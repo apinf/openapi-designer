@@ -3,20 +3,29 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.sidebar.onCreated(() => {
+  this.apiname = new ReactiveVar("An API");
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+Template.sidebar.helpers({
+  apiname() {
+    return Template.instance().apiname.get();
   },
 });
 
-Template.hello.events({
+Template.container.onCreated(() => {
+
+})
+
+Template.container.helpers({
+    apiEditor() {
+        return Template["apied-info"].renderFunction().value
+    }
+})
+
+/*Template.hello.events({
   'click button'(event, instance) {
     // increment the counter when button is clicked
     instance.counter.set(instance.counter.get() + 1);
   },
-});
+});*/

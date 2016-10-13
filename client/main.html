@@ -1,25 +1,66 @@
 <head>
-  <title>open-api-designer</title>
+  <title>Swagger Editor</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  {{> sidebar}}
+  {{> container}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="sidebar">
+  <div class="sidebar">
+    <div class="api-name">
+      {{apiname}}
+    </div>
+  </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="container">
+  <div class="container">
+    {{{apiEditor}}}
+  </div>
+</template>
+
+<template name="apied-info">
+  <form>
+    <div class="form-group row">
+      <label for="api-name" class="col-xs-2 col-form-label">Name<sup>*</sup></label>
+      <div class="col-xs-5">
+        <input class="form-control" type="text" placeholder="Enter the name of your API" id="api-name">
+      </div>
+      <label for="api-version" class="col-xs-1 col-form-label">Version<sup>*</sup></label>
+      <div class="col-xs-4">
+        <input class="form-control" type="text" placeholder="Enter API version" id="api-version">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="api-description" class="col-form-label">Description</label>
+      This is broken 3:
+      <!-- TODO figure out why this breaks meteor
+        <textarea class="form-control" id="api-description" rows="6">Mui</textarea>
+      -->
+    </div>
+    <div class="form-group row">
+      <label for="api-license" class="col-xs-2 col-form-label">License</label>
+      <div class="col-xs-5">
+        <input class="form-control" type="text" placeholder="Enter a simple name for the license" id="api-license">
+      </div>
+      <label for="api-license-url" class="col-xs-1 col-form-label">URL</label>
+      <div class="col-xs-4">
+        <input class="form-control" type="text" placeholder="Enter the URL for the license text" id="api-license-url">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="api-host" class="col-xs-2 col-form-label">Host</label>
+      <div class="col-xs-10">
+        <input class="form-control" type="text" placeholder="Enter the hostname or IP serving the API" id="api-host">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="api-base-path" class="col-xs-2 col-form-label">Base path</label>
+      <div class="col-xs-10">
+        <input class="form-control" type="text" placeholder="Enter the base path (relative to the host)" id="api-base-path">
+      </div>
+    </div>
+  </form>
 </template>
