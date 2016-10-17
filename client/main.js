@@ -19,9 +19,7 @@ Template.container.onCreated(function() {
 
 Template.container.helpers({
     apiEditor() {
-        //console.log(Template["apied-info"].renderFunction())
-        //return Template["apied-info"].renderFunction().value
-        return Meteor.render(Template["apied-info"])
+        return "apied-info"
     }
 })
 
