@@ -23,9 +23,30 @@ Template.container.helpers({
     }
 })
 
-/*Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});*/
+Template["apied-info"].events = {
+    "submit form": function(event, template) {
+        event.preventDefault()
+        $("#temporaryOutput").html(JSON.stringify($("#api-basic-data").serializeObject(), null, "    "))
+    }
+}
+
+$.assignValue = function(obj, keyPath, value) {
+    lastKeyIndex = keyPath.length-1;
+    for (var i = 0; i < lastKeyIndex; ++ i) {
+        key = keyPath[i];
+        if (!(key in obj)) {
+            obj[key] = {}
+        }
+        obj = obj[key];
+    }
+    obj[keyPath[lastKeyIndex]] = value;
+}
+
+$.fn.serializeObject = function() {
+    let obj = {}
+    let arr = this.serializeArray()
+    $.each(arr, function() {
+        $.assignValue(obj, this.name.split("."), this.value)
+    })
+    return obj
+}
