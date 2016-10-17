@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.sidebar.onCreated(() => {
+Template.sidebar.onCreated(function() {
   this.apiname = new ReactiveVar("An API");
 });
 
@@ -13,7 +13,7 @@ Template.sidebar.helpers({
   },
 });
 
-Template.container.onCreated(() => {
+Template.container.onCreated(function() {
 
 })
 
