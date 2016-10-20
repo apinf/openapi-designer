@@ -1,17 +1,17 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating'
+import { ReactiveVar } from 'meteor/reactive-var'
 
-import './main.html';
+import './main.html'
 
 Template.sidebar.onCreated(function() {
-  this.apiname = new ReactiveVar("An API");
-});
+  this.apiname = new ReactiveVar("An API")
+})
 
 Template.sidebar.helpers({
   apiname() {
-    return Template.instance().apiname.get();
+    return Template.instance().apiname.get()
   },
-});
+})
 
 Template.container.onCreated(function() {
 
@@ -31,15 +31,15 @@ Template["apied-info"].events = {
 }
 
 $.assignValue = function(obj, keyPath, value) {
-    lastKeyIndex = keyPath.length-1;
+    lastKeyIndex = keyPath.length-1
     for (var i = 0; i < lastKeyIndex; ++ i) {
-        key = keyPath[i];
+        key = keyPath[i]
         if (!(key in obj)) {
             obj[key] = {}
         }
-        obj = obj[key];
+        obj = obj[key]
     }
-    obj[keyPath[lastKeyIndex]] = value;
+    obj[keyPath[lastKeyIndex]] = value
 }
 
 $.fn.serializeObject = function() {
