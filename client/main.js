@@ -30,6 +30,19 @@ Template["apied-info"].events = {
 		event.preventDefault()
 		api = $("#api-basic-data").serializeObject()
 		Template.swaggerViewer.update()
+	},
+
+	"submit form": function(event, template) {
+		event.preventDefault()
+		let str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(api, null, "  "))
+		let download = document.createElement("a")
+		download.setAttribute("href", str)
+		download.setAttribute("download", "swagger.json")
+		download.innerHTML = "Download Open API definition file"
+		download.hidden = true
+		document.body.appendChild(download)
+		download.click()
+		download.remove()
 	}
 }
 
