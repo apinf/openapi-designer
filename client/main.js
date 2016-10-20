@@ -25,14 +25,14 @@ Template.container.helpers({
 
 var api = {}
 
-Template["apied-info"].events = {
+Template.io.events = {
 	"change form": function(event, template) {
 		event.preventDefault()
 		api = $("#api-basic-data").serializeObject()
 		Template.swaggerViewer.update()
 	},
 
-	"submit form": function(event, template) {
+	"click #api-export": function(event, template) {
 		event.preventDefault()
 		let str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(api, null, "  "))
 		let download = document.createElement("a")
@@ -43,6 +43,23 @@ Template["apied-info"].events = {
 		document.body.appendChild(download)
 		download.click()
 		download.remove()
+	},
+
+	"change #api-import": function(event, template) {
+		event.preventDefault()
+		let file = event.target.files[0]
+		let reader = new FileReader()
+		reader.readAsText(file, "UTF-8"),
+		reader.onload = evt => {
+			api = JSON.parse(evt.target.result)
+			Template.io.importFromObject()
+		}
+	}
+}
+
+Template.io.importFromObject = function() {
+	for (key in api) {
+		// TODO import data
 	}
 }
 

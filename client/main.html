@@ -19,11 +19,24 @@
 <template name="container">
 	<div class="container">
 		{{> UI.dynamic template=apiEditor}}
+		{{> io}}
 	</div>
 </template>
 
 <template name="swaggerViewer">
 	<div class="swagger-viewer" id="swagger-viewer"></div>
+</template>
+
+<template name="io">
+	<div class="row">
+
+		<div class="btn-group col-xs-12">
+			<div type="button" class="btn btn-success col-xs-6 io-btn">
+				<input type="file" id="api-import" class="col-xs-6">
+			</div>
+			<button id="api-export" type="button" class="btn btn-success col-xs-6 io-btn">Export definition</button>
+		</div>
+	</div>
 </template>
 
 <template name="apied-info">
@@ -46,11 +59,11 @@
 		</div>
 		<div class="form-group row">
 			<label for="api-license" class="col-xs-2 col-form-label">License</label>
-			<div class="col-xs-5">
+			<div class="col-xs-4">
 				<input class="form-control" type="text" placeholder="Enter a simple name for the license" id="api-license" name="license.name">
 			</div>
 			<label for="api-license-url" class="col-xs-1 col-form-label">URL</label>
-			<div class="col-xs-4">
+			<div class="col-xs-5">
 				<input class="form-control" type="text" placeholder="Enter the URL for the license text" id="api-license-url" name="license.url">
 			</div>
 		</div>
@@ -65,9 +78,6 @@
 			<div class="col-xs-10">
 				<input class="form-control" type="text" placeholder="Enter the base path (relative to the host)" id="api-base-path" name="basePath">
 			</div>
-		</div>
-		<div class="form-group row">
-			<button id="api-serialize" type="submit" class="btn btn-success col-xs-10 col-xs-offset-1">Download Open API definition file</button>
 		</div>
 	</form>
 </template>
