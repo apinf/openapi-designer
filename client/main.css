@@ -14,11 +14,26 @@
 	position: fixed;
 	top: 0;
 	right: 0;
-	bottom: 0;
+	bottom: 20rem;
+
+	overflow-y: scroll;
 
 	box-sizing: border-box;
 	width: 70%;
 	padding-top: 1.5rem;
 
 	background-color: #FFFFFF;
+}
+
+.swagger-viewer {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+
+	overflow-y: scroll;
+
+	box-sizing: border-box;
+	width: 70%;
+	height: 20rem;
+	margin: 0;
 }

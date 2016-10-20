@@ -23,11 +23,18 @@ Template.container.helpers({
 	}
 })
 
+var api = {}
+
 Template["apied-info"].events = {
-	"submit form": function(event, template) {
+	"change form": function(event, template) {
 		event.preventDefault()
-		$("#temporaryOutput").html(JSON.stringify($("#api-basic-data").serializeObject(), null, "	"))
+		api = $("#api-basic-data").serializeObject()
+		Template.swaggerViewer.update()
 	}
+}
+
+Template.swaggerViewer.update = function() {
+	$("#swagger-viewer").JSONView(api)
 }
 
 $.assignValue = function(obj, keyPath, value) {
