@@ -3,38 +3,66 @@ $("#form").alpaca({
 		"title": "Open API designer",
 		"type": "object",
 		"properties": {
-			"title": {
-				"type": "string",
-				"title": "Title"
-			},
-			"version": {
-				"type": "string",
-				"title": "Version",
-			},
-			"license": {
-				"title": "License",
+			"info": {
 				"type": "object",
+				"title": "Info",
 				"properties": {
-					"name": {
+					"title": {
 						"type": "string",
-						"title": "Name"
+						"title": "Title"
 					},
-					"url": {
+					"version": {
 						"type": "string",
-						"title": "URL"
+						"title": "Version",
 					},
+					"termsOfService": {
+						"type": "string",
+						"title": "Terms of Service",
+					},
+					"contact": {
+						"title": "Contact",
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"url": {
+								"type": "string",
+								"title": "URL"
+							},
+							"email": {
+								"type": "string",
+								"title": "Email"
+							}
+						}
+					},
+					"license": {
+						"title": "License",
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"url": {
+								"type": "string",
+								"title": "URL"
+							},
+						}
+					},
+					"host": {
+						"type": "string",
+						"title": "Host"
+					},
+					"basePath": {
+						"type": "string",
+						"title": "Base path"
+					}
 				}
 			},
-			"host": {
-				"type": "string",
-				"title": "Host"
-			},
-			"basePath": {
-				"type": "string",
-				"title": "Base path"
-			},
 			"schemes": {
-				"description": "Schemes",
+				"title": "Schemes",
 				"type": "array",
 				"items": {
 					"title": "Scheme",
