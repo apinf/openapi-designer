@@ -16,7 +16,7 @@
     "homepage": "https://github.com/apinf/open-api-designer#readme",
     "dependencies": {
         "alpaca": "^1.5.22",
-        "bootstrap": "^4.0.0-alpha.5",
+        "bootstrap": "^3.3.7",
         "handlebars": "^4.0.5",
         "jquery": "^3.1.1"
     },
