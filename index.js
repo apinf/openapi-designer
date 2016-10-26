@@ -1,5 +1,5 @@
 $("#form").alpaca({
-	"schema": {
+	schema: {
 		"title": "Open API designer",
 		"type": "object",
 		"properties": {
@@ -29,10 +29,12 @@ $("#form").alpaca({
 							},
 							"url": {
 								"type": "string",
+								"format": "url",
 								"title": "URL"
 							},
 							"email": {
 								"type": "string",
+								"format": "email",
 								"title": "Email"
 							}
 						}
@@ -47,6 +49,7 @@ $("#form").alpaca({
 							},
 							"url": {
 								"type": "string",
+								"format": "url",
 								"title": "URL"
 							},
 						}
@@ -66,7 +69,8 @@ $("#form").alpaca({
 				"type": "array",
 				"items": {
 					"title": "Scheme",
-					"type": "string"
+					"type": "string",
+					"enum": ["http", "https", "ws", "wss"]
 				},
 				"minItems": 1
 			}
