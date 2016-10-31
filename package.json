@@ -19,8 +19,5 @@
         "bootstrap": "^3.3.7",
         "handlebars": "^4.0.5",
         "jquery": "^3.1.1"
-    },
-	"devDependencies": {
-		"node-sass": "3.10.1"
     }
 }
