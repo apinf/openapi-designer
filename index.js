@@ -15,30 +15,24 @@ const hostFieldValidator = new SRL('\
 
 $("#form").alpaca({
 	schemaSource: "/schema.json",
-	options: {
-		fields: {
-			info: {
-				fields: {
-					host: {
-						validator: function(callback) {
-							if (hostFieldValidator.isMatching(this.getValue())) {
-								callback({status: true})
-							} else {
-								callback({status: false, message: "Invalid hostname e.g. host.example.com:80"})
-							}
-						}
-					},
-					basePath: {
-						validator: function(callback) {
-							if (!this.getValue().startsWith("/")) {
-								this.setValue("/" + this.getValue())
-							}
-						}
-					}
+	options: { fields: { info: { fields: {
+		host: {
+			validator: function(callback) {
+				if (hostFieldValidator.isMatching(this.getValue())) {
+					callback({status: true})
+				} else {
+					callback({status: false, message: "Invalid hostname e.g. host.example.com:80"})
+				}
+			}
+		},
+		basePath: {
+			validator: function(callback) {
+				if (!this.getValue().startsWith("/")) {
+					this.setValue("/" + this.getValue())
 				}
 			}
 		}
-	},
+	}}}},
 	postRender: control => {
 		control.on("change", function() {
 			$("#preview").JSONView(this.getValue())
