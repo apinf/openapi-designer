@@ -82,50 +82,25 @@ $("#form").alpaca({
 				fields: {
 					host: {
 						validator: function(callback) {
-							// TODO choose a validator below (or find a library)
-
-							/* Regex validator
-								+ Short
-								- Generic error message
-								- No unicode support
-								+ Similar to Alpaca validators (they don't support unicode either)
-
-							if (/^([A-Za-z0-9]+\.)*([A-Za-z0-9]+){1}(:[0-9]+)?$/.test(callback)) {
-								callback({status: false, message: "Invalid hostname"})
-							} else {
+							let query = new SRL('\
+								begin with capture (                                     \
+								    capture (                                            \
+								        any of (digit, letter, one of "-") once or more, \
+								        literally "." once                               \
+								    ) never or more,                                     \
+								    any of (digit, letter, one of "-") once or more      \
+								) once,                                                  \
+								capture (                                                \
+								    literally ":" once,                                  \
+								    digit once or more                                   \
+								) optional,                                              \
+								must end, case insensitive                               \
+							')
+							if (query.isMatching(this.getValue())) {
 								callback({status: true})
+							} else {
+								callback({status: false, message: "Invalid hostname e.g. host.example.com:80"})
 							}
-							*/
-
-							/* Javascript validator
-								+ Proper error messages
-								+ Unicode support
-								- Long
-
-							let host = this.getValue()
-							if (host.indexOf(":") !== -1) {
-								let parts = host.split(":")
-								host = parts[0]
-								// Strict string -> number conversion
-								let port = (+parts[1])
-								if (isNaN(port)) {
-									callback({status: false, message: "Invalid port"})
-								} else if (port <= 0) {
-									callback({status: false, message: "Port too small"})
-								} else if (port >= 65536) {
-									callback({status: false, message: "Port too large"})
-								}
-							}
-
-							for (char of host) {
-								if (isNaN(char) && char !== "." &&
-									char.toLowerCase() === char.toUpperCase()) {
-									callback({status: false, message: "Invalid character in hostname"})
-									return
-								}
-							}
-							callback({status: true})
-							*/
 						}
 					},
 					basePath: {
@@ -138,5 +113,10 @@ $("#form").alpaca({
 				}
 			}
 		}
+	},
+	postRender: control => {
+		control.on("change", function() {
+			$("#preview").JSONView(this.getValue())
+		})
 	}
 })
