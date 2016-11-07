@@ -69,7 +69,7 @@ function download() {
 }
 
 $("#form").alpaca({
-	schemaSource: "/schema.json",
+	schemaSource: "./schema.json",
 	options: {
 		fields: {
 			info: { fields: {
