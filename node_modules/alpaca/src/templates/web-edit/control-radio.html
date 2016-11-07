@@ -1,0 +1,20 @@
+<script type="text/x-handlebars-template">
+
+    {{#if options.hideNone}}
+    {{else}}
+    <div class="radio">
+        <label>
+            <input type="radio" {{#if options.readonly}}readonly="readonly"{{/if}} name="{{name}}" value=""/>{{{options.noneLabel}}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#each selectOptions}}
+    <div class="radio">
+        <label>
+            <input type="radio" {{#if ../options.readonly}}readonly="readonly"{{/if}} name="{{../name}}" value="{{value}}" {{#if selected}}checked="checked"{{/if}}/>{{{text}}}
+        </label>
+    </div>
+    {{/each}}
+
+</script>
