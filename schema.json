@@ -6,6 +6,7 @@
 			"type": "string",
 			"title": "Swagger Version",
 			"required": true,
+			"default": "2.0",
 			"enum": ["2.0"]
 		},
 		"info": {
@@ -87,7 +88,6 @@
 			"type": "array",
 			"items": {
 				"title": "MIME type",
-				"format": "mime",
 				"type": "string"
 			},
 			"minItems": 1
@@ -97,7 +97,6 @@
 			"type": "array",
 			"items": {
 				"title": "MIME type",
-				"format": "mime",
 				"type": "string"
 			},
 			"minItems": 1
@@ -111,6 +110,75 @@
 					"_key": {
 						"title": "Path",
 						"type": "string"
+					},
+					"get": {
+						"title": "GET request",
+						"type": "object",
+						"properties": {
+							"tags": {
+								"title": "Tags",
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"summary": {
+								"title": "Summary",
+								"type": "string",
+								"maxLength": 120
+							},
+							"description": {
+								"title": "Description",
+								"type": "string"
+							},
+							"externalDocs": {
+								"title": "External Documentation",
+								"type": "object",
+								"properties": {
+									"url": {
+										"title": "URL",
+										"type": "url",
+										"required": true
+									},
+									"description": {
+										"title": "Description",
+										"type": "string"
+									}
+								}
+							},
+							"operationId": {
+								"title": "Operation ID",
+								"type": "string"
+							},
+							"schemes": {
+								"title": "Schemes",
+								"type": "array",
+								"items": {
+									"title": "Scheme",
+									"type": "string",
+									"enum": ["http", "https", "ws", "wss"]
+								},
+								"minItems": 1
+							},
+							"consumes": {
+								"title": "Consumes",
+								"type": "array",
+								"items": {
+									"title": "MIME type",
+									"type": "string"
+								},
+								"minItems": 1
+							},
+							"produces": {
+								"title": "Produces",
+								"type": "array",
+								"items": {
+									"title": "MIME type",
+									"type": "string"
+								},
+								"minItems": 1
+							}
+						}
 					}
 				}
 			}

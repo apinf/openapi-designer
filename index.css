@@ -1,3 +1,7 @@
+@import url("node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import url("node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css");
+@import url("node_modules/jquery-jsonview/dist/jquery.jsonview.css");
+
 #form {
 	position: fixed;
 	top: 0;
