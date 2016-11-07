@@ -69,8 +69,18 @@ $("#form").alpaca({
 				host: { validator: validators.hostname },
 				basePath: { validator: validators.basePath }
 			}},
-			consumes: { items: { validator: validators.mimeType } },
-			produces: { items: { validator: validators.mimeType } }
+			consumes: {
+				items: { validator: validators.mimeType },
+				toolbarSticky: true
+			},
+			produces: {
+				items: { validator: validators.mimeType },
+				toolbarSticky: true
+			},
+			paths: {
+				type: "map",
+				toolbarSticky: true
+			}
 		},
 		form: { buttons: {
 			download: {
