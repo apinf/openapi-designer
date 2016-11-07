@@ -2,6 +2,12 @@
 	"title": "Open API designer",
 	"type": "object",
 	"properties": {
+		"swagger": {
+			"type": "string",
+			"title": "Swagger Version",
+			"required": true,
+			"enum": ["2.0"]
+		},
 		"info": {
 			"type": "object",
 			"title": "Info",
@@ -73,6 +79,26 @@
 				"title": "Scheme",
 				"type": "string",
 				"enum": ["http", "https", "ws", "wss"]
+			},
+			"minItems": 1
+		},
+		"consumes": {
+			"title": "Consumes",
+			"type": "array",
+			"items": {
+				"title": "MIME type",
+				"format": "mime",
+				"type": "string"
+			},
+			"minItems": 1
+		},
+		"produces": {
+			"title": "Produces",
+			"type": "array",
+			"items": {
+				"title": "MIME type",
+				"format": "mime",
+				"type": "string"
 			},
 			"minItems": 1
 		}
