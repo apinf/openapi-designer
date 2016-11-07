@@ -1,0 +1,31 @@
+<script type="text/x-handlebars-template">
+
+    <div>
+
+        {{#arrayToolbar}}{{/arrayToolbar}}
+
+        <table>
+
+            <!-- table headers -->
+            <thead>
+                <tr>
+                    {{#eachProperty schema.items.properties}}
+                    <th>{{value.title}}</th>
+                    {{/eachProperty}}
+                </tr>
+            </thead>
+
+            <!-- table body -->
+            <tbody>
+            {{#each items}}
+
+                {{#item "tr"}}{{/item}}
+
+            {{/each}}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</script>

@@ -1,0 +1,34 @@
+<script type="text/x-handlebars-template">
+
+    <div>
+
+        {{#if options.label}}
+        <legend class="{{#if options.labelClass}}{{options.labelClass}} {{/if}}alpaca-container-label">
+
+            {{#if options.collapsible}}
+            <span data-toggle="collapse">
+            {{/if}}
+
+            {{{options.label}}}
+
+            {{#if options.collapsible}}
+            </span>
+            {{/if}}
+
+        </legend>
+        {{/if}}
+
+        {{#if options.helpers}}
+        {{#each options.helpers}}
+        <p class="alpaca-helper help-block {{#if options.helperClass}}{{options.helperClass}}{{/if}}">
+            <i class="alpaca-icon-16 glyphicon glyphicon-info-sign"></i>
+            {{{.}}}
+        </p>
+        {{/each}}
+        {{/if}}
+
+        {{#container}}{{/container}}
+
+    </div>
+
+</script>
