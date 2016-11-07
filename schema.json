@@ -75,6 +75,7 @@
 		"schemes": {
 			"title": "Schemes",
 			"type": "array",
+			"toolbarSticky": true,
 			"items": {
 				"title": "Scheme",
 				"type": "string",
@@ -85,6 +86,7 @@
 		"consumes": {
 			"title": "Consumes",
 			"type": "array",
+			"toolbarSticky": true,
 			"items": {
 				"title": "MIME type",
 				"format": "mime",
@@ -95,6 +97,7 @@
 		"produces": {
 			"title": "Produces",
 			"type": "array",
+			"toolbarSticky": true,
 			"items": {
 				"title": "MIME type",
 				"format": "mime",
