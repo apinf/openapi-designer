@@ -9,6 +9,7 @@ const validatorPatterns = {
 		    any of (digit, letter) once,                                       \
 		    any of (digit, letter, one of "!#$&-^_.+") between 0 and 126 times \
 		)                                                                      \
+		must end, case insensitive                                             \
 	'),
 	hostname: new SRL('\
 		begin with capture (                                     \
