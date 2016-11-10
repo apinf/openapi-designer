@@ -1,10 +1,3 @@
-global.jQuery = require("jquery")
-const $ = jQuery
-const SRL = require("srl")
-require("./node_modules/alpaca/dist/alpaca/bootstrap/alpaca.js")
-require("jquery-jsonview")
-require("./index.css")
-
 const validatorPatterns = {
 	mimeType: new SRL('\
 		begin with capture (                                                   \

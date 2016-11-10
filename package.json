@@ -15,16 +15,10 @@
     },
     "homepage": "https://github.com/apinf/open-api-designer#readme",
     "dependencies": {
-        "alpaca": "^1.5.22",
-        "bootstrap": "^3.3.7",
-        "handlebars": "^4.0.5",
-        "jquery": "^3.1.1",
-        "jquery-jsonview": "^1.2.3",
         "srl": "^0.2.1",
-        "browserify": "^13.1.1",
-        "browserify-css": "^0.9.2"
+        "webpack": "^1.13.3"
     },
     "scripts": {
-        "install": "./node_modules/.bin/browserify -t [ browserify-css --autoInject=true ] index.js -o bundle.js"
+        "install": "mkdir lib && ./node_modules/.bin/webpack"
     }
 }
