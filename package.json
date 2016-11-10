@@ -19,6 +19,6 @@
         "webpack": "^1.13.3"
     },
     "scripts": {
-        "install": "mkdir lib && ./node_modules/.bin/webpack"
+        "install": "./node_modules/.bin/webpack"
     }
 }
