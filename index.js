@@ -95,7 +95,12 @@ $("#form").alpaca({
 			},
 			paths: {
 				type: "map",
-				toolbarSticky: true
+				toolbarSticky: true,
+				items: { methods: {
+					// This isn't working, `methods` isn't a map in the JSON output
+					type: "map",
+					toolbarSticky: true
+				}}
 			}
 		},
 		form: { buttons: {
