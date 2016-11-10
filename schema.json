@@ -137,7 +137,8 @@
 								"properties": {
 									"url": {
 										"title": "URL",
-										"type": "url",
+										"type": "string",
+										"format": "url",
 										"required": true
 									},
 									"description": {
