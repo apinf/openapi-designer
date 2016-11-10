@@ -61,6 +61,22 @@ function download() {
 	download.remove()
 }
 
+let form = undefined
+
+function jsonPreview() {
+	$("#json-preview").removeClass("hidden")
+	if (form !== undefined) {
+		$("#json-preview").JSONView(form)
+	}
+}
+
+function richPreview() {
+	$("#rich-preview").removeClass("hidden")
+	if (form !== undefined) {
+		// TODO rich preview
+	}
+}
+
 $("#form").alpaca({
 	schemaSource: "./schema.json",
 	options: {
@@ -93,7 +109,12 @@ $("#form").alpaca({
 	},
 	postRender: control => {
 		control.on("change", function() {
-			$("#preview").JSONView(this.getValue())
+			form = this.getValue()
+			if (!$("#json-preview").hasClass("hidden")) {
+				$("#json-preview").JSONView(this.getValue())
+			} else if (!$("#rich-preview").hasClass("hidden")) {
+				// TODO rich preview
+			}
 		})
 	}
 })
