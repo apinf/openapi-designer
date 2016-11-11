@@ -65,21 +65,21 @@ function download () {
   downloadLink.remove();
 }
 
-let form;
+// let form;
 
-function jsonPreview () {
-  $('#json-preview').removeClass('hidden')
-  if (form !== undefined) {
-    $('#json-preview').JSONView(form)
-  }
-}
-
-function richPreview () {
-  $('#rich-preview').removeClass('hidden');
-  if (form !== undefined) {
-    // TODO rich preview
-  }
-}
+// function jsonPreview () {
+//   $('#json-preview').removeClass('hidden');
+//   if (form !== undefined) {
+//     $('#json-preview').JSONView(form);
+//   }
+// }
+//
+// function richPreview () {
+//   $('#rich-preview').removeClass('hidden');
+//   if (form !== undefined) {
+//     // TODO rich preview
+//   }
+// }
 
 $('#form').alpaca({
   schemaSource: './schema.json',
@@ -127,10 +127,10 @@ $('#form').alpaca({
     },
   },
   postRender: (control) => {
-    control.on('change', function () {
-      form = this.getValue();
+    control.on('change', () => {
+      const formData = this.getValue();
       if (!$('#json-preview').hasClass('hidden')) {
-        $('#json-preview').JSONView(this.getValue());
+        $('#json-preview').JSONView(formData);
       } else if (!$('#rich-preview').hasClass('hidden')) {
         // TODO rich preview
       }
