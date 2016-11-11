@@ -1,3 +1,7 @@
+/*
+  global SRL, $, document
+*/
+
 const validatorPatterns = {
   mimeType: new SRL(`
     begin with capture (
@@ -75,7 +79,7 @@ function richPreview () {
   if (form !== undefined) {
     // TODO rich preview
   }
-};
+}
 
 $('#form').alpaca({
   schemaSource: './schema.json',
