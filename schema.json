@@ -185,6 +185,66 @@
                     "type": "string"
                   },
                   "minItems": 1
+                },
+                "parameters": {
+                  "title": "Parameters",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "title": "Name",
+                        "type": "string",
+                        "required": true
+                      },
+                      "in": {
+                        "title": "Parameter location",
+                        "type": "string",
+                        "default": "path",
+                        "enum": ["query", "header", "path", "formData", "body"],
+                        "required": true
+                      },
+                      "description": {
+                        "title": "Description",
+                        "type": "string"
+                      },
+                      "required": {
+                        "title": "Required",
+                        "type": "boolean",
+                        "required": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "parameters": {
+            "title": "Parameters",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "title": "Name",
+                  "type": "string",
+                  "required": true
+                },
+                "in": {
+                  "title": "Parameter location",
+                  "type": "string",
+                  "default": "path",
+                  "enum": ["query", "header", "path", "formData", "body"],
+                  "required": true
+                },
+                "description": {
+                  "title": "Description",
+                  "type": "string"
+                },
+                "required": {
+                  "title": "Required",
+                  "type": "boolean",
+                  "required": true
                 }
               }
             }
