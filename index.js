@@ -81,10 +81,9 @@ $('#form').alpaca({
     },
   },
   postRender: (control) => {
-    control.on('change', () => {
-      const formData = this.getValue();
+    control.on('change', function onChange () {
       if (!$('#json-preview').hasClass('hidden')) {
-        $('#json-preview').JSONView(formData);
+        $('#json-preview').JSONView(this.getValue());
       } else if (!$('#rich-preview').hasClass('hidden')) {
         // TODO rich preview
       }
