@@ -1,60 +1,12 @@
 const { schema } = require('./schema/index');
-const SRL = require('srl');
+const validators = require('./validators');
 /*
-  global SRL, $, document
+  global $, document
 */
 
-const validatorPatterns = {
-  mimeType: new SRL(`
-    begin with capture (
-        any of (digit, letter) once,
-        any of (digit, letter, one of "!#$&-^_.+") between 0 and 126 times
-    )
-    literally "/"
-    capture (
-        any of (digit, letter) once,
-        any of (digit, letter, one of "!#$&-^_.+") between 0 and 126 times
-    )
-    must end, case insensitive
-  `),
-  hostname: new SRL(`
-    begin with capture (
-      capture (
-        any of (digit, letter, one of "-") once or more,
-        literally "." once
-      ) never or more,
-      any of (digit, letter, one of "-") once or more
-    ) once,
-    capture (
-      literally ":" once,
-      digit once or more
-    ) optional,
-    must end, case insensitive
-  `),
-};
-
-const validators = {
-  mimeType (callback) {
-    if (validatorPatterns.mimeType.isMatching(this.getValue())) {
-      callback({ status: true });
-    } else {
-      callback({ status: false, message: 'Invalid MIME type e.g. application/vnd.github.v3.raw+json' });
-    }
-  },
-  hostname (callback) {
-    if (validatorPatterns.hostname.isMatching(this.getValue())) {
-      callback({ status: true });
-    } else {
-      callback({ status: false, message: 'Invalid hostname e.g. host.example.com:80' });
-    }
-  },
-  basePath () {
-    if (!this.getValue().startsWith('/')) {
-      this.setValue(`/${this.getValue()}`);
-    }
-  },
-};
-
+/**
+ * Download the JSON output
+ */
 function download () {
   const str = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(this.getValue(), null, '  '))}`;
   const downloadLink = document.createElement('a');
