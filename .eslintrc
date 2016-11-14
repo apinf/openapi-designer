@@ -1,0 +1,26 @@
+{
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 7
+  },
+  "plugins": [
+  ],
+  "extends": [
+    "airbnb-base"
+  ],
+  "settings": {
+  },
+  "rules": {
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "always"
+      }
+    ]
+  }
+}

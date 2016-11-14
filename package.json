@@ -1,24 +1,31 @@
 {
-    "name": "open-api-designer",
-    "version": "0.1.0",
-    "description": "Design interface for creating Open API (Swagger) specification files",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/apinf/open-api-designer.git"
-    },
-    "author": "Tulir Asokan <tulir@maunium.net>",
-	"contributors": ["Kerkko Pelttari <>"],
-	"private": true,
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/apinf/open-api-designer/issues"
-    },
-    "homepage": "https://github.com/apinf/open-api-designer#readme",
-    "dependencies": {
-        "srl": "^0.2.1",
-        "webpack": "^1.13.3"
-    },
-    "scripts": {
-        "install": "./node_modules/.bin/webpack"
-    }
+  "name": "open-api-designer",
+  "version": "0.1.0",
+  "description": "Design interface for creating Open API (Swagger) specification files",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apinf/open-api-designer.git"
+  },
+  "author": "Tulir Asokan <tulir@maunium.net>",
+  "contributors": [
+    "Kerkko Pelttari <>"
+  ],
+  "private": true,
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apinf/open-api-designer/issues"
+  },
+  "homepage": "https://github.com/apinf/open-api-designer#readme",
+  "dependencies": {
+    "srl": "^0.2.1",
+    "webpack": "^1.13.3"
+  },
+  "scripts": {
+    "install": "./node_modules/.bin/webpack"
+  },
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-plugin-import": "^2.2.0"
+  }
 }
