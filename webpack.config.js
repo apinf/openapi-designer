@@ -1,9 +1,7 @@
 module.exports = {
-    entry: "./node_modules/srl/lib/SRL.js",
-    output: {
-        path: __dirname,
-        filename: "./srl.js",
-		library: "SRL",
-		libraryTarget: "var"
-    }
-}
+  entry: './index.js',
+  output: {
+    path: __dirname,
+    filename: './bundle.js',
+  },
+};

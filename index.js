@@ -1,3 +1,4 @@
+const SRL = require('srl');
 /*
   global SRL, $, document
 */
