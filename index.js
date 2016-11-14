@@ -1,6 +1,5 @@
 const { schema } = require('./schema/index');
 const { fields } = require('./schema/options');
-
 /*
   global $, document
 */
@@ -37,11 +36,14 @@ function download () {
 // }
 
 $('#form').alpaca({
+  // Schema from schema/index.js
   schema,
   options: {
+    // Field extra data from schema/options.js
     fields,
     form: {
       buttons: {
+        // Download button at the end of the form
         download: {
           click: download,
           type: 'button',
@@ -53,6 +55,7 @@ $('#form').alpaca({
   },
   postRender: (control) => {
     control.on('change', function onChange () {
+      // Update the current preview with the latest changes
       if (!$('#json-preview').hasClass('hidden')) {
         $('#json-preview').JSONView(this.getValue());
       } else if (!$('#rich-preview').hasClass('hidden')) {
