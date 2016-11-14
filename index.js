@@ -1,3 +1,4 @@
+const { schema } = require('./schema/index');
 const SRL = require('srl');
 /*
   global SRL, $, document
@@ -83,7 +84,7 @@ function download () {
 // }
 
 $('#form').alpaca({
-  schemaSource: './schema.json',
+  schema,
   options: {
     fields: {
       info: {
