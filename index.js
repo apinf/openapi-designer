@@ -60,7 +60,7 @@ function download () {
   downloadLink.setAttribute('download', 'swagger.json');
   downloadLink.innerHTML = 'Download Open API specification file';
   downloadLink.hidden = true;
-  document.body.appendChild(download);
+  document.body.appendChild(downloadLink);
   downloadLink.click();
   downloadLink.remove();
 }
