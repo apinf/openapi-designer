@@ -7,6 +7,9 @@ exports.fields = {
       basePath: { validator: validators.basePath },
     },
   },
+  schemes: {
+    toolbarSticky: true,
+  },
   consumes: {
     items: {
       validator: validators.mimeType,
