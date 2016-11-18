@@ -36,25 +36,26 @@ const validatorPatterns = {
 /**
  * Alpaca validator functions to check fields using the regexes above.
  */
+module.exports = {
+  mimeType (callback) {
+    if (validatorPatterns.mimeType.isMatching(this.getValue())) {
+      callback({ status: true });
+    } else {
+      callback({ status: false, message: 'Invalid MIME type e.g. application/vnd.github.v3.raw+json' });
+    }
+  },
 
-exports.mimeType = function mimeType (callback) {
-  if (validatorPatterns.mimeType.isMatching(this.getValue())) {
-    callback({ status: true });
-  } else {
-    callback({ status: false, message: 'Invalid MIME type e.g. application/vnd.github.v3.raw+json' });
-  }
-};
+  hostname (callback) {
+    if (validatorPatterns.hostname.isMatching(this.getValue())) {
+      callback({ status: true });
+    } else {
+      callback({ status: false, message: 'Invalid hostname e.g. host.example.com:80' });
+    }
+  },
 
-exports.hostname = function hostname (callback) {
-  if (validatorPatterns.hostname.isMatching(this.getValue())) {
-    callback({ status: true });
-  } else {
-    callback({ status: false, message: 'Invalid hostname e.g. host.example.com:80' });
-  }
-};
-
-exports.basePath = function basePath () {
-  if (!this.getValue().startsWith('/')) {
-    this.setValue(`/${this.getValue()}`);
-  }
+  basePath () {
+    if (!this.getValue().startsWith('/')) {
+      this.setValue(`/${this.getValue()}`);
+    }
+  },
 };
