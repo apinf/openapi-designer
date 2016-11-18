@@ -6,7 +6,6 @@ exports.schemes = {
     type: 'string',
     enum: ['http', 'https', 'ws', 'wss'],
   },
-  minItems: 1,
 };
 
 exports.consumes = {
@@ -16,7 +15,6 @@ exports.consumes = {
     title: 'MIME type',
     type: 'string',
   },
-  minItems: 1,
 };
 
 exports.produces = {
@@ -26,5 +24,4 @@ exports.produces = {
     title: 'MIME type',
     type: 'string',
   },
-  minItems: 1,
 };
