@@ -1,5 +1,6 @@
 const { schema } = require('./schema/index');
 const { fields } = require('./schema/options');
+const processJSON = require('./jsonprocessor');
 /*
   global $, document
 */
@@ -57,7 +58,7 @@ $('#form').alpaca({
     control.on('change', function onChange () {
       // Update the current preview with the latest changes
       if (!$('#json-preview').hasClass('hidden')) {
-        $('#json-preview').JSONView(this.getValue());
+        $('#json-preview').JSONView(processJSON(this.getValue()));
       } else if (!$('#rich-preview').hasClass('hidden')) {
         // TODO rich preview
       }

@@ -37,7 +37,7 @@ const methods = {
   items: {
     type: 'object',
     properties: {
-      _key: {
+      methodName: {
         title: 'Method',
         type: 'string',
         enum: ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'],
