@@ -36,7 +36,7 @@ const license = {
   },
 };
 
-exports.info = {
+const info = {
   type: 'object',
   title: 'Info',
   properties: {
@@ -66,3 +66,5 @@ exports.info = {
     },
   },
 };
+
+module.exports = { info, contact, license };

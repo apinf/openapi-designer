@@ -1,8 +1,9 @@
 const { paths } = require('./paths');
 const { info } = require('./info');
 const { schemes, consumes, produces } = require('./ioinfo');
+const { externalDocs } = require('./externaldocs');
 
-exports.schema = {
+const schema = {
   title: 'Open API designer',
   type: 'object',
   properties: {
@@ -18,5 +19,8 @@ exports.schema = {
     consumes,
     produces,
     paths,
+    externalDocs,
   },
 };
+
+module.exports = { schema };

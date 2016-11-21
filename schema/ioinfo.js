@@ -1,4 +1,4 @@
-exports.schemes = {
+const schemes = {
   title: 'Schemes',
   type: 'array',
   items: {
@@ -8,7 +8,7 @@ exports.schemes = {
   },
 };
 
-exports.consumes = {
+const consumes = {
   title: 'Consumes',
   type: 'array',
   items: {
@@ -17,7 +17,7 @@ exports.consumes = {
   },
 };
 
-exports.produces = {
+const produces = {
   title: 'Produces',
   type: 'array',
   items: {
@@ -25,3 +25,5 @@ exports.produces = {
     type: 'string',
   },
 };
+
+module.exports = { schemes, consumes, produces };
