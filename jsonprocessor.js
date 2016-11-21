@@ -14,9 +14,6 @@ module.exports = function processJSON (object) {
   }
   Object.keys(object.paths).forEach((key) => {
     const path = object.paths[key];
-    if (path.methods.length === 0) {
-      return;
-    }
 
     path.methods.forEach((method) => {
       const methodName = method.methodName;
@@ -31,6 +28,7 @@ module.exports = function processJSON (object) {
       // Set the method object as a child of the path object.
       path[methodName] = method;
     });
+    // Delete the old list as it isn't actually a part of the Swagger spec
     delete path.methods;
   });
   return object;
