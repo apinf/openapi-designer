@@ -1,26 +1,37 @@
 
+/**
+ * This takes all elements in the methods array and puts them in the parent
+ * path element with the `methodName` field as the key and the method object
+ * as a value.
+ *
+ * @param  {object} object The output from Alpaca
+ * @return {object}        A corrected version of the output. This should be a
+ *                         valid Swagger spec.
+ */
 module.exports = function processJSON (object) {
-  // Temporary patch for bug with nested maps in Alpaca.
-  // See https://github.com/gitana/alpaca/issues/444
   if (object.paths === undefined) {
     return object;
   }
   Object.keys(object.paths).forEach((key) => {
-    const elem = object.paths[key];
-    if (elem.methods.length === 0) {
+    const path = object.paths[key];
+    if (path.methods.length === 0) {
       return;
     }
-    const methodsMap = {};
-    elem.methods.forEach((method) => {
+
+    path.methods.forEach((method) => {
       const methodName = method.methodName;
-      if (methodName === undefined) {
+      // Ignore if method is not set or if path already has the same method.
+      if (methodName === undefined || {}.hasOwnProperty.call(path, methodName)) {
         return;
       }
+
+      // Delete the key from the method object.
       const methodObj = method;
       delete methodObj.methodName;
-      methodsMap[methodName] = methodObj;
+      // Set the method object as a child of the path object.
+      path[methodName] = method;
     });
-    elem.methods = methodsMap;
+    delete path.methods;
   });
   return object;
 };
