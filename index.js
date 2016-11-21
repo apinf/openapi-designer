@@ -9,7 +9,9 @@ const processJSON = require('./jsonprocessor');
  * Download the JSON output
  */
 function download () {
-  const str = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(this.getValue(), null, '  '))}`;
+  const str = `data:text/json;charset=utf-8,${
+    encodeURIComponent(JSON.stringify(processJSON(this.getValue()), null, '  '))
+  }`;
   const downloadLink = document.createElement('a');
   downloadLink.setAttribute('href', str);
   downloadLink.setAttribute('download', 'swagger.json');
