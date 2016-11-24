@@ -33,6 +33,15 @@ const fields = {
       },
     },
   },
+  security: {
+    type: 'map',
+    toolbarSticky: true,
+    items: {
+      value: {
+        toolbarSticky: true,
+      },
+    },
+  },
 };
 
 module.exports = { fields };
