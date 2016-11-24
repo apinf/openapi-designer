@@ -32,7 +32,10 @@ module.exports = function processJSON (objectFuncParam) {
       // Delete the old list as it isn't actually a part of the Swagger spec
       delete path.methods;
     });
+  } else {
+    object.paths = {};
   }
+
   if (object.security) {
     /*
      * Put the `value` field of each security object as the actual value of the

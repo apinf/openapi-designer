@@ -75,6 +75,7 @@ const methods = {
 const paths = {
   title: 'Paths',
   type: 'array',
+  required: true,
   items: {
     type: 'object',
     properties: {
@@ -85,6 +86,7 @@ const paths = {
       methods,
       parameters,
     },
+    minItems: 1,
   },
 };
 
