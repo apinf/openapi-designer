@@ -40,7 +40,9 @@ function download () {
 
 $('#form').alpaca({
   // Schema from schema/index.js
-  schema,
+  // Stringify and parse to remove all pointer-like objects that could break
+  // things such as validation error messages.
+  schema: JSON.parse(JSON.stringify(schema)),
   options: {
     // Field extra data from schema/options.js
     fields,
