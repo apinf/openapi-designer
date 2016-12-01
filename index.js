@@ -19,6 +19,7 @@ const form = {
     tags: [],
     externalDocs: {},
   },
+  section: '',
   process () {
     return processJSON(this.data);
   },
@@ -67,6 +68,18 @@ JSONEditor.defaults.options = {
  */
 function updateJSONPreview () {
   $('#json-preview').JSONView(form.process());
+
+  // Highlight the section being edited.
+  $('#json-preview > .jsonview > .obj.level0 > li > .prop').each((i, domObj) => {
+    const obj = $(domObj);
+    // Remove quotes in the name since .text() returns the content in quotes.
+    const name = obj.text().replace(/"/g, '');
+    if (name === form.section) {
+      obj.parent().addClass('highlight');
+      return false;
+    }
+    return true;
+  });
 }
 
 /**
@@ -78,6 +91,7 @@ function switchSchema (sectionName) {
   editor = new JSONEditor(document.getElementById('form'), {
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
   });
+  form.section = sectionName;
   editor.setValue(form.data[sectionName]);
   editor.on('change', () => {
     form.data[sectionName] = editor.getValue();
