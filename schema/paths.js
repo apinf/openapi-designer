@@ -75,13 +75,13 @@ const methods = {
 const paths = {
   title: 'Paths',
   type: 'array',
-  required: true,
   items: {
     type: 'object',
     properties: {
       _key: {
         title: 'Path',
         type: 'string',
+        required: true,
       },
       methods,
       parameters,
