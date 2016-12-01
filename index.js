@@ -61,6 +61,9 @@ JSONEditor.defaults.options = {
   disable_properties: true,
   // Make all buttons visible by default.
   required_by_default: true,
+  // Disable redundant delete buttons.
+  disable_array_delete_all_rows: true,
+  disable_array_delete_last_row: true,
 };
 
 /**
