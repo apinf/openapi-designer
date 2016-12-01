@@ -7,7 +7,7 @@
  *                         valid Swagger spec.
  */
 module.exports = function processJSON (objectFuncParam) {
-  const object = objectFuncParam;
+  const object = JSON.parse(JSON.stringify(objectFuncParam));
   if (object.paths) {
     /*
      * Take all elements in the methods array and put them in the parent path
