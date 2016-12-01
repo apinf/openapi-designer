@@ -6,6 +6,7 @@ const parameters = {
   type: 'array',
   items: {
     type: 'object',
+    headerTemplate: '{{ self.name }}',
     properties: {
       name: {
         title: 'Name',
@@ -35,10 +36,12 @@ const parameters = {
 const methods = {
   title: 'Methods',
   type: 'array',
+  format: 'tabs',
   items: {
     type: 'object',
+    headerTemplate: '{{ self.method }}',
     properties: {
-      methodName: {
+      method: {
         title: 'Method',
         type: 'string',
         enum: ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'],
@@ -75,10 +78,12 @@ const methods = {
 const paths = {
   title: 'Paths',
   type: 'array',
+  uniqueItems: true,
   items: {
     type: 'object',
+    headerTemplate: 'Path {{ self.path }}',
     properties: {
-      _key: {
+      path: {
         title: 'Path',
         type: 'string',
         required: true,

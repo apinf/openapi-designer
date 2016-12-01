@@ -5,7 +5,7 @@ const security = {
   items: {
     type: 'object',
     properties: {
-      _key: {
+      key: {
         title: 'Name',
         type: 'string',
         required: true,

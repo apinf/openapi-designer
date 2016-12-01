@@ -1,19 +1,18 @@
 const schema = require('./schema/index');
-const options = require('./schema/options');
 const processJSON = require('./jsonprocessor');
 /*
-  global $, document, window
+  global $, document, window, JSONEditor
 */
 
 const form = {
   data: {
     info: {},
-    schemes: {},
-    consumes: {},
-    produces: {},
+    schemes: [],
+    consumes: [],
+    produces: [],
     paths: {},
     security: {},
-    tags: {},
+    tags: [],
     externalDocs: {},
   },
   process () {
@@ -35,23 +34,29 @@ const form = {
   },
 };
 
+let editor;
+
+JSONEditor.defaults.options = {
+  theme: 'bootstrap3',
+  disable_edit_json: true,
+  disable_properties: true,
+  required_by_default: true,
+};
+
 function updateJSONPreview () {
   $('#json-preview').JSONView(form.process());
 }
 
 function switchSchema (sectionName) {
   $('#form').empty();
-  $('#form').alpaca({
-    data: form.data[sectionName],
+  editor = new JSONEditor(document.getElementById('form'), {
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
-    options: options[sectionName] || {},
-    postRender: (control) => {
-      control.on('change', function onChange () {
-        form.data[sectionName] = this.getValue();
-        form.save();
-        updateJSONPreview();
-      });
-    },
+  });
+  editor.setValue(form.data[sectionName]);
+  editor.on('change', () => {
+    form.data[sectionName] = editor.getValue();
+    form.save();
+    updateJSONPreview();
   });
 }
 
