@@ -34,6 +34,7 @@ function updateJSONPreview () {
 function switchSchema (sectionName) {
   $('#form').empty();
   $('#form').alpaca({
+    data: form.data[sectionName],
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
     options: options[sectionName] || {},
     postRender: (control) => {
