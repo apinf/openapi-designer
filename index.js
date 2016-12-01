@@ -93,9 +93,9 @@ function switchSchema (sectionName) {
   $('#form').empty();
   editor = new JSONEditor(document.getElementById('form'), {
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
+    startval: form.data[sectionName],
   });
   form.section = sectionName;
-  editor.setValue(form.data[sectionName]);
   editor.on('change', () => {
     form.data[sectionName] = editor.getValue();
     form.save();
