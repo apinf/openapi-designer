@@ -7,7 +7,7 @@ const tags = {
     type: 'object',
     properties: {
       name: {
-        title: 'name',
+        title: 'Name *',
         type: 'string',
         required: true,
       },

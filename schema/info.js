@@ -26,7 +26,7 @@ const license = {
   properties: {
     name: {
       type: 'string',
-      title: 'Name',
+      title: 'Name *',
       required: true,
     },
     url: {
@@ -43,12 +43,12 @@ const info = {
   properties: {
     title: {
       type: 'string',
-      title: 'Title',
+      title: 'Title *',
       required: true,
     },
     version: {
       type: 'string',
-      title: 'Version',
+      title: 'Version *',
       required: true,
     },
     termsOfService: {
