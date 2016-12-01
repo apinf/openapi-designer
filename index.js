@@ -55,12 +55,12 @@ let editor;
 JSONEditor.defaults.options = {
   // Use bootstrap 3 theme.
   theme: 'bootstrap3',
+  iconlib: 'bootstrap3',
   // Disable buttons that are not needed.
   disable_edit_json: true,
   disable_properties: true,
   // Make all buttons visible by default.
   required_by_default: true,
-  iconlib: "bootstrap3",
 };
 
 /**

@@ -1,3 +1,4 @@
+
 const contact = {
   title: 'Contact',
   type: 'object',
