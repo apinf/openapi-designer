@@ -59,6 +59,7 @@ JSONEditor.defaults.options = {
   disable_properties: true,
   // Make all buttons visible by default.
   required_by_default: true,
+  iconlib: "bootstrap3",
 };
 
 /**
