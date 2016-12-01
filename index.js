@@ -65,3 +65,5 @@ function download () {
   downloadLink.click();
   downloadLink.remove();
 }
+
+$('#download').click(() => download());
