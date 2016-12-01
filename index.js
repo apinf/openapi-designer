@@ -2,7 +2,7 @@ const schema = require('./schema/index');
 const options = require('./schema/options');
 const processJSON = require('./jsonprocessor');
 /*
-  global $, document
+  global $, document, window
 */
 
 const form = {
@@ -25,6 +25,14 @@ const form = {
   toEncodedString () {
     return encodeURIComponent(this.toString());
   },
+  save () {
+    window.localStorage.cachedForm = JSON.stringify(this.data);
+  },
+  load () {
+    if ({}.hasOwnProperty.call(window.localStorage, 'cachedForm')) {
+      this.data = JSON.parse(window.localStorage.cachedForm);
+    }
+  },
 };
 
 function updateJSONPreview () {
@@ -40,6 +48,7 @@ function switchSchema (sectionName) {
     postRender: (control) => {
       control.on('change', function onChange () {
         form.data[sectionName] = this.getValue();
+        form.save();
         updateJSONPreview();
       });
     },
@@ -50,6 +59,7 @@ $('.btn[data-form]').click(function click () {
   switchSchema(this.getAttribute('data-form'));
 });
 
+form.load();
 updateJSONPreview();
 
 /**
