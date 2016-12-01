@@ -1,4 +1,10 @@
-
+/**
+ * Convert an array into a map
+ * @param  {array[object]} object The array to convert.
+ * @param  {string} keyField      The name of the field is stored in within each
+ *                                object in the array.
+ * @return {object}               The map converted from the array.
+ */
 function arrayToMap (object, keyField) {
   const newObject = {};
   object.forEach((objFuncParam) => {
@@ -28,6 +34,8 @@ module.exports = function processJSON (objectFuncParam) {
     Object.keys(object.security).forEach((key) => {
       object.security[key] = object.security[key].value;
     });
+  } else {
+    object.security = {};
   }
 
   if (object.paths && object.paths.length > 0) {
