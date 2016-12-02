@@ -6,14 +6,15 @@ const parameters = {
   type: 'array',
   items: {
     type: 'object',
+    headerTemplate: '{{ self.name }}',
     properties: {
       name: {
-        title: 'Name',
+        title: 'Name *',
         type: 'string',
         required: true,
       },
       in: {
-        title: 'Parameter location',
+        title: 'Parameter location *',
         type: 'string',
         default: 'path',
         enum: ['query', 'header', 'path', 'formData', 'body'],
@@ -24,7 +25,7 @@ const parameters = {
         type: 'string',
       },
       required: {
-        title: 'Required',
+        title: 'Required *',
         type: 'boolean',
         required: true,
       },
@@ -35,10 +36,12 @@ const parameters = {
 const methods = {
   title: 'Methods',
   type: 'array',
+  format: 'tabs',
   items: {
     type: 'object',
+    headerTemplate: '{{ self.method }}',
     properties: {
-      methodName: {
+      method: {
         title: 'Method',
         type: 'string',
         enum: ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'],
@@ -75,13 +78,15 @@ const methods = {
 const paths = {
   title: 'Paths',
   type: 'array',
-  required: true,
+  uniqueItems: true,
   items: {
     type: 'object',
+    headerTemplate: 'Path {{ self.path }}',
     properties: {
-      _key: {
-        title: 'Path',
+      path: {
+        title: 'Path *',
         type: 'string',
+        required: true,
       },
       methods,
       parameters,

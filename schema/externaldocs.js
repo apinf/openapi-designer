@@ -1,3 +1,4 @@
+
 const externalDocs = {
   title: 'External Documentation',
   type: 'object',

@@ -1,17 +1,121 @@
-const { schema } = require('./schema/index');
-const { fields } = require('./schema/options');
+const schema = require('./schema/index');
 const processJSON = require('./jsonprocessor');
 /*
-  global $, document
+  global $, document, window, JSONEditor
 */
+
+/**
+ * The main form data store.
+ * @type {object}
+ */
+const form = {
+  data: {
+    info: {},
+    schemes: [],
+    consumes: [],
+    produces: [],
+    paths: {},
+    security: {},
+    tags: [],
+    externalDocs: {},
+  },
+  section: '',
+  process () {
+    return processJSON(this.data);
+  },
+  toString () {
+    return JSON.stringify(this.process(), null, '  ');
+  },
+  toEncodedString () {
+    return encodeURIComponent(this.toString());
+  },
+  /**
+   * Save form data to cache (LocalStorage).
+   */
+  save () {
+    window.localStorage.cachedForm = JSON.stringify(this.data);
+  },
+  /**
+   * Load form data from cache (LocalStorage).
+   */
+  load () {
+    if ({}.hasOwnProperty.call(window.localStorage, 'cachedForm')) {
+      this.data = JSON.parse(window.localStorage.cachedForm);
+    }
+  },
+};
+
+/**
+ * The current JSONEditor instance.
+ * @type {JSONEditor}
+ */
+let editor;
+
+// Default options for JSONEditor
+JSONEditor.defaults.options = {
+  // Use bootstrap 3 theme.
+  theme: 'bootstrap3',
+  iconlib: 'bootstrap3',
+  // Disable buttons that are not needed.
+  disable_edit_json: true,
+  disable_properties: true,
+  // Make all buttons visible by default.
+  required_by_default: true,
+  // Disable redundant delete buttons.
+  disable_array_delete_all_rows: true,
+  disable_array_delete_last_row: true,
+};
+
+/**
+ * Update the JSON preview panel with the current data.
+ */
+function updateJSONPreview () {
+  $('#json-preview').JSONView(form.process());
+
+  // Highlight the section being edited.
+  $('#json-preview > .jsonview > .obj.level0 > li > .prop').each((i, domObj) => {
+    const obj = $(domObj);
+    // Remove quotes in the name since .text() returns the content in quotes.
+    const name = obj.text().replace(/"/g, '');
+    if (name === form.section) {
+      obj.parent().addClass('highlight');
+      return false;
+    }
+    return true;
+  });
+}
+
+/**
+ * Switch to another section in the schema.
+ * @param {string} sectionName The name of the section to switch to.
+ */
+function switchSchema (sectionName) {
+  $('#form').empty();
+  editor = new JSONEditor(document.getElementById('form'), {
+    schema: JSON.parse(JSON.stringify(schema[sectionName])),
+    startval: form.data[sectionName],
+  });
+  form.section = sectionName;
+  editor.on('change', () => {
+    form.data[sectionName] = editor.getValue();
+    form.save();
+    updateJSONPreview();
+  });
+}
+
+// Switch between schema sections when clicking on buttons with the data-form attribute.
+$('.btn[data-form]').click(function click () {
+  switchSchema(this.getAttribute('data-form'));
+});
+
+form.load();
+updateJSONPreview();
 
 /**
  * Download the JSON output
  */
 function download () {
-  const str = `data:text/json;charset=utf-8,${
-    encodeURIComponent(JSON.stringify(processJSON(this.getValue()), null, '  '))
-  }`;
+  const str = `data:text/json;charset=utf-8,${form.toEncodedString()}`;
   const downloadLink = document.createElement('a');
   downloadLink.setAttribute('href', str);
   downloadLink.setAttribute('download', 'swagger.json');
@@ -22,50 +126,4 @@ function download () {
   downloadLink.remove();
 }
 
-// let form;
-
-// function jsonPreview () {
-//   $('#json-preview').removeClass('hidden');
-//   if (form !== undefined) {
-//     $('#json-preview').JSONView(form);
-//   }
-// }
-//
-// function richPreview () {
-//   $('#rich-preview').removeClass('hidden');
-//   if (form !== undefined) {
-//     // TODO rich preview
-//   }
-// }
-
-$('#form').alpaca({
-  // Schema from schema/index.js
-  // Stringify and parse to remove all pointer-like objects that could break
-  // things such as validation error messages.
-  schema: JSON.parse(JSON.stringify(schema)),
-  options: {
-    // Field extra data from schema/options.js
-    fields,
-    form: {
-      buttons: {
-        // Download button at the end of the form
-        download: {
-          click: download,
-          type: 'button',
-          value: 'Download as JSON',
-          styles: 'btn btn-primary',
-        },
-      },
-    },
-  },
-  postRender: (control) => {
-    control.on('change', function onChange () {
-      // Update the current preview with the latest changes
-      if (!$('#json-preview').hasClass('hidden')) {
-        $('#json-preview').JSONView(processJSON(this.getValue()));
-      } else if (!$('#rich-preview').hasClass('hidden')) {
-        // TODO rich preview
-      }
-    });
-  },
-});
+$('#download').click(() => download());
