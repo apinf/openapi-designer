@@ -5,6 +5,7 @@ const parameters = {
   title: 'Parameters',
   type: 'array',
   items: {
+    title: 'Parameter',
     type: 'object',
     headerTemplate: '{{ self.name }}',
     properties: {
@@ -38,6 +39,7 @@ const methods = {
   type: 'array',
   format: 'tabs',
   items: {
+    title: 'Method',
     type: 'object',
     headerTemplate: '{{ self.method }}',
     properties: {
@@ -50,6 +52,7 @@ const methods = {
         title: 'Tags',
         type: 'array',
         items: {
+          title: 'Tag',
           type: 'string',
         },
       },
@@ -80,6 +83,7 @@ const paths = {
   type: 'array',
   uniqueItems: true,
   items: {
+    title: 'Path',
     type: 'object',
     headerTemplate: 'Path {{ self.path }}',
     properties: {

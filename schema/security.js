@@ -3,6 +3,7 @@ const security = {
   title: 'Security',
   type: 'array',
   items: {
+    title: 'Security requirement',
     type: 'object',
     properties: {
       key: {
@@ -14,6 +15,7 @@ const security = {
         title: 'Scope names',
         type: 'array',
         items: {
+          title: 'Scope',
           type: 'string',
         },
       },

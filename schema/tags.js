@@ -4,6 +4,7 @@ const tags = {
   title: 'Tags',
   type: 'array',
   items: {
+    title: 'Tag',
     type: 'object',
     properties: {
       name: {
