@@ -16,13 +16,77 @@ function arrayToMap (object, keyField) {
   return newObject;
 }
 
+function isEmpty (object) {
+  if (object === undefined) {
+    return true;
+  } else if (Array.isArray(object)) {
+    if (object.length === 0) {
+      return true;
+    }
+    let empty = true;
+    object.forEach((child) => {
+      if (!isEmpty(child)) {
+        empty = false;
+        return true;
+      }
+      return false;
+    });
+    return empty;
+  } else if (typeof object === 'object') {
+    let empty = true;
+    Object.keys(object).forEach((key) => {
+      if (!isEmpty(object[key])) {
+        empty = false;
+        return true;
+      }
+      return false;
+    });
+    return empty;
+  } else if (typeof object === 'string') {
+    return object.length === 0;
+  }
+  return false;
+}
+
+function deleteEmptyChildren (objectFuncParam) {
+  const object = objectFuncParam;
+  if (Array.isArray(object)) {
+    object.forEach((child, index) => {
+      if (isEmpty(child)) {
+        object.pop(index);
+      } else {
+        object[index] = deleteEmptyChildren(child);
+      }
+    });
+  } else if (typeof object === 'object') {
+    Object.keys(object).forEach((key) => {
+      if (isEmpty(object[key])) {
+        delete object[key];
+      } else {
+        object[key] = deleteEmptyChildren(object[key]);
+      }
+    });
+  }
+  return object;
+}
+
 /**
  * @param  {object} object The form value
  * @return {object}        A corrected version of the output. This should be a
  *                         valid Swagger spec.
  */
 module.exports = function processJSON (objectFuncParam) {
-  const object = JSON.parse(JSON.stringify(objectFuncParam));
+  let object = JSON.parse(JSON.stringify(objectFuncParam));
+
+  object = deleteEmptyChildren(object);
+
+  // Hardcoded Swagger version
+  object.swagger = '2.0';
+
+  object.host = object.info.host;
+  delete object.info.host;
+  object.basePath = object.info.basePath;
+  delete object.info.basePath;
 
   if (object.security && object.security.length > 0) {
     object.security = arrayToMap(object.security, 'key');
@@ -32,10 +96,14 @@ module.exports = function processJSON (objectFuncParam) {
      * object.
      */
     Object.keys(object.security).forEach((key) => {
-      object.security[key] = object.security[key].value;
+      if ({}.hasOwnProperty.call(object.security[key], 'value')) {
+        object.security[key] = object.security[key].value;
+      } else {
+        object.security[key] = [];
+      }
     });
   } else {
-    object.security = {};
+    delete object.security;
   }
 
   if (object.paths && object.paths.length > 0) {
