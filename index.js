@@ -1,7 +1,8 @@
 const schema = require('./schema/index');
 const processJSON = require('./jsonprocessor');
+const JSONEditor = require('./lib/json-editor/dist/jsoneditor.js');
 /*
-  global $, document, window, JSONEditor
+  global $, document, window
 */
 
 /**

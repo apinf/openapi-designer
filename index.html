@@ -19,6 +19,30 @@
     .btn-group-vertical>.btn, .btn-group>.btn{
       margin-bottom: 8px;
     }
+
+    /* CSS for the custom info button in our json-editor fork*/
+    .form-tooltip {
+      padding: .25rem;
+      position: relative;
+      display: inline-block;
+    }
+    .form-tooltip .form-tooltip-text {
+      visibility: hidden;
+      width: auto;
+      background-color: rgba(50, 50, 50, .75);
+      margin: 0 .25rem;
+      color: #FAFAFA;
+      text-align: left;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+
+      position: absolute;
+      z-index: 1;
+    }
+
+    .form-tooltip:hover .form-tooltip-text {
+      visibility: visible;
+    }
   </style>
 </html>
 <body>
@@ -92,7 +116,7 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/json-editor/0.7.28/jsoneditor.min.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/json-editor/0.7.28/jsoneditor.min.js"></script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jsonview/1.2.3/jquery.jsonview.min.js"></script>
   <script src="bundle.js"></script>
 </body>
