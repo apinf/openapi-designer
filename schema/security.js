@@ -1,5 +1,9 @@
 
 const security = {
+  description: 'A declaration of which security schemes are applied for the ' +
+    'API as a whole. The list of values describes alternative security ' +
+    'schemes that can be used (that is, there is a logical OR between the ' +
+    'security requirements). Individual operations can override this definition.',
   title: 'Security',
   type: 'array',
   uniqueItems: true,
