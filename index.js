@@ -23,11 +23,8 @@ const form = {
   process () {
     return processJSON(this.data);
   },
-  toString () {
-    return JSON.stringify(this.process(), null, '  ');
-  },
   toEncodedString () {
-    return encodeURIComponent(this.toString());
+    return encodeURIComponent(JSON.stringify(this.process(), null, '  '));
   },
   /**
    * Save form data to cache (LocalStorage).
