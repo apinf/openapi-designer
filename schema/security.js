@@ -2,6 +2,7 @@
 const security = {
   title: 'Security',
   type: 'array',
+  uniqueItems: true,
   items: {
     title: 'Security requirement',
     type: 'object',

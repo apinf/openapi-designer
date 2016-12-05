@@ -4,6 +4,7 @@ const { externalDocs } = require('./externaldocs');
 const parameters = {
   title: 'Parameters',
   type: 'array',
+  uniqueItems: true,
   items: {
     title: 'Parameter',
     type: 'object',
@@ -38,6 +39,7 @@ const responses = {
   title: 'Responses',
   type: 'array',
   format: 'tabs',
+  uniqueItems: 'true',
   items: {
     title: 'Response',
     type: 'object',
@@ -61,6 +63,7 @@ const methods = {
   title: 'Methods',
   type: 'array',
   format: 'tabs',
+  uniqueItems: true,
   items: {
     title: 'Method',
     type: 'object',

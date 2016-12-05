@@ -3,6 +3,7 @@ const { externalDocs } = require('./externaldocs');
 const tags = {
   title: 'Tags',
   type: 'array',
+  uniqueItems: true,
   items: {
     title: 'Tag',
     type: 'object',
