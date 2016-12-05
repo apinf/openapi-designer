@@ -34,6 +34,29 @@ const parameters = {
   },
 };
 
+const responses = {
+  title: 'Responses',
+  type: 'array',
+  format: 'tabs',
+  items: {
+    title: 'Response',
+    type: 'object',
+    headerTemplate: '{{ self.statusCode }}',
+    properties: {
+      statusCode: {
+        title: 'HTTP Status *',
+        type: 'string',
+        required: true,
+      },
+      description: {
+        title: 'Description *',
+        type: 'string',
+        required: true,
+      },
+    },
+  },
+};
+
 const methods = {
   title: 'Methods',
   type: 'array',
@@ -65,6 +88,7 @@ const methods = {
         title: 'Description',
         type: 'string',
       },
+      responses,
       externalDocs,
       operationId: {
         title: 'Operation ID',

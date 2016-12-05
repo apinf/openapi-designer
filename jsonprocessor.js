@@ -51,6 +51,8 @@ module.exports = function processJSON (objectFuncParam) {
 
       Object.keys(path.methods).forEach((methodName) => {
         path[methodName] = path.methods[methodName];
+        path[methodName].responses = arrayToMap(
+          path[methodName].responses, 'statusCode');
       });
 
       // Delete the old list as it isn't actually a part of the Swagger spec
