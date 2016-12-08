@@ -18,23 +18,10 @@ const validatorPatterns = {
     )
     must end, case insensitive
   `),
-  hostname: new SRL(`
-    begin with capture (
-      capture (
-        any of (digit, letter, one of "-") once or more,
-        literally "." once
-      ) never or more,
-      any of (digit, letter, one of "-") once or more
-    ) once,
-    capture (
-      literally ":" once,
-      digit once or more
-    ) optional,
-    must end, case insensitive
-  `),
 };
 
 function validateString (format, value) {
+  let portSplitter;
   switch (format) {
     case 'url':
       if (!validator.isURL(value)) {
@@ -52,7 +39,16 @@ function validateString (format, value) {
       }
       break;
     case 'hostname':
-      if (!validatorPatterns.hostname.isMatching(value)) {
+      // The validator package doesn't do hostname (FQDN + optional port) validation
+      // by default, so we split the port into a separate string if it exists.
+      portSplitter = value.indexOf(':');
+      if (portSplitter !== -1) {
+        if (!validator.isFQDN(value.substr(0, portSplitter))) {
+          return 'Invalid hostname';
+        } else if (!validator.isInt(value.substr(portSplitter + 1), { min: 1, max: 65536 })) {
+          return 'Invalid port in hostname';
+        }
+      } else if (!validator.isFQDN(value)) {
         return 'Invalid hostname';
       }
       break;
