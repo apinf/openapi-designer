@@ -1,5 +1,6 @@
 const schema = require('./schema/index');
 const processJSON = require('./jsonprocessor');
+const validators = require('./validators');
 require('./lib/json-editor/dist/jsoneditor.js');
 /*
   global $, document, window, JSONEditor
@@ -62,7 +63,8 @@ JSONEditor.defaults.options = {
   // Disable redundant delete buttons.
   disable_array_delete_all_rows: true,
   disable_array_delete_last_row: true,
-  description_in_info_button: true,
+  show_errors: 'always',
+  custom_validators: [validators.required, validators.type],
 };
 
 /**
@@ -94,6 +96,7 @@ function switchSchema (sectionName) {
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
     startval: form.data[sectionName],
   });
+  global.editor = editor;
   form.section = sectionName;
   editor.on('change', () => {
     form.data[sectionName] = editor.getValue();

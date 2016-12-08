@@ -1,3 +1,4 @@
+/* global validator */
 const SRL = require('srl');
 
 /**
@@ -33,29 +34,70 @@ const validatorPatterns = {
   `),
 };
 
+function validateString (format, value) {
+  switch (format) {
+    case 'url':
+      if (!validator.isURL(value)) {
+        return 'Invalid URL';
+      }
+      break;
+    case 'email':
+      if (!validator.isEmail(value)) {
+        return 'Invalid e-mail address';
+      }
+      break;
+    case 'uuid':
+      if (!validator.isUUID(value)) {
+        return 'Invalid UUID';
+      }
+      break;
+    case 'hostname':
+      if (!validatorPatterns.hostname.isMatching(value)) {
+        return 'Invalid hostname';
+      }
+      break;
+    case 'mime':
+      if (!validatorPatterns.mimeType.isMatching(value)) {
+        return 'Invalid MIME type';
+      }
+      break;
+    default:
+      return '';
+  }
+  return '';
+}
+
 /**
  * Alpaca validator functions to check fields using the regexes above.
  */
 module.exports = {
-  mimeType (callback) {
-    if (validatorPatterns.mimeType.isMatching(this.getValue())) {
-      callback({ status: true });
-    } else {
-      callback({ status: false, message: 'Invalid MIME type e.g. application/vnd.github.v3.raw+json' });
+  required (schema, value, path) {
+    if (schema.required && value.length === 0) {
+      return [{ path, message: 'This field is required' }];
     }
+    return [];
   },
 
-  hostname (callback) {
-    if (validatorPatterns.hostname.isMatching(this.getValue())) {
-      callback({ status: true });
-    } else {
-      callback({ status: false, message: 'Invalid hostname e.g. host.example.com:80' });
+  type (schema, value, path) {
+    if (schema.type === 'string') {
+      /*
+        Validate various strings formats.
+       */
+      const message = validateString(schema.format, value);
+      if (message.length > 0) {
+        return [{ path, message }];
+      }
+    } else if (schema.type === 'number') {
+      // Validate non-integer numbers.
+      if (!validator.isDecimal(value)) {
+        return [{ path, message: 'Invalid number' }];
+      }
+    } else if (schema.type === 'integer') {
+      // Validate integers.
+      if (!validator.isNumeric(value)) {
+        return [{ path, message: 'Invalid integer' }];
+      }
     }
-  },
-
-  basePath () {
-    if (!this.getValue().startsWith('/')) {
-      this.setValue(`/${this.getValue()}`);
-    }
+    return [];
   },
 };

@@ -17,6 +17,7 @@ const consumes = {
   items: {
     title: 'MIME type',
     type: 'string',
+    format: 'mime',
   },
 };
 
@@ -27,6 +28,7 @@ const produces = {
   items: {
     title: 'MIME type',
     type: 'string',
+    format: 'mime',
   },
 };
 

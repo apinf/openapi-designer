@@ -62,6 +62,7 @@ const info = {
     license,
     host: {
       type: 'string',
+      format: 'hostname',
       title: 'Host',
       options: {
         infoText: 'The hostname the API is available at. Do not include protocol or base path.',
