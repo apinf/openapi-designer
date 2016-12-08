@@ -128,6 +128,9 @@ function download (type) {
   } else {
     return;
   }
+
+  // Add an anchor element that has the data as the href attribute, then click
+  // the element to download the data.
   const str = `data:text/json;charset=utf-8,${data}`;
   const downloadLink = document.createElement('a');
   downloadLink.setAttribute('href', str);
@@ -138,11 +141,14 @@ function download (type) {
   downloadLink.click();
   downloadLink.remove();
 }
+
 function clear () {
+  // Delete cached form data and reload the page.
   delete window.localStorage.cachedForm;
   window.location.reload();
 }
 
+// Bind buttons to functions
 $('#download-json').click(() => download('json'));
 $('#download-yaml').click(() => download('yml'));
 
