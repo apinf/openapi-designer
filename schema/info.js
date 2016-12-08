@@ -47,10 +47,12 @@ const info = {
       required: true,
     },
     version: {
-      description: 'The version of the API (not Swagger)',
       type: 'string',
       title: 'Version *',
       required: true,
+      options: {
+        infoText: 'The version of the API (not Swagger)',
+      },
     },
     termsOfService: {
       type: 'string',
@@ -59,9 +61,11 @@ const info = {
     contact,
     license,
     host: {
-      description: 'The hostname the API is available at. Do not include protocol or base path.',
       type: 'string',
       title: 'Host',
+      options: {
+        infoText: 'The hostname the API is available at. Do not include protocol or base path.',
+      },
     },
     basePath: {
       type: 'string',
