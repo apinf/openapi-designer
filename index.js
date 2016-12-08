@@ -123,7 +123,7 @@ function download (type) {
   let data;
   if (type === 'json') {
     data = form.toEncodedJSON();
-  } else if (type === 'yaml') {
+  } else if (type === 'yml') {
     data = form.toEncodedYAML();
   } else {
     return;
@@ -144,6 +144,6 @@ function clear () {
 }
 
 $('#download-json').click(() => download('json'));
-$('#download-yaml').click(() => download('yaml'));
+$('#download-yaml').click(() => download('yml'));
 
 $('#clear').click(() => clear());
