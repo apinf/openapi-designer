@@ -127,5 +127,10 @@ function download () {
   downloadLink.click();
   downloadLink.remove();
 }
+function clear () {
+  delete window.localStorage.cachedForm;
+  window.location.reload();
+}
 
 $('#download').click(() => download());
+$('#clear').click(() => clear());
