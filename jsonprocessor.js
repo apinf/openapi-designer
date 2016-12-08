@@ -83,10 +83,16 @@ module.exports = function processJSON (objectFuncParam) {
   // Hardcoded Swagger version
   object.swagger = '2.0';
 
-  object.host = object.info.host;
-  delete object.info.host;
-  object.basePath = object.info.basePath;
-  delete object.info.basePath;
+  if (object.info) {
+    if (object.info.host) {
+      object.host = object.info.host;
+      delete object.info.host;
+    }
+    if (object.info.basePath) {
+      object.basePath = object.info.basePath;
+      delete object.info.basePath;
+    }
+  }
 
   if (object.security && object.security.length > 0) {
     object.security = arrayToMap(object.security, 'key');
@@ -127,7 +133,7 @@ module.exports = function processJSON (objectFuncParam) {
       delete path.methods;
     });
   } else {
-    object.paths = {};
+    delete object.paths;
   }
 
   return object;
