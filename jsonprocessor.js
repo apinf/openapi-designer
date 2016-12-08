@@ -7,6 +7,9 @@
  */
 function arrayToMap (object, keyField) {
   const newObject = {};
+  if (object === undefined) {
+    return newObject;
+  }
   object.forEach((objFuncParam) => {
     const obj = objFuncParam;
     const key = obj[keyField];
