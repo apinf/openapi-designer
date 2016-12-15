@@ -154,3 +154,4 @@ $('#download-json').click(() => download('json'));
 $('#download-yaml').click(() => download('yml'));
 
 $('#clear').click(() => clear());
+switchSchema('info');
