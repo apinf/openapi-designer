@@ -18,6 +18,7 @@ const form = {
     produces: [],
     paths: {},
     security: {},
+    securityDefinitions: {},
     tags: [],
     externalDocs: {},
   },

@@ -29,7 +29,50 @@ const security = {
 };
 
 const securityDefinitions = {
-
+  title: 'Security Definitions',
+  type: 'array',
+  items: {
+    title: 'Security definition',
+    type: 'object',
+    properties: {
+      choice: {
+        title: 'Type',
+        type: 'string',
+        enum: ['basic', 'apiKey', 'oauth2'],
+        required: true,
+      },
+      description: {
+        title: 'Description',
+        type: 'string',
+      },
+      name: {
+        title: 'Name *',
+        type: 'string',
+        required: true,
+        options: {
+          infoText: 'The name of the header or query parameter to be used',
+        },
+      },
+      in: {
+        title: 'Location of key *',
+        required: true,
+        type: 'string',
+        enum: ['query', 'header'],
+        options: {
+          infoText: 'The location of the API key.',
+        },
+      },
+      flow: {
+        title: 'Flow *',
+        type: 'string',
+        required: true,
+        enum: ['implicit', 'password', 'application', 'accessCode'],
+        options: {
+          infoText: 'The flow used by the OAuth2 security scheme.',
+        },
+      },
+    },
+  },
 };
 
 module.exports = { security, securityDefinitions };
