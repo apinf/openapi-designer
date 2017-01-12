@@ -144,6 +144,33 @@ module.exports = function processJSON (objectFuncParam) {
 
   if (object.definitions) {
     object.definitions = arrayToMap(object.definitions, 'key');
+
+    Object.keys(object.definitions).forEach((key) => {
+      const definition = object.definitions[key];
+      if (definition.properties) {
+        definition.properties = arrayToMap(definition.properties, 'key');
+      }
+      if (definition.patternProperties) {
+        definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
+      }
+
+      const propertyHardRefParser = (propKey, props) => {
+        const properties = props;
+        const property = properties[propKey];
+        if (property.hardReference &&
+          Object.hasOwnProperty.call(object.definitions, property.$ref)) {
+          properties[propKey] = object.definitions[property.$ref];
+        } else {
+          delete property.hardReference;
+        }
+      };
+      if (definition.properties) {
+        Object.keys(definition.properties).forEach(propKey =>
+          propertyHardRefParser(propKey, definition.properties));
+        Object.keys(definition.patternProperties).forEach(propKey =>
+          propertyHardRefParser(propKey, definition.patternProperties));
+      }
+    });
   } else {
     delete object.definitions;
   }
