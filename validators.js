@@ -83,16 +83,6 @@ module.exports = {
       if (message.length > 0) {
         return [{ path, message }];
       }
-    } else if (schema.type === 'number') {
-      // Validate non-integer numbers.
-      if (!validator.isDecimal(value)) {
-        return [{ path, message: 'Invalid number' }];
-      }
-    } else if (schema.type === 'integer') {
-      // Validate integers.
-      if (!validator.isNumeric(value)) {
-        return [{ path, message: 'Invalid integer' }];
-      }
     }
     return [];
   },
