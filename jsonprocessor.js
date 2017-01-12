@@ -147,13 +147,6 @@ module.exports = function processJSON (objectFuncParam) {
 
     Object.keys(object.definitions).forEach((key) => {
       const definition = object.definitions[key];
-      if (definition.properties) {
-        definition.properties = arrayToMap(definition.properties, 'key');
-      }
-      if (definition.patternProperties) {
-        definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
-      }
-
       const propertyHardRefParser = (propKey, props) => {
         const properties = props;
         const property = properties[propKey];
@@ -164,9 +157,15 @@ module.exports = function processJSON (objectFuncParam) {
           delete property.hardReference;
         }
       };
+
       if (definition.properties) {
+        definition.properties = arrayToMap(definition.properties, 'key');
         Object.keys(definition.properties).forEach(propKey =>
           propertyHardRefParser(propKey, definition.properties));
+      }
+
+      if (definition.patternProperties) {
+        definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
         Object.keys(definition.patternProperties).forEach(propKey =>
           propertyHardRefParser(propKey, definition.patternProperties));
       }
