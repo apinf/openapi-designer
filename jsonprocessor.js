@@ -139,5 +139,11 @@ module.exports = function processJSON (objectFuncParam) {
     delete object.paths;
   }
 
+  if (object.definitions) {
+    object.definitions = arrayToMap(object.definitions, 'key');
+  } else {
+    delete object.definitions;
+  }
+
   return object;
 };
