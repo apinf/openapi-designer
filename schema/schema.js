@@ -1,4 +1,18 @@
 
+const schemaImport = {
+  $ref: {
+    title: 'Reference (key of another definition)',
+    type: 'string',
+  },
+  hardReference: {
+    title: 'Hard reference',
+    type: 'boolean',
+    options: {
+      infoText: 'Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
+    },
+  },
+};
+
 const schema = {
   title: 'Schema-based object',
   type: 'object',
@@ -92,19 +106,7 @@ const schema = {
     items: {
       title: 'Item object',
       type: 'object',
-      properties: {
-        $ref: {
-          title: 'Reference (key of another definition)',
-          type: 'string',
-        },
-        hardReference: {
-          title: 'Hard reference',
-          options: {
-            infoText: 'Not yet implemented! Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
-          },
-          type: 'boolean',
-        },
-      },
+      properties: schemaImport,
       options: { dependencies: { type: 'array' } },
     },
 
@@ -141,7 +143,7 @@ const schema = {
           hardReference: {
             title: 'Hard reference',
             options: {
-              infoText: 'Not yet implemented! Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
+              infoText: 'Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
             },
             type: 'boolean',
           },
@@ -189,4 +191,4 @@ const definitions = {
   items: schema,
 };
 
-module.exports = { definitions, schema };
+module.exports = { definitions, schemaImport, schema };
