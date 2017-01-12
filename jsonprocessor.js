@@ -7,12 +7,15 @@
  */
 function arrayToMap (object, keyField) {
   const newObject = {};
-  if (object === undefined) {
+  if (object === undefined || object === null) {
     return newObject;
   }
   object.forEach((objFuncParam) => {
     const obj = objFuncParam;
     const key = obj[keyField];
+    if (key === undefined) {
+      return;
+    }
     delete obj[keyField];
     newObject[key] = obj;
   });
@@ -20,7 +23,7 @@ function arrayToMap (object, keyField) {
 }
 
 function isEmpty (object) {
-  if (object === undefined) {
+  if (object === undefined || object === null) {
     return true;
   } else if (Array.isArray(object)) {
     if (object.length === 0) {
