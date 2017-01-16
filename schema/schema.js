@@ -46,18 +46,13 @@ const schema = {
       title: 'Default value',
     },
 
-    maximum: {
-      title: 'Inclusive maximum',
-      type: 'integer',
-      options: { dependencies: { type: ['number', 'integer'] } },
-    },
     minimum: {
       title: 'Inclusive minimum',
       type: 'integer',
       options: { dependencies: { type: ['number', 'integer'] } },
     },
-    exclusiveMaximum: {
-      title: 'Exclusive maximum',
+    maximum: {
+      title: 'Inclusive maximum',
       type: 'integer',
       options: { dependencies: { type: ['number', 'integer'] } },
     },
@@ -66,14 +61,19 @@ const schema = {
       type: 'integer',
       options: { dependencies: { type: ['number', 'integer'] } },
     },
+    exclusiveMaximum: {
+      title: 'Exclusive maximum',
+      type: 'integer',
+      options: { dependencies: { type: ['number', 'integer'] } },
+    },
 
-    maxLength: {
-      title: 'Maximum length',
+    minLength: {
+      title: 'Minimum length',
       type: 'integer',
       options: { dependencies: { type: 'string' } },
     },
-    minLength: {
-      title: 'Minimum length',
+    maxLength: {
+      title: 'Maximum length',
       type: 'integer',
       options: { dependencies: { type: 'string' } },
     },
@@ -88,13 +88,13 @@ const schema = {
       options: { dependencies: { type: 'string' } },
     },
 
-    maxItems: {
-      title: 'Maximum number of items',
+    minItems: {
+      title: 'Minimum number of items',
       type: 'integer',
       options: { dependencies: { type: 'array' } },
     },
-    minItems: {
-      title: 'Minimum number of items',
+    maxItems: {
+      title: 'Maximum number of items',
       type: 'integer',
       options: { dependencies: { type: 'array' } },
     },
@@ -110,13 +110,13 @@ const schema = {
       options: { dependencies: { type: 'array' } },
     },
 
-    maxProperties: {
-      title: 'Maximum number of properties',
+    minProperties: {
+      title: 'Minimum number of properties',
       type: 'integer',
       options: { dependencies: { type: 'object' } },
     },
-    minProperties: {
-      title: 'Minimum number of properties',
+    maxProperties: {
+      title: 'Maximum number of properties',
       type: 'integer',
       options: { dependencies: { type: 'object' } },
     },
