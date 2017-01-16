@@ -141,11 +141,18 @@ module.exports = function processJSON (objectFuncParam) {
       path.methods = arrayToMap(path.methods, 'method');
 
       Object.keys(path.methods).forEach((methodName) => {
-        path[methodName] = path.methods[methodName];
-        path[methodName].responses = arrayToMap(
-          path[methodName].responses, 'statusCode');
-        Object.keys(path[methodName].responses).forEach(propKey =>
-          propertyHardRefParser(object, propKey, path[methodName].responses));
+        const method = path.methods[methodName];
+        method.responses = arrayToMap(method.responses, 'statusCode');
+        Object.keys(method.responses).forEach((propKey) => {
+          const response = method.responses[propKey];
+          propertyHardRefParser(object, propKey, method.responses);
+          const examples = {};
+          response.examples.forEach((example) => {
+            examples[example.mimeType] = example.value;
+          });
+          response.examples = examples;
+        });
+        path[methodName] = method;
       });
 
       // Delete the old list as it isn't actually a part of the Swagger spec

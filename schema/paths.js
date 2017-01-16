@@ -70,6 +70,28 @@ const responses = {
         type: 'object',
         properties: schemaImport,
       },
+      examples: {
+        title: 'Examples',
+        type: 'array',
+        items: {
+          title: 'Example',
+          type: 'object',
+          properties: {
+            mimeType: {
+              title: 'MIME type',
+              type: 'string',
+              format: 'mime',
+            },
+            value: {
+              title: 'Value',
+              options: {
+                disable_properties: false,
+                disable_edit_json: false,
+              },
+            },
+          },
+        },
+      },
     },
   },
 };
