@@ -95,6 +95,9 @@ function updateJSONPreview () {
  * @param {string} sectionName The name of the section to switch to.
  */
 function switchSchema (sectionName) {
+  if (editor !== undefined) {
+    editor.destroy();
+  }
   $('#form').empty();
   editor = new JSONEditor(document.getElementById('form'), {
     schema: JSON.parse(JSON.stringify(schema[sectionName])),
