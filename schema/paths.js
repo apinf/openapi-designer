@@ -1,5 +1,6 @@
 const { schemes, consumes, produces } = require('./ioinfo');
 const { externalDocs } = require('./externaldocs');
+const { schemaImport } = require('./schema');
 
 const parameters = {
   description: 'A list of parameters that are applicable for all the ' +
@@ -63,6 +64,11 @@ const responses = {
         title: 'Description *',
         type: 'string',
         required: true,
+      },
+      schema: {
+        title: 'Schema object',
+        type: 'object',
+        properties: schemaImport,
       },
     },
   },

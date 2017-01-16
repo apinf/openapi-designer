@@ -76,6 +76,17 @@ function deleteEmptyChildren (objectFuncParam) {
   return object;
 }
 
+function propertyHardRefParser (object, propKey, props) {
+  const properties = props;
+  const property = properties[propKey];
+  if (property.hardReference &&
+    Object.hasOwnProperty.call(object.definitions, property.$ref)) {
+    properties[propKey] = object.definitions[property.$ref];
+  } else {
+    delete property.hardReference;
+  }
+}
+
 /**
  * @param  {object} object The form value
  * @return {object}        A corrected version of the output. This should be a
@@ -133,6 +144,8 @@ module.exports = function processJSON (objectFuncParam) {
         path[methodName] = path.methods[methodName];
         path[methodName].responses = arrayToMap(
           path[methodName].responses, 'statusCode');
+        Object.keys(path[methodName].responses).forEach(propKey =>
+          propertyHardRefParser(object, propKey, path[methodName].responses));
       });
 
       // Delete the old list as it isn't actually a part of the Swagger spec
@@ -147,27 +160,17 @@ module.exports = function processJSON (objectFuncParam) {
 
     Object.keys(object.definitions).forEach((key) => {
       const definition = object.definitions[key];
-      const propertyHardRefParser = (propKey, props) => {
-        const properties = props;
-        const property = properties[propKey];
-        if (property.hardReference &&
-          Object.hasOwnProperty.call(object.definitions, property.$ref)) {
-          properties[propKey] = object.definitions[property.$ref];
-        } else {
-          delete property.hardReference;
-        }
-      };
 
       if (definition.properties) {
         definition.properties = arrayToMap(definition.properties, 'key');
         Object.keys(definition.properties).forEach(propKey =>
-          propertyHardRefParser(propKey, definition.properties));
+          propertyHardRefParser(object, propKey, definition.properties));
       }
 
       if (definition.patternProperties) {
         definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
         Object.keys(definition.patternProperties).forEach(propKey =>
-          propertyHardRefParser(propKey, definition.patternProperties));
+          propertyHardRefParser(object, propKey, definition.patternProperties));
       }
     });
   } else {
