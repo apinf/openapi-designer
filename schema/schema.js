@@ -59,12 +59,12 @@ const schema = {
     },
     exclusiveMinimum: {
       title: 'Exclusive minimum',
-      type: 'integer',
+      type: 'boolean',
       options: { dependencies: { type: ['number', 'integer'] } },
     },
     exclusiveMaximum: {
       title: 'Exclusive maximum',
-      type: 'integer',
+      type: 'boolean',
       options: { dependencies: { type: ['number', 'integer'] } },
     },
 
