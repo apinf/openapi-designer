@@ -35,6 +35,11 @@ const securityDefinitions = {
     title: 'Security definition',
     type: 'object',
     properties: {
+      key: {
+        title: 'Definition ID *',
+        type: 'string',
+        required: true,
+      },
       choice: {
         title: 'Type',
         type: 'string',

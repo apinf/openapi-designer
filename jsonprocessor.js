@@ -129,6 +129,12 @@ module.exports = function processJSON (objectFuncParam) {
     delete object.security;
   }
 
+  if (object.securityDefinitions && object.securityDefinitions.length > 0) {
+    object.securityDefinitions = arrayToMap(object.security, 'key');
+  } else {
+    delete object.securityDefinitions;
+  }
+
   if (object.paths && object.paths.length > 0) {
     object.paths = arrayToMap(object.paths, 'path');
     /*
@@ -154,6 +160,9 @@ module.exports = function processJSON (objectFuncParam) {
             });
           }
           response.examples = examples;
+        });
+        method.parameters.forEach((parameter, index) => {
+          propertyHardRefParser(object, index, method.parameters);
         });
         path[methodName] = method;
       });
