@@ -1,3 +1,5 @@
+const schema = require('./schema/index');
+
 /**
  * Convert an array into a map
  * @param  {array[object]} object The array to convert.
@@ -79,9 +81,15 @@ function deleteEmptyChildren (objectFuncParam) {
 function propertyHardRefParser (object, propKey, props) {
   const properties = props;
   const property = properties[propKey];
-  if (property.hardReference &&
-    Object.hasOwnProperty.call(object.definitions, property.$ref)) {
-    properties[propKey] = object.definitions[property.$ref];
+
+  const targetExists = Object.hasOwnProperty.call(object.definitions, property.$ref);
+  if (!targetExists) {
+    return;
+  }
+
+  const target = object.definitions[property.$ref];
+  if (property.hardReference || target.hardReferenceOnly) {
+    properties[propKey] = target;
   } else {
     delete property.hardReference;
   }
@@ -119,7 +127,7 @@ module.exports = function processJSON (objectFuncParam) {
      * object.
      */
     Object.keys(object.security).forEach((key) => {
-      if ({}.hasOwnProperty.call(object.security[key], 'value')) {
+      if (Object.hasOwnProperty.call(object.security[key], 'value')) {
         object.security[key] = object.security[key].value;
       } else {
         object.security[key] = [];
@@ -127,6 +135,59 @@ module.exports = function processJSON (objectFuncParam) {
     });
   } else {
     delete object.security;
+  }
+
+  // Definition keys that have set the Only hard refences to true will be stored
+  // here and then deleted from the definitions object at the end of processing.
+  const definitionsToDelete = [];
+
+  if (object.definitions) {
+    object.definitions = arrayToMap(object.definitions, 'key');
+
+    Object.keys(object.definitions).forEach((key) => {
+      const definition = object.definitions[key];
+
+      // Push hard reference -only definitions to the definitionsToDelete array.
+      if (definition.hardReferenceOnly) {
+        definitionsToDelete.push(key);
+      }
+      delete definition.hardReferenceOnly;
+
+      // schemaSchema is a schema to create and validate schemas, also known as
+      // a meta-schema.
+      // schema.definitions is the main schema for global object definitions and
+      // object definitions are basically meta-schemas.
+      const schemaSchema = schema.definitions.items;
+
+      // If the value of a property is the same as the default value, delete the
+      // whole field to avoid unnecessary fields in the output.
+      Object.keys(schemaSchema.properties).forEach((schemaKey) => {
+        const prop = schemaSchema.properties[schemaKey];
+        if (Object.hasOwnProperty.call(definition, schemaKey)
+            && Object.hasOwnProperty.call(prop, 'default')) {
+          if (prop.default === definition[schemaKey]) {
+            delete definition[schemaKey];
+          }
+        }
+      });
+
+      // Convert the properties field to a map and process references in the
+      // properties.
+      if (definition.properties) {
+        definition.properties = arrayToMap(definition.properties, 'key');
+        Object.keys(definition.properties).forEach(propKey =>
+          propertyHardRefParser(object, propKey, definition.properties));
+      }
+
+      // Do the same thing as previously, but for patternProperties.
+      if (definition.patternProperties) {
+        definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
+        Object.keys(definition.patternProperties).forEach(propKey =>
+          propertyHardRefParser(object, propKey, definition.patternProperties));
+      }
+    });
+  } else {
+    delete object.definitions;
   }
 
   if (object.securityDefinitions && object.securityDefinitions.length > 0) {
@@ -174,27 +235,7 @@ module.exports = function processJSON (objectFuncParam) {
     delete object.paths;
   }
 
-  if (object.definitions) {
-    object.definitions = arrayToMap(object.definitions, 'key');
-
-    Object.keys(object.definitions).forEach((key) => {
-      const definition = object.definitions[key];
-
-      if (definition.properties) {
-        definition.properties = arrayToMap(definition.properties, 'key');
-        Object.keys(definition.properties).forEach(propKey =>
-          propertyHardRefParser(object, propKey, definition.properties));
-      }
-
-      if (definition.patternProperties) {
-        definition.patternProperties = arrayToMap(definition.patternProperties, 'key');
-        Object.keys(definition.patternProperties).forEach(propKey =>
-          propertyHardRefParser(object, propKey, definition.patternProperties));
-      }
-    });
-  } else {
-    delete object.definitions;
-  }
+  definitionsToDelete.forEach(key => delete object.definitions[key]);
 
   return object;
 };
