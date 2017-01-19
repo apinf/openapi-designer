@@ -146,10 +146,17 @@ function download (type) {
   downloadLink.remove();
 }
 
+function getConfirm () {
+  return window.confirm;
+}
+
 function clear () {
-  // Delete cached form data and reload the page.
-  delete window.localStorage.cachedForm;
-  window.location.reload();
+  const really = getConfirm()('Are you sure you want to delete the cached form?');
+  if (really) {
+    // Delete cached form data and reload the page.
+    delete window.localStorage.cachedForm;
+    window.location.reload();
+  }
 }
 
 // Bind buttons to functions
