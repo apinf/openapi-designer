@@ -148,9 +148,11 @@ module.exports = function processJSON (objectFuncParam) {
           response.headers = arrayToMap(response.headers, 'key');
           propertyHardRefParser(object, propKey, method.responses);
           const examples = {};
-          response.examples.forEach((example) => {
-            examples[example.mimeType] = example.value;
-          });
+          if (response.examples) {
+            response.examples.forEach((example) => {
+              examples[example.mimeType] = example.value;
+            });
+          }
           response.examples = examples;
         });
         path[methodName] = method;
