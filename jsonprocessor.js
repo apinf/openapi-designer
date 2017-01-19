@@ -145,6 +145,7 @@ module.exports = function processJSON (objectFuncParam) {
         method.responses = arrayToMap(method.responses, 'statusCode');
         Object.keys(method.responses).forEach((propKey) => {
           const response = method.responses[propKey];
+          response.headers = arrayToMap(response.headers, 'key');
           propertyHardRefParser(object, propKey, method.responses);
           const examples = {};
           response.examples.forEach((example) => {

@@ -1,6 +1,6 @@
 const { schemes, consumes, produces } = require('./ioinfo');
 const { externalDocs } = require('./externaldocs');
-const { schemaImport } = require('./schema');
+const { schema, schemaImport } = require('./schema');
 
 const parameters = {
   description: 'A list of parameters that are applicable for all the ' +
@@ -39,8 +39,42 @@ const parameters = {
         type: 'boolean',
         required: true,
       },
+
+      schema: {
+        title: 'Schema',
+        type: 'object',
+        properties: schemaImport,
+        options: { dependencies: { in: 'body' } },
+      },
+
+      // TODO Fields when `in` is not "body"
     },
   },
+};
+
+// The Header object is very similar to the Schema object, so we just customize
+// it a bit rather than copying all the code manually.
+const header = JSON.parse(JSON.stringify(schema));
+header.properties.type.enum = ['boolean', 'array', 'integer', 'number', 'string'];
+header.properties.default.type = ['boolean', 'array', 'integer', 'number', 'string'];
+delete header.properties.title;
+delete header.properties.externalDocs;
+delete header.properties.example;
+header.properties.collectionFormat = {
+  title: 'Collection format',
+  type: 'string',
+  default: 'csv',
+  enum: ['csv', 'ssv', 'tsv', 'pipes'],
+  options: { dependencies: { type: 'array' } },
+};
+header.title = 'Header';
+header.properties.key.title = 'Header name';
+
+const headers = {
+  title: 'Headers',
+  type: 'array',
+  uniqueItems: 'true',
+  items: header,
 };
 
 const responses = {
@@ -70,6 +104,7 @@ const responses = {
         type: 'object',
         properties: schemaImport,
       },
+      headers,
       examples: {
         title: 'Examples',
         type: 'array',

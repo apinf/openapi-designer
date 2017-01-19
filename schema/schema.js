@@ -1,3 +1,4 @@
+const { externalDocs } = require('./externaldocs');
 
 const schemaImport = {
   $ref: {
@@ -125,6 +126,11 @@ const schema = {
       type: 'array',
       options: { dependencies: { type: 'object' } },
     },
+    readOnly: {
+      title: 'Read-only?',
+      type: 'boolean',
+      options: { dependencies: { type: 'object' } },
+    },
     properties: {
       title: 'Properties',
       type: 'array',
@@ -181,6 +187,15 @@ const schema = {
       title: 'Allow additional properties?',
       type: 'boolean',
       options: { dependencies: { type: 'object' } },
+    },
+
+    externalDocs,
+    example: {
+      title: 'Example',
+      options: {
+        disable_properties: false,
+        disable_edit_json: false,
+      },
     },
   },
 };
