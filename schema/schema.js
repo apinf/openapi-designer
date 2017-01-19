@@ -14,6 +14,15 @@ const schemaImport = {
   },
 };
 
+const schemaImportWithKey = {
+  key: {
+    title: 'Property key',
+    type: 'string',
+  },
+  $ref: schemaImport.$ref,
+  hardReference: schemaImport.hardReference,
+};
+
 const schema = {
   title: 'Schema-based object',
   type: 'object',
@@ -161,23 +170,7 @@ const schema = {
       items: {
         title: 'Property',
         type: 'object',
-        properties: {
-          key: {
-            title: 'Property key',
-            type: 'string',
-          },
-          $ref: {
-            title: 'Reference (key of another definition)',
-            type: 'string',
-          },
-          hardReference: {
-            title: 'Hard reference',
-            options: {
-              infoText: 'Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
-            },
-            type: 'boolean',
-          },
-        },
+        properties: schemaImportWithKey,
       },
       options: { dependencies: { type: 'object' } },
     },
@@ -187,23 +180,7 @@ const schema = {
       items: {
         title: 'Patterned property',
         type: 'object',
-        properties: {
-          key: {
-            type: 'string',
-            title: 'Key pattern',
-          },
-          $ref: {
-            title: 'Reference (key of another definition)',
-            type: 'string',
-          },
-          hardReference: {
-            title: 'Hard reference',
-            options: {
-              infoText: 'Not yet implemented! Whether or not to hard copy the data of the reference to this object in post-processing rather than simply adding a $ref field.',
-            },
-            type: 'boolean',
-          },
-        },
+        properties: schemaImportWithKey,
       },
       options: { dependencies: { type: 'object' } },
     },
