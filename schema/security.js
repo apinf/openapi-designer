@@ -38,11 +38,11 @@ const securityDefinitions = {
     type: 'object',
     properties: {
       key: {
-        title: 'Definition ID *',
+        title: 'Key *',
         type: 'string',
         required: true,
       },
-      choice: {
+      type: {
         title: 'Type',
         type: 'string',
         enum: ['basic', 'apiKey', 'oauth2'],
@@ -53,29 +53,75 @@ const securityDefinitions = {
         type: 'string',
       },
       name: {
-        title: 'Name *',
+        title: 'Name',
         type: 'string',
         required: true,
-        options: {
-          infoText: 'The name of the header or query parameter to be used',
-        },
+        options: { dependencies: { type: 'apiKey' } },
       },
       in: {
-        title: 'Location of key *',
+        title: 'Location of key',
         required: true,
         type: 'string',
         enum: ['query', 'header'],
-        options: {
-          infoText: 'The location of the API key.',
-        },
+        options: { dependencies: { type: 'apiKey' } },
       },
       flow: {
-        title: 'Flow *',
+        title: 'Flow',
         type: 'string',
         required: true,
         enum: ['implicit', 'password', 'application', 'accessCode'],
         options: {
           infoText: 'The flow used by the OAuth2 security scheme.',
+          dependencies: { type: 'oauth2' },
+        },
+      },
+      authorizationUrl: {
+        title: 'Authorization URL',
+        type: 'string',
+        required: true,
+        format: 'url',
+        options: {
+          dependencies: {
+            type: 'oauth2',
+            flow: ['implicit', 'accessCode'],
+          },
+        },
+      },
+      tokenUrl: {
+        title: 'Token URL',
+        type: 'string',
+        required: true,
+        format: 'url',
+        options: {
+          dependencies: {
+            type: 'oauth2',
+            flow: ['password', 'application', 'accessCode'],
+          },
+        },
+      },
+      scopes: {
+        title: 'Scopes',
+        type: 'array',
+        items: {
+          type: 'object',
+          title: 'Scope',
+          properties: {
+            name: {
+              title: 'Scope name *',
+              type: 'string',
+              required: true,
+            },
+            description: {
+              title: 'Description',
+              type: 'string',
+            },
+          },
+        },
+        options: {
+          map: true,
+          mapKey: 'name',
+          valueKey: 'description',
+          dependencies: { type: 'oauth2' },
         },
       },
     },

@@ -24,6 +24,7 @@ const schemaImportWithKey = {
 
 const schema = {
   title: 'Schema-based object',
+  headerTemplate: '{{ self.key }}',
   type: 'object',
   properties: {
     key: {
@@ -154,9 +155,11 @@ const schema = {
     properties: {
       title: 'Properties',
       type: 'array',
+      format: 'tabs',
       items: {
         title: 'Property',
         type: 'object',
+        headerTemplate: '{{ self.key }}',
         properties: schemaImportWithKey,
       },
       options: { dependencies: { type: 'object' } },
@@ -164,9 +167,11 @@ const schema = {
     patternProperties: {
       title: 'Patterned properties',
       type: 'array',
+      format: 'tabs',
       items: {
         title: 'Patterned property',
         type: 'object',
+        headerTemplate: '{{ self.key }}',
         properties: schemaImportWithKey,
       },
       options: { dependencies: { type: 'object' } },
@@ -213,6 +218,7 @@ const schema = {
 const definitions = {
   title: 'Definitions',
   type: 'array',
+  format: 'tabs',
   items: schema,
 };
 
