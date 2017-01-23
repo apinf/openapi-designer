@@ -67,7 +67,7 @@ const schema = {
       default: null,
     },
 
-    minimum: {
+    /* minimum: {
       title: 'Minimum',
       type: 'integer',
       options: { dependencies: { type: ['number', 'integer'] } },
@@ -88,9 +88,9 @@ const schema = {
       type: 'boolean',
       default: false,
       options: { dependencies: { type: ['number', 'integer'] } },
-    },
+    }, */
 
-    minLength: {
+    /* minLength: {
       title: 'Minimum length',
       type: 'integer',
       default: -1,
@@ -101,7 +101,7 @@ const schema = {
       type: 'integer',
       default: -1,
       options: { dependencies: { type: 'string' } },
-    },
+    }, */
     pattern: {
       title: 'Pattern',
       type: 'string',
@@ -111,11 +111,15 @@ const schema = {
     enum: {
       title: 'Value choices',
       type: 'array',
+      items: {
+        type: 'string',
+        title: 'Value choice',
+      },
       default: [],
       options: { dependencies: { type: 'string' } },
     },
 
-    minItems: {
+    /* minItems: {
       title: 'Minimum number of items',
       type: 'integer',
       default: -1,
@@ -126,7 +130,7 @@ const schema = {
       type: 'integer',
       default: -1,
       options: { dependencies: { type: 'array' } },
-    },
+    }, */
     uniqueItems: {
       title: 'Items must be unique?',
       type: 'boolean',
@@ -140,7 +144,7 @@ const schema = {
       options: { dependencies: { type: 'array' } },
     },
 
-    minProperties: {
+    /* minProperties: {
       title: 'Minimum number of properties',
       type: 'integer',
       default: -1,
@@ -151,7 +155,7 @@ const schema = {
       type: 'integer',
       default: -1,
       options: { dependencies: { type: 'object' } },
-    },
+    }, */
     required: {
       title: 'Required subfields',
       type: 'array',
