@@ -31,8 +31,10 @@ const security = {
 const securityDefinitions = {
   title: 'Security Definitions',
   type: 'array',
+  format: 'tabs',
   items: {
     title: 'Security definition',
+    headerTemplate: '{{ self.key }}',
     type: 'object',
     properties: {
       key: {

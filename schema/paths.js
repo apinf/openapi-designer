@@ -12,6 +12,7 @@ const parameters = {
     'Object\'s parameters. There can be one "body" parameter at most.',
   title: 'Parameters',
   type: 'array',
+  format: 'tabs',
   uniqueItems: true,
   items: {
     title: 'Parameter',
@@ -184,6 +185,7 @@ const paths = {
   'The Paths may be empty, due to ACL constraints.',
   title: 'Paths',
   type: 'array',
+  format: 'tabs',
   uniqueItems: true,
   items: {
     title: 'Path',

@@ -6,9 +6,11 @@ const tags = {
     'qualifier,',
   title: 'Tags',
   type: 'array',
+  format: 'tabs',
   uniqueItems: true,
   items: {
     title: 'Tag',
+    headerTemplate: '{{ self.name }}',
     type: 'object',
     properties: {
       name: {
