@@ -46,6 +46,11 @@ const info = {
       title: 'Title *',
       required: true,
     },
+    description: {
+      type: 'string',
+      format: 'markdown',
+      title: 'Description',
+    },
     version: {
       type: 'string',
       title: 'Version *',
