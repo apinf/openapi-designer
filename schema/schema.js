@@ -61,10 +61,6 @@ const schema = {
       type: 'string',
       default: '',
     },
-    default: {
-      title: 'Default value',
-      default: null,
-    },
 
     /* minimum: {
       title: 'Minimum',
@@ -130,16 +126,16 @@ const schema = {
       default: -1,
       options: { dependencies: { type: 'array' } },
     }, */
-    uniqueItems: {
-      title: 'Items must be unique?',
-      type: 'boolean',
-      default: false,
-      options: { dependencies: { type: 'array' } },
-    },
     items: {
       title: 'Item object',
       type: 'object',
       properties: schemaImport,
+      options: { dependencies: { type: 'array' } },
+    },
+    uniqueItems: {
+      title: 'Items must be unique?',
+      type: 'boolean',
+      default: false,
       options: { dependencies: { type: 'array' } },
     },
 
@@ -155,18 +151,6 @@ const schema = {
       default: -1,
       options: { dependencies: { type: 'object' } },
     }, */
-    required: {
-      title: 'Required subfields',
-      type: 'array',
-      default: [],
-      options: { dependencies: { type: 'object' } },
-    },
-    readOnly: {
-      title: 'Read-only?',
-      type: 'boolean',
-      default: false,
-      options: { dependencies: { type: 'object' } },
-    },
     properties: {
       title: 'Properties',
       type: 'array',
@@ -187,6 +171,22 @@ const schema = {
       },
       options: { dependencies: { type: 'object' } },
     },
+    required: {
+      title: 'Required subfields',
+      type: 'array',
+      items: {
+        type: 'string',
+        title: 'Field name',
+      },
+      default: [],
+      options: { dependencies: { type: 'object' } },
+    },
+    readOnly: {
+      title: 'Read-only?',
+      type: 'boolean',
+      default: false,
+      options: { dependencies: { type: 'object' } },
+    },
     additionalProperties: {
       title: 'Allow additional properties?',
       type: 'boolean',
@@ -195,6 +195,10 @@ const schema = {
     },
 
     // externalDocs,
+    default: {
+      title: 'Default value',
+      default: null,
+    },
     example: {
       title: 'Example',
       options: {
