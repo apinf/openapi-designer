@@ -1,4 +1,3 @@
-const { externalDocs } = require('./externaldocs');
 
 const schemaImport = {
   $ref: {
@@ -52,11 +51,11 @@ const schema = {
       options: { dependencies: { type: ['integer', 'number', 'string'] } },
     },
 
-    title: {
+    /* title: {
       title: 'Title',
       type: 'string',
       default: '',
-    },
+    }, */
     description: {
       title: 'Description',
       type: 'string',
@@ -195,7 +194,7 @@ const schema = {
       options: { dependencies: { type: 'object' } },
     },
 
-    externalDocs,
+    // externalDocs,
     example: {
       title: 'Example',
       options: {
