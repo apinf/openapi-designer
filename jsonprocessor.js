@@ -91,6 +91,7 @@ function propertyHardRefParser (object, propKey, props) {
   if (property.hardReference || target.hardReferenceOnly) {
     properties[propKey] = target;
   } else {
+    property.$ref = `#/definitions/${property.$ref}`;
     delete property.hardReference;
   }
 }
