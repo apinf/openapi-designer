@@ -27,6 +27,12 @@ parameterSchema.options = { dependencies: {
   in: ['query', 'header', 'path', 'formData'],
 } };
 
+const parameterSchemaItems = JSON.parse(JSON.stringify(parameterSchema));
+parameterSchemaItems.properties.type.enum = ['boolean', 'integer', 'number', 'string'];
+parameterSchemaItems.properties.default.type = ['boolean', 'integer', 'number', 'string'];
+parameterSchemaItems.options = { dependencies: { type: 'array' } };
+parameterSchemaItems.title = 'Array items';
+parameterSchema.properties.items = parameterSchemaItems;
 
 const parameters = {
   description: 'A list of parameters that are applicable for all the ' +
