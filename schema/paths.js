@@ -2,6 +2,32 @@ const { schemes, consumes, produces } = require('./ioinfo');
 const { externalDocs } = require('./externaldocs');
 const { schema, schemaImport } = require('./schema');
 
+// The parameter schema object for non-body parameters is very similar to the
+// actual Schema object, so we just customize it a bit rather than copying all
+// the code manually.
+const parameterSchema = JSON.parse(JSON.stringify(schema));
+parameterSchema.properties.type.enum = ['boolean', 'array', 'integer', 'number', 'string', 'file'];
+parameterSchema.properties.default.type = ['boolean', 'array', 'integer', 'number', 'string'];
+delete parameterSchema.properties.key;
+delete parameterSchema.properties.hardReferenceOnly;
+delete parameterSchema.properties.title;
+delete parameterSchema.properties.description;
+delete parameterSchema.properties.externalDocs;
+delete parameterSchema.properties.example;
+delete parameterSchema.headerTemplate;
+parameterSchema.properties.collectionFormat = {
+  title: 'Collection format',
+  type: 'string',
+  default: 'csv',
+  enum: ['csv', 'ssv', 'tsv', 'pipes'],
+  options: { dependencies: { type: 'array' } },
+};
+parameterSchema.title = 'Schema';
+parameterSchema.options = { dependencies: {
+  in: ['query', 'header', 'path', 'formData'],
+} };
+
+
 const parameters = {
   description: 'A list of parameters that are applicable for all the ' +
     'operations described under this path. These parameters can be ' +
@@ -48,13 +74,11 @@ const parameters = {
         options: { dependencies: { in: 'body' } },
       },
 
-      // TODO Fields when `in` is not "body"
+      schemaNotBody: parameterSchema,
     },
   },
 };
 
-// The Header object is very similar to the Schema object, so we just customize
-// it a bit rather than copying all the code manually.
 const header = JSON.parse(JSON.stringify(schema));
 header.properties.type.enum = ['boolean', 'array', 'integer', 'number', 'string'];
 header.properties.default.type = ['boolean', 'array', 'integer', 'number', 'string'];

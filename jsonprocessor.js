@@ -223,11 +223,31 @@ module.exports = function processJSON (objectFuncParam) {
           }
           response.examples = examples;
         });
-        method.parameters.forEach((parameter, index) => {
-          propertyHardRefParser(object, index, method.parameters);
-        });
+        if (method.parameters) {
+          method.parameters.forEach((unused, index) => {
+            propertyHardRefParser(object, index, method.parameters);
+            const parameter = method.parameters[index];
+            if (parameter.in !== 'body') {
+              delete parameter.schema;
+              Object.assign(parameter, parameter.schemaNotBody);
+            }
+            delete parameter.schemaNotBody;
+          });
+        }
         path[methodName] = method;
       });
+
+      if (path.parameters) {
+        path.parameters.forEach((unused, index) => {
+          propertyHardRefParser(object, index, path.parameters);
+          const parameter = path.parameters[index];
+          if (parameter.in !== 'body') {
+            delete parameter.schema;
+            Object.assign(parameter, parameter.schemaNotBody);
+          }
+          delete parameter.schemaNotBody;
+        });
+      }
 
       // Delete the old list as it isn't actually a part of the Swagger spec
       delete path.methods;
