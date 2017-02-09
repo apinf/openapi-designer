@@ -1,13 +1,13 @@
 <template>
   <require from="bootstrap/css/bootstrap.min.css"></require>
-  <require from="./fields/textfield"></require>
-
+  <require from="./resources/fields/textfield"></require>
+  <require from="./resources/style/index.css"></require>
   <div class="jumbotron">
     <h1>${message}</h1>
   </div>
   <div class="container">
     <div class="card" repeat.for="field of fields">
-      <compose view="./fields/${field.type}.html" view-model.bind="field"></compose>
+      <compose view="./resources/fields/${field.type}.html" view-model.bind="field"></compose>
     </div>
   </div>
 </template>
