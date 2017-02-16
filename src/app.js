@@ -1,6 +1,7 @@
 import 'bootstrap';
 import {Textfield} from './resources/elements/textfield';
 import {ObjectField} from './resources/elements/objectfield';
+import {Checkbox} from './resources/elements/checkbox';
 
 export class App {
   constructor() {
@@ -14,6 +15,10 @@ export class App {
     tf.title = 'Yay!';
     tf.placeholder = 'Enter text';
     obj.addField(tf);
+    const check = new Checkbox();
+    check.title = 'Uncheck me';
+    check.checked = true;
+    obj.addField(check);
 
     const obj2 = new ObjectField();
     obj2.title = 'Another field';
