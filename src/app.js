@@ -1,6 +1,6 @@
 import 'bootstrap';
-import {Textfield} from './resources/fields/textfield';
-import {ObjectField} from './resources/fields/objectfield';
+import {Textfield} from './resources/elements/textfield';
+import {ObjectField} from './resources/elements/objectfield';
 
 export class App {
   constructor() {
