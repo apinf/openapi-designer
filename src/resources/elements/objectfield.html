@@ -1,6 +1,8 @@
 <template>
-  <h1 textcontent.bind="title"></h1>
-  <div class="card" repeat.for="field of fields">
-    <compose view="./${field.type}.html" view-model.bind="field"></compose>
+  <div class="card">
+    <h1 textcontent.bind="title"></h1>
+    <div class="field" repeat.for="field of fields">
+      <compose view="./${field.type}.html" view-model.bind="field"></compose>
+    </div>
   </div>
 </template>
