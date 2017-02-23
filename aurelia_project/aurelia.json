@@ -111,7 +111,6 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "text",
-          "jquery",
           {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
@@ -129,14 +128,18 @@
             "env": "dev"
           },
           {
-            "name": "bootstrap",
-            "path": "../node_modules/bootstrap/dist",
-            "main": "js/bootstrap.min",
-            "deps": ["jquery"],
-            "exports": "$",
+            "name": "encapsulated-mdl",
+            "path": "../node_modules/encapsulated-mdl/dist",
+            "main": "material.min",
             "resources": [
-              "css/bootstrap.min.css"
+              "material.amber-indigo.min.css"
             ]
+          },
+          {
+            "name": "aurelia-mdl",
+            "path": "../node_modules/aurelia-mdl/dist/amd",
+            "main": "index",
+            "deps": ["encapsulated-mdl"]
           }
         ]
       }

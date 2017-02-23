@@ -1,12 +1,16 @@
 <template>
-  <require from="bootstrap/css/bootstrap.min.css"></require>
+  <require from="encapsulated-mdl/material.amber-indigo.min.css"></require>
   <require from="style/index.css"></require>
-  <div class="jumbotron">
-    <h1>${message}</h1>
-  </div>
-  <div class="container">
-    <div class="card" repeat.for="field of fields">
-      <compose view="./resources/elements/${field.type}.html" view-model.bind="field"></compose>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs" style="position: static;" id="container">
+    <header class="mdl-layout__header">
+      <compose containerless view="./topbar.html"></compose>
+    </header>
+    <div class="mdl-layout__drawer">
+      <compose containerless view="./sidebar.html"></compose>
     </div>
+    <main class="mdl-layout__content">
+      <compose containerless view="./content.html"></compose>
+    </main>
   </div>
 </template>

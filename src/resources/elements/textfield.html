@@ -1,6 +1,6 @@
 <template>
-  <div class="textfield-wrapper">
-    <label textcontent.one-way="title"></label><br>
-    <input type="text" value.bind="value" placeholder.one-way="placeholder">
+  <div class="mdl-textfield mdl-js-textfield">
+    <label class="mdl-textfield__external_label" for.bind="id" textcontent.bind="label"></label>
+    <input class="mdl-textfield__input" type="text" id.bind="id" value.bind="value" placeholder.bind="placeholder">
   </div>
 </template>

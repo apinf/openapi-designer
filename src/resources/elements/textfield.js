@@ -1,6 +1,8 @@
-import {Field} from './field';
+import {bindable} from 'aurelia-framework';
 
-export class Textfield extends Field {
-  value = '';
-  placeholder = '';
+export class Textfield {
+  @bindable id = '';
+  @bindable label = '';
+  @bindable placeholder = 'Enter value...';
+  @bindable value = '';
 }
