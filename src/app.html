@@ -2,13 +2,10 @@
   <require from="encapsulated-mdl/material.amber-indigo.min.css"></require>
   <require from="style/index.css"></require>
 
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs" style="position: static;" id="container">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-tabs" style="position: static;" id="container">
     <header class="mdl-layout__header">
       <compose containerless view="./topbar.html"></compose>
     </header>
-    <div class="mdl-layout__drawer">
-      <compose containerless view="./sidebar.html"></compose>
-    </div>
     <main class="mdl-layout__content">
       <section class="mdl-layout__tab-panel is-active" id="info">
         <objectfield children.bind="info"></objectfield>

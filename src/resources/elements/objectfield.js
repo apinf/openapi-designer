@@ -1,46 +1,50 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, containerless} from 'aurelia-framework';
+import {Basefield} from './basefield';
 
-export class Objectfield {
-  @bindable label
-  @bindable id
-  @bindable children = {};
+@containerless
+export class Objectfield extends Basefield {
+  @bindable children
+  _children = {}
 
-  constructor(id = '', label = '', children = []) {
-    this.id = id;
-    this.label = label;
+  constructor(id = '', {label = '', children = [], columns = 8} = {}) {
+    super(id, {label, columns});
     for (const child of children) {
       this.addChild(child);
     }
+    window.object = this;
   }
 
   childrenChanged(arr) {
     if (Array.isArray(arr)) {
-      this.children = {};
+      this._children = {};
       for (const child of arr) {
         this.addChild(child);
       }
     }
   }
 
+  get childrenMap() {
+    return this._children;
+  }
+
   get childrenArray() {
-    return Object.values(this.children);
+    return Object.values(this._children);
   }
 
   getValue() {
     const value = {};
-    for (const [key, field] of Object.entries(this.children)) {
+    for (const [key, field] of Object.entries(this._children)) {
       value[key] = field.getValue();
     }
     return value;
   }
 
-  addChild(child) {
-    this.children[child.id] = child;
+  bind() {
+    super.bind();
+    this.childrenChanged(this.children);
   }
 
-  bind() {
-    if (this.label.length === 0) {
-      this.label = this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
-    }
+  addChild(child) {
+    this._children[child.id] = child;
   }
 }

@@ -1,28 +1,82 @@
-.mdl-layout__content {
-  padding: 0 8px;
+html {
+  font-size: 16px;
 }
 
-.mdl-textfield__external_label {
-  font-weight: bold;
+main {
+  display: flex;
 }
 
-textfield {
+section {
   width: 100%;
+  min-width: 0;
+  max-width: 50rem;
+  margin: 1rem auto 0;
+}
 
-  label, input {
+.field {
+  display: inline-block;
+
+  box-sizing: border-box;
+  width: 100%;
+  padding: .25rem;
+
+  &.columns {
+    &.c1 { width: 12.5% }
+    &.c2 { width: 25.0% }
+    &.c3 { width: 37.5% }
+    &.c4 { width: 50.0% }
+    &.c5 { width: 62.5% }
+    &.c6 { width: 75.0% }
+    &.c7 { width: 87.5% }
+    &.c8 { width:  100% }
+  }
+
+  label {
+    display: block;
+
+    width: 100%;
+
+    font-weight: bold;
+  }
+
+  label, .title {
+    &:empty {
+      display: none;
+    }
+  }
+
+  .title {
+    margin: 0;
+    margin-bottom: .5rem;
+    margin-left: .25rem;
+  }
+
+  &.text input {
     display: block;
 
     width: 100%;
   }
-}
 
-objectfield {
-  width: 100%;
-  width: 100%;
-  max-width: 600px;
-  margin: 1rem auto 0;
-}
+  &.object {
+    margin: .25rem;
+    padding: .25rem;
 
-section {
-  height: 100%;
+    border: 1px solid #D6D6D6;
+    border-radius: .25rem;
+
+    &:not(:last-of-type) {
+      margin-bottom: .75rem;
+    }
+
+    &.columns {
+      &.c1 { width: calc(12.5% - .5rem) }
+      &.c2 { width: calc(25.0% - .5rem) }
+      &.c3 { width: calc(37.5% - .5rem) }
+      &.c4 { width: calc(50.0% - .5rem) }
+      &.c5 { width: calc(62.5% - .5rem) }
+      &.c6 { width: calc(75.0% - .5rem) }
+      &.c7 { width: calc(87.5% - .5rem) }
+      &.c8 { width: calc( 100% - .5rem) }
+    }
+  }
 }

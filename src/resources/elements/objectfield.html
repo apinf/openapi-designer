@@ -1,6 +1,8 @@
 <template>
-  <h3 textcontent.bind="label"></h3>
-  <div repeat.for="childElem of childrenArray">
-    <compose containerless view-model.bind="childElem"></compose>
+  <div class="object field c${columns} columns">
+    <h3 class="title" textcontent.bind="label"></h3>
+    <template repeat.for="childElem of childrenArray">
+      <compose containerless view-model.bind="childElem"></compose>
+    </template>
   </div>
 </template>
