@@ -1,6 +1,6 @@
 <template>
-  <h3 textcontent.bind="label"/>
+  <h3 textcontent.bind="label"></h3>
   <div repeat.for="childElem of childrenArray">
-    ${childElem}
+    <compose containerless view-model.bind="childElem"></compose>
   </div>
 </template>

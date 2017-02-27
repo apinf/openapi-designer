@@ -13,8 +13,10 @@ export class Textfield {
     this.value = value;
   }
 
-  attached() {
-    this.label = this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
+  bind() {
+    if (this.label.length === 0) {
+      this.label = this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
+    }
   }
 
   getValue() {

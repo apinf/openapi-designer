@@ -2,12 +2,12 @@ import {bindable} from 'aurelia-framework';
 
 export class Objectfield {
   @bindable label
-  @bindable headerSize
+  @bindable id
   @bindable children = {};
 
-  constructor(label = '', headerSize = 3, children = []) {
+  constructor(id = '', label = '', children = []) {
+    this.id = id;
     this.label = label;
-    this.headerSize = headerSize;
     for (const child of children) {
       this.addChild(child);
     }
@@ -35,7 +35,12 @@ export class Objectfield {
   }
 
   addChild(child) {
-    child.__observers__.parentNode = this;
     this.children[child.id] = child;
+  }
+
+  bind() {
+    if (this.label.length === 0) {
+      this.label = this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
+    }
   }
 }

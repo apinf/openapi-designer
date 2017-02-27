@@ -10,7 +10,19 @@
       <compose containerless view="./sidebar.html"></compose>
     </div>
     <main class="mdl-layout__content">
-      <compose containerless view="./content.html"></compose>
+      <section class="mdl-layout__tab-panel is-active" id="info">
+        <objectfield children.bind="info"></objectfield>
+      </section>
+      <section class="mdl-layout__tab-panel" id="mime">
+      </section>
+      <section class="mdl-layout__tab-panel" id="security">
+      </section>
+      <section class="mdl-layout__tab-panel" id="tags">
+      </section>
+      <section class="mdl-layout__tab-panel" id="paths">
+      </section>
+      <section class="mdl-layout__tab-panel" id="types">
+      </section>
     </main>
   </div>
 </template>
