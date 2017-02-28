@@ -4,20 +4,68 @@ import {Objectfield} from './resources/elements/objectfield';
 import {Textfield} from './resources/elements/textfield';
 import {Textareafield} from './resources/elements/textareafield';
 
+const fieldTypes = {
+  text: Textfield,
+  textarea: Textareafield,
+  object: Objectfield
+};
+
 export class App {
-  info = [
-    new Objectfield('info', {children: [
-      new Textfield('title', {columns: 5}),
-      new Textfield('version', {columns: 3}),
-      new Textareafield('description'),
-      new Textfield('termsofservice', {label: 'Terms of Service'})
-    ]}),
-    new Objectfield('contact', {children: [
-      new Textfield('name'),
-      new Textfield('email'),
-      new Textfield('url')
-    ]})
-  ];
+  formSchema = {};
+
+  parseJSON(obj) {
+    const data = [];
+    for (const [key, field] of Object.entries(obj)) {
+      switch (field.type) {
+      case 'object':
+        field.children = this.parseJSON(field.children);
+        data.push(new Objectfield(key, field));
+        break;
+      default:
+        data.push(new fieldTypes[field.type](key, field));
+      }
+    }
+    return data;
+  }
+
+  bind() {
+    this.formSchema.info = this.parseJSON({
+      info: {
+        type: 'object',
+        children: {
+          title: {
+            type: 'text',
+            columns: 5
+          },
+          version: {
+            type: 'text',
+            columns: 3
+          },
+          description: {
+            type: 'textarea'
+          },
+          termsofservice: {
+            type: 'text',
+            label: 'Terms of Service'
+          }
+        }
+      },
+      contact: {
+        type: 'object',
+        children: {
+          name: {
+            type: 'text'
+          },
+          email: {
+            type: 'text'
+          },
+          url: {
+            type: 'text'
+          }
+        }
+      }
+    });
+  }
 
   attached() {
     componentHandler.upgradeElement(document.getElementById('container'));
