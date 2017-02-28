@@ -3,13 +3,16 @@ import {Basefield} from '../basefield';
 
 @containerless
 export class Textfield extends Basefield {
-  @bindable placeholder;
-  @bindable value;
+  @bindable id = '';
+  @bindable label = '';
+  @bindable columns = 8;
+  @bindable placeholder = 'Enter value...';
+  @bindable value = '';
 
-  constructor(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8} = {}) {
-    super(id, {label, columns});
+  init(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, parent, index} = {}) {
     this.placeholder = placeholder;
     this.value = value;
+    return super.init(id, {label, columns, parent, index});
   }
 
   getValue() {

@@ -1,17 +1,15 @@
 import 'aurelia-mdl';
 import {componentHandler} from 'encapsulated-mdl';
 import {Objectfield} from './resources/elements/objectfield';
-import {Textfield} from './resources/elements/textfield';
-import {Textareafield} from './resources/elements/textareafield';
-
-const fieldTypes = {
-  text: Textfield,
-  textarea: Textareafield,
-  object: Objectfield
-};
+import {fieldTypes} from './resources/fieldtypes';
 
 export class App {
   formSchema = {};
+
+  constructor() {
+    // Allow access from browser console
+    window.$oai = this;
+  }
 
   parseJSON(obj) {
     const data = [];
@@ -19,10 +17,10 @@ export class App {
       switch (field.type) {
       case 'object':
         field.children = this.parseJSON(field.children);
-        data.push(new Objectfield(key, field));
+        data.push(new Objectfield().init(key, field));
         break;
       default:
-        data.push(new fieldTypes[field.type](key, field));
+        data.push(new fieldTypes[field.type]().init(key, field));
       }
     }
     return data;
@@ -60,8 +58,20 @@ export class App {
             type: 'text'
           },
           url: {
-            type: 'text'
+            type: 'text',
+            label: 'URL'
           }
+        }
+      }
+    });
+    this.formSchema.mime = this.parseJSON({
+      array: {
+        type: 'array',
+        label: 'Array Test',
+        item: {
+          id: 'array-elem',
+          type: 'text',
+          labelFormat: 'Mui'
         }
       }
     });

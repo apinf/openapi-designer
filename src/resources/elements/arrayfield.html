@@ -1,0 +1,24 @@
+<template>
+  <div class="array field c${columns} columns">
+    <h3 class="title" textcontent.bind="label"></h3>
+    <div class="controls">
+      <button class="mdl-button mdl-js-button" click.delegate="addChild()">
+        New ${item.labelFormat}
+      </button>
+    </div>
+    <div class="items">
+      <template repeat.for="item of items">
+        <div class="item c${item.columns} columns">
+          <div class="actualItem">
+            <compose containerless view-model.bind="item"></compose>
+          </div>
+          <div class="controls">
+            <button class="mdl-button mdl-js-button" click.delegate="item.delete()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

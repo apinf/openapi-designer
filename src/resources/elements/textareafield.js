@@ -3,15 +3,18 @@ import {Basefield} from '../basefield';
 
 @containerless
 export class Textareafield extends Basefield {
-  @bindable placeholder;
-  @bindable value;
-  @bindable rows;
+  @bindable id = '';
+  @bindable label = '';
+  @bindable columns = 8;
+  @bindable placeholder = 'Enter value...';
+  @bindable value = '';
+  @bindable rows = 4;
 
-  constructor(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, rows = 4} = {}) {
-    super(id, {label, columns});
+  init(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, rows = 4, parent, index} = {}) {
     this.placeholder = placeholder;
     this.rows = rows;
     this.value = value;
+    return super.init(id, {label, columns, parent, index});
   }
 
   getValue() {

@@ -3,20 +3,21 @@ import {Basefield} from '../basefield';
 
 @containerless
 export class Objectfield extends Basefield {
-  @bindable children
+  @bindable id = '';
+  @bindable label = '';
+  @bindable columns = 8;
+  @bindable children = [];
   _children = {}
 
-  constructor(id = '', {label = '', children = [], columns = 8} = {}) {
-    super(id, {label, columns});
+  init(id = '', {label = '', children = [], columns = 8, parent, index} = {}) {
     for (const child of children) {
       this.addChild(child);
     }
-    window.object = this;
+    return super.init(id, {label, columns, parent, index});
   }
 
   childrenChanged(arr) {
     if (Array.isArray(arr)) {
-      this._children = {};
       for (const child of arr) {
         this.addChild(child);
       }
