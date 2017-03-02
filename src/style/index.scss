@@ -1,3 +1,6 @@
+$main-color: #FFC107;
+$border-color: #DBDBDB;
+
 html {
   font-size: 16px;
 }
@@ -55,10 +58,25 @@ section {
     margin-left: .25rem;
   }
 
-  &.text input {
+  &.text input, &.textarea textarea {
     display: block;
 
     width: 100%;
+    margin-bottom: 1px;
+    padding: .25rem 0;
+
+    border: none;
+    border-bottom: 1px solid $border-color;
+
+    &:hover {
+      border-bottom: 1px solid $main-color;
+    }
+
+    &:focus {
+      margin-bottom: 0;
+
+      border-bottom: 2px solid $main-color;
+    }
   }
 
   &.object, &.array {
@@ -89,15 +107,19 @@ section {
       > .controls {
         margin-bottom: .5rem;
       }
+
       > .item {
         display: inline-block;
-        .actualItem {
-          width: calc(100% - 6rem);
 
+        .actualItem {
+          // Array item column handling is done in the item wrapper, so we want
+          // to stop the field from handling columns.
+          width: calc(100% - 6rem);
           > .field {
             width: 100%;
           }
         }
+
         .controls, .actualItem {
           display: inline-block;
         }
