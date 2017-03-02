@@ -7,11 +7,11 @@
       <compose containerless view="./topbar.html"></compose>
     </header>
     <main class="mdl-layout__content">
-      <section class="mdl-layout__tab-panel is-active" id="info">
-        <objectfield children.bind="formSchema.info"></objectfield>
+      <section class="mdl-layout__tab-panel is-active" id="header">
+        <compose containerless view-model.bind="formSchema.header"></compose>
       </section>
       <section class="mdl-layout__tab-panel" id="mime">
-        <objectfield children.bind="formSchema.mime"></objectfield>
+        <compose containerless view-model.bind="formSchema.mime"></compose>
       </section>
       <section class="mdl-layout__tab-panel" id="security">
       </section>

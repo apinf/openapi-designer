@@ -9,10 +9,8 @@ export class Objectfield extends Basefield {
   @bindable children = [];
   _children = {}
 
-  init(id = '', {label = '', children = [], columns = 8, parent, index} = {}) {
-    for (const child of children) {
-      this.addChild(child);
-    }
+  init(id = '', {label = '', children = {}, columns = 8, parent, index} = {}) {
+    this._children = children;
     return super.init(id, {label, columns, parent, index});
   }
 
