@@ -1,4 +1,5 @@
 $main-color: #FFC107;
+$dark-color: darken($main-color, 5%);
 $border-color: #DBDBDB;
 
 html {
@@ -103,25 +104,53 @@ section {
   }
 
   &.array {
-    > .items {
-      > .controls {
-        margin-bottom: .5rem;
-      }
+    > .controls {
+      margin-bottom: .5rem;
 
+      > .new-item {
+        padding: .375rem 1rem;
+
+        text-transform: uppercase;
+
+        border: none;
+        background-color: $main-color;
+
+        &:hover {
+          background-color: $dark-color;
+        }
+      }
+    }
+
+    > .items {
       > .item {
         display: inline-block;
 
-        .actualItem {
-          // Array item column handling is done in the item wrapper, so we want
-          // to stop the field from handling columns.
-          width: calc(100% - 6rem);
-          > .field {
-            width: 100%;
+        > .delete-button {
+          display: inline-block;
+
+          cursor: pointer;
+          transform: translateY(50%);
+
+          border: none;
+          background: none;
+
+          > img {
+            width: 1rem;
+            height: 1rem;
+
+            opacity: .2;
           }
         }
 
-        .controls, .actualItem {
+
+        > .actualItem {
           display: inline-block;
+
+          width: calc(100% - 2rem);
+
+          > .field {
+            width: 100%;
+          }
         }
       }
     }

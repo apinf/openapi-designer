@@ -38,7 +38,7 @@ export class Arrayfield extends Basefield {
     for (let i = index; i < this.items.length; i++) {
       const item = this.items[i];
       item.index = i;
-      item.label = `${this.item.labelFormat} #${(index + 1)}`;
+      item.label = `${this.item.labelFormat} #${(i + 1)}`;
     }
   }
 }
