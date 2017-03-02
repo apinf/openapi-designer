@@ -44,6 +44,7 @@ section {
 
     width: 100%;
 
+    font-size: .875rem;
     font-weight: bold;
   }
 
@@ -51,10 +52,6 @@ section {
     &:empty {
       display: none;
     }
-  }
-
-  label {
-    font-size: .875rem;
   }
 
   .title {
