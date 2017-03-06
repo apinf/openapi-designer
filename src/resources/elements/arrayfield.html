@@ -1,12 +1,12 @@
 <template>
   <div class="array field c${columns} columns">
     <h3 class="title" textcontent.bind="label"></h3>
-    <div class="controls">
+    <div class="controls" if.bind="!collapsed">
       <button class="new-item" click.delegate="addChild()">
         New ${item.labelFormat}
       </button>
     </div>
-    <div class="items">
+    <div class="items" if.bind="!collapsed">
       <template repeat.for="item of items">
         <div class="item c${item.columns} columns">
           <button class="delete-button" click.delegate="item.delete()">

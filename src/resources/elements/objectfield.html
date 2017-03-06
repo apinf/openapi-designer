@@ -2,7 +2,7 @@
   <div class="object field c${columns} columns">
     <h3 class="title" textcontent.bind="label"></h3>
     <template repeat.for="childElem of childrenArray">
-      <compose containerless view-model.bind="childElem"></compose>
+      <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
     </template>
   </div>
 </template>

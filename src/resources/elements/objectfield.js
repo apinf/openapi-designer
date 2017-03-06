@@ -7,10 +7,12 @@ export class Objectfield extends Basefield {
   @bindable label = '';
   @bindable columns = 8;
   @bindable children = [];
+  @bindable collapsed = false;
   _children = {}
 
-  init(id = '', {label = '', children = {}, columns = 8, parent, index} = {}) {
+  init(id = '', {label = '', children = {}, columns = 8, collapsed = false, parent, index} = {}) {
     this._children = children;
+    this.collapsed = collapsed;
     return super.init(id, {label, columns, parent, index});
   }
 

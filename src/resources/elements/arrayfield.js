@@ -5,11 +5,13 @@ import {fieldTypes} from '../fieldtypes';
 @containerless
 export class Arrayfield extends Basefield {
   @bindable item
+  @bindable collapsed = false;
   items = []
 
-  init(id = '', {label = '', item = {type = 'text', id = 'arrElem'} = {}, columns = 8} = {}) {
+  init(id = '', {label = '', item = {type = 'text', id = 'arrElem'} = {}, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
-    return super.init(id, {label, columns});
+    this.collapsed = collapsed;
+    return super.init(id, {label, columns, parent, index});
   }
 
   getValue() {
