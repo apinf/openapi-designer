@@ -21,7 +21,7 @@ export class Basefield {
   }
 
   delete() {
-    if (this.parent && this.index) {
+    if (this.parent && typeof this.index === 'number') {
       this.parent.deleteChild(this.index);
     }
   }
