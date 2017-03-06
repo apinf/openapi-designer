@@ -29,4 +29,6 @@ export class Basefield {
   getValue() {
     return undefined;
   }
+
+  setValue(value) { }
 }

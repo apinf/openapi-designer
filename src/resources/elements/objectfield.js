@@ -40,6 +40,14 @@ export class Objectfield extends Basefield {
     return value;
   }
 
+  setValue(value) {
+    for (const [key, field] of Object.entries(value)) {
+      if (this._children.hasOwnProperty(key)) {
+        this._children[key].setValue(field);
+      }
+    }
+  }
+
   bind() {
     super.bind();
     this.childrenChanged(this.children);

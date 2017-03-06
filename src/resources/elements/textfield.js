@@ -18,4 +18,8 @@ export class Textfield extends Basefield {
   getValue() {
     return this.value;
   }
+
+  setValue(value) {
+    this.value = value;
+  }
 }

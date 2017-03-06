@@ -22,6 +22,14 @@ export class Arrayfield extends Basefield {
     return value;
   }
 
+  setValue(value) {
+    this.items = [];
+    for (const item of value) {
+      const index = this.addChild();
+      this.items[index].setValue(item);
+    }
+  }
+
   addChild() {
     const index = this.items.length;
     const field = new fieldTypes[this.item.type]();
@@ -33,6 +41,7 @@ export class Arrayfield extends Basefield {
     }, this.item);
     field.init(id, args);
     this.items.push(field);
+    return index;
   }
 
   deleteChild(index) {
