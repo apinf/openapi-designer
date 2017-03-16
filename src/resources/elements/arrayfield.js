@@ -14,10 +14,6 @@ export class Arrayfield extends Parentfield {
     return super.init(id, {label, columns, parent, index});
   }
 
-  get iterableChildren() {
-    return Object.values(this._children);
-  }
-
   getValue() {
     const value = [];
     for (const [index, item] of Object.entries(this._children)) {

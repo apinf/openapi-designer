@@ -24,10 +24,6 @@ export class Objectfield extends Parentfield {
     }
   }
 
-  get iterableChildren() {
-    return Object.values(this._children);
-  }
-
   getValue() {
     const value = {};
     for (const [key, field] of Object.entries(this._children)) {
