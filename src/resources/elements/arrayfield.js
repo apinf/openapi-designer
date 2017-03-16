@@ -6,18 +6,33 @@ import {Basefield} from './abstract/basefield';
 export class Arrayfield extends Parentfield {
   @bindable item
   @bindable collapsed = false;
+  @bindable format = 'array';
+  @bindable keyField = '_key';
   _children = []
 
-  init(id = '', {label = '', item, columns = 8, collapsed = false, parent, index} = {}) {
+  init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
+    this.format = format;
+    this.keyField = keyField;
     this.collapsed = collapsed;
     return super.init(id, {label, columns, parent, index});
   }
 
   getValue() {
-    const value = [];
-    for (const [index, item] of Object.entries(this._children)) {
-      value[index] = item.getValue();
+    let value = undefined;
+    if (this.format === 'map') {
+      value = {};
+      for (const item of this._children) {
+        const data = item.getValue();
+        const key = data[this.keyField];
+        delete data[this.keyField];
+        value[key] = data;
+      }
+    } else if (this.format === 'array') {
+      value = [];
+      for (const [index, item] of Object.entries(this._children)) {
+        value[index] = item.getValue();
+      }
     }
     return value;
   }

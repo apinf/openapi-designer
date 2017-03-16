@@ -1,6 +1,8 @@
 export const mime = {
   'type': 'array',
   'label': 'Array Test',
+  'format': 'map',
+  'keyField': 'name',
   'item': {
     'type': 'object',
     'label': 'Contact object',
