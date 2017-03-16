@@ -24,11 +24,7 @@ export class Objectfield extends Basefield {
     }
   }
 
-  get childrenMap() {
-    return this._children;
-  }
-
-  get childrenArray() {
+  get iterableChildren() {
     return Object.values(this._children);
   }
 
@@ -55,5 +51,22 @@ export class Objectfield extends Basefield {
 
   addChild(child) {
     this._children[child.id] = child;
+  }
+
+  clone() {
+    const clone = new Objectfield();
+    const clonedChildren = {};
+    for (const [key, field] of Object.entries(this._children)) {
+      clonedChildren[key] = field.clone();
+    }
+    clone.init(this.id, {
+      label: this.label,
+      columns: this.columns,
+      collapsed: this.collapsed,
+      parent: this.parent,
+      index: this.index,
+      children: clonedChildren
+    });
+    return clone;
   }
 }

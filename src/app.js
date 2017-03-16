@@ -20,6 +20,8 @@ export class App {
       for (const [key, field] of Object.entries(obj.children)) {
         obj.children[key] = this.parseJSON(key, field);
       }
+    } else if (obj.type === 'array') {
+      obj.item = this.parseJSON(obj.item.id, obj.item);
     }
     return new fieldTypes[obj.type]().init(id, obj);
   }

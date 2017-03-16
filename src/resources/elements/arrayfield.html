@@ -3,17 +3,17 @@
     <h3 class="title" textcontent.bind="label"></h3>
     <div class="controls" if.bind="!collapsed">
       <button class="new-item" click.delegate="addChild()">
-        New ${item.labelFormat}
+        New ${item.label}
       </button>
     </div>
     <div class="items" if.bind="!collapsed">
-      <template repeat.for="item of items">
-        <div class="item c${item.columns} columns">
-          <button class="delete-button" click.delegate="item.delete()">
+      <template repeat.for="childElem of iterableChildren">
+        <div class="item c${childElem.columns} columns">
+          <button class="delete-button" click.delegate="childElem.delete()">
             <img src="res/delete.svg" alt="Delete"/>
           </button>
           <div class="actualItem">
-            <compose containerless view-model.bind="item"></compose>
+            <compose containerless view-model.bind="childElem"></compose>
           </div>
         </div>
       </template>

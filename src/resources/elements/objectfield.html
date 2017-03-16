@@ -1,7 +1,7 @@
 <template>
   <div class="object field c${columns} columns">
     <h3 class="title" textcontent.bind="label"></h3>
-    <template repeat.for="childElem of childrenArray">
+    <template repeat.for="childElem of iterableChildren">
       <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
     </template>
   </div>

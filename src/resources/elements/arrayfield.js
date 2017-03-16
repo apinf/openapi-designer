@@ -1,12 +1,11 @@
 import {bindable, containerless} from 'aurelia-framework';
 import {Basefield} from '../basefield';
-import {fieldTypes} from '../fieldtypes';
 
 @containerless
 export class Arrayfield extends Basefield {
   @bindable item
   @bindable collapsed = false;
-  items = []
+  _children = []
 
   init(id = '', {label = '', item = {type = 'text', id = 'arrElem'} = {}, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
@@ -14,43 +13,49 @@ export class Arrayfield extends Basefield {
     return super.init(id, {label, columns, parent, index});
   }
 
+  get iterableChildren() {
+    return Object.values(this._children);
+  }
+
   getValue() {
     const value = [];
-    for (const [index, item] of Object.entries(this.items)) {
+    for (const [index, item] of Object.entries(this._children)) {
       value[index] = item.getValue();
     }
     return value;
   }
 
   setValue(value) {
-    this.items = [];
+    this._children = [];
     for (const item of value) {
       const index = this.addChild();
-      this.items[index].setValue(item);
+      this._children[index].setValue(item);
     }
   }
 
   addChild() {
-    const index = this.items.length;
-    const field = new fieldTypes[this.item.type]();
-    const id = `${this.item.id}-${index}`;
-    const args = Object.assign({
-      index,
-      parent: this,
-      label: 'Array item'
-    }, this.item);
-    field.init(id, args);
-    field.label = `${field.label} #${(index + 1)}`;
-    this.items.push(field);
-    return index;
+    const field = this.item.clone();
+    field.parent = this;
+    field.index = this._children.length;
+    field.id = `${this.item.id}-${field.index}`;
+    field.label = `${field.label} #${(field.index + 1)}`;
+    this._children.push(field);
+    return field.index;
   }
 
   deleteChild(index) {
-    this.items.splice(index, 1);
-    for (let i = index; i < this.items.length; i++) {
-      const item = this.items[i];
+    this._children.splice(index, 1);
+    for (let i = index; i < this._children.length; i++) {
+      const item = this._children[i];
       item.index = i;
-      item.label = `${this.item.labelFormat} #${(i + 1)}`;
+      item.label = `${this.item.label} #${(i + 1)}`;
     }
+  }
+
+  clone() {
+    const clone = new Arrayfield();
+    clone.init(this.id, this);
+    clone.item = this.item.clone();
+    return clone;
   }
 }

@@ -3,6 +3,7 @@ export const mime = {
   'label': 'Array Test',
   'item': {
     'type': 'object',
+    'label': 'Contact object',
     'children': {
       'name': {
         'type': 'text'

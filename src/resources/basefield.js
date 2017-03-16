@@ -36,4 +36,11 @@ export class Basefield {
   }
 
   setValue(value) { }
+
+  clone() {
+    const ExtendedClass = Object.getPrototypeOf(this).constructor;
+    const clone = new ExtendedClass();
+    clone.init(this.id, this);
+    return clone;
+  }
 }
