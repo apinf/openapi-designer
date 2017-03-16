@@ -1,5 +1,5 @@
 import {bindable, containerless} from 'aurelia-framework';
-import {Basefield} from '../basefield';
+import {Basefield} from './abstract/basefield';
 
 @containerless
 export class Textfield extends Basefield {

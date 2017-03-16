@@ -1,8 +1,8 @@
 import {bindable, containerless} from 'aurelia-framework';
-import {Basefield} from '../basefield';
+import {Parentfield} from './abstract/parentfield';
 
 @containerless
-export class Arrayfield extends Basefield {
+export class Arrayfield extends Parentfield {
   @bindable item
   @bindable collapsed = false;
   _children = []

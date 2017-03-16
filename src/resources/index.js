@@ -1,3 +1,3 @@
 export function configure(config) {
-  config.globalResources(['./elements/textfield', './elements/textareafield', './elements/objectfield']);
+  config.globalResources(['./elements/textfield', './elements/textareafield', './elements/objectfield', './elements/arrayfield']);
 }
