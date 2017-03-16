@@ -11,13 +11,18 @@ export class Basefield {
     this.columns = columns;
     this.index = index;
     this.parent = parent;
+    this.fixLabel();
     return this;
   }
 
-  bind() {
+  fixLabel() {
     if (this.label.length === 0) {
       this.label = this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
     }
+  }
+
+  bind() {
+    this.fixLabel();
   }
 
   delete() {
