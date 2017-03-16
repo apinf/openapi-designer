@@ -1,33 +1,20 @@
-import 'aurelia-mdl';
-import {componentHandler} from 'encapsulated-mdl';
-import {fieldTypes} from './resources/fieldtypes';
-import {header} from './schema/header';
-import {mime} from './schema/mime';
-
 export class App {
-  formSchema = {};
-
   constructor() {
     // Allow access from browser console
     window.$oai = this;
-
-    this.formSchema.header = this.parseJSON('header', header);
-    this.formSchema.mime = this.parseJSON('mime', mime);
   }
 
-  parseJSON(id, obj) {
-    if (obj.type === 'object') {
-      for (const [key, field] of Object.entries(obj.children)) {
-        obj.children[key] = this.parseJSON(key, field);
-      }
-    } else if (obj.type === 'array') {
-      obj.item = this.parseJSON(obj.item.id, obj.item);
-    }
-    return new fieldTypes[obj.type]().init(id, obj);
-  }
-
-  attached() {
-    // Activate Material Design Lite
-    componentHandler.upgradeElement(document.getElementById('container'));
+  configureRouter(config, router) {
+    this.router = router;
+    config.title = 'Open API designer';
+    config.map([
+      { route: '', redirect: 'header'},
+      { route: 'header', name: 'header', moduleId: 'forms/header', nav: true },
+      { route: 'mime', name: 'mime', moduleId: 'forms/mime', nav: true },
+      { route: 'security', name: 'security', moduleId: 'forms/security', nav: true },
+      { route: 'tags', name: 'tags', moduleId: 'forms/tags', nav: true },
+      { route: 'paths', name: 'paths', moduleId: 'forms/paths', nav: true },
+      { route: 'types', name: 'types', moduleId: 'forms/types', nav: true }
+    ]);
   }
 }

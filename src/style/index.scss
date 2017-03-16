@@ -2,15 +2,28 @@ $main-color: #FFC107;
 $dark-color: darken($main-color, 5%);
 $border-color: #DBDBDB;
 
-html, body {
+html {
   font-size: 16px;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
 }
 
 * {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
-main {
+.main {
   display: flex;
 }
 

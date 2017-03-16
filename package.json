@@ -11,7 +11,6 @@
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
     "bluebird": "^3.4.1",
-    "aurelia-mdl": "^0.4.4",
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest"
   },

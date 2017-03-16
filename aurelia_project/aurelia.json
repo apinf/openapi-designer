@@ -126,20 +126,6 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
-          },
-          {
-            "name": "encapsulated-mdl",
-            "path": "../node_modules/encapsulated-mdl/dist",
-            "main": "material.min",
-            "resources": [
-              "material.amber-indigo.min.css"
-            ]
-          },
-          {
-            "name": "aurelia-mdl",
-            "path": "../node_modules/aurelia-mdl/dist/amd",
-            "main": "index",
-            "deps": ["encapsulated-mdl"]
           }
         ]
       }
