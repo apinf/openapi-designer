@@ -1,5 +1,6 @@
 import {bindable, containerless} from 'aurelia-framework';
 import {Parentfield} from './abstract/parentfield';
+import {Basefield} from './abstract/basefield';
 
 @containerless
 export class Arrayfield extends Parentfield {
@@ -7,7 +8,7 @@ export class Arrayfield extends Parentfield {
   @bindable collapsed = false;
   _children = []
 
-  init(id = '', {label = '', item = {type = 'text', id = 'arrElem'} = {}, columns = 8, collapsed = false, parent, index} = {}) {
+  init(id = '', {label = '', item, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
     this.collapsed = collapsed;
     return super.init(id, {label, columns, parent, index});
@@ -34,6 +35,10 @@ export class Arrayfield extends Parentfield {
   }
 
   addChild() {
+    if (!(this.item instanceof Basefield)) {
+      return;
+    }
+
     const field = this.item.clone();
     field.parent = this;
     field.index = this._children.length;
@@ -44,6 +49,10 @@ export class Arrayfield extends Parentfield {
   }
 
   deleteChild(index) {
+    if (this._children.length === 0) {
+      return;
+    }
+
     this._children.splice(index, 1);
     for (let i = index; i < this._children.length; i++) {
       const item = this._children[i];
@@ -55,7 +64,9 @@ export class Arrayfield extends Parentfield {
   clone() {
     const clone = new Arrayfield();
     clone.init(this.id, this);
-    clone.item = this.item.clone();
+    if (this.item instanceof Basefield) {
+      clone.item = this.item.clone();
+    }
     return clone;
   }
 }
