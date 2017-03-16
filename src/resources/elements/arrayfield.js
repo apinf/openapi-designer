@@ -37,9 +37,10 @@ export class Arrayfield extends Basefield {
     const args = Object.assign({
       index,
       parent: this,
-      label: `${this.item.labelFormat} #${(index + 1)}`
+      label: 'Array item'
     }, this.item);
     field.init(id, args);
+    field.label = `${field.label} #${(index + 1)}`;
     this.items.push(field);
     return index;
   }
