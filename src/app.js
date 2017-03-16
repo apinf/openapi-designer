@@ -4,6 +4,10 @@ export class App {
     window.$oai = this;
   }
 
+  get json() {
+    return '{}';
+  }
+
   configureRouter(config, router) {
     this.router = router;
     config.title = 'Open API designer';

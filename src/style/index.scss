@@ -23,16 +23,20 @@ h3 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
+.preview {
+  font-family: monospace !important;
+}
+
 .main {
   display: flex;
 }
 
-section {
+/*section {
   width: 100%;
   min-width: 0;
   max-width: 50rem;
   margin: 1rem auto 0;
-}
+}*/
 
 .field {
   display: inline-block;
