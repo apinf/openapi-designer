@@ -24,9 +24,14 @@ export class MIME {
     }
   }
   field = undefined
+  show = false
 
   constructor() {
     this.field = parseJSON('mime', this.schema);
+  }
+
+  getValue() {
+    return this.field.getValue();
   }
 
   getViewStrategy() {

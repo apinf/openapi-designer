@@ -11,7 +11,10 @@
   </div>
 
   <div class="main">
-    <router-view class="form"></router-view>
+    <template containerless repeat.for="form of formArray">
+      <compose containerless view-model.bind="form"></compose>
+    </template>
+
     <div class="preview" textcontent.one-way="json"></div>
   </div>
 </template>

@@ -42,9 +42,14 @@ export class Header {
     }
   }
   field = undefined
+  show = false
 
   constructor() {
     this.field = parseJSON('header', this.schema);
+  }
+
+  getValue() {
+    return this.field.getValue();
   }
 
   getViewStrategy() {

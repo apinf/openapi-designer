@@ -1,24 +1,40 @@
+import {Header} from './forms/header';
+import {MIME} from './forms/mime';
+
 export class App {
   constructor() {
     // Allow access from browser console
     window.$oai = this;
+
+    this.forms = {
+      header: new Header(),
+      mime: new MIME()
+    };
+
+    this.activeForm = this.forms.header;
+    this.activeForm.show = true;
+
+    window.onhashchange = () => {
+      const form = window.location.hash.substr(2);
+      if (this.forms.hasOwnProperty(form)) {
+        this.activeForm.show = false;
+        this.forms[form].show = true;
+
+        this.activeForm = this.forms[form];
+      }
+    };
+    window.onhashchange();
+  }
+
+  get formArray() {
+    return Object.values(this.forms);
   }
 
   get json() {
-    return '{}';
-  }
-
-  configureRouter(config, router) {
-    this.router = router;
-    config.title = 'Open API designer';
-    config.map([
-      { route: '', redirect: 'header'},
-      { route: 'header', name: 'header', moduleId: 'forms/header', nav: true },
-      { route: 'mime', name: 'mime', moduleId: 'forms/mime', nav: true },
-      { route: 'security', name: 'security', moduleId: 'forms/security', nav: true },
-      { route: 'tags', name: 'tags', moduleId: 'forms/tags', nav: true },
-      { route: 'paths', name: 'paths', moduleId: 'forms/paths', nav: true },
-      { route: 'types', name: 'types', moduleId: 'forms/types', nav: true }
-    ]);
+    const data = {};
+    for (const [name, form] of Object.entries(this.forms)) {
+      data[name] = form.getValue();
+    }
+    return JSON.stringify(data, '', '  ');
   }
 }
