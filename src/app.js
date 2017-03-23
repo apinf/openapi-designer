@@ -1,4 +1,5 @@
 import {parseJSON} from './resources/jsonparser';
+import {Objectfield} from './resources/elements/objectfield';
 import {header} from './schemas/header';
 import {mime} from './schemas/mime';
 
@@ -7,35 +8,25 @@ export class App {
     // Allow access from browser console
     window.$oai = this;
 
-    this.forms = {
-      header: parseJSON('header', header),
-      mime: parseJSON('mime', mime)
-    };
+    this.forms = new Objectfield();
+    this.forms.addChild(parseJSON('header', header));
+    this.forms.addChild(parseJSON('mime', mime));
 
-    this.activeForm = this.forms.header;
+    this.activeForm = this.forms.getChild('header');
     this.activeForm.show = true;
 
     window.onhashchange = () => {
-      const form = window.location.hash.substr(2);
-      if (this.forms.hasOwnProperty(form)) {
+      const formID = window.location.hash.substr(2);
+      if (this.forms.hasChild(formID)) {
         this.activeForm.show = false;
-        this.forms[form].show = true;
-
-        this.activeForm = this.forms[form];
+        this.activeForm = this.forms.getChild(formID);
+        this.activeForm.show = true;
       }
     };
     window.onhashchange();
   }
 
-  get formArray() {
-    return Object.values(this.forms);
-  }
-
   get json() {
-    const data = {};
-    for (const [name, form] of Object.entries(this.forms)) {
-      data[name] = form.getValue();
-    }
-    return JSON.stringify(data, '', '  ');
+    return JSON.stringify(this.forms.getValue(), '', '  ');
   }
 }

@@ -1,14 +1,14 @@
-import {bindable, containerless} from 'aurelia-framework';
+import {containerless} from 'aurelia-framework';
 import {Parentfield} from './abstract/parentfield';
-import {Basefield} from './abstract/basefield';
+import {Field} from './abstract/field';
 
 @containerless
 export class Arrayfield extends Parentfield {
-  @bindable item
-  @bindable collapsed = false;
-  @bindable format = 'array';
-  @bindable keyField = '_key';
-  _children = []
+  item;
+  collapsed = false;
+  format = 'array';
+  keyField = '_key';
+  _children = [];
 
   init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
@@ -46,7 +46,7 @@ export class Arrayfield extends Parentfield {
   }
 
   addChild() {
-    if (!(this.item instanceof Basefield)) {
+    if (!(this.item instanceof Field)) {
       return;
     }
 
@@ -74,7 +74,7 @@ export class Arrayfield extends Parentfield {
   clone() {
     const clone = new Arrayfield();
     clone.init(this.id, this);
-    if (this.item instanceof Basefield) {
+    if (this.item instanceof Field) {
       clone.item = this.item.clone();
     }
     return clone;
