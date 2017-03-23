@@ -51,7 +51,6 @@ export class Arrayfield extends Parentfield {
     }
 
     const field = this.item.clone();
-    field.parent = this;
     field.index = this._children.length;
     field.id = `${this.item.id}-${field.index}`;
     field.label = `${field.label} #${(field.index + 1)}`;
