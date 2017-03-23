@@ -41,24 +41,16 @@ export class Field {
    * @type {Field}
    */
   parent = undefined;
-  /**
-   * A map containing listeners that listen to the value of this field or the
-   * possible children of this field.
-   * Listeners of this field are under the key {@linkplain #}. Other fields are
-   * referenced using the JSON reference format ({@linkplain #/...}).
-   * @type {Object}
-   */
-  fieldListeners = {};
 
   /**
    * Initialize this field with the base data.
    * @param  {String} [id='']     The index of this field.
    * @param  {String} [label='']  The label of this field.
    * @param  {Number} [columns=8] The number of columns this field should use.
-   * @param  {Field} parent      The parent of this field.
+   * @param  {Field}  parent      The parent of this field.
    * @param  {Number} index       The numerical index of this field within the
    *                              parent.
-   * @return {Field}          This field.
+   * @return {Field}              This field.
    */
   init(id = '', {label = '', columns = 8, conditions = {}, parent, index} = {}) {
     this.id = id;
@@ -141,66 +133,6 @@ export class Field {
    */
   get labelFormat() {
     return this._labelFormat || this._label;
-  }
-
-  /**
-   * Called by children when their value changes.
-   *
-   * This calls the parents {@link #childValueChanged} method and the
-   * {@link #runFieldListeners} of this field.
-   *
-   * @param  {string[]} fieldPath The path to the field relative to this field.
-   * @param  {Object} newVal    The new value of the field.
-   * @param  {Object} oldVal    The old value of the field.
-   */
-  childValueChanged(fieldPath, newVal, oldVal) {
-    if (this.parent) {
-      this.parent.childValueChanged([this.index || this.id].concat(fieldPath), newVal, oldVal);
-    }
-    this.runFieldListeners(`#/${fieldPath.join('/')}`, newVal, oldVal);
-  }
-
-  /**
-   * Called by Aurelia when {@link #value} changes.
-   *
-   * This calls the parents {@link #childValueChanged} method and the
-   * {@link #runFieldListeners} of this field.
-   *
-   * @param  {Object} newVal The new value.
-   * @param  {Object} oldVal The old value.
-   */
-  valueChanged(newVal, oldVal) {
-    if (this.parent) {
-      this.parent.childValueChanged([this.index || this.id], newVal, oldVal);
-    }
-    this.runFieldListeners('#', newVal, oldVal);
-  }
-
-  /**
-   * Run the field listeners registered to this field.
-   *
-   * @param  {[type]} path   [description]
-   * @param  {[type]} newVal [description]
-   * @param  {[type]} oldVal [description]
-   */
-  runFieldListeners(path, newVal, oldVal) {
-    if (this.fieldListeners.hasOwnProperty(path)) {
-      for (const func of this.fieldListeners[path]) {
-        func(newVal, oldVal);
-      }
-    }
-  }
-
-  /**
-   * Register a field listener.
-   * @param {String} path The path (in JSON reference format) to the field to
-   *                      listen to.
-   * @param {func}   func The callback function.
-   */
-  addFieldListener(path, func) {
-    const listeners = this.fieldListeners[path] || [];
-    listeners.push(func);
-    this.fieldListeners[path] = listeners;
   }
 
   /**
