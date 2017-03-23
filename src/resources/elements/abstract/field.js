@@ -93,30 +93,15 @@ export class Field {
     if (!this._labelFormat) {
       return this._label;
     }
-    let label = this._labelFormat;
-    label.replace(/$index/g, this.index + 1);
-
-    if (this._labelFormat.includes('${')) {
-      const regex = /\${(.+?)}/;
-
-      let result = regex.exec(label);
-      while (result !== null) {
-        const index = result.index;
-        const match = result[0];
-        const path = result[1];
-        let replacement = '';
-
-        const elem = this.resolveRef(path);
-        if (elem !== undefined) {
-          replacement = elem.getValue();
-        }
-
-        label = label.substr(0, index) + replacement + label.substr(index + match.length);
-        result = regex.exec(label);
-      }
-    }
-
-    return label;
+    return this._labelFormat
+        .replace(/$index/g, this.index + 1)
+        .replace(/\${(.+?)}/g, (match, capture) => {
+          const elem = this.resolveRef(capture);
+          if (elem !== undefined) {
+            return elem.getValue();
+          }
+          return '';
+        });
   }
 
   set labelFormat(newLabel) {
