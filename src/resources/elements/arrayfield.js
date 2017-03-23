@@ -2,14 +2,34 @@ import {containerless} from 'aurelia-framework';
 import {Parentfield} from './abstract/parentfield';
 import {Field} from './abstract/field';
 
+/**
+ * Arrayfield is a field that has a variable number of the same kind of child.
+ */
 @containerless
 export class Arrayfield extends Parentfield {
+  /**
+   * The base object that is cloned whenever a new child is added.
+   * @type {Field}
+   */
   item;
+  /**
+   * Whether or not the UI element should be collapsed (i.e. only show the title)
+   * @type {Boolean}
+   */
   collapsed = false;
+  /**
+   * The output format ({@linkplain array} or {@linkplain map})
+   * @type {String}
+   */
   format = 'array';
+  /**
+   * The field that is used as the key if {@link #format} is {@linkplain map}
+   * @type {String}
+   */
   keyField = '_key';
   _children = [];
 
+  /** @inheritdoc */
   init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, parent, index} = {}) {
     this.item = item;
     this.format = format;
@@ -18,6 +38,11 @@ export class Arrayfield extends Parentfield {
     return super.init(id, {label, columns, parent, index});
   }
 
+  /**
+   * @inheritdoc
+   * @return {Object[]|Object} The values of the children of this array in the
+   *                           format specified by {@link #format}.
+   */
   getValue() {
     let value = undefined;
     if (this.format === 'map') {
@@ -37,14 +62,26 @@ export class Arrayfield extends Parentfield {
     return value;
   }
 
+  /**
+   * Set the value of this field.
+   *
+   * @param {Object|Object[]} value The new value in the format specified by
+   *                                {@link #format}.
+   */
   setValue(value) {
     this._children = [];
-    for (const item of value) {
+    for (const [key, item] of Object.entries(value)) {
       const index = this.addChild();
+      if (this.format === 'map') {
+        item[this.keyField] = key;
+      }
       this._children[index].setValue(item);
     }
   }
 
+  /**
+   * Add a new blank child to this array.
+   */
   addChild() {
     if (!(this.item instanceof Field)) {
       return;
@@ -58,6 +95,11 @@ export class Arrayfield extends Parentfield {
     return field.index;
   }
 
+  /**
+   * Delete the child with the given index from this field.
+   *
+   * @param  {Number} index The index of the child.
+   */
   deleteChild(index) {
     if (this._children.length === 0) {
       return;
@@ -71,6 +113,7 @@ export class Arrayfield extends Parentfield {
     }
   }
 
+  /** @inheritdoc */
   clone() {
     const clone = new Arrayfield();
     clone.init(this.id, this);
