@@ -1,6 +1,6 @@
 import {parseJSON} from '../resources/jsonparser';
 
-export class Header {
+export class MIME {
   schema = {
     'type': 'array',
     'label': 'Array Test',
