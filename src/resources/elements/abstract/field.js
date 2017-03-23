@@ -94,7 +94,7 @@ export class Field {
       return this._label;
     }
     return this._labelFormat
-        .replace(/$index/g, this.index + 1)
+        .replace(/\$index/g, this.index + 1)
         .replace(/\${(.+?)}/g, (match, capture) => {
           const elem = this.resolveRef(capture);
           if (elem !== undefined) {
