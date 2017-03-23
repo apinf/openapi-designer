@@ -1,5 +1,6 @@
-import {Header} from './forms/header';
-import {MIME} from './forms/mime';
+import {parseJSON} from './resources/jsonparser';
+import {header} from './schemas/header';
+import {mime} from './schemas/mime';
 
 export class App {
   constructor() {
@@ -7,8 +8,8 @@ export class App {
     window.$oai = this;
 
     this.forms = {
-      header: new Header(),
-      mime: new MIME()
+      header: parseJSON('header', header),
+      mime: parseJSON('mime', mime)
     };
 
     this.activeForm = this.forms.header;
