@@ -26,6 +26,10 @@ export class App {
     window.onhashchange();
   }
 
+  get formArray() {
+    return Object.values(this.forms.children);
+  }
+
   get json() {
     return JSON.stringify(this.forms.getValue(), '', '  ');
   }

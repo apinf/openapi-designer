@@ -30,12 +30,12 @@ export class Arrayfield extends Parentfield {
   _children = [];
 
   /** @inheritdoc */
-  init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, parent, index} = {}) {
+  init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, conditions = {}, parent, index} = {}) {
     this.item = item;
     this.format = format;
     this.keyField = keyField;
     this.collapsed = collapsed;
-    return super.init(id, {label, columns, parent, index});
+    return super.init(id, {label, columns, conditions, parent, index});
   }
 
   /**
@@ -90,7 +90,7 @@ export class Arrayfield extends Parentfield {
     const field = this.item.clone();
     field.index = this._children.length;
     field.id = `${this.item.id}-${field.index}`;
-    field.label = `${field.label} #${(field.index + 1)}`;
+    field.labelFormat = `${field.labelFormat} #$index`;
     this._children.push(field);
     return field.index;
   }
@@ -109,7 +109,7 @@ export class Arrayfield extends Parentfield {
     for (let i = index; i < this._children.length; i++) {
       const item = this._children[i];
       item.index = i;
-      item.label = `${this.item.label} #${(i + 1)}`;
+      //item.label = `${this.item.label} #${(i + 1)}`;
     }
   }
 

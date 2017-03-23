@@ -8,16 +8,27 @@ export class Field {
    */
   id = '';
   /**
-   * The displayed label for the field. This might be a header (for objects) or
-   * just a label (for inputs)
+   * The internal storage for a static label.
    * @type {String}
+   * @private
    */
-  label = '';
+  _label = '';
+  /**
+   * The internal storage for a non-static label.
+   * @type {String}
+   * @private
+   */
+  _labelFormat = '';
   /**
    * The number of columns this element should use.
    * @type {Number}
    */
   columns = 8;
+  /**
+   * The conditions on which to display this field.
+   * @type {String}
+   */
+  conditions = {};
   /**
    * The index of this element within the parent. This should only be defined if
    * the parent stores children using numerical indexes. For object-like child
@@ -49,14 +60,87 @@ export class Field {
    *                              parent.
    * @return {Field}          This field.
    */
-  init(id = '', {label = '', columns = 8, parent, index} = {}) {
+  init(id = '', {label = '', columns = 8, conditions = {}, parent, index} = {}) {
     this.id = id;
-    this.label = label || this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
+    this.labelFormat = label || this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
+    this.conditions = conditions;
     this.columns = columns;
     this.index = index;
     this.parent = parent;
 
     return this;
+  }
+
+  get display() {
+    for (const [path, value] of Object.entries(this.conditions)) {
+      const elem = this.resolvePath(path.split('/'));
+
+      if (!elem) {
+        return false;
+      }
+
+      const elemValue = elem.getValue();
+
+      if (Array.isArray(value)) {
+        if (!value.includes(elemValue)) {
+          return false;
+        }
+      } else if (value !== elemValue) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * The displayed label for the field. This might be a header (for objects) or
+   * just a label (for inputs).
+   * @return {String} The label to display.
+   */
+  get label() {
+    if (!this._labelFormat) {
+      return this._label;
+    }
+    let label = this._labelFormat;
+    label.replace(/$index/g, this.index + 1);
+
+    if (this._labelFormat.includes('${')) {
+      const regex = /\${(.+)?}/;
+
+      let result = regex.exec(label);
+      while (result !== null) {
+        const index = result.index;
+        const match = result[0];
+        const path = result[1];
+        let replacement = '';
+
+        const elem = this.resolvePath(path.split('/'));
+        if (elem !== undefined) {
+          replacement = elem.getValue();
+        }
+
+        label = label.substr(0, index) + replacement + label.substr(index + match.length);
+        result = regex.exec(label);
+      }
+    }
+
+    return label;
+  }
+
+  set labelFormat(newLabel) {
+    if (newLabel.includes('$') || (newLabel.includes('${') && newLabel.includes('}'))) {
+      this._labelFormat = newLabel;
+    } else {
+      this._labelFormat = '';
+      this._label = newLabel;
+    }
+  }
+
+  /**
+   * Get the label format.
+   */
+  get labelFormat() {
+    return this._labelFormat || this._label;
   }
 
   /**
@@ -138,6 +222,8 @@ export class Field {
   resolvePath(path) {
     if (path.length === 0) {
       return this;
+    } else if (path[0] === '..') {
+      return this.parent.resolvePath(path.splice(1));
     }
     return undefined;
   }

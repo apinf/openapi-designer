@@ -8,10 +8,10 @@ export class AbstractTextfield extends Field {
   value = '';
   placeholder = 'Enter value...';
 
-  init(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, parent, index} = {}) {
+  init(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, conditions = {}, parent, index} = {}) {
     this.value = value;
     this.placeholder = placeholder;
-    return super.init(id, {label, columns, parent, index});
+    return super.init(id, {label, columns, parent, conditions, index});
   }
 
   /**

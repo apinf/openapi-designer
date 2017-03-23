@@ -11,8 +11,8 @@ export class Parentfield extends Field {
   _children;
 
   /** @inheritdoc */
-  init(id = '', {label = '', columns = 8, parent, index} = {}) {
-    return super.init(id, {label, columns, parent, index});
+  init(id = '', {label = '', columns = 8, conditions = {}, parent, index} = {}) {
+    return super.init(id, {label, columns, conditions, parent, index});
   }
 
   /**

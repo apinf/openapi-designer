@@ -11,7 +11,7 @@
   </div>
 
   <div class="main">
-    <template containerless repeat.for="form of form.childrenArray">
+    <template containerless repeat.for="form of formArray">
       <compose containerless if.bind="form.show" view-model.bind="form"></compose>
     </template>
 

@@ -6,10 +6,10 @@ export class Objectfield extends Parentfield {
   collapsed = false;
   _children = {};
 
-  init(id = '', {label = '', children = {}, columns = 8, collapsed = false, parent, index} = {}) {
+  init(id = '', {label = '', children = {}, columns = 8, collapsed = false, conditions = {}, parent, index} = {}) {
     this._children = children;
     this.collapsed = collapsed;
-    return super.init(id, {label, columns, parent, index});
+    return super.init(id, {label, columns, conditions, parent, index});
   }
 
   getValue() {
@@ -39,7 +39,8 @@ export class Objectfield extends Parentfield {
       clonedChildren[key] = field.clone();
     }
     clone.init(this.id, {
-      label: this.label,
+      _label: this._label,
+      _labelFormat: this._labelFormat,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: this.parent,
