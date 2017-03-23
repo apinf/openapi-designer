@@ -65,7 +65,7 @@ export class Field {
 
   get display() {
     for (const [path, value] of Object.entries(this.conditions)) {
-      const elem = this.resolvePath(path.split('/'));
+      const elem = this.resolveRef(path);
 
       if (!elem) {
         return false;
@@ -97,7 +97,7 @@ export class Field {
     label.replace(/$index/g, this.index + 1);
 
     if (this._labelFormat.includes('${')) {
-      const regex = /\${(.+)?}/;
+      const regex = /\${(.+?)}/;
 
       let result = regex.exec(label);
       while (result !== null) {
@@ -106,7 +106,7 @@ export class Field {
         const path = result[1];
         let replacement = '';
 
-        const elem = this.resolvePath(path.split('/'));
+        const elem = this.resolveRef(path);
         if (elem !== undefined) {
           replacement = elem.getValue();
         }
@@ -142,7 +142,7 @@ export class Field {
    * @return {Field}      The field at the path, or undefined if not found.
    */
   resolveRef(ref) {
-    return this.resolvePath(ref.substr(2).split('/'));
+    return this.resolvePath(ref.split('/'));
   }
 
   /**
@@ -154,6 +154,8 @@ export class Field {
   resolvePath(path) {
     if (path.length === 0) {
       return this;
+    } else if (path[0] === '.' || path[0] === '#') {
+      return this.resolvePath(path.splice(1));
     } else if (path[0] === '..') {
       return this.parent.resolvePath(path.splice(1));
     }

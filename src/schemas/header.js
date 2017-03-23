@@ -6,17 +6,17 @@ export const header = {
       'children': {
         'title': {
           'type': 'text',
-          'label': 'Title for ${../version}',
           'columns': 5
         },
         'version': {
           'type': 'text',
+          'label': 'Version of ${../title} is ${.}',
           'columns': 3
         },
         'description': {
           'type': 'textarea',
           'conditions': {
-            '../version': ['0.1.0', '0.2.0']
+            '../version': ['0.1.0', '0.2.0', '0.3.0']
           }
         },
         'termsofservice': {
