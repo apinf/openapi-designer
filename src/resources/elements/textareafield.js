@@ -1,11 +1,11 @@
 import {containerless} from 'aurelia-framework';
-import {AbstractTextfield} from './abstract/textfield';
+import {Textfield} from './textfield';
 
 /**
- * Textareafield is a multi-row text input field.
+ * Textareafield is a {@link Textfield} that has a multi-row text input.
  */
 @containerless
-export class Textareafield extends AbstractTextfield {
+export class Textareafield extends Textfield {
   /**
    * The number of rows to set to the textarea by default.
    * @type {Number}
