@@ -16,6 +16,9 @@ export class Objectfield extends Parentfield {
   getValue() {
     const value = {};
     for (const [key, field] of Object.entries(this._children)) {
+      if (!field || !field.showValueInParent) {
+        continue;
+      }
       value[key] = field.getValue();
     }
     return value;

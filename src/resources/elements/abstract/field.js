@@ -47,24 +47,37 @@ export class Field {
    * @type {Field}
    */
   parent = undefined;
+  /**
+   * Whether or not the parent should include the value of this field in its
+   * value. Useful to set to false when using {@link Linkfield}s
+   * @type {Boolean}
+   */
+  showValueInParent = true
 
   /**
    * Initialize this field with the base data.
-   * @param  {String} id               The index of this field.
-   * @param  {String} [args.label]     The label of this field.
-   * @param  {Number} [args.columns=8] The number of columns this field should
-   *                                   use.
-   * @param  {Field}  [args.parent]    The parent of this field.
-   * @param  {Number} [args.index]     The numerical index of this field within
-   *                                   the parent.
-   * @return {Field}                   This field.
+   * @param  {String} id                The index of this field.
+   * @param  {String} [args.label]      The label of this field.
+   * @param  {Number} [args.columns=8]  The number of columns this field should
+   *                                    use.
+   * @param  {Number} [args.format]     The output and/or display format of the
+   *                                    field.
+   * @param  {Field}  [args.parent]     The parent of this field.
+   * @param  {Number} [args.index]      The numerical index of this field within
+   *                                    the parent.
+   * @param  {Object} [args.conditions] The display conditions of this field.
+   * @param  {Boolean} [args.showValueInParent] Whether or not the parent should
+   *                                            include the value of this field
+   *                                            in its value.
+   * @return {Field}                    This field.
    */
   init(id, args = {}) {
     args = Object.assign({
-      label: this.id.substr(0, 1).toUpperCase() + this.id.substr(1),
+      label: id.substr(0, 1).toUpperCase() + id.substr(1),
       columns: 8,
       format: '',
-      conditions: {}
+      conditions: {},
+      showValueInParent: true
     }, args);
     this.id = id;
     this.format = args.format;
@@ -73,7 +86,7 @@ export class Field {
     this.columns = args.columns;
     this.index = args.index;
     this.parent = args.parent;
-
+    this.showValueInParent = args.showValueInParent;
     return this;
   }
 
@@ -157,6 +170,8 @@ export class Field {
       return this.resolvePath(path.splice(1));
     } else if (path[0] === '..') {
       return this.parent.resolvePath(path.splice(1));
+    } else if (path[0].length === 0) {
+      return this.superParent().resolvePath(path.splice(1));
     }
     return undefined;
   }

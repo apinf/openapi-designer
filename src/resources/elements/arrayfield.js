@@ -43,6 +43,9 @@ export class Arrayfield extends Parentfield {
     if (this.format === 'map') {
       value = {};
       for (const item of this._children) {
+        if (!item.showValueInParent) {
+          continue;
+        }
         const data = item.getValue();
         const key = data[this.keyField];
         delete data[this.keyField];
@@ -51,6 +54,9 @@ export class Arrayfield extends Parentfield {
     } else if (this.format === 'array') {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
+        if (!item.showValueInParent) {
+          continue;
+        }
         value[index] = item.getValue();
       }
     }
