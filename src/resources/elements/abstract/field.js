@@ -8,6 +8,12 @@ export class Field {
    */
   id = '';
   /**
+   * The display and/or output format of the field. The field implementation may
+   * or may not ignore this.
+   * @type {String}
+   */
+  format = '';
+  /**
    * The internal storage for a static label.
    * @type {String}
    * @private
@@ -44,21 +50,29 @@ export class Field {
 
   /**
    * Initialize this field with the base data.
-   * @param  {String} [id='']     The index of this field.
-   * @param  {String} [label='']  The label of this field.
-   * @param  {Number} [columns=8] The number of columns this field should use.
-   * @param  {Field}  [parent]    The parent of this field.
-   * @param  {Number} [index]     The numerical index of this field within the
-   *                              parent.
-   * @return {Field}              This field.
+   * @param  {String} id               The index of this field.
+   * @param  {String} [args.label]     The label of this field.
+   * @param  {Number} [args.columns=8] The number of columns this field should
+   *                                   use.
+   * @param  {Field}  [args.parent]    The parent of this field.
+   * @param  {Number} [args.index]     The numerical index of this field within
+   *                                   the parent.
+   * @return {Field}                   This field.
    */
-  init(id = '', {label, columns = 8, conditions = {}, parent, index} = {}) {
+  init(id, args = {}) {
+    args = Object.assign({
+      label: this.id.substr(0, 1).toUpperCase() + this.id.substr(1),
+      columns: 8,
+      format: '',
+      conditions: {}
+    }, args);
     this.id = id;
-    this.labelFormat = label || this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
-    this.conditions = conditions;
-    this.columns = columns;
-    this.index = index;
-    this.parent = parent;
+    this.format = args.format;
+    this.labelFormat = args.label;
+    this.conditions = args.conditions;
+    this.columns = args.columns;
+    this.index = args.index;
+    this.parent = args.parent;
 
     return this;
   }

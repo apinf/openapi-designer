@@ -18,11 +18,6 @@ export class Arrayfield extends Parentfield {
    */
   collapsed = false;
   /**
-   * The output format ({@linkplain array} or {@linkplain map})
-   * @type {String}
-   */
-  format = 'array';
-  /**
    * The field that is used as the key if {@link #format} is {@linkplain map}
    * @type {String}
    */
@@ -33,7 +28,6 @@ export class Arrayfield extends Parentfield {
   init(id = '', args = {}) {
     args = Object.assign({format: 'array', keyField: '_key', collapsed: false}, args);
     this.item = args.item;
-    this.format = args.format;
     this.keyField = args.keyField;
     this.collapsed = args.collapsed;
     return super.init(id, args);

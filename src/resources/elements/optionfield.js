@@ -4,11 +4,9 @@ import {Field} from './abstract/field';
 @containerless
 export class Optionfield extends Field {
   choices = [];
-  format = 'dropdown';
 
   init(id = '', args = {}) {
     args = Object.assign({choices: [], format: 'dropdown'}, args);
-    this.format = args.format;
     this.choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
