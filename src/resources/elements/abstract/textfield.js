@@ -8,10 +8,11 @@ export class AbstractTextfield extends Field {
   value = '';
   placeholder = 'Enter value...';
 
-  init(id = '', {label = '', placeholder = 'Enter value...', value = '', columns = 8, conditions = {}, parent, index} = {}) {
-    this.value = value;
-    this.placeholder = placeholder;
-    return super.init(id, {label, columns, parent, conditions, index});
+  init(id = '', args = {}) {
+    args = Object.assign({placeholder: 'Enter value...', value: ''}, args);
+    this.value = args.value;
+    this.placeholder = args.placeholder;
+    return super.init(id, args);
   }
 
   /**

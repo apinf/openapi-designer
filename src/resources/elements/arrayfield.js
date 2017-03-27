@@ -30,12 +30,13 @@ export class Arrayfield extends Parentfield {
   _children = [];
 
   /** @inheritdoc */
-  init(id = '', {label = '', format = 'array', keyField = '_key', item, columns = 8, collapsed = false, conditions = {}, parent, index} = {}) {
-    this.item = item;
-    this.format = format;
-    this.keyField = keyField;
-    this.collapsed = collapsed;
-    return super.init(id, {label, columns, conditions, parent, index});
+  init(id = '', args = {}) {
+    args = Object.assign({format: 'array', keyField: '_key', collapsed: false}, args);
+    this.item = args.item;
+    this.format = args.format;
+    this.keyField = args.keyField;
+    this.collapsed = args.collapsed;
+    return super.init(id, args);
   }
 
   /**

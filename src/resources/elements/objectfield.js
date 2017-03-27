@@ -6,10 +6,11 @@ export class Objectfield extends Parentfield {
   collapsed = false;
   _children = {};
 
-  init(id = '', {label = '', children = {}, columns = 8, collapsed = false, conditions = {}, parent, index} = {}) {
-    this._children = children;
-    this.collapsed = collapsed;
-    return super.init(id, {label, columns, conditions, parent, index});
+  init(id = '', args = {}) {
+    args = Object.assign({children: {}, collapsed: false}, args);
+    this._children = args.children;
+    this.collapsed = args.collapsed;
+    return super.init(id, args);
   }
 
   getValue() {

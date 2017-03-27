@@ -6,10 +6,11 @@ export class Optionfield extends Field {
   choices = [];
   format = 'dropdown';
 
-  init(id = '', {label = '', choices = [], format = 'dropdown', columns = 8, conditions = {}, parent, index} = {}) {
-    this.format = format;
+  init(id = '', args = {}) {
+    args = Object.assign({choices: [], format: 'dropdown'}, args);
+    this.format = args.format;
     this.choices = [];
-    for (const choice of choices) {
+    for (const choice of args.choices) {
       if (typeof choice === 'string') {
         this.choices.push({
           key: choice,
@@ -27,7 +28,7 @@ export class Optionfield extends Field {
     if (this.getValue() === undefined && this.choices.length > 0) {
       this.choices[0].selected = true;
     }
-    return super.init(id, {label, columns, parent, index});
+    return super.init(id, args);
   }
 
   getValue() {

@@ -47,12 +47,12 @@ export class Field {
    * @param  {String} [id='']     The index of this field.
    * @param  {String} [label='']  The label of this field.
    * @param  {Number} [columns=8] The number of columns this field should use.
-   * @param  {Field}  parent      The parent of this field.
-   * @param  {Number} index       The numerical index of this field within the
+   * @param  {Field}  [parent]    The parent of this field.
+   * @param  {Number} [index]     The numerical index of this field within the
    *                              parent.
    * @return {Field}              This field.
    */
-  init(id = '', {label = '', columns = 8, conditions = {}, parent, index} = {}) {
+  init(id = '', {label, columns = 8, conditions = {}, parent, index} = {}) {
     this.id = id;
     this.labelFormat = label || this.id.substr(0, 1).toUpperCase() + this.id.substr(1);
     this.conditions = conditions;
