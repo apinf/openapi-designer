@@ -1,5 +1,12 @@
 import {fieldTypes} from './fieldtypes';
 
+/**
+ * Parse an object into a {@link Field}.
+ * @param  {String} id       The ID for the field.
+ * @param  {Object} obj      The parameters for the field.
+ * @param  {Field}  [parent] The parent of the new field.
+ * @return {Field}           The field created from the given data.
+ */
 export function parseJSON(id, obj, parent = undefined) {
   const createdObj = new fieldTypes[obj.type]();
   if (obj.type === 'object') {

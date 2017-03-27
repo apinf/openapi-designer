@@ -3,7 +3,7 @@ import {Parentfield} from './abstract/parentfield';
 import {Field} from './abstract/field';
 
 /**
- * Arrayfield is a field that has a variable number of the same kind of child.
+ * Arrayfield is a {@link Parentfield} that has a variable number of the same kind of child.
  */
 @containerless
 export class Arrayfield extends Parentfield {
@@ -22,9 +22,18 @@ export class Arrayfield extends Parentfield {
    * @type {String}
    */
   keyField = '_key';
+  /** @inheritdoc */
   _children = [];
 
-  /** @inheritdoc */
+  /**
+   * @inheritdoc
+   * @param {Field}   [args.item]      The base object that is cloned to create
+   *                                   new children.
+   * @param {String}  [args.keyField]  The field that is used as the key if
+   *                                   {@link #format} is {@linkplain map}
+   * @param {Boolean} [args.collapsed] Whether or not the UI element should be
+   *                                   collapsed.
+   */
   init(id = '', args = {}) {
     args = Object.assign({format: 'array', keyField: '_key', collapsed: false}, args);
     this.item = args.item;
@@ -64,8 +73,7 @@ export class Arrayfield extends Parentfield {
   }
 
   /**
-   * Set the value of this field.
-   *
+   * @inheritdoc
    * @param {Object|Object[]} value The new value in the format specified by
    *                                {@link #format}.
    */
@@ -99,6 +107,7 @@ export class Arrayfield extends Parentfield {
   /**
    * Delete the child with the given index from this field.
    *
+   * @override
    * @param  {Number} index The index of the child.
    */
   deleteChild(index) {

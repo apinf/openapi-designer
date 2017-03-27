@@ -1,10 +1,22 @@
 import {containerless} from 'aurelia-framework';
 import {Field} from './abstract/field';
 
+/**
+ * Optionfield is a {@link Field} that gives certain options to the user as
+ * checkboxes or a dropdown depending on the format.
+ */
 @containerless
 export class Optionfield extends Field {
+  /**
+   * The choices.
+   * @type {Array}
+   */
   choices = [];
 
+  /**
+   * @inheritdoc
+   * @param {String[]|Object[]} args.choices The choices to add.
+   */
   init(id = '', args = {}) {
     args = Object.assign({choices: [], format: 'dropdown'}, args);
     this.choices = [];
@@ -29,6 +41,11 @@ export class Optionfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * @inheritdoc
+   * @return {String[]|String} The choice or choices of this option field
+   *                           depending on the format of this field.
+   */
   getValue() {
     if (this.format === 'dropdown') {
       for (const choice of this.choices) {
@@ -48,6 +65,11 @@ export class Optionfield extends Field {
     }
   }
 
+  /**
+   * @inheritdoc
+   * @param {String|String[]} value The new choice or choices depending on the
+   *                                format of this field.
+   */
   setValue(value) {
     if (Array.isArray(value) && this.format === 'checkbox') {
       for (const choice of this.choices) {
@@ -67,6 +89,12 @@ export class Optionfield extends Field {
       }
     }
   }
+
+  /**
+   * @return {String} The name of the HTML file that displays the choices in the
+   *                  format specified by {@link #format}.
+   * @private
+   */
   getViewStrategy() {
     return `resources/elements/optionfield-${this.format}.html`;
   }

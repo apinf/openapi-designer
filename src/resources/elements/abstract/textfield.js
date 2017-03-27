@@ -5,9 +5,22 @@ import {Field} from './field';
  * the primary value.
  */
 export class AbstractTextfield extends Field {
+  /**
+   * The text value of the input field.
+   * @type {String}
+   */
   value = '';
+  /**
+   * The UI placeholder when the field has no value.
+   * @type {String}
+   */
   placeholder = 'Enter value...';
 
+  /**
+   * @inheritdoc
+   * @param {String} [args.value]       The value of the input field.
+   * @param {String} [args.placeholder] The input placeholder text.
+   */
   init(id = '', args = {}) {
     args = Object.assign({placeholder: 'Enter value...', value: ''}, args);
     this.value = args.value;
