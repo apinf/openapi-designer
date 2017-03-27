@@ -3,7 +3,6 @@ import {Field} from './abstract/field';
 
 /**
  * Linkfield is a field that proxies the value from another field.
- * @type {String}
  */
 @noView
 export class Linkfield extends Field {
