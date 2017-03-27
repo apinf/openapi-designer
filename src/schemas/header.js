@@ -1,5 +1,6 @@
 export const header = {
   'type': 'object',
+  'showValueInParent': false,
   'children': {
     'info': {
       'type': 'object',
@@ -10,14 +11,10 @@ export const header = {
         },
         'version': {
           'type': 'text',
-          'label': 'Version of ${../title} is ${.}',
           'columns': 3
         },
         'description': {
-          'type': 'textarea',
-          'conditions': {
-            '../version': ['0.1.0', '0.2.0', '0.3.0']
-          }
+          'type': 'textarea'
         },
         'termsofservice': {
           'type': 'text',

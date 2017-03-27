@@ -11,10 +11,7 @@
   </div>
 
   <div class="main">
-    <template containerless repeat.for="form of formArray">
-      <compose containerless if.bind="form.show" view-model.bind="form"></compose>
-    </template>
-
+    <compose containerless view-model.bind="activeForm"></compose>
     <div class="preview" textcontent.one-way="json"></div>
   </div>
 </template>
