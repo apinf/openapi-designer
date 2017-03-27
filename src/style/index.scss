@@ -31,14 +31,19 @@ h3 {
 
 .main {
   display: flex;
+
+  flex-flow: wrap;
 }
 
-/*section {
-  width: 100%;
-  min-width: 0;
-  max-width: 50rem;
-  margin: 1rem auto 0;
-}*/
+.form {
+  min-width: 100%;
+  max-width: 100%;
+
+  flex: 1;
+  @media screen and (min-width: 40rem) {
+    min-width: 40rem;
+  }
+}
 
 .field {
   display: inline-block;
