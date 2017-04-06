@@ -4,6 +4,7 @@ import {Textareafield} from './elements/textareafield';
 import {Arrayfield} from './elements/arrayfield';
 import {Optionfield} from './elements/optionfield';
 import {Linkfield} from './elements/linkfield';
+import {Typefield} from './elements/typefield';
 
 export const fieldTypes = {
   text: Textfield,
@@ -11,5 +12,6 @@ export const fieldTypes = {
   object: Objectfield,
   array: Arrayfield,
   option: Optionfield,
-  link: Linkfield
+  link: Linkfield,
+  selectable: Typefield
 };
