@@ -35,6 +35,14 @@ export class Optionfield extends Field {
         });
       }
     }
+    if (this.choices.length === 0) {
+      this.choices.push({
+        key: this.key,
+        label: '',
+        selected: false
+      });
+      this.checkboxFormat = 'simple';
+    }
     if (this.getValue() === undefined && this.choices.length > 0) {
       this.choices[0].selected = true;
     }
@@ -55,6 +63,9 @@ export class Optionfield extends Field {
       }
       return undefined;
     } else if (this.format === 'checkbox') {
+      if (this.checkboxFormat === 'simple') {
+        return this.choices[0].selected;
+      }
       const chosen = [];
       for (const choice of this.choices) {
         if (choice.selected) {
