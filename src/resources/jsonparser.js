@@ -1,4 +1,4 @@
-import {fieldTypes} from './fieldtypes';
+import {fields} from './elements/index';
 
 /**
  * Parse an object into a {@link Field}.
@@ -8,7 +8,7 @@ import {fieldTypes} from './fieldtypes';
  * @return {Field}           The field created from the given data.
  */
 export function parseJSON(id, obj, parent = undefined) {
-  const createdObj = new fieldTypes[obj.type]();
+  const createdObj = new fields[obj.type]();
   if (obj.type === 'object') {
     for (const [key, field] of Object.entries(obj.children)) {
       obj.children[key] = parseJSON(key, field, createdObj);
