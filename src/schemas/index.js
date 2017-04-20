@@ -17,6 +17,18 @@ export const schema = {
     'contact': {
       'type': 'link',
       'target': '/header/contact'
+    },
+    'license': {
+      'type': 'link',
+      'target': '/header/contact'
+    },
+    'host': {
+      'type': 'link',
+      'target': '/header/info/host'
+    },
+    'basePath': {
+      'type': 'link',
+      'target': '/header/info/basePath'
     }
   }
 };

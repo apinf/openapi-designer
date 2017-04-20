@@ -19,6 +19,15 @@ export const header = {
         'termsofservice': {
           'type': 'text',
           'label': 'Terms of Service'
+        },
+        'host': {
+          'type': 'text',
+          'showValueInParent': false
+        },
+        'basePath': {
+          'type': 'text',
+          'label': 'Base path',
+          'showValueInParent': false
         }
       }
     },
@@ -34,6 +43,17 @@ export const header = {
         'url': {
           'type': 'text',
           'label': 'URL'
+        }
+      }
+    },
+    'license': {
+      'type': 'object',
+      'children': {
+        'name': {
+          'type': 'text'
+        },
+        'url': {
+          'type': 'text'
         }
       }
     }
