@@ -29,6 +29,14 @@ export const schema = {
     'basePath': {
       'type': 'link',
       'target': '/header/info/basePath'
+    },
+    'consumes': {
+      'type': 'link',
+      'target': '/mime/consumes'
+    },
+    'produces': {
+      'type': 'link',
+      'target': '/mime/produces'
     }
   }
 };

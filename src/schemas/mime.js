@@ -1,21 +1,19 @@
 export const mime = {
-  'type': 'array',
-  'label': 'Array Test',
-  'format': 'map',
-  'keyField': 'name',
-  'item': {
-    'type': 'object',
-    'label': 'Contact object',
-    'children': {
-      'name': {
-        'type': 'text'
-      },
-      'email': {
-        'type': 'text'
-      },
-      'url': {
+  'type': 'object',
+  'showValueInParent': false,
+  'children': {
+    'consumes': {
+      'type': 'array',
+      'item': {
         'type': 'text',
-        'label': 'URL'
+        'label': 'MIME type'
+      }
+    },
+    'produces': {
+      'type': 'array',
+      'item': {
+        'type': 'text',
+        'label': 'MIME type'
       }
     }
   }
