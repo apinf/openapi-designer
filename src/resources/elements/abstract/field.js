@@ -77,7 +77,7 @@ export class Field {
     }, args);
     this.id = id;
     this.format = args.format;
-    this.labelFormat = args.label;
+    this.labelFormat = args.label || args._label;
     this.conditions = args.conditions;
     this.columns = args.columns;
     this.index = args.index;
