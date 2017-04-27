@@ -69,8 +69,7 @@ export class Objectfield extends Parentfield {
       clonedChildren[key] = field.clone();
     }
     clone.init(this.id, {
-      _label: this._label,
-      _labelFormat: this._labelFormat,
+      label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: this.parent,

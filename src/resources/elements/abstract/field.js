@@ -19,12 +19,8 @@ export class Field {
    * @private
    */
   _label = '';
-  /**
-   * The internal storage for a non-static label.
-   * @type {String}
-   * @private
-   */
-  _labelFormat = '';
+  formatLabel = false;
+  internationalizeLabel = false;
   /**
    * The number of columns this element should use.
    * @type {Number}
@@ -117,10 +113,17 @@ export class Field {
    * @return {String} The label to display.
    */
   get label() {
-    if (!this._labelFormat) {
-      return this._label;
+    let label = this._label;
+    if (this.internationalizeLabel) {
+      // TODO implement translation here
+      label = label;
     }
-    return this._labelFormat
+
+    if (!this.formatLabel) {
+      return label;
+    }
+
+    return label
         .replace(/\$index/g, this.index + 1)
         .replace(/\${(.+?)}/g, (match, capture) => {
           const elem = this.resolveRef(capture);
@@ -131,20 +134,29 @@ export class Field {
         });
   }
 
+  /**
+   * Set the label format.
+   */
   set labelFormat(newLabel) {
-    if (newLabel.includes('$') || (newLabel.includes('${') && newLabel.includes('}'))) {
-      this._labelFormat = newLabel;
-    } else {
-      this._labelFormat = '';
-      this._label = newLabel;
+    if (newLabel.includes('i18n:')) {
+      this.internationalizeLabel = true;
+      newLabel = newLabel.substr(5);
+      // TODO implement translation here
+      let translated = newLabel;
+      if (translated.includes('$')) {
+        this.formatLabel = true;
+      }
+    } else if (newLabel.includes('$')) {
+      this.formatLabel = true;
     }
+    this._label = newLabel;
   }
 
   /**
    * Get the label format.
    */
   get labelFormat() {
-    return this._labelFormat || this._label;
+    return this._label;
   }
 
   /**
