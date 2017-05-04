@@ -14,13 +14,23 @@ export class Objectfield extends Parentfield {
   collapsed = false;
   /** @inheritdoc */
   _children = {};
+  /**
+   * The key field to use.
+   * @type {Field}
+   */
+  keyFieldName = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
-    args = Object.assign({children: {}, collapsed: false}, args);
+    args = Object.assign({children: {}, collapsed: false, keyField: undefined}, args);
     this._children = args.children;
     this.collapsed = args.collapsed;
+    this.keyFieldName = args.keyField;
     return super.init(id, args);
+  }
+
+  get keyField() {
+    return this._children[this.keyFieldName];
   }
 
   /**
@@ -37,6 +47,25 @@ export class Objectfield extends Parentfield {
       value[key] = field.getValue();
     }
     return value;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  get iterableChildren() {
+    return Object.values(this.children);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  get children() {
+    if (!this.keyField) {
+      return this._children;
+    }
+    const children = Object.assign({}, this._children);
+    delete children[this.keyFieldName];
+    return children;
   }
 
   /**
@@ -74,8 +103,16 @@ export class Objectfield extends Parentfield {
       collapsed: this.collapsed,
       parent: this.parent,
       index: this.index,
+      keyField: this.keyFieldName,
       children: clonedChildren
     });
     return clone;
+  }
+
+  /**
+   * @private
+   */
+  getViewStrategy() {
+    return `resources/elements/objectfield${this.keyField === undefined ? '' : '-keyed'}.html`;
   }
 }

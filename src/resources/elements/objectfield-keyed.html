@@ -1,0 +1,11 @@
+<template>
+  <fieldset class="object field c${columns} columns" if.bind="display">
+    <legend>
+      <compose containerless view-model.bind="keyField"></compose>
+    </legend>
+    <h3 class="title" textcontent.bind="label"></h3>
+    <template repeat.for="childElem of iterableChildren">
+      <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
+    </template>
+  </fieldset>
+</template>
