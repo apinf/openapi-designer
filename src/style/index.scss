@@ -176,6 +176,26 @@ h3 {
     }
   }
 
+  &.type > legend {
+    select + input {
+      margin-left: .5rem;
+      padding: .2rem;
+
+      border: .0625rem solid $border-color;
+      border-radius: .25rem;
+
+      &:hover {
+        border-bottom: .0625rem solid $main-color;
+      }
+
+      &:focus {
+        margin-bottom: 0;
+
+        border-bottom: .125rem solid $main-color;
+      }
+    }
+  }
+
   &.array {
     > .controls {
       margin-bottom: .5rem;
