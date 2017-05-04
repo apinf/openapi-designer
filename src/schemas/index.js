@@ -2,6 +2,8 @@ import {header} from './header';
 import {mime} from './mime';
 import {security} from './security';
 import {tags} from './tags';
+import {paths} from './paths';
+import {types} from './types';
 
 export const schema = {
   'type': 'object',
@@ -10,6 +12,8 @@ export const schema = {
     mime,
     security,
     tags,
+    paths,
+    types,
     'info': {
       'type': 'link',
       'target': '/header/info'
