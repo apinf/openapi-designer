@@ -21,6 +21,9 @@ export class Typefield extends Field {
    * @type {String}
    */
   valueKey = '';
+  keyKey = '';
+  key = '';
+  keyPlaceholder = '';
   /**
    * Whether or not to show the chosen type in the value of this field.
    * @type {Boolean}
@@ -51,12 +54,16 @@ export class Typefield extends Field {
   init(id = '', args = {}) {
     args = Object.assign({
       valueKey: '',
+      keyKey: '',
+      keyPlaceholder: 'Object key...',
       showType: true,
       copyValue: false,
       types: { 'null': { 'type': 'text' } }
     }, args);
     this.types = args.types;
     this.valueKey = args.valueKey;
+    this.keyKey = args.keyKey;
+    this.keyPlaceholder = args.keyPlaceholder;
     this.showType = args.showType;
     this.copyValue = args.copyValue;
     this.selectedType = args.defaultType || Object.keys(this.types)[0];
@@ -75,7 +82,7 @@ export class Typefield extends Field {
     if (newSchema.hasOwnProperty('$ref')) {
       newChild = this.resolveRef(newSchema.$ref).clone();
     } else {
-      newChild = parseJSON(newType, newSchema);
+      newChild = parseJSON(newType, JSON.parse(JSON.stringify(newSchema)));
     }
     if (newChild) {
       newChild.parent = this;
@@ -94,10 +101,7 @@ export class Typefield extends Field {
    * returned.
    * If {@link #showType} is {@linkplain true} and {@link #valueKey} is defined
    * OR the raw value of the child is not an object, the raw value of the child
-   * will be placed in an object with {@link #valueKey} or {@linkplain value}
-   * as the key.
-   * If {@link #showType} is {@linkplain true}, {@link #valueKey} is not
-   * defined and the raw value of the child is an object, the type will simply
+   * will be placed in an object wit child is an object, the type will simply
    * be added to the raw value of the child.
    *
    * @return {Object} The value.
@@ -119,6 +123,9 @@ export class Typefield extends Field {
       };
     } else {
       value.type = this.selectedType;
+    }
+    if (this.keyKey) {
+      value[this.keyKey] = this.key;
     }
     return value;
   }
