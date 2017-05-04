@@ -138,6 +138,9 @@ export class Field {
    * Set the label format.
    */
   set labelFormat(newLabel) {
+    if (newLabel === undefined) {
+      return;
+    }
     if (newLabel.includes('i18n:')) {
       this.internationalizeLabel = true;
       newLabel = newLabel.substr(5);
