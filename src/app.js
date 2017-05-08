@@ -22,6 +22,29 @@ export class App {
     window.onhashchange();
   }
 
+  download(type) {
+    let data;
+    if (type === 'json') {
+      data = this.json;
+    } else if (type === 'yml') {
+      data = 'yaml-support-implemented: false';
+    } else {
+      return;
+    }
+
+    // Add an anchor element that has the data as the href attribute, then click
+    // the element to download the data.
+    const str = `data:text/json;charset=utf-8,${data}`;
+    const downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href', str);
+    downloadLink.setAttribute('download', `swagger.${type}`);
+    downloadLink.innerHTML = 'Download Open API specification file';
+    downloadLink.hidden = true;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+  }
+
   get json() {
     return JSON.stringify(this.forms.getValue(), '', '  ');
   }
