@@ -13,6 +13,11 @@ export function parseJSON(id, obj, parent = undefined) {
     for (const [key, field] of Object.entries(obj.children)) {
       obj.children[key] = parseJSON(key, field, createdObj);
     }
+    if (obj.legendChildren) {
+      for (const [key, field] of Object.entries(obj.legendChildren)) {
+        obj.legendChildren[key] = parseJSON(key, field, createdObj);
+      }
+    }
   } else if (obj.type === 'array') {
     obj.item = parseJSON(obj.item.id, obj.item, createdObj);
   }

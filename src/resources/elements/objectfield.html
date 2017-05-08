@@ -1,8 +1,13 @@
-<template>
-  <div class="object field c${columns} columns" if.bind="display">
+ <template>
+  <fieldset class="object field c${columns} columns" if.bind="display">
+    <legend if.bind="hasLegend">
+      <template repeat.for="childElem of iterableLegendChildren">
+        <compose containerless view-model.bind="childElem"></compose>
+      </template>
+    </legend>
     <h3 class="title" textcontent.bind="label"></h3>
     <template repeat.for="childElem of iterableChildren">
       <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
     </template>
-  </div>
+  </fieldset>
 </template>

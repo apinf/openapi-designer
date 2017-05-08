@@ -15,22 +15,17 @@ export class Objectfield extends Parentfield {
   /** @inheritdoc */
   _children = {};
   /**
-   * The key field to use.
-   * @type {Field}
+   * The fields to display in the legend slot of the form.
    */
-  keyFieldName = undefined;
+  legendChildren = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
-    args = Object.assign({children: {}, collapsed: false, keyField: undefined}, args);
+    args = Object.assign({children: {}, collapsed: false, legendChildren: undefined}, args);
     this._children = args.children;
     this.collapsed = args.collapsed;
-    this.keyFieldName = args.keyField;
+    this.legendChildren = args.legendChildren;
     return super.init(id, args);
-  }
-
-  get keyField() {
-    return this._children[this.keyFieldName];
   }
 
   /**
@@ -40,7 +35,7 @@ export class Objectfield extends Parentfield {
    */
   getValue() {
     const value = {};
-    for (const [key, field] of Object.entries(this._children)) {
+    for (const [key, field] of Object.entries(this.allChildren)) {
       if (!field || !field.showValueInParent) {
         continue;
       }
@@ -49,23 +44,16 @@ export class Objectfield extends Parentfield {
     return value;
   }
 
-  /**
-   * @inheritdoc
-   */
-  get iterableChildren() {
-    return Object.values(this.children);
+  get allChildren() {
+    return Object.assign({}, this.legendChildren, this._children);
   }
 
-  /**
-   * @inheritdoc
-   */
-  get children() {
-    if (!this.keyField) {
-      return this._children;
-    }
-    const children = Object.assign({}, this._children);
-    delete children[this.keyFieldName];
-    return children;
+  get iterableLegendChildren() {
+    return Object.values(this.legendChildren);
+  }
+
+  get hasLegend() {
+    return this.legendChildren && this.iterableLegendChildren.length > 0;
   }
 
   /**
@@ -97,22 +85,21 @@ export class Objectfield extends Parentfield {
     for (const [key, field] of Object.entries(this._children)) {
       clonedChildren[key] = field.clone();
     }
+    const clonedLegendChildren = {};
+    if (this.legendChildren) {
+      for (const [key, field] of Object.entries(this.legendChildren)) {
+        clonedLegendChildren[key] = field.clone();
+      }
+    }
     clone.init(this.id, {
       label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: this.parent,
       index: this.index,
-      keyField: this.keyFieldName,
-      children: clonedChildren
+      children: clonedChildren,
+      legendChildren: clonedLegendChildren
     });
     return clone;
-  }
-
-  /**
-   * @private
-   */
-  getViewStrategy() {
-    return `resources/elements/objectfield${this.keyField === undefined ? '' : '-keyed'}.html`;
   }
 }
