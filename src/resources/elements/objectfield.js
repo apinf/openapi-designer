@@ -36,7 +36,7 @@ export class Objectfield extends Parentfield {
   getValue() {
     const value = {};
     for (const [key, field] of Object.entries(this.allChildren)) {
-      if (!field || !field.showValueInParent) {
+      if (!field || !field.showValueInParent || !field.display) {
         continue;
       }
       value[key] = field.getValue();

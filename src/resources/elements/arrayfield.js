@@ -52,7 +52,7 @@ export class Arrayfield extends Parentfield {
     if (this.format === 'map') {
       value = {};
       for (const item of this._children) {
-        if (!item.showValueInParent) {
+        if (!item.showValueInParent || !item.display) {
           continue;
         }
         const data = item.getValue();
@@ -63,7 +63,7 @@ export class Arrayfield extends Parentfield {
     } else if (this.format === 'array') {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
-        if (!item.showValueInParent) {
+        if (!item.showValueInParent || !item.display) {
           continue;
         }
         value[index] = item.getValue();
