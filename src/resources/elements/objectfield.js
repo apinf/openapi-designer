@@ -104,6 +104,7 @@ export class Objectfield extends Parentfield {
     });
     return clone;
   }
+
   resolvePath(path) {
     const superResolv = super.resolvePath(path);
     if (superResolv) {

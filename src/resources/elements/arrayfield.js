@@ -132,4 +132,16 @@ export class Arrayfield extends Parentfield {
     }
     return clone;
   }
+
+  resolvePath(path) {
+    const superResolv = super.resolvePath(path);
+    if (superResolv) {
+      return superResolv;
+    }
+
+    if (path[0] === ':item') {
+      return this.item;
+    }
+    return undefined;
+  }
 }
