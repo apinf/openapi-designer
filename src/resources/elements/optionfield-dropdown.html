@@ -4,6 +4,7 @@
     <select id.bind="id">
       <option
         repeat.for="choice of choices"
+        if.bind="choice.dependenciesFulfilled"
         model.bind="choice.key"
         selected.two-way="choice.selected"
       >${choice.label}</option>

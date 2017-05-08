@@ -87,6 +87,10 @@ export class Field {
   }
 
   get display() {
+    return this.shouldDisplay();
+  }
+
+  shouldDisplay() {
     for (const [path, value] of Object.entries(this.conditions)) {
       const elem = this.resolveRef(path);
 

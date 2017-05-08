@@ -84,11 +84,13 @@ export class Objectfield extends Parentfield {
     const clonedChildren = {};
     for (const [key, field] of Object.entries(this._children)) {
       clonedChildren[key] = field.clone();
+      clonedChildren[key].parent = clone;
     }
     const clonedLegendChildren = {};
     if (this.legendChildren) {
       for (const [key, field] of Object.entries(this.legendChildren)) {
         clonedLegendChildren[key] = field.clone();
+        clonedLegendChildren[key].parent = clone;
       }
     }
     clone.init(this.id, {
@@ -101,5 +103,17 @@ export class Objectfield extends Parentfield {
       legendChildren: clonedLegendChildren
     });
     return clone;
+  }
+  resolvePath(path) {
+    const superResolv = super.resolvePath(path);
+    if (superResolv) {
+      return superResolv;
+    }
+
+    const elem = this.legendChildren[path[0]];
+    if (elem) {
+      return elem.resolvePath(path.splice(1));
+    }
+    return undefined;
   }
 }

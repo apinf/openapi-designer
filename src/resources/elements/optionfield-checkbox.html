@@ -2,7 +2,7 @@
   <div class="checkbox option field c${columns} columns" if.bind="display">
     <label textcontent.bind="label"></label>
     <div class="box-wrapper" repeat.for="checkbox of choices">
-      <input type="checkbox" id="${id}-${checkbox.key}" checked.two-way="checkbox.selected"/>
+      <input type="checkbox" id="${id}-${checkbox.key}" if.bind="checkbox.dependenciesFulfilled" checked.two-way="checkbox.selected"/>
       <label for="${id}-${checkbox.key}">${checkbox.label}</label>
     </div>
   </div>

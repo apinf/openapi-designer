@@ -25,13 +25,30 @@ export class Optionfield extends Field {
         this.choices.push({
           key: choice,
           label: choice,
-          selected: false
+          selected: false,
+          dependenciesFulfilled: true
         });
       } else {
+        const choiceParent = this;
         this.choices.push({
           key: choice.key,
           label: choice.label || choice.key,
-          selected: false
+          selected: false,
+          dependencies: choice.dependencies,
+          get dependenciesFulfilled() {
+            if (choice.dependencies) {
+              for (const [fieldPath, expectedValue] of Object.entries(choice.dependencies)) {
+                const field = choiceParent.resolveRef(fieldPath);
+                const value = field ? field.getValue() : undefined;
+                if (Array.isArray(value) && !value.includes(expectedValue)) {
+                  return false;
+                } else if (value !== expectedValue) {
+                  return false;
+                }
+              }
+            }
+            return true;
+          }
         });
       }
     }
@@ -39,7 +56,8 @@ export class Optionfield extends Field {
       this.choices.push({
         key: this.key,
         label: '',
-        selected: false
+        selected: false,
+        dependenciesFulfilled: true
       });
       this.checkboxFormat = 'simple';
     }
@@ -47,6 +65,15 @@ export class Optionfield extends Field {
       this.choices[0].selected = true;
     }
     return super.init(id, args);
+  }
+
+  shouldDisplay() {
+    for (const choice of this.choices) {
+      if (choice.dependenciesFulfilled) {
+        return super.shouldDisplay();
+      }
+    }
+    return false;
   }
 
   /**
@@ -100,6 +127,7 @@ export class Optionfield extends Field {
       }
     }
   }
+
 
   /**
    * @return {String} The name of the HTML file that displays the choices in the
