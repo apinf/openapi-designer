@@ -1,0 +1,18 @@
+<template>
+  <require from="style/index.css"></require>
+
+  <div class="nav">
+    <a href="#/header">Header</a>
+    <a href="#/mime">MIME types</a>
+    <a href="#/security">Security</a>
+    <a href="#/tags">Tags</a>
+    <a href="#/paths">Paths</a>
+    <a href="#/types">Types</a>
+    <a href="javascript:void(0)" click.delegate="download('json')">Download</a>
+  </div>
+
+  <div class="main">
+    <compose class="form" view-model.bind="activeForm"></compose>
+    <div class="preview" textcontent.one-way="json"></div>
+  </div>
+</template>

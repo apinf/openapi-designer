@@ -1,0 +1,12 @@
+<template>
+  <fieldset class="type field c${columns} columns" if.bind="display">
+    <legend>
+      <select value.two-way="selectedType">
+        <option repeat.for="type of possibleTypes">${type}</option>
+      </select>
+      <input type="text" if.bind="keyKey" value.bind="key" placeholder.bind="keyPlaceholder">
+    </legend>
+    <h3 class="title" textcontent.bind="label"></h3>
+    <compose containerless view-model.bind="child"></compose>
+  </fieldset>
+</template>
