@@ -58,6 +58,27 @@ export const types = {
             }
           }
         ]
+      },
+      'item': {
+        'type': 'lazylink',
+        'target': '/types/:item',
+        'overrides': {
+          '#/labelFormat': 'Array item'
+        },
+        'conditions': {
+          '../type': 'array'
+        }
+      },
+      'properties': {
+        'type': 'lazylink',
+        'target': '/types',
+        'overrides': {
+          '#/labelFormat': 'Properties',
+          '#/:item/labelFormat': 'Property'
+        },
+        'conditions': {
+          '../type': 'object'
+        }
       }
     }
   }
