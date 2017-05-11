@@ -26,7 +26,7 @@ export class Optionfield extends Field {
           key: choice,
           label: choice,
           selected: false,
-          dependenciesFulfilled: true
+          conditionsFulfilled: true
         });
       } else {
         const choiceParent = this;
@@ -34,10 +34,10 @@ export class Optionfield extends Field {
           key: choice.key,
           label: choice.label || choice.key,
           selected: false,
-          dependencies: choice.dependencies,
-          get dependenciesFulfilled() {
-            if (choice.dependencies) {
-              for (const [fieldPath, expectedValue] of Object.entries(choice.dependencies)) {
+          conditions: choice.conditions,
+          get conditionsFulfilled() {
+            if (choice.conditions) {
+              for (const [fieldPath, expectedValue] of Object.entries(choice.conditions)) {
                 const field = choiceParent.resolveRef(fieldPath);
                 const value = field ? field.getValue() : undefined;
                 if (Array.isArray(value) && !value.includes(expectedValue)) {
@@ -57,7 +57,7 @@ export class Optionfield extends Field {
         key: this.key,
         label: '',
         selected: false,
-        dependenciesFulfilled: true
+        conditionsFulfilled: true
       });
       this.checkboxFormat = 'simple';
     }
@@ -69,7 +69,7 @@ export class Optionfield extends Field {
 
   shouldDisplay() {
     for (const choice of this.choices) {
-      if (choice.dependenciesFulfilled) {
+      if (choice.conditionsFulfilled) {
         return super.shouldDisplay();
       }
     }

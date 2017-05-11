@@ -32,28 +32,28 @@ export const types = {
           {
             'key': 'int32',
             'label': '32-bit integer',
-            'dependencies': {
+            'conditions': {
               '../type': 'integer'
             }
           },
           {
             'key': 'int64',
             'label': '64-bit integer',
-            'dependencies': {
+            'conditions': {
               '../type': 'integer'
             }
           },
           {
             'key': 'float',
             'label': '32-bit floating point',
-            'dependencies': {
+            'conditions': {
               '../type': 'number'
             }
           },
           {
             'key': 'double',
             'label': '64-bit floating point',
-            'dependencies': {
+            'conditions': {
               '../type': 'number'
             }
           }
