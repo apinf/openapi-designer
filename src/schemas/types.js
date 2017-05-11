@@ -2,6 +2,7 @@ export const types = {
   'type': 'array',
   'format': 'map',
   'keyField': 'name',
+  'showValueInParent': false,
   'item': {
     'type': 'object',
     'label': 'Type',
@@ -11,19 +12,33 @@ export const types = {
         'columns': '4',
         'placeholder': 'Type name',
         'format': 'dropdown',
-        'choices': ['string', 'integer', 'number', 'array', 'object', 'null']
+        'choices': ['string', 'integer', 'number', 'array', 'object', 'reference', 'null']
       },
       'name': {
         'type': 'text',
-        'columns': '4'
+        'columns': '4',
+        'label': 'Enter key...'
       }
     },
     'children': {
+      '$ref': {
+        'type': 'text',
+        'label': 'Target',
+        'conditions': {
+          '../type': 'reference'
+        }
+      },
       'title': {
-        'type': 'text'
+        'type': 'text',
+        'conditions': {
+          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+        }
       },
       'description': {
-        'type': 'textarea'
+        'type': 'textarea',
+        'conditions': {
+          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+        }
       },
       'format': {
         'type': 'option',

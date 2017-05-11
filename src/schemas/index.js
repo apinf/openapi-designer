@@ -14,6 +14,10 @@ export const schema = {
     tags,
     paths,
     types,
+    'definitions': {
+      'type': 'link',
+      'target': '/types'
+    },
     'info': {
       'type': 'link',
       'target': '/header/info'
