@@ -4,6 +4,7 @@ import {Textareafield} from './textareafield';
 import {Arrayfield} from './arrayfield';
 import {Optionfield} from './optionfield';
 import {Linkfield} from './linkfield';
+import {LazyLinkfield} from './lazylinkfield';
 import {Typefield} from './typefield';
 
 export const fields = {
@@ -13,5 +14,6 @@ export const fields = {
   array: Arrayfield,
   option: Optionfield,
   link: Linkfield,
+  lazylink: LazyLinkfield,
   selectable: Typefield
 };
