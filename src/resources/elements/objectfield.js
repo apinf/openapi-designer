@@ -49,7 +49,7 @@ export class Objectfield extends Parentfield {
   }
 
   get iterableLegendChildren() {
-    return Object.values(this.legendChildren);
+    return this.legendChildren ? Object.values(this.legendChildren) : [];
   }
 
   get hasLegend() {
@@ -111,9 +111,11 @@ export class Objectfield extends Parentfield {
       return superResolv;
     }
 
-    const elem = this.legendChildren[path[0]];
-    if (elem) {
-      return elem.resolvePath(path.splice(1));
+    if (this.hasLegend) {
+      const elem = this.legendChildren[path[0]];
+      if (elem) {
+        return elem.resolvePath(path.splice(1));
+      }
     }
     return undefined;
   }
