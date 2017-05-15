@@ -22,11 +22,33 @@ export class LazyLinkfield extends Field {
     this._child = this.resolveRef(this.target).clone();
     this._child.parent = this;
     for (const [field, value] of Object.entries(this.overrides)) {
-      const lastSlash = field.lastIndexOf('/');
-      const path = field.substr(0, lastSlash);
-      const fieldName = field.substr(lastSlash + 1, field.length);
-      this._child.resolveRef(path)[fieldName] = value;
+      let target;
+      let fieldPath;
+      if (field.includes(';')) {
+        [elementPath, fieldPath] = field.split(';');
+        fieldPath = fieldPath.split('/');
+        target = this._child.resolveRef(elementPath);
+      } else {
+        fieldPath = field.split('/');
+        target = this._child;
+      }
+      const lastFieldPathEntry = fieldPath.splice(-1)[0];
+      target = this.resolveRawPath(target, fieldPath);
+      if (value === null) {
+        delete target[lastFieldPathEntry];
+      } else {
+        target[lastFieldPathEntry] = value;
+      }
     }
+  }
+
+  resolveRawPath(object, path) {
+    if (path.length === 0) {
+      return object;
+    } else if (path[0] === '#') {
+      return this.resolveRawPath(object, path.splice(1));
+    }
+    return this.resolveRawPath(object[path[0]], path.splice(1));
   }
 
   deleteChild() {
