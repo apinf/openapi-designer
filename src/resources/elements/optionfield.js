@@ -22,6 +22,7 @@ export class Optionfield extends Field {
     this.choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
+        // Parse a simple (label-only) choice definition.
         this.choices.push({
           key: choice,
           label: choice,
@@ -29,12 +30,17 @@ export class Optionfield extends Field {
           conditionsFulfilled: true
         });
       } else {
+        // Parse a full choice definition.
         const choiceParent = this;
         this.choices.push({
           key: choice.key,
           label: choice.label || choice.key,
           selected: false,
           conditions: choice.conditions,
+          // A getter function to check whether all the conditions defined in
+          // the schema are fulfilled.
+          // The HTML templates can't do this complex logic, so we have to do it
+          // here.
           get conditionsFulfilled() {
             if (choice.conditions) {
               for (const [fieldPath, expectedValue] of Object.entries(choice.conditions)) {
@@ -53,6 +59,8 @@ export class Optionfield extends Field {
       }
     }
     if (this.choices.length === 0) {
+      // We don't want to leave the choices empty, so if there are no choices,
+      // make a checkbox with no label.
       this.choices.push({
         key: this.key,
         label: '',
@@ -61,6 +69,7 @@ export class Optionfield extends Field {
       });
       this.checkboxFormat = 'simple';
     }
+    // Make sure some choice is selected.
     if (this.getValue() === undefined && this.choices.length > 0) {
       this.choices[0].selected = true;
     }
