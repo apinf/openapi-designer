@@ -28,7 +28,7 @@ export const schema = {
     },
     'license': {
       'type': 'link',
-      'target': '/header/contact'
+      'target': '/header/license'
     },
     'host': {
       'type': 'link',
