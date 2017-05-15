@@ -78,7 +78,9 @@ export const types = {
         'type': 'lazylink',
         'target': '/types/:item',
         'overrides': {
-          '#/labelFormat': 'Array item'
+          'labelFormat': 'Array item',
+          'legendChildren/name': null,
+          'legendChildren/type/columns': 8
         },
         'conditions': {
           '../type': 'array'
@@ -88,8 +90,8 @@ export const types = {
         'type': 'lazylink',
         'target': '/types',
         'overrides': {
-          '#/labelFormat': 'Properties',
-          '#/:item/labelFormat': 'Property'
+          'labelFormat': 'Properties',
+          '#/:item;labelFormat': 'Property'
         },
         'conditions': {
           '../type': 'object'
