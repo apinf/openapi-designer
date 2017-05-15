@@ -73,8 +73,8 @@ export class LazyLinkfield extends Field {
     // and so changes to the output of the parent shouldDisplay can be detected
     // here.
     // When this field appears, the child will be generated. When the field dis-
-    // appears, the child will be deleted. This is what puts the "lazy" in this
-    // link field.
+    // appears, the child will be deleted. This is what makes this link field
+    // lazy.
     const display = super.shouldDisplay();
     if (display) {
       if (this.child === undefined) {
