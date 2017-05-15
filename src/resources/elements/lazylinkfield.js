@@ -9,7 +9,7 @@ import {Field} from './abstract/field';
 export class LazyLinkfield extends Field {
   target = '#';
   overrides = {};
-  _child = undefined;
+  child = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
@@ -18,19 +18,25 @@ export class LazyLinkfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Create the child of this field. Basically copy the target, set the parent
+   * and apply field overrides.
+   * This doesn't return anything, since it just sets the {@link #child} field.
+   */
   createChild() {
-    this._child = this.resolveRef(this.target).clone();
-    this._child.parent = this;
+    this.child = this.resolveRef(this.target).clone();
+    this.child.parent = this;
     for (const [field, value] of Object.entries(this.overrides)) {
       let target;
       let fieldPath;
       if (field.includes(';')) {
+        let elementPath;
         [elementPath, fieldPath] = field.split(';');
         fieldPath = fieldPath.split('/');
-        target = this._child.resolveRef(elementPath);
+        target = this.child.resolveRef(elementPath);
       } else {
         fieldPath = field.split('/');
-        target = this._child;
+        target = this.child;
       }
       const lastFieldPathEntry = fieldPath.splice(-1)[0];
       target = this.resolveRawPath(target, fieldPath);
@@ -42,6 +48,9 @@ export class LazyLinkfield extends Field {
     }
   }
 
+  /**
+   * Recurse through an object to find a specific nested field.
+   */
   resolveRawPath(object, path) {
     if (path.length === 0) {
       return object;
@@ -51,24 +60,30 @@ export class LazyLinkfield extends Field {
     return this.resolveRawPath(object[path[0]], path.splice(1));
   }
 
+  /**
+   * Delete the current child.
+   */
   deleteChild() {
-    this._child = undefined;
+    this.child = undefined;
   }
 
+  /** @inheritdoc */
   shouldDisplay() {
+    // This function is called by Aurelia (due to the if.bind="display" in HTML)
+    // and so changes to the output of the parent shouldDisplay can be detected
+    // here.
+    // When this field appears, the child will be generated. When the field dis-
+    // appears, the child will be deleted. This is what puts the "lazy" in this
+    // link field.
     const display = super.shouldDisplay();
     if (display) {
-      if (this._child === undefined) {
+      if (this.child === undefined) {
         this.createChild();
       }
-    } else if (this._child !== undefined) {
+    } else if (this.child !== undefined) {
       this.deleteChild();
     }
     return display;
-  }
-
-  get child() {
-    return this.display ? this._child : undefined;
   }
 
   /**
@@ -78,10 +93,10 @@ export class LazyLinkfield extends Field {
    * @param {Object} value The new value to set to the target field.
    */
   setValue(value) {
-    if (!this._child) {
+    if (!this.child) {
       return;
     }
-    this._child.setValue(value);
+    this.child.setValue(value);
   }
 
 
@@ -93,6 +108,6 @@ export class LazyLinkfield extends Field {
    *                  {@link #resolveTarget} returns {@linkplain undefined}.
    */
   getValue() {
-    return this._child ? this._child.getValue() : undefined;
+    return this.child ? this.child.getValue() : undefined;
   }
 }
