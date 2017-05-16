@@ -9,9 +9,15 @@
     <div class="items" if.bind="!collapsed">
       <template repeat.for="childElem of iterableChildren">
         <div class="item c${childElem.columns} columns">
-          <button class="delete-button" click.delegate="childElem.delete()">
-            <img src="res/delete.svg" alt="Delete"/>
-          </button>
+          <div class="controls">
+            <button class="delete-button" click.delegate="childElem.delete()">
+              <img src="res/delete.svg" alt="Delete"/>
+            </button>
+            <button class="collapse-button" if.bind="childElem.isCollapsible" click.delegate="childElem.toggleCollapse()">
+              <img src="res/collapse-open.svg" alt="Collapse" if.bind="!childElem.collapsed"/>
+              <img src="res/collapse-closed.svg" alt="Collapse" if.bind="childElem.collapsed"/>
+            </button>
+          </div>
           <div class="actualItem">
             <compose containerless view-model.bind="childElem"></compose>
           </div>

@@ -14,6 +14,11 @@ export class Parentfield extends Field {
    * @type {Boolean}
    */
   collapsed = false;
+  isCollapsible = true;
+
+  toggleCollapse() {
+    this.collapsed = !this.collapsed;
+  }
 
   /**
    * Get the children of this field as an array.

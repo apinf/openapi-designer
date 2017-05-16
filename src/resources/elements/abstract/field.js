@@ -49,6 +49,13 @@ export class Field {
    * @type {Boolean}
    */
   showValueInParent = true
+  /**
+   * Whether or not this field has the field {@link #collapsed} and the method
+   * {@link #toggleCollapse()}
+   *
+   * @type {Boolean}
+   */
+  isCollapsible = false
 
   /**
    * Initialize this field with the base data.
