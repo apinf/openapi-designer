@@ -3,6 +3,7 @@ export const paths = {
   'format': 'map',
   'keyField': 'name',
   'addIndexToChildLabel': false,
+  'collapseManagement': true,
   'item': {
     'type': 'object',
     'label': 'Path ${#/name}',

@@ -16,8 +16,17 @@ export class Parentfield extends Field {
   collapsed = false;
   isCollapsible = true;
 
+  childCollapseChanged(field, isNowCollapsed) {}
+
   toggleCollapse() {
-    this.collapsed = !this.collapsed;
+    this.setCollapsed(!this.collapsed);
+  }
+
+  setCollapsed(collapsed) {
+    this.collapsed = collapsed;
+    if (this.parent) {
+      this.parent.childCollapseChanged(this, this.collapsed);
+    }
   }
 
   /**

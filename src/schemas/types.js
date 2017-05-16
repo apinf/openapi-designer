@@ -4,6 +4,7 @@ export const types = {
   'keyField': 'name',
   'showValueInParent': false,
   'addIndexToChildLabel': false,
+  'collapseManagement': true,
   'item': {
     'type': 'object',
     'label': 'Type ${#/name}',

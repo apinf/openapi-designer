@@ -23,6 +23,12 @@ export class Arrayfield extends Parentfield {
    * @type {Boolean}
    */
   addIndexToChildLabel = true;
+  /**
+   * Whether or not to automatically collapse other fields when uncollapsing a
+   * field.
+   * @type {Boolean}
+   */
+  collapseManagement = false;
   /** @inheritdoc */
   _children = [];
 
@@ -36,10 +42,11 @@ export class Arrayfield extends Parentfield {
    *                                   collapsed.
    */
   init(id = '', args = {}) {
-    args = Object.assign({format: 'array', keyField: '_key', addIndexToChildLabel: true, collapsed: false}, args);
+    args = Object.assign({format: 'array', keyField: '_key', addIndexToChildLabel: true, collapseManagement: false, collapsed: false}, args);
     this.item = args.item;
     this.keyField = args.keyField;
     this.addIndexToChildLabel = args.addIndexToChildLabel;
+    this.collapseManagement = args.collapseManagement;
     this.collapsed = args.collapsed;
     return super.init(id, args);
   }
@@ -74,6 +81,16 @@ export class Arrayfield extends Parentfield {
     return value;
   }
 
+  childCollapseChanged(field, isNowCollapsed) {
+    if (!isNowCollapsed && this.collapseManagement) {
+      for (const child of this._children) {
+        if (child !== field) {
+          child.setCollapsed(true);
+        }
+      }
+    }
+  }
+
   /**
    * @inheritdoc
    * @param {Object|Object[]} value The new value in the format specified by
@@ -105,6 +122,9 @@ export class Arrayfield extends Parentfield {
       field.labelFormat = `${field.labelFormat} #$index`;
     }
     this._children.push(field);
+    if (this.collapseManagement) {
+      field.setCollapsed(false);
+    }
     return field.index;
   }
 
