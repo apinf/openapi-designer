@@ -13,11 +13,6 @@ export class Arrayfield extends Parentfield {
    */
   item;
   /**
-   * Whether or not the UI element should be collapsed (i.e. only show the title)
-   * @type {Boolean}
-   */
-  collapsed = false;
-  /**
    * The field that is used as the key if {@link #format} is {@linkplain map}
    * @type {String}
    */

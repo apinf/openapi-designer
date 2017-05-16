@@ -7,11 +7,6 @@ import {Parentfield} from './abstract/parentfield';
  */
 @containerless
 export class Objectfield extends Parentfield {
-  /**
-   * Define if the UI element will be collapsed (i.e. only show the title)
-   * @type {Boolean}
-   */
-  collapsed = false;
   /** @inheritdoc */
   _children = {};
   /**

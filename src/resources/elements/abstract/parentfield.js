@@ -9,6 +9,11 @@ export class Parentfield extends Field {
    * @private
    */
   _children;
+  /**
+   * Whether or not the UI element should be collapsed (i.e. only show the title)
+   * @type {Boolean}
+   */
+  collapsed = false;
 
   /**
    * Get the children of this field as an array.
