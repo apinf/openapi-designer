@@ -2,9 +2,10 @@ export const paths = {
   'type': 'array',
   'format': 'map',
   'keyField': 'name',
+  'addIndexToChildLabel': false,
   'item': {
     'type': 'object',
-    'label': 'Path',
+    'label': 'Path ${#/name}',
     'legendChildren': {
       'name': {
         'type': 'text',

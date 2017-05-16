@@ -22,6 +22,12 @@ export class Arrayfield extends Parentfield {
    * @type {String}
    */
   keyField = '_key';
+  /**
+   * Whether or not to add {@linkplain #<index>} to the end of the labels of
+   * children.
+   * @type {Boolean}
+   */
+  addIndexToChildLabel = true;
   /** @inheritdoc */
   _children = [];
 
@@ -35,9 +41,10 @@ export class Arrayfield extends Parentfield {
    *                                   collapsed.
    */
   init(id = '', args = {}) {
-    args = Object.assign({format: 'array', keyField: '_key', collapsed: false}, args);
+    args = Object.assign({format: 'array', keyField: '_key', addIndexToChildLabel: true, collapsed: false}, args);
     this.item = args.item;
     this.keyField = args.keyField;
+    this.addIndexToChildLabel = args.addIndexToChildLabel;
     this.collapsed = args.collapsed;
     return super.init(id, args);
   }
@@ -99,7 +106,9 @@ export class Arrayfield extends Parentfield {
     const field = this.item.clone();
     field.index = this._children.length;
     field.id = `${this.item.id}-${field.index}`;
-    field.labelFormat = `${field.labelFormat} #$index`;
+    if (this.addIndexToChildLabel) {
+      field.labelFormat = `${field.labelFormat} #$index`;
+    }
     this._children.push(field);
     return field.index;
   }
