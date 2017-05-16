@@ -123,7 +123,6 @@ export class Arrayfield extends Parentfield {
     for (let i = index; i < this._children.length; i++) {
       const item = this._children[i];
       item.index = i;
-      //item.label = `${this.item.label} #${(i + 1)}`;
     }
   }
 
