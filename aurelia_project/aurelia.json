@@ -111,6 +111,7 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "text",
+          "jquery",
           {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
