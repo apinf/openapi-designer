@@ -10,7 +10,7 @@ tooltip {
   > .text {
     position: absolute;
 
-    display: inline-block;
+    display: none;
 
     width: 20rem;
     padding: .5rem;
@@ -23,9 +23,5 @@ tooltip {
 
     font-size: .9rem;
     font-weight: normal;
-
-    &.hidden {
-      display: none;
-    }
   }
 }
