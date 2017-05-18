@@ -61,7 +61,7 @@ export class Objectfield extends Parentfield {
     for (const [key, field] of Object.entries(value)) {
       if (this._children.hasOwnProperty(key)) {
         this._children[key].setValue(field);
-      } else if (this.legendChildren.hasOwnProperty(key)) {
+      } else if (this.legendChildren && this.legendChildren.hasOwnProperty(key)) {
         this.legendChildren[key].setValue(field);
       }
     }
