@@ -76,17 +76,17 @@ export class Objectfield extends Parentfield {
   }
 
   /** @inheritdoc */
-  clone() {
+  clone(parent) {
     const clone = new Objectfield();
     const clonedChildren = {};
     for (const [key, field] of Object.entries(this._children)) {
-      clonedChildren[key] = field.clone();
+      clonedChildren[key] = field.clone(clone);
       clonedChildren[key].parent = clone;
     }
     const clonedLegendChildren = {};
     if (this.legendChildren) {
       for (const [key, field] of Object.entries(this.legendChildren)) {
-        clonedLegendChildren[key] = field.clone();
+        clonedLegendChildren[key] = field.clone(clone);
         clonedLegendChildren[key].parent = clone;
       }
     }
@@ -94,7 +94,7 @@ export class Objectfield extends Parentfield {
       label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
-      parent: this.parent,
+      parent: parent || this.parent,
       index: this.index,
       children: clonedChildren,
       legendChildren: clonedLegendChildren

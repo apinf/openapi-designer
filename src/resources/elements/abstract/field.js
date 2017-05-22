@@ -219,7 +219,7 @@ export class Field {
    */
   delete() {
     if (this.parent) {
-      this.parent.deleteChild(this.index || this.id);
+      this.parent.deleteChild(typeof this.index === 'number' ? this.index : this.id);
     }
   }
 
@@ -242,12 +242,16 @@ export class Field {
   /**
    * Clone this field.
    *
+   * @param {Field} parent The new parent of this field.
    * @return {Field} A deep clone of this field.
    */
-  clone() {
+  clone(parent) {
     const ExtendedClass = Object.getPrototypeOf(this).constructor;
     const clone = new ExtendedClass();
     clone.init(this.id, this);
+    if (parent) {
+      clone.parent = parent;
+    }
     return clone;
   }
 }

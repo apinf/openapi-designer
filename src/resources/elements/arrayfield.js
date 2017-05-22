@@ -115,7 +115,7 @@ export class Arrayfield extends Parentfield {
       return;
     }
 
-    const field = this.item.clone();
+    const field = this.item.clone(this);
     field.index = this._children.length;
     field.id = `${this.item.id}-${field.index}`;
     if (this.addIndexToChildLabel) {
@@ -147,9 +147,12 @@ export class Arrayfield extends Parentfield {
   }
 
   /** @inheritdoc */
-  clone() {
+  clone(parent) {
     const clone = new Arrayfield();
     clone.init(this.id, this);
+    if (parent) {
+      clone.parent = parent;
+    }
     if (this.item instanceof Field) {
       clone.item = this.item.clone();
     }
