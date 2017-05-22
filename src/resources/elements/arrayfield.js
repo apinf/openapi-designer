@@ -118,6 +118,7 @@ export class Arrayfield extends Parentfield {
     const field = this.item.clone();
     field.index = this._children.length;
     field.id = `${this.item.id}-${field.index}`;
+    field.parent = this;
     if (this.addIndexToChildLabel) {
       field.labelFormat = `${field.labelFormat} #$index`;
     }
