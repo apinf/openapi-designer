@@ -219,7 +219,7 @@ export class Field {
    */
   delete() {
     if (this.parent) {
-      this.parent.deleteChild(this.index || this.id);
+      this.parent.deleteChild(typeof this.index === 'number' ? this.index : this.id);
     }
   }
 
