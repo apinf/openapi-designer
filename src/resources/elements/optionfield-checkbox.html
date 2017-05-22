@@ -2,7 +2,9 @@
   <div class="checkbox option field c${columns} columns" if.bind="display">
     <label for.bind="id">
       ${label}
-      <tooltip if.bind="helpText" text.bind="helpText"><img src="res/info.svg" alt="Info"/></tooltip>
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
     </label>
     <div class="box-wrapper" repeat.for="checkbox of choices">
       <input type="checkbox" id="${id}-${checkbox.key}" if.bind="checkbox.conditionsFulfilled" checked.two-way="checkbox.selected"/>

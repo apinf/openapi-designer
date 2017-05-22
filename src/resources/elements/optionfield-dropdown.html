@@ -2,7 +2,9 @@
   <div class="dropdown option field c${columns} columns" if.bind="display">
     <label for.bind="id">
       ${label}
-      <tooltip if.bind="helpText" text.bind="helpText"><img src="res/info.svg" alt="Info"/></tooltip>
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
     </label>
     <select id.bind="id">
       <option

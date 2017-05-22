@@ -8,7 +8,9 @@
     </legend>
     <h3 class="title">
       ${label}
-      <tooltip if.bind="helpText" text.bind="helpText"><img src="res/info.svg" alt="Info"/></tooltip>
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
     </h3>
     <compose containerless view-model.bind="child"></compose>
   </fieldset>

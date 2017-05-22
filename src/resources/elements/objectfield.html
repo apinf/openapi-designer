@@ -7,7 +7,9 @@
     </legend>
     <h3 click.delegate="toggleCollapse()" class="title">
       ${label}
-      <tooltip if.bind="helpText" text.bind="helpText"><img src="res/info.svg" alt="Info"/></tooltip>
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
     </h3>
     <template repeat.for="childElem of iterableChildren">
       <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
