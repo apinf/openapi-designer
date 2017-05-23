@@ -72,6 +72,10 @@ h3 {
 
     font-size: .875rem;
     font-weight: bold;
+
+    > tooltip {
+      height: 0.8rem;
+    }
   }
 
   label, .title {
@@ -93,7 +97,7 @@ h3 {
 
     > tooltip {
       width: auto;
-      height: 100%;
+      height: 1.2rem;
     }
   }
 
