@@ -192,22 +192,31 @@ h3 {
     }
   }
 
-  &.type > legend {
-    select + input {
-      margin-left: .5rem;
-      padding: .2rem;
+  &.type {
+    .object.field, .array.field, .type.field {
+      margin: 0;
+      padding: 0;
 
-      border: .0625rem solid $border-color;
-      border-radius: .25rem;
+      border: none;
+    }
 
-      &:hover {
-        border-bottom: .0625rem solid $main-color;
-      }
+    > legend {
+      select + input {
+        margin-left: .5rem;
+        padding: .2rem;
 
-      &:focus {
-        margin-bottom: 0;
+        border: .0625rem solid $border-color;
+        border-radius: .25rem;
 
-        border-bottom: .125rem solid $main-color;
+        &:hover {
+          border-bottom: .0625rem solid $main-color;
+        }
+
+        &:focus {
+          margin-bottom: 0;
+
+          border-bottom: .125rem solid $main-color;
+        }
       }
     }
   }
