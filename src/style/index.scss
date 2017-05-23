@@ -1,3 +1,5 @@
+@import "tooltip";
+
 $main-color: #FFC107;
 $dark-color: darken($main-color, 5%);
 $border-color: #DBDBDB;
@@ -70,6 +72,10 @@ h3 {
 
     font-size: .875rem;
     font-weight: bold;
+
+    > tooltip {
+      height: 0.8rem;
+    }
   }
 
   label, .title {
@@ -85,6 +91,13 @@ h3 {
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+
+
+    > tooltip {
+      width: auto;
+      height: 1.2rem;
     }
   }
 

@@ -1,6 +1,11 @@
 <template>
   <div class="array field c${columns} columns" if.bind="display">
-    <h3 click.delegate="toggleCollapse()" class="title" textcontent.bind="label"></h3>
+    <h3 click.delegate="toggleCollapse()" class="title">
+      ${label}
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
+    </h3>
     <div class="controls" if.bind="!collapsed">
       <button class="new-item" click.delegate="addChild()">
         New ${item.label}
