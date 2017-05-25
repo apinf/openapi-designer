@@ -19,15 +19,37 @@ export const header = {
         'termsofservice': {
           'type': 'text',
           'label': 'Terms of Service'
-        },
+        }
+      }
+    },
+    'host': {
+      'label': 'Host location',
+      'type': 'object',
+      'showValueInParent': false,
+      'children': {
         'host': {
-          'type': 'text',
-          'showValueInParent': false
+          'type': 'text'
         },
         'basePath': {
           'type': 'text',
-          'label': 'Base path',
-          'showValueInParent': false
+          'label': 'Base path'
+        },
+        'schemes': {
+          'type': 'option',
+          'format': 'checkbox',
+          'choices': [{
+            'key': 'http',
+            'label': 'HTTP'
+          }, {
+            'key': 'https',
+            'label': 'HTTPS'
+          }, {
+            'key': 'websocket',
+            'label': 'WebSocket'
+          }, {
+            'key': 'websockets',
+            'label': 'Secure WebSocket'
+          }]
         }
       }
     },

@@ -32,11 +32,15 @@ export const schema = {
     },
     'host': {
       'type': 'link',
-      'target': '/header/info/host'
+      'target': '/header/host/host'
     },
     'basePath': {
       'type': 'link',
-      'target': '/header/info/basePath'
+      'target': '/header/host/basePath'
+    },
+    'schemes': {
+      'type': 'link',
+      'target': '/header/host/schemes'
     },
     'consumes': {
       'type': 'link',
