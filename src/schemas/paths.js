@@ -20,12 +20,43 @@ export const paths = {
           '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
         }
       },
+      'get': {
+        'type': 'link',
+        'target': '../methods/method(get)'
+      },
+      'put': {
+        'type': 'link',
+        'target': '../methods/method(put)'
+      },
+      'post': {
+        'type': 'link',
+        'target': '../methods/method(put)'
+      },
+      'delete': {
+        'type': 'link',
+        'target': '../methods/method(delete)'
+      },
+      'options': {
+        'type': 'link',
+        'target': '../methods/method(options)'
+      },
+      'head': {
+        'type': 'link',
+        'target': '../methods/method(head)'
+      },
+      'patch': {
+        'type': 'link',
+        'target': '../methods/method(patch)'
+      },
       'methods': {
         'type': 'array',
         'format': 'map',
         'keyField': 'method',
+        'addIndexToChildLabel': false,
+        'collapseManagement': true,
+        'showValueInParent': false,
         'item': {
-          'label': 'Method definition',
+          'label': '${#/method:getChoiceLabel()} handler',
           'type': 'object',
           'legendChildren': {
             'method': {
