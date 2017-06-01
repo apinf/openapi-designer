@@ -1,3 +1,26 @@
+const methodDefinition = {
+  'label': '${#:method} handler',
+  'type': 'object',
+  'children': {
+    'operationId': {
+      'label': 'Operation ID',
+      'type': 'text'
+    },
+    'summary': {
+      'type': 'text'
+    },
+    'description': {
+      'type': 'textarea'
+    },
+    'tags': {
+      'type': 'array',
+      'item': {
+        'type': 'text'
+      }
+    }
+  }
+};
+
 export const paths = {
   'type': 'array',
   'format': 'map',
@@ -20,77 +43,83 @@ export const paths = {
           '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
         }
       },
-      'get': {
-        'type': 'link',
-        'target': '../methods/method(get)'
-      },
-      'put': {
-        'type': 'link',
-        'target': '../methods/method(put)'
-      },
-      'post': {
-        'type': 'link',
-        'target': '../methods/method(put)'
-      },
-      'delete': {
-        'type': 'link',
-        'target': '../methods/method(delete)'
-      },
-      'options': {
-        'type': 'link',
-        'target': '../methods/method(options)'
-      },
-      'head': {
-        'type': 'link',
-        'target': '../methods/method(head)'
-      },
-      'patch': {
-        'type': 'link',
-        'target': '../methods/method(patch)'
-      },
-      'methods': {
-        'type': 'array',
-        'format': 'map',
-        'keyField': 'method',
-        'addIndexToChildLabel': false,
-        'collapseManagement': true,
-        'showValueInParent': false,
-        'item': {
-          'label': '${#/method:getChoiceLabel()} handler',
-          'type': 'object',
-          'legendChildren': {
-            'method': {
-              'type': 'option',
-              'format': 'dropdown',
-              'choices': [
-                {'key': 'get', 'label': 'GET'},
-                {'key': 'put', 'label': 'PUT'},
-                {'key': 'post', 'label': 'POST'},
-                {'key': 'delete', 'label': 'DELETE'},
-                {'key': 'options', 'label': 'OPTIONS'},
-                {'key': 'head', 'label': 'HEAD'},
-                {'key': 'patch', 'label': 'PATCH'}
-              ]
-            }
+      'methodDefinition': {
+        'display': false,
+        'collapsed': true,
+        'type': 'object',
+        'children': {
+          'operationId': {
+            'label': 'Operation ID',
+            'type': 'text'
           },
-          'children': {
-            'operationId': {
-              'label': 'Operation ID',
+          'summary': {
+            'type': 'text'
+          },
+          'description': {
+            'type': 'textarea'
+          },
+          'tags': {
+            'type': 'array',
+            'item': {
               'type': 'text'
-            },
-            'summary': {
-              'type': 'text'
-            },
-            'description': {
-              'type': 'textarea'
-            },
-            'tags': {
-              'type': 'array',
-              'item': {
-                'type': 'text'
-              }
             }
           }
+        }
+      },
+      'get': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'GET handler',
+          '_display': true
+        }
+      },
+      'put': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'PUT handler',
+          '_display': true
+        }
+      },
+      'post': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'POST handler',
+          '_display': true
+        }
+      },
+      'delete': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'DELETE handler',
+          '_display': true
+        }
+      },
+      'options': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'OPTIONS handler',
+          '_display': true
+        }
+      },
+      'head': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'HEAD handler',
+          '_display': true
+        }
+      },
+      'patch': {
+        'type': 'lazylink',
+        'target': '../methodDefinition',
+        'overrides': {
+          'labelFormat': 'PATCH handler',
+          '_display': true
         }
       }
     }
