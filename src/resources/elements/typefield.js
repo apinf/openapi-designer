@@ -49,6 +49,25 @@ export class Typefield extends Field {
    * @type {Object}
    */
   types = {};
+  /**
+   * Whether or not the UI element should be collapsed (i.e. only show the title)
+   * @type {Boolean}
+   */
+  collapsed = false;
+  isCollapsible = true;
+
+  childCollapseChanged(field, isNowCollapsed) {}
+
+  toggleCollapse() {
+    this.setCollapsed(!this.collapsed);
+  }
+
+  setCollapsed(collapsed) {
+    this.collapsed = collapsed;
+    if (this.parent) {
+      this.parent.childCollapseChanged(this, this.collapsed);
+    }
+  }
 
   /** @inheritdoc */
   init(id = '', args = {}) {
@@ -58,6 +77,7 @@ export class Typefield extends Field {
       keyPlaceholder: 'Object key...',
       showType: true,
       copyValue: false,
+      collapsed: false,
       types: { 'null': { 'type': 'text' } }
     }, args);
     this.types = args.types;
@@ -66,6 +86,8 @@ export class Typefield extends Field {
     this.keyPlaceholder = args.keyPlaceholder;
     this.showType = args.showType;
     this.copyValue = args.copyValue;
+    this.collapsed = args.collapsed;
+    this.defaultType = args.defaultType;
     this.selectedType = args.defaultType || Object.keys(this.types)[0];
     this.selectedTypeChanged(this.selectedType);
     return super.init(id, args);
