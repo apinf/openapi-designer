@@ -19,19 +19,27 @@ export class Optionfield extends Field {
    * @type {Array}
    */
   dataSources = [];
+  /**
+   * Whether or not to hide this field if there are no choices.
+   * @type {Boolean}
+   */
+  hideIfNoChoices = true;
 
   /**
    * @inheritdoc
    * @param {String[]|Object[]} args.choices     The choices to add.
    * @param {Object[]}          args.dataSources Sources from where to get dynamic choices.
+   * @param {Boolean}           args.hideIfNoChoices Whether or not to hide this field if there are no choices.
    */
   init(id = '', args = {}) {
     args = Object.assign({
       choices: [],
       dataSources: [],
-      format: 'dropdown'
+      format: 'dropdown',
+      hideIfNoChoices: true
     }, args);
     this.dataSources = args.dataSources;
+    this.hideIfNoChoices = args.hideIfNoChoices;
     this._choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
@@ -79,6 +87,9 @@ export class Optionfield extends Field {
   }
 
   shouldDisplay() {
+    if (!this.hideIfNoChoices) {
+      return super.shouldDisplay();
+    }
     for (const choice of this.choices) {
       if (choice.conditionsFulfilled) {
         return super.shouldDisplay();
