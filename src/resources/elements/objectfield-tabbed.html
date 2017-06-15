@@ -1,0 +1,23 @@
+<template>
+  <fieldset class="tabbed object field has-children c${columns} columns" if.bind="display">
+    <legend if.bind="hasLegend && !collapsed">
+      <template repeat.for="childElem of iterableLegendChildren">
+        <compose containerless view-model.bind="childElem"></compose>
+      </template>
+    </legend>
+    <h3 click.delegate="toggleCollapse()" class="title">
+      ${label}
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
+    </h3>
+    <div class="tabs" if.bind="!collapsed">
+      <template repeat.for="childElem of iterableChildren">
+        <a class="tab-link" if.bind="childElem.display" click.delegate="switchTab(childElem)">
+          ${childElem.label}
+        </a>
+      </template>
+    </div>
+    <compose containerless if.bind="!collapsed" view-model.bind="activeChild"></compose>
+  </fieldset>
+</template>

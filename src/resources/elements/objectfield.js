@@ -13,11 +13,20 @@ export class Objectfield extends Parentfield {
    * The fields to display in the legend slot of the form.
    */
   legendChildren = undefined;
+  /**
+   * The child that is currently open in the tabbed view.
+   * @type {Field}
+   */
+  activeChild = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
     args = Object.assign({children: {}, collapsed: false, legendChildren: undefined}, args);
     this._children = args.children;
+    const iterableChildren = this.iterableChildren;
+    if (iterableChildren.length > 0) {
+      this.switchTab(this.iterableChildren[0]);
+    }
     this.collapsed = args.collapsed;
     this.legendChildren = args.legendChildren;
     return super.init(id, args);
@@ -75,6 +84,10 @@ export class Objectfield extends Parentfield {
     this._children[child.id] = child;
   }
 
+  switchTab(toChild) {
+    this.activeChild = toChild;
+  }
+
   /** @inheritdoc */
   clone(parent) {
     const clone = new Objectfield();
@@ -91,6 +104,7 @@ export class Objectfield extends Parentfield {
       }
     }
     clone.init(this.id, {
+      format: this.format,
       label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
@@ -115,5 +129,17 @@ export class Objectfield extends Parentfield {
       }
     }
     return undefined;
+  }
+
+  /**
+   * @return {String} The name of the HTML file that displays the object with
+   *                  the format specified in {@link #format}.
+   * @private
+   */
+  getViewStrategy() {
+    if (this.format === 'tabs') {
+      return 'resources/elements/objectfield-tabbed.html';
+    }
+    return 'resources/elements/objectfield.html';
   }
 }
