@@ -1,5 +1,6 @@
 import {containerless} from 'aurelia-framework';
 import {Field} from './abstract/field';
+import {Parentfield} from './abstract/parentfield';
 
 /**
  * Optionfield is a {@link Field} that gives certain options to the user as
@@ -8,22 +9,34 @@ import {Field} from './abstract/field';
 @containerless
 export class Optionfield extends Field {
   /**
-   * The choices.
+   * The static choices.
    * @type {Array}
    */
-  choices = [];
+  _choices = [];
+  _dataSourceChoices = [];
+  /**
+   * Sources from where to get dynamic choices.
+   * @type {Array}
+   */
+  dataSources = [];
 
   /**
    * @inheritdoc
-   * @param {String[]|Object[]} args.choices The choices to add.
+   * @param {String[]|Object[]} args.choices     The choices to add.
+   * @param {Object[]}          args.dataSources Sources from where to get dynamic choices.
    */
   init(id = '', args = {}) {
-    args = Object.assign({choices: [], format: 'dropdown'}, args);
-    this.choices = [];
+    args = Object.assign({
+      choices: [],
+      dataSources: [],
+      format: 'dropdown'
+    }, args);
+    this.dataSources = args.dataSources;
+    this._choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
         // Parse a simple (label-only) choice definition.
-        this.choices.push({
+        this._choices.push({
           key: choice,
           label: choice,
           selected: false,
@@ -32,7 +45,7 @@ export class Optionfield extends Field {
       } else {
         // Parse a full choice definition.
         const choiceParent = this;
-        this.choices.push({
+        this._choices.push({
           key: choice.key,
           label: choice.label || choice.key,
           selected: false,
@@ -42,26 +55,15 @@ export class Optionfield extends Field {
           // The HTML templates can't do this complex logic, so we have to do it
           // here.
           get conditionsFulfilled() {
-            if (choice.conditions) {
-              for (const [fieldPath, expectedValue] of Object.entries(choice.conditions)) {
-                const field = choiceParent.resolveRef(fieldPath);
-                const value = field ? field.getValue() : undefined;
-                if (Array.isArray(value) && !value.includes(expectedValue)) {
-                  return false;
-                } else if (value !== expectedValue) {
-                  return false;
-                }
-              }
-            }
-            return true;
+            return Optionfield.conditionsFulfilled(choice.conditions, choiceParent);
           }
         });
       }
     }
-    if (this.choices.length === 0) {
+    if (this._choices.length === 0 && Object.getOwnPropertyNames(this.dataSources).length === 0) {
       // We don't want to leave the choices empty, so if there are no choices,
       // make a checkbox with no label.
-      this.choices.push({
+      this._choices.push({
         key: this.key,
         label: '',
         selected: false,
@@ -70,8 +72,8 @@ export class Optionfield extends Field {
       this.checkboxFormat = 'simple';
     }
     // Make sure some choice is selected.
-    if (this.getValue() === undefined && this.choices.length > 0) {
-      this.choices[0].selected = true;
+    if (this.getValue() === undefined && this._choices.length > 0) {
+      this._choices[0].selected = true;
     }
     return super.init(id, args);
   }
@@ -83,6 +85,92 @@ export class Optionfield extends Field {
       }
     }
     return false;
+  }
+
+  static conditionsFulfilled(conditions, parentField) {
+    if (conditions) {
+      for (const [fieldPath, expectedValue] of Object.entries(conditions)) {
+        const field = parentField.resolveRef(fieldPath);
+        const value = field ? field.getValue() : undefined;
+        if (Array.isArray(value) && !value.includes(expectedValue)) {
+          return false;
+        } else if (value !== expectedValue) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  updateChoicesFromDataSources() {
+    this._dataSourceChoices = [];
+    for (const dataSource of this.dataSources) {
+      if (typeof dataSource === 'string') {
+        const target = this.resolveRef(dataSource);
+        if (target instanceof Parentfield) {
+          for (const child of target.iterableChildren) {
+            this._dataSourceChoices.push({
+              key: child.getValue(),
+              label: child.getValue(),
+              selected: false,
+              conditionsFulfilled: true
+            });
+          }
+        } else {
+          this._dataSourceChoices.push({
+            key: child.getValue(),
+            label: child.getValue(),
+            selected: false,
+            conditionsFulfilled: true
+          });
+        }
+      } else {
+        const target = this.resolveRef(dataSource.source);
+        if (target instanceof Parentfield) {
+          for (const child of target.iterableChildren) {
+            const data = {
+              key: child.formatReferencePlusField(dataSource.key),
+              selected: false,
+              get conditionsFulfilled() {
+                return Optionfield.conditionsFulfilled(dataSource.localConditions, child)
+                    && Optionfield.conditionsFulfilled(dataSource.targetConditions, child);
+              }
+            };
+            if (dataSource.label) {
+              data.label = child.formatReferencePlusField(dataSource.label);
+            } else {
+              data.label = data.key;
+            }
+            this._dataSourceChoices.push(data);
+          }
+        } else {
+          const data = {
+            key: target.formatReferencePlusField(dataSource.key),
+            selected: false,
+            get conditionsFulfilled() {
+              return Optionfield.conditionsFulfilled(dataSource.localConditions, target)
+                  && Optionfield.conditionsFulfilled(dataSource.targetConditions, target);
+            }
+          };
+          if (dataSource.label) {
+            data.label = target.formatReferencePlusField(dataSource.label);
+          } else {
+            data.label = data.key;
+          }
+          this._dataSourceChoices.push(data);
+        }
+      }
+    }
+  }
+
+  get choices() {
+    if (this.dataSources.length === 0) {
+      return this._choices;
+    } else if (this._choices.length === 0) {
+      return this._dataSourceChoices;
+    }
+
+    return this._dataSourceChoices.concat(this._choices);
   }
 
   /**
