@@ -156,7 +156,7 @@ export class Field {
       return label;
     }
 
-    return formatReferencePlusField(formatIndex(label));
+    return this.formatReferencePlusField(this.formatIndex(label));
   }
 
   /**
