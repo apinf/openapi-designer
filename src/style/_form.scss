@@ -154,6 +154,47 @@
     }
   }
 
+  &.tabbed.object {
+    > .tabs {
+      padding: .5rem 1rem;
+
+      border-bottom: 1px solid lightgray;
+      background-color: white;
+      > .tab-link {
+        display: inline;
+
+        box-sizing: border-box;
+        padding: .5rem 1rem;
+
+        text-decoration: none !important;
+
+        color: #337ab7 !important;
+        border-radius: .25rem .25rem 0 0;
+
+        &:hover {
+          background-color: lighten(lightgray, 7%);
+        }
+
+        &.open {
+          color: black !important;
+          border: 1px solid lightgray;
+          border-bottom: 1px solid white;
+
+          &:focus {
+            outline: 1px dotted lightgray;
+          }
+        }
+      }
+    }
+
+    > .has-children {
+      margin: .25rem 0 0;
+      padding: 0;
+
+      border: none;
+    }
+  }
+
   &.type {
     > legend {
       select + input {
@@ -176,9 +217,10 @@
     }
 
     > .has-children {
-      border: none;
       margin: 0;
       padding: 0;
+
+      border: none;
     }
   }
 
