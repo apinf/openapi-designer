@@ -96,15 +96,24 @@ export class Typefield extends Field {
   /**
    * Get the value of this field.
    *
-   * If the child is undefined, this will return undefined.
-   * If {@link #showType} is {@linkplain false}, the raw value of the child is
-   * returned.
-   * If {@link #showType} is {@linkplain true} and {@link #valueKey} is defined
-   * OR the raw value of the child is not an object, the raw value of the child
-   * will be placed in an object wit child is an object, the type will simply
-   * be added to the raw value of the child.
+   * If the value of the child is undefined, this will return undefined.
    *
-   * @return {Object} The value.
+   * The value of the child will be put into an object with {@link #valueKey} or
+   * `value` as the key if the value is not already an object and one of the
+   * following is true:
+   *   a) {@link #showType} is {@linkplain true}
+   *   b) {@link #keyKey} is defined
+   *   c) {@link #valueKey} is defined
+   * If {@link #valueKey} is defined, the child value will be put into an object
+   * as described previously regardless of whether or not the child value is an
+   * object.
+   *
+   * If {@link #showType} is {@linkplain true}, the name of the selected type
+   * will be added to the return object.
+   * If {@link #keyKey} is defined, the return object will contain a field with
+   * {@link #keyKey} as its key and the key from the fieldset legend as the value.
+   *
+   * @return {Object} The processed value.
    */
   getValue() {
     if (!this.child) {
@@ -112,20 +121,20 @@ export class Typefield extends Field {
     }
 
     let value = this.child.getValue();
-    if (!this.showType) {
-      return value;
-    }
-    if (this.valueKey || typeof value !== 'object' || Array.isArray(value)) {
+    const isNotObject = typeof value !== 'object' || Array.isArray(value);
+    // If (valueKey is set) OR (value is not object AND either keyKey is set OR showType is true)
+    // then put the value inside an object with valueKey or `value` as the key.
+    if (this.valueKey || (isNotObject && (this.keyKey || this.showType))) {
       const valueKey = this.valueKey || 'value';
       value = {
-        type: this.selectedType,
         [valueKey]: value
       };
-    } else {
-      value.type = this.selectedType;
     }
     if (this.keyKey) {
       value[this.keyKey] = this.key;
+    }
+    if (this.showType) {
+      value.type = this.selectedType;
     }
     return value;
   }
