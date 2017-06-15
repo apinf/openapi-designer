@@ -144,6 +144,12 @@ export class Field {
 
     return label
         .replace(/\$index/g, this.index + 1)
+        // Match a form field reference optionally followed by a JS field or function.
+        //
+        // Examples:
+        //   #/reference/to/form/field:jsFieldName
+        //   #/another/reference:jsFunctionName()
+        //   #/third/reference/without/js/field
         .replace(/\${(.+?)(\:([a-zA-Z0-9]+(\(\))?))?}/g, (match, path, _, field) => {
           const elem = this.resolveRef(path);
           if (elem !== undefined) {
