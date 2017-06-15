@@ -51,6 +51,15 @@ export class Arrayfield extends Parentfield {
     return super.init(id, args);
   }
 
+  isEmpty() {
+    for (const child of this._children) {
+      if (!child.isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * @inheritdoc
    * @return {Object[]|Object} The values of the children of this array in the
@@ -63,6 +72,8 @@ export class Arrayfield extends Parentfield {
       for (const item of this._children) {
         if (!item.showValueInParent || !item.display) {
           continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
+          continue;
         }
         const data = item.getValue();
         const key = data[this.keyField];
@@ -73,6 +84,8 @@ export class Arrayfield extends Parentfield {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
         if (!item.showValueInParent || !item.display) {
+          continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
           continue;
         }
         value[index] = item.getValue();

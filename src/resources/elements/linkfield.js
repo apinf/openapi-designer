@@ -19,6 +19,14 @@ export class Linkfield extends Field {
     return super.init(id, args);
   }
 
+  isEmpty() {
+    const field = this.resolveTarget();
+    if (!field) {
+      return true;
+    }
+    return field.isEmpty();
+  }
+
   /**
    * Resolve the path to the target.
    * @return {Field} The target field, or {@linkplain undefined} if the target

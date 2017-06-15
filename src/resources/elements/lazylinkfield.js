@@ -18,6 +18,13 @@ export class LazyLinkfield extends Field {
     return super.init(id, args);
   }
 
+  isEmpty() {
+    if (!this.child) {
+      return true;
+    }
+    return this.child.isEmpty();
+  }
+
   /**
    * Create the child of this field. Basically copy the target, set the parent
    * and apply field overrides.

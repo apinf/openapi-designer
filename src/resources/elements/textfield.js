@@ -29,6 +29,10 @@ export class Textfield extends Field {
     return super.init(id, args);
   }
 
+  isEmpty() {
+    return this.value.length === 0;
+  }
+
   /**
    * @inheritdoc
    * @return {String} The text in the input field.

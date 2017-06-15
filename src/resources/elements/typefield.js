@@ -71,6 +71,13 @@ export class Typefield extends Field {
     return super.init(id, args);
   }
 
+  isEmpty() {
+    if (!this.child) {
+      return true;
+    }
+    return this.child.isEmpty();
+  }
+
   /**
    * Called by Aurelia when the selected type changes (e.g. from the dropdown)
    * @param {String} newType The new type.
