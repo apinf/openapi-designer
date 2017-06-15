@@ -144,13 +144,37 @@ export class Field {
 
     return label
         .replace(/\$index/g, this.index + 1)
-        .replace(/\${(.+?)}/g, (match, capture) => {
-          const elem = this.resolveRef(capture);
+        .replace(/\${(.+?)(\:([a-zA-Z0-9]+(\(\))?))?}/g, (match, path, _, field) => {
+          const elem = this.resolveRef(path);
           if (elem !== undefined) {
+            if (field !== undefined) {
+              return elem.getFieldValue(field);
+            }
+            // Field name not specified, return the value of the form field.
             return elem.getValue();
           }
+          // Form field not found.
           return '';
         });
+  }
+
+  /**
+   * Get the value of the given field or function.
+   * @param  {String} name The name of the field. If the field is a function that
+   *                       should be called, add {@linkplain ()} to the end.
+   * @return {[type]}      [description]
+   */
+  getFieldValue(name) {
+    if (name === undefined) {
+      return undefined;
+    }
+
+    if (name.endsWith('()')) {
+      // Field name specified with braces, so call the field as a function.
+      return this[name.substr(0, name.length - 2)]();
+    }
+    // Field name specified without braces, so just get the value of that field.
+    return this[name];
   }
 
   /**
