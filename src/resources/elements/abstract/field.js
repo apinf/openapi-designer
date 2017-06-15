@@ -156,20 +156,37 @@ export class Field {
       return label;
     }
 
-    return label
-        .replace(Field.MATCH_INDEX, this.index + 1)
-        .replace(Field.MATCH_REFERENCE_PLUS_FIELD, (match, path, _, field) => {
-          const elem = this.resolveRef(path);
-          if (elem !== undefined) {
-            if (field !== undefined) {
-              return elem.getFieldValue(field);
-            }
-            // Field name not specified, return the value of the form field.
-            return elem.getValue();
-          }
-          // Form field not found.
-          return '';
-        });
+    return formatReferencePlusField(formatIndex(label));
+  }
+
+  /**
+   * Replace each instance of {@linkplain $index} with the index of this field.
+   * @param  {String} string The string to replace the occurences in.
+   * @return {String}        The string with all the occurences replaced.
+   */
+  formatIndex(string) {
+    return string.replace(Field.MATCH_INDEX, this.index + 1);
+  }
+
+  /**
+   * Replace all field references with the values of the references.
+   * See {@link #MATCH_REFERENCE_PLUS_FIELD} to see what kind of references are allowed.
+   * @param  {String} string The string to replace the occurences in.
+   * @return {String}        The string with all the occurences replaced.
+   */
+  formatReferencePlusField(string) {
+    return string.replace(Field.MATCH_REFERENCE_PLUS_FIELD, (match, path, _, field) => {
+      const elem = this.resolveRef(path);
+      if (elem !== undefined) {
+        if (field !== undefined) {
+          return elem.getFieldValue(field);
+        }
+        // Field name not specified, return the value of the form field.
+        return elem.getValue();
+      }
+      // Form field not found.
+      return '';
+    });
   }
 
   /**
