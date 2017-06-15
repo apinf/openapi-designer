@@ -3,6 +3,20 @@
  */
 export class Field {
   /**
+   * Match a form field reference optionally followed by a JS field or function.
+   *
+   * Examples:
+   *   {@linkplain #/reference/to/form/field:jsFieldName}
+   *   {@linkplain #/another/reference:jsFunctionName()}
+   *   {@linkplain #/third/reference/without/js/field}
+  */
+  static MATCH_REFERENCE_PLUS_FIELD = /\${(.+?)(\:([a-zA-Z0-9]+(\(\))?))?}/g
+  /**
+   * Match the string {@linkplain $index}
+   * @type {String}
+   */
+  static MATCH_INDEX = /\$index/g
+  /**
    * The ID of the field. Not displayed to the user directly.
    * @type {String}
    */
@@ -143,14 +157,8 @@ export class Field {
     }
 
     return label
-        .replace(/\$index/g, this.index + 1)
-        // Match a form field reference optionally followed by a JS field or function.
-        //
-        // Examples:
-        //   #/reference/to/form/field:jsFieldName
-        //   #/another/reference:jsFunctionName()
-        //   #/third/reference/without/js/field
-        .replace(/\${(.+?)(\:([a-zA-Z0-9]+(\(\))?))?}/g, (match, path, _, field) => {
+        .replace(Field.MATCH_INDEX, this.index + 1)
+        .replace(Field.MATCH_REFERENCE_PLUS_FIELD, (match, path, _, field) => {
           const elem = this.resolveRef(path);
           if (elem !== undefined) {
             if (field !== undefined) {
