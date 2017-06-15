@@ -11,7 +11,8 @@ export const fieldsToShow = {
     'contact',
     'license',
     'host',
-    'basePath'
+    'basePath',
+    'schemes'
   ],
   'types': ['definitions'],
   'mime': ['consumes', 'produces']

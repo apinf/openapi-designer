@@ -44,10 +44,10 @@ export const header = {
             'key': 'https',
             'label': 'HTTPS'
           }, {
-            'key': 'websocket',
+            'key': 'ws',
             'label': 'WebSocket'
           }, {
-            'key': 'websockets',
+            'key': 'wss',
             'label': 'Secure WebSocket'
           }]
         }
