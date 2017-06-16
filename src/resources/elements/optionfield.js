@@ -137,6 +137,15 @@ export class Optionfield extends Field {
     }
   }
 
+  /**
+   * Call {@link #setValue()} and {@link #onChange()}
+   * @param {String|String[]} value The new choice or choices depending on the
+   *                                format of this field.
+   */
+  selectionChanged(value) {
+    this.setValue(value);
+    this.onChange();
+  }
 
   /**
    * @return {String} The name of the HTML file that displays the choices in the
