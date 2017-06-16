@@ -8,7 +8,7 @@
     </label>
     <select id.bind="id">
       <option
-        repeat.for="choice of choices"
+        repeat.for="choice of allChoices"
         if.bind="choice.conditionsFulfilled"
         model.bind="choice.key"
         selected.two-way="choice.selected"

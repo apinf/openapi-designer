@@ -12,7 +12,7 @@ export class Optionfield extends Field {
    * The static choices.
    * @type {Array}
    */
-  _choices = [];
+  choices = [];
   _dataSourceChoices = [];
   /**
    * Sources from where to get dynamic choices.
@@ -40,11 +40,12 @@ export class Optionfield extends Field {
     }, args);
     this.dataSources = args.dataSources;
     this.hideIfNoChoices = args.hideIfNoChoices;
-    this._choices = [];
+    this.argChoices = args.choices;
+    this.choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
         // Parse a simple (label-only) choice definition.
-        this._choices.push({
+        this.choices.push({
           key: choice,
           label: choice,
           selected: false,
@@ -53,7 +54,7 @@ export class Optionfield extends Field {
       } else {
         // Parse a full choice definition.
         const choiceParent = this;
-        this._choices.push({
+        this.choices.push({
           key: choice.key,
           label: choice.label || choice.key,
           selected: false,
@@ -68,10 +69,10 @@ export class Optionfield extends Field {
         });
       }
     }
-    if (this._choices.length === 0 && Object.getOwnPropertyNames(this.dataSources).length === 0) {
+    if (this.choices.length === 0 && Object.getOwnPropertyNames(this.dataSources).length === 0) {
       // We don't want to leave the choices empty, so if there are no choices,
       // make a checkbox with no label.
-      this._choices.push({
+      this.choices.push({
         key: this.key,
         label: '',
         selected: false,
@@ -80,8 +81,8 @@ export class Optionfield extends Field {
       this.checkboxFormat = 'simple';
     }
     // Make sure some choice is selected.
-    if (this.getValue() === undefined && this._choices.length > 0) {
-      this._choices[0].selected = true;
+    if (this.getValue() === undefined && this.choices.length > 0) {
+      this.choices[0].selected = true;
     }
     return super.init(id, args);
   }
@@ -174,14 +175,14 @@ export class Optionfield extends Field {
     }
   }
 
-  get choices() {
+  get allChoices() {
     if (this.dataSources.length === 0) {
-      return this._choices;
-    } else if (this._choices.length === 0) {
+      return this.choices;
+    } else if (this.choices.length === 0) {
       return this._dataSourceChoices;
     }
 
-    return this._dataSourceChoices.concat(this._choices);
+    return this._dataSourceChoices.concat(this.choices);
   }
 
   /**
