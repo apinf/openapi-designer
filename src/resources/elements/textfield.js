@@ -16,17 +16,33 @@ export class Textfield extends Field {
    * @type {String}
    */
   placeholder = 'Enter value...';
+  /**
+   * Autocompletions that the text input should offer.
+   * @type {String[]}
+   */
+  autocomplete = undefined;
 
   /**
    * @inheritdoc
-   * @param {String} [args.value]       The value of the input field.
-   * @param {String} [args.placeholder] The input placeholder text.
+   * @param {String} [args.value]        The value of the input field.
+   * @param {String} [args.placeholder]  The input placeholder text.
+   * @param {String} [args.autocomplete] Autocompletions that the text input
+   *                                     should offer.
    */
   init(id = '', args = {}) {
-    args = Object.assign({placeholder: 'Enter value...', value: ''}, args);
+    args = Object.assign({
+      placeholder: 'Enter value...',
+      value: '',
+      autocomplete: undefined
+    }, args);
     this.value = args.value;
     this.placeholder = args.placeholder;
+    this.autocomplete = args.autocomplete;
     return super.init(id, args);
+  }
+
+  get listID() {
+    return `autocomplete-${this.id}`;
   }
 
   /**
