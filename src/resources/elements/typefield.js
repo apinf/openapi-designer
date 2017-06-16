@@ -131,6 +131,9 @@ export class Typefield extends Field {
   }
 
   setValue(value) {
+    if (this.keyKey && value.hasOwnProperty(this.keyKey)) {
+      this.key = value[this.keyKey];
+    }
     if (!this.showType) {
       this.child.setValue(value);
     } else if (typeof value === 'object' && !Array.isArray(value)) {
