@@ -40,10 +40,10 @@ export class Typefield extends Field {
    */
   keyPlaceholder = '';
   /**
-   * Whether or not to show the chosen type in the value of this field.
-   * @type {Boolean}
+   * The key where to put the type of this field.
+   * @type {String}
    */
-  showType = true;
+  typeKey = 'x-oad-type';
   /**
    * Whether or not to copy the value over to the new child when switching types.
    *
@@ -92,18 +92,18 @@ export class Typefield extends Field {
   init(id = '', args = {}) {
     args = Object.assign({
       valueKey: '',
+      typeKey: 'x-oad-type',
       keyKey: '',
       keyPlaceholder: 'Object key...',
-      showType: true,
       copyValue: false,
       collapsed: false,
       types: { 'null': { 'type': 'text' } }
     }, args);
     this.types = args.types;
     this.valueKey = args.valueKey;
+    this.typeKey = args.typeKey;
     this.keyKey = args.keyKey;
     this.keyPlaceholder = args.keyPlaceholder;
-    this.showType = args.showType;
     this.copyValue = args.copyValue;
     this.collapsed = args.collapsed;
     this.defaultType = args.defaultType;
@@ -152,16 +152,16 @@ export class Typefield extends Field {
    *
    * The value of the child will be put into an object with {@link #valueKey} or
    * `value` as the key if the value is not already an object and one of the
-   * following is true:
-   *   a) {@link #showType} is {@linkplain true}
-   *   b) {@link #keyKey} is defined
-   *   c) {@link #valueKey} is defined
+   * following fields is defined:
+   *   a) {@link #typeKey}
+   *   b) {@link #keyKey}
+   *   c) {@link #valueKey}
    * If {@link #valueKey} is defined, the child value will be put into an object
    * as described previously regardless of whether or not the child value is an
    * object.
    *
-   * If {@link #showType} is {@linkplain true}, the name of the selected type
-   * will be added to the return object.
+   * If {@link #typeKey} is defined, the name of the selected type will be added
+   * to the return object with {@link #typeKey} as its key.
    * If {@link #keyKey} is defined, the return object will contain a field with
    * {@link #keyKey} as its key and the key from the fieldset legend as the value.
    *
@@ -180,9 +180,9 @@ export class Typefield extends Field {
     // object with valueKey as the key for the value of the child.
     //
     // If the value is not an object or is an array AND either keyKey or
-    // showType is set, the above should be done regardless of whether or not
+    // typeKey is set, the above should be done regardless of whether or not
     // valueKey is set.
-    if (this.valueKey || (valueIsNotObject && (this.keyKey || this.showType))) {
+    if (this.valueKey || (valueIsNotObject && (this.keyKey || this.typeKey))) {
       const valueKey = this.valueKey || 'value';
       value = {
         [valueKey]: value
@@ -191,8 +191,8 @@ export class Typefield extends Field {
     if (this.keyKey) {
       value[this.keyKey] = this.key;
     }
-    if (this.showType) {
-      value.type = this.selectedType;
+    if (this.typeKey) {
+      value[this.typeKey] = this.selectedType;
     }
     return value;
   }
@@ -200,11 +200,13 @@ export class Typefield extends Field {
   setValue(value) {
     if (this.keyKey && value.hasOwnProperty(this.keyKey)) {
       this.key = value[this.keyKey];
+      delete value[this.keyKey];
     }
-    if (!this.showType) {
-      this.child.setValue(value);
-    } else if (typeof value === 'object' && !Array.isArray(value)) {
-      delete value.type;
+    if (this.typeKey && value.hasOwnProperty(this.typeKey)) {
+      this.setType(value[this.typeKey]);
+      delete value[this.typeKey];
+    }
+    if (!this.valueKey && typeof value === 'object' && !Array.isArray(value)) {
       this.child.setValue(value);
     } else {
       this.child.setValue(value[this.valueKey || 'value']);
