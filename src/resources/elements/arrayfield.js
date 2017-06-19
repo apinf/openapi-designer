@@ -18,6 +18,12 @@ export class Arrayfield extends Parentfield {
    */
   keyField = '_key';
   /**
+   * The field that is used as the value if {@link #format} is {@linkplain map}
+   * This field is optional. By default, the whole value will be used as-is.
+   * @type {String}
+   */
+  valueField = undefined;
+  /**
    * Whether or not to add {@linkplain #<index>} to the end of the labels of
    * children.
    * @type {Boolean}
@@ -34,21 +40,47 @@ export class Arrayfield extends Parentfield {
 
   /**
    * @inheritdoc
-   * @param {Field}   [args.item]      The base object that is cloned to create
-   *                                   new children.
-   * @param {String}  [args.keyField]  The field that is used as the key if
-   *                                   {@link #format} is {@linkplain map}
-   * @param {Boolean} [args.collapsed] Whether or not the UI element should be
-   *                                   collapsed.
+   * @param {Field}   [args.item]       The base object that is cloned to create
+   *                                    new children.
+   * @param {String}  [args.keyField]   The field that is used as the key if
+   *                                    {@link #format} is {@linkplain map}
+   * @param {String}  [args.valueField] The field that is used as the value if
+   *                                    {@link #format} is {@linkplain map}.
+   *                                    This field is optional. By default, the
+   *                                    whole value will be used as-is.
+   * @param {Boolean} [args.collapsed]  Whether or not the UI element should be
+   *                                    collapsed.
    */
   init(id = '', args = {}) {
-    args = Object.assign({format: 'array', keyField: '_key', addIndexToChildLabel: true, collapseManagement: false, collapsed: false}, args);
+    args = Object.assign({
+      format: 'array',
+      keyField: '_key',
+      valueField: undefined,
+      addIndexToChildLabel: true,
+      collapseManagement: false,
+      collapsed: false
+    }, args);
     this.item = args.item;
     this.keyField = args.keyField;
+    this.valueField = args.valueField;
     this.addIndexToChildLabel = args.addIndexToChildLabel;
     this.collapseManagement = args.collapseManagement;
     this.collapsed = args.collapsed;
     return super.init(id, args);
+  }
+
+  /**
+   * Check if this array is empty. If all children are empty, then this field is
+   * also considered to be empty.
+   */
+  isEmpty() {
+    for (const child of this._children) {
+      if (!child.isEmpty()) {
+        // This field is not empty if any of the children is not empty.
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -63,16 +95,24 @@ export class Arrayfield extends Parentfield {
       for (const item of this._children) {
         if (!item.showValueInParent || !item.display) {
           continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
+          continue;
         }
         const data = item.getValue();
         const key = data[this.keyField];
-        delete data[this.keyField];
-        value[key] = data;
+        if (this.valueField) {
+          value[key] = data[this.valueField];
+        } else {
+          delete data[this.keyField];
+          value[key] = data;
+        }
       }
     } else if (this.format === 'array') {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
         if (!item.showValueInParent || !item.display) {
+          continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
           continue;
         }
         value[index] = item.getValue();
