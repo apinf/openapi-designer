@@ -62,7 +62,7 @@ export class Field {
    */
   isCollapsible = false
   /**
-   * Functions that want to be called when this field changes.
+   * Functions that will be called when this field changes.
    * @type {Function[]}
    */
   changeListeners = []
