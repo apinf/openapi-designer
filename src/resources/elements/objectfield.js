@@ -104,6 +104,7 @@ export class Objectfield extends Parentfield {
    */
   addChild(child) {
     this._children[child.id] = child;
+    this.onChange(child);
   }
 
   switchTab(toChild) {

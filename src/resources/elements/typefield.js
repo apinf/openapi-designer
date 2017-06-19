@@ -142,6 +142,7 @@ export class Typefield extends Field {
       }
       this.child = newChild;
     }
+    this.onChange();
   }
 
   /**

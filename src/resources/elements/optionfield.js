@@ -138,7 +138,17 @@ export class Optionfield extends Field {
     }
   }
 
-  /*
+  /**
+   * Call {@link #setValue()} and {@link #onChange()}
+   * @param {String|String[]} value The new choice or choices depending on the
+   *                                format of this field.
+   */
+  selectionChanged(value) {
+    this.setValue(value);
+    this.onChange();
+  }
+
+  /**
    * Called by Aurelia when it sets the current selection to selectedChoice.
    */
   selectedChoiceChanged() {

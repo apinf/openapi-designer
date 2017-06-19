@@ -1,4 +1,4 @@
-import {containerless} from 'aurelia-framework';
+import {observable, containerless} from 'aurelia-framework';
 import {Field} from './abstract/field';
 
 /**
@@ -10,6 +10,7 @@ export class Textfield extends Field {
    * The text value of the input field.
    * @type {String}
    */
+  @observable
   value = '';
   /**
    * The UI placeholder when the field has no value.
@@ -66,5 +67,9 @@ export class Textfield extends Field {
    */
   setValue(value) {
     this.value = value;
+  }
+
+  valueChanged() {
+    this.onChange();
   }
 }
