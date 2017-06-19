@@ -3,6 +3,20 @@
  */
 export class Field {
   /**
+   * Match a form field reference optionally followed by a JS field or function.
+   *
+   * Examples:
+   *   {@linkplain #/reference/to/form/field:jsFieldName}
+   *   {@linkplain #/another/reference:jsFunctionName()}
+   *   {@linkplain #/third/reference/without/js/field}
+  */
+  static MATCH_REFERENCE_PLUS_FIELD = /\${(.+?)(\:([a-zA-Z0-9]+(\(\))?))?}/g
+  /**
+   * Match the string {@linkplain $index}
+   * @type {String}
+   */
+  static MATCH_INDEX = /\$index/g
+  /**
    * The ID of the field. Not displayed to the user directly.
    * @type {String}
    */
@@ -175,15 +189,56 @@ export class Field {
       return label;
     }
 
-    return label
-        .replace(/\$index/g, this.index + 1)
-        .replace(/\${(.+?)}/g, (match, capture) => {
-          const elem = this.resolveRef(capture);
-          if (elem !== undefined) {
-            return elem.getValue();
-          }
-          return '';
-        });
+    return this.formatReferencePlusField(this.formatIndex(label));
+  }
+
+  /**
+   * Replace each instance of {@linkplain $index} with the index of this field.
+   * @param  {String} string The string to replace the occurences in.
+   * @return {String}        The string with all the occurences replaced.
+   */
+  formatIndex(string) {
+    return string.replace(Field.MATCH_INDEX, this.index + 1);
+  }
+
+  /**
+   * Replace all field references with the values of the references.
+   * See {@link #MATCH_REFERENCE_PLUS_FIELD} to see what kind of references are allowed.
+   * @param  {String} string The string to replace the occurences in.
+   * @return {String}        The string with all the occurences replaced.
+   */
+  formatReferencePlusField(string) {
+    return string.replace(Field.MATCH_REFERENCE_PLUS_FIELD, (match, path, _, field) => {
+      const elem = this.resolveRef(path);
+      if (elem !== undefined) {
+        if (field !== undefined) {
+          return elem.getFieldValue(field);
+        }
+        // Field name not specified, return the value of the form field.
+        return elem.getValue();
+      }
+      // Form field not found.
+      return '';
+    });
+  }
+
+  /**
+   * Get the value of the given field or function.
+   * @param  {String} name The name of the field. If the field is a function that
+   *                       should be called, add {@linkplain ()} to the end.
+   * @return {[type]}      [description]
+   */
+  getFieldValue(name) {
+    if (name === undefined) {
+      return undefined;
+    }
+
+    if (name.endsWith('()')) {
+      // Field name specified with braces, so call the field as a function.
+      return this[name.substr(0, name.length - 2)]();
+    }
+    // Field name specified without braces, so just get the value of that field.
+    return this[name];
   }
 
   /**
