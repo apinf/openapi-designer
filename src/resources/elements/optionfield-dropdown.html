@@ -6,12 +6,11 @@
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
     </label>
-    <select id.bind="id">
+    <select value.bind="selectedChoice" id.bind="id">
       <option
         repeat.for="choice of allChoices"
         if.bind="choice.conditionsFulfilled"
         model.bind="choice.key"
-        selected.two-way="choice.selected"
       >${choice.label}</option>
     </select>
   </div>

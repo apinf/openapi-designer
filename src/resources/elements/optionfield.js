@@ -1,4 +1,4 @@
-import {containerless} from 'aurelia-framework';
+import {containerless, bindable} from 'aurelia-framework';
 import {Field} from './abstract/field';
 import {Parentfield} from './abstract/parentfield';
 
@@ -24,6 +24,11 @@ export class Optionfield extends Field {
    * @type {Boolean}
    */
   hideIfNoChoices = true;
+  /**
+   * The choice that is currently selected. Updated with Aurelia binding.
+   */
+  @bindable
+  selectedChoice = '';
 
   /**
    * @inheritdoc
@@ -79,10 +84,6 @@ export class Optionfield extends Field {
         conditionsFulfilled: true
       });
       this.checkboxFormat = 'simple';
-    }
-    // Make sure some choice is selected.
-    if (this.getValue() === undefined && this.choices.length > 0) {
-      this.choices[0].selected = true;
     }
     return super.init(id, args);
   }
@@ -237,14 +238,11 @@ export class Optionfield extends Field {
     }
   }
 
-  /**
-   * Call {@link #setValue()} and {@link #onChange()}
-   * @param {String|String[]} value The new choice or choices depending on the
-   *                                format of this field.
+  /*
+   * Called by Aurelia when it sets the current selection to selectedChoice.
    */
-  selectionChanged(value) {
-    this.setValue(value);
-    this.onChange();
+  selectedChoiceChanged() {
+    this.setValue(this.selectedChoice);
   }
 
   /**
