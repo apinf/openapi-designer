@@ -56,7 +56,7 @@ export class Field {
   showValueInParent = true
   /**
    * Whether or not the value of this field should be hidden from the output
-   * when its empty.
+   * when it's empty.
    * @type {Boolean}
    */
   hideValueIfEmpty = false
