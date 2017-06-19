@@ -13,6 +13,11 @@ export class Objectfield extends Parentfield {
    * The fields to display in the legend slot of the form.
    */
   legendChildren = undefined;
+  /**
+   * The child that is currently open in the tabbed view.
+   * @type {Field}
+   */
+  activeChild = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
@@ -21,6 +26,17 @@ export class Objectfield extends Parentfield {
     this.collapsed = args.collapsed;
     this.legendChildren = args.legendChildren;
     return super.init(id, args);
+  }
+
+  attached() {
+    // Is this a tabbed objectfield that has children?
+    if (this.iterableChildren.length > 0 && this.format === 'tabs') {
+      // Are there no active tabs?
+      if ($(this.tabs).find('.tab-link.open').length === 0) {
+        // Then activate the first tab.
+        this.switchTab(this.iterableChildren[0]);
+      }
+    }
   }
 
   /**
@@ -90,6 +106,13 @@ export class Objectfield extends Parentfield {
     this._children[child.id] = child;
   }
 
+  switchTab(toChild) {
+    this.activeChild = toChild;
+    const tabElem = $(`#tab-${toChild.path.replace(/\./g, '\\.')}`);
+    tabElem.parent().find('.tab-link.open').removeClass('open');
+    tabElem.addClass('open');
+  }
+
   /** @inheritdoc */
   clone(parent) {
     const clone = new Objectfield();
@@ -106,6 +129,7 @@ export class Objectfield extends Parentfield {
       }
     }
     clone.init(this.id, {
+      format: this.format,
       label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
@@ -131,5 +155,17 @@ export class Objectfield extends Parentfield {
       }
     }
     return undefined;
+  }
+
+  /**
+   * @return {String} The name of the HTML file that displays the object with
+   *                  the format specified in {@link #format}.
+   * @private
+   */
+  getViewStrategy() {
+    if (this.format === 'tabs') {
+      return 'resources/elements/objectfield-tabbed.html';
+    }
+    return 'resources/elements/objectfield.html';
   }
 }
