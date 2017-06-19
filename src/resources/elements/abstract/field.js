@@ -75,6 +75,11 @@ export class Field {
    * @type {Boolean}
    */
   isCollapsible = false
+  /**
+   * Functions that want to be called when this field changes.
+   * @type {Function[]}
+   */
+  changeListeners = []
 
   /**
    * Initialize this field with the base data.
@@ -301,6 +306,21 @@ export class Field {
    * @param {Object} value The new value to set to this field.
    */
   setValue(value) { }
+
+  onChange(field) {
+    field = field || this;
+    if (this.parent) {
+      this.parent.onChange(field);
+    }
+
+    for (const listener of this.changeListeners) {
+      listener(field);
+    }
+  }
+
+  addChangeListener(func) {
+    this.changeListeners.push(func);
+  }
 
   /**
    * Clone this field.

@@ -125,6 +125,7 @@ export class Arrayfield extends Parentfield {
     if (this.collapseManagement) {
       field.setCollapsed(false);
     }
+    this.onChange(field);
     return field.index;
   }
 
@@ -144,6 +145,7 @@ export class Arrayfield extends Parentfield {
       const item = this._children[i];
       item.index = i;
     }
+    this.onChange();
   }
 
   /** @inheritdoc */
