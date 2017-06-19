@@ -6,7 +6,7 @@
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
     </label>
-    <div class="box-wrapper" repeat.for="checkbox of choices">
+    <div class="box-wrapper" repeat.for="checkbox of allChoices">
       <input type="checkbox" id="${id}-${checkbox.key}" if.bind="checkbox.conditionsFulfilled" checked.two-way="checkbox.selected"/>
       <label for="${id}-${checkbox.key}">${checkbox.label}</label>
     </div>
