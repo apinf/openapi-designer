@@ -23,13 +23,20 @@ export class Objectfield extends Parentfield {
   init(id = '', args = {}) {
     args = Object.assign({children: {}, collapsed: false, legendChildren: undefined}, args);
     this._children = args.children;
-    const iterableChildren = this.iterableChildren;
-    if (iterableChildren.length > 0) {
-      this.switchTab(this.iterableChildren[0]);
-    }
     this.collapsed = args.collapsed;
     this.legendChildren = args.legendChildren;
     return super.init(id, args);
+  }
+
+  attached() {
+    // Is this a tabbed objectfield that has children?
+    if (this.iterableChildren.length > 0 && this.format === 'tabs') {
+      // Are there no active tabs?
+      if ($(this.tabs).find('.tab-link.open').length === 0) {
+        // Then activate the first tab.
+        this.switchTab(this.iterableChildren[0]);
+      }
+    }
   }
 
   /**
@@ -86,6 +93,9 @@ export class Objectfield extends Parentfield {
 
   switchTab(toChild) {
     this.activeChild = toChild;
+    const tabElem = $(`#tab-${toChild.path.replace(/\./g, '\\.')}`);
+    tabElem.parent().find('.tab-link.open').removeClass('open');
+    tabElem.addClass('open');
   }
 
   /** @inheritdoc */
