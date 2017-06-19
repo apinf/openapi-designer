@@ -71,6 +71,9 @@ export class Typefield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Check if this field doesn't currently have a child or if the child is empty.
+   */
   isEmpty() {
     if (!this.child) {
       return true;

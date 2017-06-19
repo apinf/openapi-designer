@@ -51,9 +51,14 @@ export class Arrayfield extends Parentfield {
     return super.init(id, args);
   }
 
+  /**
+   * Check if this array is empty. If all children are empty, then this field is
+   * also considered to be empty.
+   */
   isEmpty() {
     for (const child of this._children) {
       if (!child.isEmpty()) {
+        // This field is not empty if any of the children is not empty.
         return false;
       }
     }

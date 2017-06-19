@@ -23,6 +23,10 @@ export class Objectfield extends Parentfield {
     return super.init(id, args);
   }
 
+  /**
+   * Check if this object is empty. If all children are empty, then this field
+   * is also considered to be empty.
+   */
   isEmpty() {
     for (const child of Object.values(this.allChildren)) {
       if (!child.isEmpty()) {

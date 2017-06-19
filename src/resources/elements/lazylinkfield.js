@@ -18,6 +18,9 @@ export class LazyLinkfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Check if this link doesn't currently have a child or if the child is empty.
+   */
   isEmpty() {
     if (!this.child) {
       return true;

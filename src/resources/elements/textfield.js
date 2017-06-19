@@ -29,6 +29,9 @@ export class Textfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Check if the text input field is empty.
+   */
   isEmpty() {
     return this.value.length === 0;
   }

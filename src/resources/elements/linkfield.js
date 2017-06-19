@@ -19,6 +19,10 @@ export class Linkfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Check if this link doesn't currently have a resolvable target or if the
+   * target is empty.
+   */
   isEmpty() {
     const field = this.resolveTarget();
     if (!field) {

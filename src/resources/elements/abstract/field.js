@@ -112,6 +112,10 @@ export class Field {
     return this;
   }
 
+  /**
+   * Check if this field is empty. By default, this returns false, but all field
+   * implementations should override this.
+   */
   isEmpty() {
     return false;
   }
