@@ -19,6 +19,16 @@ export class LazyLinkfield extends Field {
   }
 
   /**
+   * Check if this link doesn't currently have a child or if the child is empty.
+   */
+  isEmpty() {
+    if (!this.child) {
+      return true;
+    }
+    return this.child.isEmpty();
+  }
+
+  /**
    * Create the child of this field. Basically copy the target, set the parent
    * and apply field overrides.
    * This doesn't return anything, since it just sets the {@link #child} field.

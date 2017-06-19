@@ -20,6 +20,18 @@ export class Linkfield extends Field {
   }
 
   /**
+   * Check if this link doesn't currently have a resolvable target or if the
+   * target is empty.
+   */
+  isEmpty() {
+    const field = this.resolveTarget();
+    if (!field) {
+      return true;
+    }
+    return field.isEmpty();
+  }
+
+  /**
    * Resolve the path to the target.
    * @return {Field} The target field, or {@linkplain undefined} if the target
    *                 is this field or if {@link Field#resolveRef} returned

@@ -72,6 +72,16 @@ export class Typefield extends Field {
   }
 
   /**
+   * Check if this field doesn't currently have a child or if the child is empty.
+   */
+  isEmpty() {
+    if (!this.child) {
+      return true;
+    }
+    return this.child.isEmpty();
+  }
+
+  /**
    * Called by Aurelia when the selected type changes (e.g. from the dropdown)
    * @param {String} newType The new type.
    */

@@ -24,6 +24,19 @@ export class Objectfield extends Parentfield {
   }
 
   /**
+   * Check if this object is empty. If all children are empty, then this field
+   * is also considered to be empty.
+   */
+  isEmpty() {
+    for (const child of Object.values(this.allChildren)) {
+      if (!child.isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * @inheritdoc
    * @return {Object} The values of the children in an object. The keys are the
    *                  IDs of the children.
@@ -32,6 +45,8 @@ export class Objectfield extends Parentfield {
     const value = {};
     for (const [key, field] of Object.entries(this.allChildren)) {
       if (!field || !field.showValueInParent || !field.display) {
+        continue;
+      } else if (field.isEmpty() && field.hideValueIfEmpty) {
         continue;
       }
       value[key] = field.getValue();
@@ -96,6 +111,7 @@ export class Objectfield extends Parentfield {
       collapsed: this.collapsed,
       parent: parent || this.parent,
       index: this.index,
+      hideValueIfEmpty: this.hideValueIfEmpty,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });

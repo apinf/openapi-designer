@@ -70,6 +70,20 @@ export class Arrayfield extends Parentfield {
   }
 
   /**
+   * Check if this array is empty. If all children are empty, then this field is
+   * also considered to be empty.
+   */
+  isEmpty() {
+    for (const child of this._children) {
+      if (!child.isEmpty()) {
+        // This field is not empty if any of the children is not empty.
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * @inheritdoc
    * @return {Object[]|Object} The values of the children of this array in the
    *                           format specified by {@link #format}.
@@ -80,6 +94,8 @@ export class Arrayfield extends Parentfield {
       value = {};
       for (const item of this._children) {
         if (!item.showValueInParent || !item.display) {
+          continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
           continue;
         }
         const data = item.getValue();
@@ -95,6 +111,8 @@ export class Arrayfield extends Parentfield {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
         if (!item.showValueInParent || !item.display) {
+          continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
           continue;
         }
         value[index] = item.getValue();

@@ -55,6 +55,12 @@ export class Field {
    */
   showValueInParent = true
   /**
+   * Whether or not the value of this field should be hidden from the output
+   * when it's empty.
+   * @type {Boolean}
+   */
+  hideValueIfEmpty = false
+  /**
    * Whether or not this field has the field {@link #collapsed} and the method
    * {@link #toggleCollapse()}
    *
@@ -78,6 +84,9 @@ export class Field {
    * @param  {Boolean} [args.showValueInParent] Whether or not the parent should
    *                                            include the value of this field
    *                                            in its value.
+   * @param  {Boolean} [args.hideValueIfEmpty]  Whether or not the value of this
+   *                                            field should be hidden from the
+   *                                            output when its empty.
    * @return {Field}                    This field.
    */
   init(id, args = {}) {
@@ -87,7 +96,8 @@ export class Field {
       format: '',
       helpText: '',
       conditions: {},
-      showValueInParent: true
+      showValueInParent: true,
+      hideValueIfEmpty: false
     }, args);
     this.id = id;
     this.format = args.format;
@@ -98,7 +108,16 @@ export class Field {
     this.index = args.index;
     this.parent = args.parent;
     this.showValueInParent = args.showValueInParent;
+    this.hideValueIfEmpty = args.hideValueIfEmpty;
     return this;
+  }
+
+  /**
+   * Check if this field is empty. By default, this returns false, but all field
+   * implementations should override this.
+   */
+  isEmpty() {
+    return false;
   }
 
   get display() {
