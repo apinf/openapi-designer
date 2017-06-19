@@ -1,6 +1,5 @@
 import {containerless, bindable} from 'aurelia-framework';
 import {Field} from './abstract/field';
-import {Parentfield} from './abstract/parentfield';
 
 /**
  * Optionfield is a {@link Field} that gives certain options to the user as
@@ -13,9 +12,8 @@ export class Optionfield extends Field {
    * @type {Array}
    */
   choices = [];
-  _dataSourceChoices = [];
   /**
-   * Sources from where to get dynamic choices.
+   * Sources where to get dynamic choices from.
    * @type {Array}
    */
   dataSources = [];
