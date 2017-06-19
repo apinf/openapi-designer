@@ -56,6 +56,10 @@ export class Typefield extends Field {
   collapsed = false;
   isCollapsible = true;
 
+  /*
+   * Called by child fields when they are collapsed/uncollapsed.
+   * Unused in Typefields, currently only used in Arrayfields.
+   */
   childCollapseChanged(field, isNowCollapsed) {}
 
   toggleCollapse() {
