@@ -43,9 +43,9 @@ export class Optionfield extends Field {
       format: 'dropdown',
       hideIfNoChoices: true
     }, args);
-    this.dataSources = args.dataSources;
     this.hideIfNoChoices = args.hideIfNoChoices;
     this.argChoices = args.choices;
+
     this.choices = [];
     for (const choice of args.choices) {
       if (typeof choice === 'string') {
@@ -74,7 +74,10 @@ export class Optionfield extends Field {
         });
       }
     }
-    if (this.choices.length === 0 && Object.getOwnPropertyNames(this.dataSources).length === 0) {
+
+    this.dataSources = args.dataSources;
+
+    if (this.choices.length === 0 && this.dataSources.length === 0) {
       // We don't want to leave the choices empty, so if there are no choices,
       // make a checkbox with no label.
       this.choices.push({
@@ -88,11 +91,47 @@ export class Optionfield extends Field {
     return super.init(id, args);
   }
 
+  created() {
+    const ds = this.dataSources;
+    this.dataSources = [];
+    for (let dataSource of ds) {
+      if (typeof dataSource === 'string') {
+        dataSource = {
+          source: dataSource,
+          key: '\${#}'
+        };
+      }
+      const target = this.resolveRef(dataSource.source);
+      dataSource.updateFunc = () => {
+        dataSource.choices = [];
+        for (const child of target.iterableChildren) {
+          const data = {
+            key: child.formatReferencePlusField(dataSource.key),
+            selected: false,
+            get conditionsFulfilled() {
+              return Optionfield.conditionsFulfilled(dataSource.localConditions, target)
+                  && Optionfield.conditionsFulfilled(dataSource.targetConditions, target);
+            }
+          };
+          if (dataSource.label) {
+            data.label = child.formatReferencePlusField(dataSource.label);
+          } else {
+            data.label = data.key;
+          }
+          dataSource.choices.push(data);
+        }
+      };
+      target.addChangeListener(dataSource.updateFunc);
+      dataSource.updateFunc();
+      this.dataSources.push(dataSource);
+    }
+  }
+
   shouldDisplay() {
     if (!this.hideIfNoChoices) {
       return super.shouldDisplay();
     }
-    for (const choice of this.choices) {
+    for (const choice of this.allChoices) {
       if (choice.conditionsFulfilled) {
         return super.shouldDisplay();
       }
@@ -115,75 +154,18 @@ export class Optionfield extends Field {
     return true;
   }
 
-  updateChoicesFromDataSources() {
-    this._dataSourceChoices = [];
-    for (const dataSource of this.dataSources) {
-      if (typeof dataSource === 'string') {
-        const target = this.resolveRef(dataSource);
-        if (target instanceof Parentfield) {
-          for (const child of target.iterableChildren) {
-            this._dataSourceChoices.push({
-              key: child.getValue(),
-              label: child.getValue(),
-              selected: false,
-              conditionsFulfilled: true
-            });
-          }
-        } else {
-          this._dataSourceChoices.push({
-            key: child.getValue(),
-            label: child.getValue(),
-            selected: false,
-            conditionsFulfilled: true
-          });
-        }
-      } else {
-        const target = this.resolveRef(dataSource.source);
-        if (target instanceof Parentfield) {
-          for (const child of target.iterableChildren) {
-            const data = {
-              key: child.formatReferencePlusField(dataSource.key),
-              selected: false,
-              get conditionsFulfilled() {
-                return Optionfield.conditionsFulfilled(dataSource.localConditions, child)
-                    && Optionfield.conditionsFulfilled(dataSource.targetConditions, child);
-              }
-            };
-            if (dataSource.label) {
-              data.label = child.formatReferencePlusField(dataSource.label);
-            } else {
-              data.label = data.key;
-            }
-            this._dataSourceChoices.push(data);
-          }
-        } else {
-          const data = {
-            key: target.formatReferencePlusField(dataSource.key),
-            selected: false,
-            get conditionsFulfilled() {
-              return Optionfield.conditionsFulfilled(dataSource.localConditions, target)
-                  && Optionfield.conditionsFulfilled(dataSource.targetConditions, target);
-            }
-          };
-          if (dataSource.label) {
-            data.label = target.formatReferencePlusField(dataSource.label);
-          } else {
-            data.label = data.key;
-          }
-          this._dataSourceChoices.push(data);
-        }
-      }
-    }
-  }
-
   get allChoices() {
     if (this.dataSources.length === 0) {
       return this.choices;
-    } else if (this.choices.length === 0) {
-      return this._dataSourceChoices;
     }
 
-    return this._dataSourceChoices.concat(this.choices);
+    let choices = this.choices;
+    for (const dataSource of this.dataSources) {
+      if (dataSource.choices) {
+        choices = choices.concat(dataSource.choices);
+      }
+    }
+    return choices;
   }
 
   /**
@@ -193,12 +175,7 @@ export class Optionfield extends Field {
    */
   getValue() {
     if (this.format === 'dropdown') {
-      for (const choice of this.choices) {
-        if (choice.selected) {
-          return choice.key;
-        }
-      }
-      return undefined;
+      return this.selectedChoice;
     } else if (this.format === 'checkbox') {
       if (this.checkboxFormat === 'simple') {
         return this.choices[0].selected;
