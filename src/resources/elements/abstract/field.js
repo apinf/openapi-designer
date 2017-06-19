@@ -119,6 +119,15 @@ export class Field {
   isEmpty() {
     return false;
   }
+  /**
+   * Recursively get an unique identifier for this field.
+   */
+  get path() {
+    if (!this.parent) {
+      return this.id;
+    }
+    return `${this.parent.path}.${this.id}`;
+  }
 
   get display() {
     return this.shouldDisplay();
