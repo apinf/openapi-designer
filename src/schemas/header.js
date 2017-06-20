@@ -22,6 +22,32 @@ export const header = {
         'termsofservice': {
           'type': 'text',
           'label': 'Terms of Service'
+        },
+        'contact': {
+          'type': 'object',
+          'children': {
+            'name': {
+              'type': 'text'
+            },
+            'email': {
+              'type': 'text'
+            },
+            'url': {
+              'type': 'text',
+              'label': 'URL'
+            }
+          }
+        },
+        'license': {
+          'type': 'object',
+          'children': {
+            'name': {
+              'type': 'text'
+            },
+            'url': {
+              'type': 'text'
+            }
+          }
         }
       }
     },
@@ -38,32 +64,6 @@ export const header = {
           'label': 'Base path'
         },
         'schemes': schemes
-      }
-    },
-    'contact': {
-      'type': 'object',
-      'children': {
-        'name': {
-          'type': 'text'
-        },
-        'email': {
-          'type': 'text'
-        },
-        'url': {
-          'type': 'text',
-          'label': 'URL'
-        }
-      }
-    },
-    'license': {
-      'type': 'object',
-      'children': {
-        'name': {
-          'type': 'text'
-        },
-        'url': {
-          'type': 'text'
-        }
       }
     },
     'externalDocs': externalDocs

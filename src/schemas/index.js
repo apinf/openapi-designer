@@ -10,8 +10,6 @@ import {responses} from './responses';
 export const fieldsToShow = {
   'header': [
     'info',
-    'contact',
-    'license',
     'host',
     'basePath',
     'schemes',
@@ -63,14 +61,6 @@ export const schema = {
     'info': {
       'type': 'link',
       'target': '/header/info'
-    },
-    'contact': {
-      'type': 'link',
-      'target': '/header/contact'
-    },
-    'license': {
-      'type': 'link',
-      'target': '/header/license'
     },
     'externalDocs': {
       'type': 'link',
