@@ -59,6 +59,14 @@ export class App {
     }
   }
 
+  delete() {
+    let userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
+    if (userInput === true) {
+      delete localStorage.cachedForm;
+      location.reload();
+    }
+  }
+  
   get yaml() {
     return YAML.stringify(this.forms.getValue(), 10, 2);
   }
