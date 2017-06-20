@@ -6,6 +6,9 @@
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
     </label>
-    <input type="text" id.bind="id" value.bind="value" placeholder.bind="placeholder">
+    <input type="text" id.bind="id" list.bind="listID & attr" value.bind="value" placeholder.bind="placeholder">
+    <datalist if.bind="autocomplete" id.bind="listID">
+      <option repeat.for="completion of autocomplete" value.bind="completion"/>
+    </datalist>
   </div>
 </template>

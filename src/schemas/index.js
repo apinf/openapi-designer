@@ -15,7 +15,8 @@ export const fieldsToShow = {
     'schemes'
   ],
   'types': ['definitions'],
-  'mime': ['consumes', 'produces']
+  'mime': ['consumes', 'produces'],
+  'global-security': ['security', 'securityDefinitions']
 };
 
 export const schema = {
@@ -23,10 +24,18 @@ export const schema = {
   'children': {
     header,
     mime,
-    security,
+    'global-security': security,
     tags,
     paths,
     types,
+    'security': {
+      'type': 'link',
+      'target': '/global-security/requirements'
+    },
+    'securityDefinitions': {
+      'type': 'link',
+      'target': '/global-security/definitions'
+    },
     'definitions': {
       'type': 'link',
       'target': '/types'

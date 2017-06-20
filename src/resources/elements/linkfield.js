@@ -20,6 +20,18 @@ export class Linkfield extends Field {
   }
 
   /**
+   * Check if this link doesn't currently have a resolvable target or if the
+   * target is empty.
+   */
+  isEmpty() {
+    const field = this.resolveTarget();
+    if (!field) {
+      return true;
+    }
+    return field.isEmpty();
+  }
+
+  /**
    * Resolve the path to the target.
    * @return {Field} The target field, or {@linkplain undefined} if the target
    *                 is this field or if {@link Field#resolveRef} returned
@@ -31,6 +43,23 @@ export class Linkfield extends Field {
       return undefined;
     }
     return field;
+  }
+
+  resolvePath(path) {
+    const parentResolveResult = super.resolvePath(path);
+    if (parentResolveResult) {
+      return parentResolveResult;
+    }
+
+    // If the target exists and the next path piece to be resolved targets the
+    // target, continue recursing from the target.
+    if (path[0] === ':target') {
+      const target = this.resolveTarget();
+      if (target) {
+        return target.resolvePath(path.splice(1));
+      }
+    }
+    return undefined;
   }
 
   /**

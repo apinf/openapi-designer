@@ -26,6 +26,8 @@ export class App {
         $(`#nav-${formID}`).addClass('open');
       }
     };
+
+    this.forms.addChangeListener(() => this.saveFormLocal());
   }
 
   attached() {
@@ -66,12 +68,13 @@ export class App {
     return data;
   }
 
+  saveFormLocal() {
+    window.localStorage.cachedForm = JSON.stringify(this.forms.getValue());
+  }
+
   get currentFormJSON() {
     if (fieldsToShow.hasOwnProperty(this.activeForm.id)) {
       const rawData = this.forms.getValue();
-      // This is a temporary-ish solution for saving the form data automatically.
-      // Basically this saves the form every time the preview updates.
-      window.localStorage.cachedForm = JSON.stringify(rawData);
       let output = '';
       for (const field of fieldsToShow[this.activeForm.id]) {
         output += `"${field}": ${JSON.stringify(rawData[field], '', '  ')}\n`;

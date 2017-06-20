@@ -10,12 +10,23 @@ export class LazyLinkfield extends Field {
   target = '#';
   overrides = {};
   child = undefined;
+  cachedValue = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
     this.target = args.target || '#';
     this.overrides = args.overrides || {};
     return super.init(id, args);
+  }
+
+  /**
+   * Check if this link doesn't currently have a child or if the child is empty.
+   */
+  isEmpty() {
+    if (!this.child) {
+      return true;
+    }
+    return this.child.isEmpty();
   }
 
   /**
@@ -44,6 +55,11 @@ export class LazyLinkfield extends Field {
       } else {
         target[lastFieldPathEntry] = value;
       }
+    }
+    // Use cached value if it has been set.
+    if (this.cachedValue) {
+      this.child.setValue(this.cachedValue);
+      this.cachedValue = undefined;
     }
   }
 
@@ -93,6 +109,10 @@ export class LazyLinkfield extends Field {
    */
   setValue(value) {
     if (!this.child) {
+      // Caching values helps when using setValue() in a big form. By caching
+      // the values, we won't lose setValue data due to dependencies of this
+      // field not getting their value set before this field.
+      this.cachedValue = value;
       return;
     }
     this.child.setValue(value);
@@ -108,5 +128,19 @@ export class LazyLinkfield extends Field {
    */
   getValue() {
     return this.child ? this.child.getValue() : undefined;
+  }
+
+  resolvePath(path) {
+    const parentResolveResult = super.resolvePath(path);
+    if (parentResolveResult) {
+      return parentResolveResult;
+    }
+
+    // If the child exists and the next path piece to be resolved targets the
+    // child, continue recursing from the child.
+    if (this.child && path[0] === ':child') {
+      return this.child.resolvePath(path.splice(1));
+    }
+    return undefined;
   }
 }

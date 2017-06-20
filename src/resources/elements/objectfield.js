@@ -13,6 +13,11 @@ export class Objectfield extends Parentfield {
    * The fields to display in the legend slot of the form.
    */
   legendChildren = undefined;
+  /**
+   * The child that is currently open in the tabbed view.
+   * @type {Field}
+   */
+  activeChild = undefined;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
@@ -21,6 +26,30 @@ export class Objectfield extends Parentfield {
     this.collapsed = args.collapsed;
     this.legendChildren = args.legendChildren;
     return super.init(id, args);
+  }
+
+  attached() {
+    // Is this a tabbed objectfield that has children?
+    if (this.iterableChildren.length > 0 && this.format === 'tabs') {
+      // Are there no active tabs?
+      if ($(this.tabs).find('.tab-link.open').length === 0) {
+        // Then activate the first tab.
+        this.switchTab(this.iterableChildren[0]);
+      }
+    }
+  }
+
+  /**
+   * Check if this object is empty. If all children are empty, then this field
+   * is also considered to be empty.
+   */
+  isEmpty() {
+    for (const child of Object.values(this.allChildren)) {
+      if (!child.isEmpty()) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -32,6 +61,8 @@ export class Objectfield extends Parentfield {
     const value = {};
     for (const [key, field] of Object.entries(this.allChildren)) {
       if (!field || !field.showValueInParent || !field.display) {
+        continue;
+      } else if (field.isEmpty() && field.hideValueIfEmpty) {
         continue;
       }
       value[key] = field.getValue();
@@ -73,6 +104,14 @@ export class Objectfield extends Parentfield {
    */
   addChild(child) {
     this._children[child.id] = child;
+    this.onChange(child);
+  }
+
+  switchTab(toChild) {
+    this.activeChild = toChild;
+    const tabElem = $(`#tab-${toChild.path.replace(/\./g, '\\.')}`);
+    tabElem.parent().find('.tab-link.open').removeClass('open');
+    tabElem.addClass('open');
   }
 
   /** @inheritdoc */
@@ -91,11 +130,13 @@ export class Objectfield extends Parentfield {
       }
     }
     clone.init(this.id, {
+      format: this.format,
       label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: parent || this.parent,
       index: this.index,
+      hideValueIfEmpty: this.hideValueIfEmpty,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });
@@ -103,9 +144,9 @@ export class Objectfield extends Parentfield {
   }
 
   resolvePath(path) {
-    const superResolv = super.resolvePath(path);
-    if (superResolv) {
-      return superResolv;
+    const parentResolveResult = super.resolvePath(path);
+    if (parentResolveResult) {
+      return parentResolveResult;
     }
 
     if (this.hasLegend) {
@@ -115,5 +156,17 @@ export class Objectfield extends Parentfield {
       }
     }
     return undefined;
+  }
+
+  /**
+   * @return {String} The name of the HTML file that displays the object with
+   *                  the format specified in {@link #format}.
+   * @private
+   */
+  getViewStrategy() {
+    if (this.format === 'tabs') {
+      return 'resources/elements/objectfield-tabbed.html';
+    }
+    return 'resources/elements/objectfield.html';
   }
 }

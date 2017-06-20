@@ -13,10 +13,22 @@ export class Arrayfield extends Parentfield {
    */
   item;
   /**
+   * The text that is displayed in the new item -button rather than the label of
+   * the child.
+   * @type {String}
+   */
+  newItemText;
+  /**
    * The field that is used as the key if {@link #format} is {@linkplain map}
    * @type {String}
    */
   keyField = '_key';
+  /**
+   * The field that is used as the value if {@link #format} is {@linkplain map}
+   * This field is optional. By default, the whole value will be used as-is.
+   * @type {String}
+   */
+  valueField = undefined;
   /**
    * Whether or not to add {@linkplain #<index>} to the end of the labels of
    * children.
@@ -34,21 +46,52 @@ export class Arrayfield extends Parentfield {
 
   /**
    * @inheritdoc
-   * @param {Field}   [args.item]      The base object that is cloned to create
-   *                                   new children.
-   * @param {String}  [args.keyField]  The field that is used as the key if
-   *                                   {@link #format} is {@linkplain map}
-   * @param {Boolean} [args.collapsed] Whether or not the UI element should be
-   *                                   collapsed.
+   * @param {Field}   [args.item]        The base object that is cloned to create
+   *                                     new children.
+   * @param {String}  [args.newItemText] The text that is displayed in the new
+   *                                     item -button rather than the label of
+   *                                     the child.
+   * @param {String}  [args.keyField]    The field that is used as the key if
+   *                                     {@link #format} is {@linkplain map}
+   * @param {String}  [args.valueField]  The field that is used as the value if
+   *                                     {@link #format} is {@linkplain map}.
+   *                                     This field is optional. By default, the
+   *                                     whole value will be used as-is.
+   * @param {Boolean} [args.collapsed]   Whether or not the UI element should be
+   *                                     collapsed.
    */
   init(id = '', args = {}) {
-    args = Object.assign({format: 'array', keyField: '_key', addIndexToChildLabel: true, collapseManagement: false, collapsed: false}, args);
+    args = Object.assign({
+      format: 'array',
+      newItemText: undefined,
+      keyField: '_key',
+      valueField: undefined,
+      addIndexToChildLabel: true,
+      collapseManagement: false,
+      collapsed: false
+    }, args);
     this.item = args.item;
+    this.newItemText = args.newItemText;
     this.keyField = args.keyField;
+    this.valueField = args.valueField;
     this.addIndexToChildLabel = args.addIndexToChildLabel;
     this.collapseManagement = args.collapseManagement;
     this.collapsed = args.collapsed;
     return super.init(id, args);
+  }
+
+  /**
+   * Check if this array is empty. If all children are empty, then this field is
+   * also considered to be empty.
+   */
+  isEmpty() {
+    for (const child of this._children) {
+      if (!child.isEmpty()) {
+        // This field is not empty if any of the children is not empty.
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -63,16 +106,24 @@ export class Arrayfield extends Parentfield {
       for (const item of this._children) {
         if (!item.showValueInParent || !item.display) {
           continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
+          continue;
         }
         const data = item.getValue();
         const key = data[this.keyField];
-        delete data[this.keyField];
-        value[key] = data;
+        if (this.valueField) {
+          value[key] = data[this.valueField];
+        } else {
+          delete data[this.keyField];
+          value[key] = data;
+        }
       }
     } else if (this.format === 'array') {
       value = [];
       for (const [index, item] of Object.entries(this._children)) {
         if (!item.showValueInParent || !item.display) {
+          continue;
+        } else if (item.isEmpty() && item.hideValueIfEmpty) {
           continue;
         }
         value[index] = item.getValue();
@@ -125,6 +176,7 @@ export class Arrayfield extends Parentfield {
     if (this.collapseManagement) {
       field.setCollapsed(false);
     }
+    this.onChange(field);
     return field.index;
   }
 
@@ -144,6 +196,7 @@ export class Arrayfield extends Parentfield {
       const item = this._children[i];
       item.index = i;
     }
+    this.onChange();
   }
 
   /** @inheritdoc */
@@ -160,13 +213,33 @@ export class Arrayfield extends Parentfield {
   }
 
   resolvePath(path) {
-    const superResolv = super.resolvePath(path);
-    if (superResolv) {
-      return superResolv;
+    const parentResolveResult = super.resolvePath(path);
+    if (parentResolveResult) {
+      return parentResolveResult;
+    }
+
+    if (this.format === 'map') {
+      // Matches `fieldName(expectedValue)`
+      // First capture group: Field name
+      // Second capture group: Expected value of given field.
+      const match = (/([a-zA-Z0-9]+)\((.+?)\)/g).exec(path[0]);
+      if (match) {
+        // Match found, loop through children to find a child that has the
+        // expected value in the given field.
+
+        // Result unpacking: first element is the whole match and the remaining
+        // elements are capture group results.
+        const [, fieldName, expectedValue] = match;
+        for (const child of this._children) {
+          if (child.getValue()[fieldName] === expectedValue) {
+            return child.resolvePath(path.splice(1));
+          }
+        }
+      }
     }
 
     if (path[0] === ':item') {
-      return this.item;
+      return this.item.resolvePath(path.splice(1));
     }
     return undefined;
   }

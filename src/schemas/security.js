@@ -1,6 +1,35 @@
-export const security = {
+const securityRequirements = {
   'type': 'array',
   'format': 'map',
+  'keyField': 'name',
+  'valueField': 'scopes',
+  'label': 'Requirements',
+  'item': {
+    'label': 'Security Requirement',
+    'type': 'object',
+    'children': {
+      'name': {
+        'type': 'option',
+        'format': 'dropdown',
+        'dataSources': [{
+          'source': '/global-security/definitions',
+          'key': '#:key'
+        }]
+      },
+      'scopes': {
+        'type': 'array',
+        'item': {
+          'type': 'text'
+        }
+      }
+    }
+  }
+};
+
+const securityDefinitions = {
+  'type': 'array',
+  'format': 'map',
+  'label': 'Definitions',
   'keyField': 'key',
   'item': {
     'label': 'Security definition',
@@ -60,24 +89,35 @@ export const security = {
             'conditions': {
               '../flow': ['password', 'application', 'accessCode']
             }
-          }/*,
+          },
           'scopes': {
             'type': 'array',
             'format': 'map',
             'keyField': 'key',
+            'valueField': 'value',
             'item': {
               'type': 'object',
-              'keyField': 'key',
               'children': {
                 'key': {
                   'type': 'text'
                 },
-                'value':
+                'description': {
+                  'type': 'text'
+                }
               }
             }
-          }*/
+          }
         }
       }
     }
+  }
+};
+
+export const security = {
+  'type': 'object',
+  'label': 'Security',
+  'children': {
+    definitions: securityDefinitions,
+    requirements: securityRequirements
   }
 };
