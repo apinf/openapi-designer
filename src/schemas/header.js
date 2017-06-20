@@ -1,4 +1,5 @@
 import {schemes} from './schemes';
+import {externalDocs} from './externalDocs';
 
 export const header = {
   'type': 'object',
