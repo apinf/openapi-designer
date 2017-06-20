@@ -14,7 +14,8 @@ export const fieldsToShow = {
     'license',
     'host',
     'basePath',
-    'schemes'
+    'schemes',
+    'externalDocs'
   ],
   'global-definitions': ['definitions', 'parameters', 'responses'],
   'mime': ['consumes', 'produces'],
@@ -70,6 +71,10 @@ export const schema = {
     'license': {
       'type': 'link',
       'target': '/header/license'
+    },
+    'externalDocs': {
+      'type': 'link',
+      'target': '/header/externalDocs'
     },
     'host': {
       'type': 'link',

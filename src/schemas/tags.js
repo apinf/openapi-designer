@@ -1,3 +1,5 @@
+import {externalDocs} from './externalDocs';
+
 export const tags = {
   'type': 'array',
   'item': {
@@ -10,17 +12,7 @@ export const tags = {
       'description': {
         'type': 'textarea'
       },
-      'externalDocs': {
-        'type': 'object',
-        'children': {
-          'description': {
-            'type': 'textarea'
-          },
-          'url': {
-            'type': 'text'
-          }
-        }
-      }
+      'externalDocs': externalDocs
     }
   }
 };

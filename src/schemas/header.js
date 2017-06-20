@@ -64,6 +64,7 @@ export const header = {
           'type': 'text'
         }
       }
-    }
+    },
+    'externalDocs': externalDocs
   }
 };
