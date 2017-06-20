@@ -139,6 +139,16 @@ export const types = {
           '../type': 'array'
         }
       },
+      'required': {
+        'type': 'array',
+        'item': {
+          'type': 'text',
+          'label': 'Required subfield'
+        },
+        'conditions': {
+          '../type': 'object'
+        }
+      },
       'properties': {
         'type': 'lazylink',
         'target': '/global-definitions/types',
