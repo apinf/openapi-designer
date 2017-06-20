@@ -13,11 +13,13 @@ const operationChildren = {
     'type': 'text'
   },
   'description': {
-    'type': 'textarea'
+    'type': 'textarea',
+    'hideValueIfEmpty': true
   },
   'deprecated': {
     'type': 'option',
-    'format': 'checkbox'
+    'format': 'checkbox',
+    'hideValueIfEmpty': true
   },
   'overrides': {
     'type': 'object',
@@ -30,6 +32,26 @@ const operationChildren = {
       'security': securityRequirements
     }
   },
+  'consumes': {
+    'type': 'link',
+    'target': '../overrides/consumes',
+    'hideValueIfEmpty': true
+  },
+  'produces': {
+    'type': 'link',
+    'target': '../overrides/produces',
+    'hideValueIfEmpty': true
+  },
+  'schemes': {
+    'type': 'link',
+    'target': '../overrides/schemes',
+    'hideValueIfEmpty': true
+  },
+  'security': {
+    'type': 'link',
+    'target': '../overrides/security',
+    'hideValueIfEmpty': true
+  },
   'tags': {
     'type': 'array',
     'item': {
@@ -37,6 +59,7 @@ const operationChildren = {
       'format': 'dropdown',
       'label': 'Tag',
       'hideIfNoChoices': false,
+      'hideValueIfEmpty': true,
       'dataSources': [{
         'source': '/tags',
         'key': '${#/name}'
@@ -47,6 +70,7 @@ const operationChildren = {
     'type': 'array',
     'collapseManagement': true,
     'addIndexToChildLabel': false,
+    'hideValueIfEmpty': true,
     'newItemText': 'New Response',
     'item': response
   },
@@ -54,6 +78,7 @@ const operationChildren = {
     'type': 'array',
     'collapseManagement': true,
     'addIndexToChildLabel': false,
+    'hideValueIfEmpty': true,
     'newItemText': 'New Parameter',
     'item': parameter
   }
