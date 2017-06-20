@@ -19,7 +19,7 @@ export const header = {
         'description': {
           'type': 'textarea'
         },
-        'termsofservice': {
+        'termsOfService': {
           'type': 'text',
           'label': 'Terms of Service'
         },
