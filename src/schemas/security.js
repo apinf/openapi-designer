@@ -19,7 +19,8 @@ const securityRequirements = {
       'scopes': {
         'type': 'array',
         'item': {
-          'type': 'text'
+          'type': 'text',
+          'label': 'OAuth2 scope'
         }
       }
     }
@@ -94,9 +95,10 @@ const securityDefinitions = {
             'type': 'array',
             'format': 'map',
             'keyField': 'key',
-            'valueField': 'value',
+            'valueField': 'description',
             'item': {
               'type': 'object',
+              'label': 'Scope',
               'children': {
                 'key': {
                   'type': 'text'
