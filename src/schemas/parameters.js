@@ -2,7 +2,7 @@ import {typeFormatChoices} from './types';
 
 export const parameter = {
   'type': 'object',
-  'label': 'Parameter #$index: ${#/paramName}',
+  'label': 'Parameter #$index: ${#/name}',
   'children': {
     'name': {
       'type': 'text'
@@ -118,6 +118,7 @@ namedParameter.legendChildren = {
     'placeholder': 'Enter name...'
   }
 };
+namedParameter.label = 'Parameter #$index: ${#/paramName}';
 
 export const parameters = {
   'type': 'array',
