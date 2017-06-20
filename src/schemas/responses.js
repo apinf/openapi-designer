@@ -1,8 +1,6 @@
 export const response = {
   'type': 'object',
   'label': 'Response #$index for HTTP ${#/httpStatus}',
-  'keyKey': 'httpStatus',
-  'keyPlaceholder': 'Enter HTTP status code...',
   'legendChildren': {
     'type': {
       'type': 'option',
@@ -27,6 +25,7 @@ export const response = {
     'httpStatus': {
       'type': 'text',
       'label': 'HTTP status code',
+      'keyPlaceholder': 'Enter HTTP status code...',
       'infoText': 'Set to `default` to handle all other statuses',
       'conditions': {
         '../type': 'response'
