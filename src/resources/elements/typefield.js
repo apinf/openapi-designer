@@ -197,19 +197,32 @@ export class Typefield extends Field {
     return value;
   }
 
+  /**
+   * Set the value of this field. This reverses anything that{@link #getValue()}
+   * does.
+   * @param {Object} value The value to set to this field.
+   */
   setValue(value) {
+    // If the key is available in the given value object, get the key from there
+    // and delete the field (from the value object) it was stored in.
     if (this.keyKey && value.hasOwnProperty(this.keyKey)) {
       this.key = value[this.keyKey];
       delete value[this.keyKey];
     }
+    // Do the same for the type
     if (this.typeKey && value.hasOwnProperty(this.typeKey)) {
       this.setType(value[this.typeKey]);
       delete value[this.typeKey];
     }
-    if (!this.valueKey && typeof value === 'object' && !Array.isArray(value)) {
-      this.child.setValue(value);
+    // Try to reverse getValue() in a reliable way.
+    // Currently this looks at whether or not valueKey is set and also the type
+    // of the object found with valueKey.
+    const valueInValueKey = value[this.valueKey || 'value'];
+    const valueIsNotObject = typeof valueInValueKey === 'object' && !Array.isArray(valueInValueKey);
+    if (this.valueKey || ((this.typeKey || this.keyKey) && valueIsNotObject)) {
+      this.child.setValue(valueInValueKey);
     } else {
-      this.child.setValue(value[this.valueKey || 'value']);
+      this.child.setValue(value);
     }
   }
 
