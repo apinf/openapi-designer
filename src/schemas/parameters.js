@@ -106,7 +106,10 @@ export const parameter = {
         'conditions': [
           '../in': ['query', 'formData']
         ]
-      }]
+      }],
+      'conditions': {
+        '../in': ['path', 'query', 'header', 'formData']
+      }
     }
   }
 };
