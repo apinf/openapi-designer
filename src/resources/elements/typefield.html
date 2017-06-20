@@ -6,7 +6,7 @@
       </select>
       <input type="text" if.bind="keyKey" value.bind="key" placeholder.bind="keyPlaceholder">
     </legend>
-    <h3 class="title">
+    <h3 click.delegate="toggleCollapse()" class="title">
       ${label}
       <tooltip if.bind="helpText" text.bind="helpText">
         <img src="res/info.svg" alt="Info"/>
