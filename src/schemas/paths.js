@@ -68,6 +68,7 @@ const operationChildren = {
   },
   'responses': {
     'type': 'array',
+    'format': 'map',
     'collapseManagement': true,
     'addIndexToChildLabel': false,
     'hideValueIfEmpty': true,
@@ -93,7 +94,7 @@ export const paths = {
   'collapseManagement': true,
   'item': {
     'type': 'selectable',
-    'label': 'Path ${#/name}',
+    'label': 'Path ${#:key}',
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {
