@@ -144,7 +144,7 @@ export const types = {
         'target': '/global-definitions/types',
         'overrides': {
           'labelFormat': 'Properties',
-          '#/:item;labelFormat': 'Property'
+          '#/:item;labelFormat': 'Property #$index: ${#/name}'
         },
         'conditions': {
           '../type': 'object'
