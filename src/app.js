@@ -8,7 +8,7 @@ export class App {
     // Allow access from browser console
     window.$oai = this;
 
-    this.forms = parseJSON('swagger', schema);
+    this.forms = parseJSON('swagger', JSON.parse(JSON.stringify(schema)));
     if (window.localStorage.cachedForm) {
       this.forms.setValue(JSON.parse(window.localStorage.cachedForm));
     }

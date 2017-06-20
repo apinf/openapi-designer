@@ -8,8 +8,6 @@ import {fields} from './elements/index';
  * @return {Field}           The field created from the given data.
  */
 export function parseJSON(id, obj, parent = undefined) {
-  // Create shallow copy of object to avoid unwanted pointer-like things.
-  obj = Object.assign({}, obj);
   const createdObj = new fields[obj.type]();
   if (obj.type === 'object') {
     for (const [key, field] of Object.entries(obj.children)) {
