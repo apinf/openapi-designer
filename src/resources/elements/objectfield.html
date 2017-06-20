@@ -12,7 +12,7 @@
       </tooltip>
     </h3>
     <template repeat.for="childElem of iterableChildren">
-      <compose containerless if.bind="!collapsed" view-model.bind="childElem"></compose>
+      <compose containerless if.bind="!collapsed && !childElem.noView" view-model.bind="childElem"></compose>
     </template>
   </fieldset>
 </template>
