@@ -1,3 +1,5 @@
+import {schemes} from './schemes';
+
 export const header = {
   'type': 'object',
   'showValueInParent': false,
@@ -34,23 +36,7 @@ export const header = {
           'type': 'text',
           'label': 'Base path'
         },
-        'schemes': {
-          'type': 'option',
-          'format': 'checkbox',
-          'choices': [{
-            'key': 'http',
-            'label': 'HTTP'
-          }, {
-            'key': 'https',
-            'label': 'HTTPS'
-          }, {
-            'key': 'ws',
-            'label': 'WebSocket'
-          }, {
-            'key': 'wss',
-            'label': 'Secure WebSocket'
-          }]
-        }
+        'schemes': schemes
       }
     },
     'contact': {

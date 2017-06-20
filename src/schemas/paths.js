@@ -1,23 +1,61 @@
-const methodDefinition = {
-  'label': '${#:method} handler',
-  'type': 'object',
-  'children': {
-    'operationId': {
-      'label': 'Operation ID',
-      'type': 'text'
-    },
-    'summary': {
-      'type': 'text'
-    },
-    'description': {
-      'type': 'textarea'
-    },
-    'tags': {
-      'type': 'array',
-      'item': {
-        'type': 'text'
-      }
+import {mimeTypeArray} from './mime';
+import {schemes} from './schemes';
+import {securityRequirements} from './security';
+import {response} from './responses';
+import {parameter} from './parameters';
+
+const operationChildren = {
+  'operationId': {
+    'label': 'Operation ID',
+    'type': 'text'
+  },
+  'summary': {
+    'type': 'text'
+  },
+  'description': {
+    'type': 'textarea'
+  },
+  'deprecated': {
+    'type': 'option',
+    'format': 'checkbox'
+  },
+  'overrides': {
+    'type': 'object',
+    'collapsed': 'true',
+    'showValueInParent': false,
+    'children': {
+      'consumes': mimeTypeArray,
+      'produces': mimeTypeArray,
+      'schemes': schemes,
+      'security': securityRequirements
     }
+  },
+  'tags': {
+    'type': 'array',
+    'item': {
+      'type': 'option',
+      'format': 'dropdown',
+      'label': 'Tag',
+      'hideIfNoChoices': false,
+      'dataSources': [{
+        'source': '/tags',
+        'key': '${#/name}'
+      }]
+    }
+  },
+  'responses': {
+    'type': 'array',
+    'collapseManagement': true,
+    'addIndexToChildLabel': false,
+    'newItemText': 'New Response',
+    'item': response
+  },
+  'parameters': {
+    'type': 'array',
+    'collapseManagement': true,
+    'addIndexToChildLabel': false,
+    'newItemText': 'New Parameter',
+    'item': parameter
   }
 };
 
@@ -28,98 +66,83 @@ export const paths = {
   'addIndexToChildLabel': false,
   'collapseManagement': true,
   'item': {
-    'type': 'object',
+    'type': 'selectable',
     'label': 'Path ${#/name}',
-    'legendChildren': {
-      'name': {
-        'type': 'text',
-        'label': 'Enter path...'
-      }
-    },
-    'children': {
-      'title': {
-        'type': 'text',
-        'conditions': {
-          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
-        }
-      },
-      'methodDefinition': {
-        'display': false,
-        'collapsed': true,
+    'keyKey': 'name',
+    'keyPlaceholder': 'Enter path...',
+    'types': {
+      'operation': {
         'type': 'object',
+        'format': 'tabs',
+        'label': '',
         'children': {
-          'operationId': {
-            'label': 'Operation ID',
-            'type': 'text'
+          'get': {
+            'type': 'object',
+            'label': 'GET',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
           },
-          'summary': {
-            'type': 'text'
+          'put': {
+            'type': 'object',
+            'label': 'PUT',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
           },
-          'description': {
-            'type': 'textarea'
+          'post': {
+            'type': 'object',
+            'label': 'POST',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
           },
-          'tags': {
+          'delete': {
+            'type': 'object',
+            'label': 'DELETE',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
+          },
+          'options': {
+            'type': 'object',
+            'label': 'OPTIONS',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
+          },
+          'head': {
+            'type': 'object',
+            'label': 'HEAD',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
+          },
+          'patch': {
+            'type': 'object',
+            'label': 'PATCH',
+            'hideValueIfEmpty': true,
+            'children': operationChildren
+          },
+          'parameters': {
             'type': 'array',
-            'item': {
-              'type': 'text'
-            }
+            'label': 'Params',
+            'collapseManagement': true,
+            'addIndexToChildLabel': false,
+            'newItemText': 'New Parameter',
+            'item': parameter
           }
         }
       },
-      'get': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'GET handler',
-          '_display': true
-        }
-      },
-      'put': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'PUT handler',
-          '_display': true
-        }
-      },
-      'post': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'POST handler',
-          '_display': true
-        }
-      },
-      'delete': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'DELETE handler',
-          '_display': true
-        }
-      },
-      'options': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'OPTIONS handler',
-          '_display': true
-        }
-      },
-      'head': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'HEAD handler',
-          '_display': true
-        }
-      },
-      'patch': {
-        'type': 'lazylink',
-        'target': '../methodDefinition',
-        'overrides': {
-          'labelFormat': 'PATCH handler',
-          '_display': true
+      'reference': {
+        'type': 'object',
+        'label': '',
+        'children': {
+          '$ref': {
+            'type': 'option',
+            'format': 'dropdown',
+            'label': 'Target',
+            'hideIfNoChoices': false,
+            'dataSources': [{
+              'source': '/paths',
+              'key': '#/paths/${#:key}',
+              'label': 'Path ${#:key}'
+            }]
+          }
         }
       }
     }

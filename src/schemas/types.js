@@ -1,3 +1,76 @@
+export const typeFormatChoices = [
+  {
+    'key': 'int32',
+    'label': '32-bit integer',
+    'conditions': {
+      '../type': 'integer'
+    }
+  },
+  {
+    'key': 'int64',
+    'label': '64-bit integer',
+    'conditions': {
+      '../type': 'integer'
+    }
+  },
+  {
+    'key': 'float',
+    'label': '32-bit floating point',
+    'conditions': {
+      '../type': 'number'
+    }
+  },
+  {
+    'key': 'double',
+    'label': '64-bit floating point',
+    'conditions': {
+      '../type': 'number'
+    }
+  },
+  {
+    'key': '',
+    'label': 'String',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'byte',
+    'label': 'Byte (Base64)',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'binary',
+    'label': 'Binary (octet sequence)',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'date',
+    'label': 'Date',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'date-time',
+    'label': 'Date and Time',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'password',
+    'label': 'Password',
+    'conditions': {
+      '../type': 'string'
+    }
+  }
+];
+
 export const types = {
   'type': 'array',
   'format': 'map',
@@ -5,9 +78,10 @@ export const types = {
   'showValueInParent': false,
   'addIndexToChildLabel': false,
   'collapseManagement': true,
+  'newItemText': 'New Type',
   'item': {
     'type': 'object',
-    'label': 'Type ${#/name}',
+    'label': 'Type #$index: ${#/name}',
     'legendChildren': {
       'type': {
         'type': 'option',
@@ -24,8 +98,14 @@ export const types = {
     },
     'children': {
       '$ref': {
-        'type': 'text',
+        'type': 'option',
+        'format': 'dropdown',
         'label': 'Target',
+        'dataSources': [{
+          'source': '/global-definitions/types',
+          'key': '#/definitions/${#/name}',
+          'label': 'Type ${#/name}'
+        }],
         'conditions': {
           '../type': 'reference'
         }
@@ -45,40 +125,11 @@ export const types = {
       'format': {
         'type': 'option',
         'format': 'dropdown',
-        'choices': [
-          {
-            'key': 'int32',
-            'label': '32-bit integer',
-            'conditions': {
-              '../type': 'integer'
-            }
-          },
-          {
-            'key': 'int64',
-            'label': '64-bit integer',
-            'conditions': {
-              '../type': 'integer'
-            }
-          },
-          {
-            'key': 'float',
-            'label': '32-bit floating point',
-            'conditions': {
-              '../type': 'number'
-            }
-          },
-          {
-            'key': 'double',
-            'label': '64-bit floating point',
-            'conditions': {
-              '../type': 'number'
-            }
-          }
-        ]
+        'choices': typeFormatChoices
       },
-      'item': {
+      'items': {
         'type': 'lazylink',
-        'target': '/types/:item',
+        'target': '/global-definitions/types/:item',
         'overrides': {
           'labelFormat': 'Array item',
           'legendChildren/name': null,
@@ -90,7 +141,7 @@ export const types = {
       },
       'properties': {
         'type': 'lazylink',
-        'target': '/types',
+        'target': '/global-definitions/types',
         'overrides': {
           'labelFormat': 'Properties',
           '#/:item;labelFormat': 'Property'
