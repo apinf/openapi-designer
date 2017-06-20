@@ -13,7 +13,7 @@ const securityRequirements = {
         'format': 'dropdown',
         'dataSources': [{
           'source': '/global-security/definitions',
-          'key': '#:key'
+          'key': '${#:key}'
         }]
       },
       'scopes': {
