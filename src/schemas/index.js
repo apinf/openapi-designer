@@ -32,6 +32,7 @@ export const schema = {
       'type': 'object',
       'format': 'tabs',
       'label': 'Global definitions',
+      'showValueInParent': false,
       'children': {
         types,
         parameters,
