@@ -19,7 +19,7 @@ export const response = {
         'label': 'Response ${#:key}'
       }],
       'conditions': {
-        '../type': 'reference'
+        '../x-oad-type': 'reference'
       }
     },
     'httpStatus': {
@@ -28,13 +28,13 @@ export const response = {
       'keyPlaceholder': 'Enter HTTP status code...',
       'infoText': 'Set to `default` to handle all other statuses',
       'conditions': {
-        '../type': 'response'
+        '../x-oad-type': 'response'
       }
     },
     'description': {
       'type': 'textarea',
       'conditions': {
-        '../type': 'response'
+        '../x-oad-type': 'response'
       }
     },
     'schema': {
@@ -47,7 +47,7 @@ export const response = {
         'legendChildren/type/columns': 8
       },
       'conditions': {
-        '../type': 'response'
+        '../x-oad-type': 'response'
       }
     }
   }
