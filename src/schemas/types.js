@@ -139,22 +139,28 @@ export const types = {
           '../type': 'array'
         }
       },
-      'required': {
-        'type': 'array',
-        'item': {
-          'type': 'text',
-          'label': 'Required subfield'
-        },
-        'conditions': {
-          '../type': 'object'
-        }
-      },
       'properties': {
         'type': 'lazylink',
         'target': '/global-definitions/types',
         'overrides': {
           'labelFormat': 'Properties',
           '#/:item;labelFormat': 'Property #$index: ${#/name}'
+        },
+        'conditions': {
+          '../type': 'object'
+        }
+      },
+      'required': {
+        'type': 'array',
+        'item': {
+          'type': 'option',
+          'format': 'dropdown',
+          'dataSources': [{
+            'source': '../../properties/:child',
+            'key': '${#/name}',
+            'label': 'Field ${#/name}'
+          }],
+          'label': 'Required subfield'
         },
         'conditions': {
           '../type': 'object'
