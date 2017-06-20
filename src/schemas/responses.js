@@ -2,7 +2,7 @@ export const response = {
   'type': 'object',
   'label': 'Response #$index for HTTP ${#/httpStatus}',
   'legendChildren': {
-    'type': {
+    'x-oad-type': {
       'type': 'option',
       'choices': ['response', 'reference']
     }
@@ -54,7 +54,7 @@ export const response = {
 };
 
 const namedResponse = JSON.parse(JSON.stringify(response));
-namedResponse.legendChildren.type.columns = 4;
+namedResponse.legendChildren['x-oad-type'].columns = 4;
 namedResponse.legendChildren.responseName = {
   'type': 'text',
   'placeholder': 'Enter name...',
