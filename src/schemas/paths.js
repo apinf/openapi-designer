@@ -71,7 +71,7 @@ const operationChildren = {
     'format': 'map',
     'collapseManagement': true,
     'addIndexToChildLabel': false,
-    'hideValueIfEmpty': true,
+    'hideValueIfEmpty': false,
     'newItemText': 'New Response',
     'keyField': 'httpStatus',
     'item': response
