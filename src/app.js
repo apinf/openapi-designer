@@ -59,22 +59,36 @@ export class App {
     }
   }
 
+  delete() {
+    let userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
+    if (userInput === true) {
+      delete localStorage.cachedForm;
+      location.reload();
+    }
+  }
+
+  getFormData() {
+    const data = this.forms.getValue();
+    data.swagger = '2.0';
+    return data;
+  }
+
   get yaml() {
-    return YAML.stringify(this.forms.getValue(), 10, 2);
+    return YAML.stringify(this.getFormData(), 10, 2);
   }
 
   get json() {
-    const data = JSON.stringify(this.forms.getValue(), '', '  ');
+    const data = JSON.stringify(this.getFormData(), '', '  ');
     return data;
   }
 
   saveFormLocal() {
-    window.localStorage.cachedForm = JSON.stringify(this.forms.getValue());
+    window.localStorage.cachedForm = JSON.stringify(this.getFormData());
   }
 
   get currentFormJSON() {
     if (fieldsToShow.hasOwnProperty(this.activeForm.id)) {
-      const rawData = this.forms.getValue();
+      const rawData = this.getFormData();
       let output = '';
       for (const field of fieldsToShow[this.activeForm.id]) {
         output += `"${field}": ${JSON.stringify(rawData[field], '', '  ')}\n`;

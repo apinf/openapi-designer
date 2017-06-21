@@ -9,6 +9,7 @@ import {responses} from './responses';
 
 export const fieldsToShow = {
   'header': [
+    'swagger',
     'info',
     'host',
     'basePath',

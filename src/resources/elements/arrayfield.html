@@ -13,7 +13,7 @@
     </div>
     <div class="items" if.bind="!collapsed">
       <template repeat.for="childElem of iterableChildren">
-        <div class="item c${childElem.columns} columns">
+        <div class="item c${childElem.columns} columns" if.bind="!childElem.noView">
           <div class="controls">
             <button class="delete-button" click.delegate="childElem.delete()">
               <img src="res/delete.svg" alt="Delete"/>

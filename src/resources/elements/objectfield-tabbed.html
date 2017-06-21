@@ -13,11 +13,11 @@
     </h3>
     <div class="tabs" if.bind="!collapsed" ref="tabs">
       <template repeat.for="childElem of iterableChildren">
-        <a class="tab-link" id="tab-${childElem.path}" if.bind="childElem.display" click.delegate="switchTab(childElem)">
+        <a class="tab-link" id="tab-${childElem.path}" if.bind="childElem.display && !childElem.noView" click.delegate="switchTab(childElem)">
           ${childElem.label}
         </a>
       </template>
     </div>
-    <compose containerless if.bind="!collapsed" view-model.bind="activeChild"></compose>
+    <compose containerless if.bind="!collapsed && !activeChild.noView" view-model.bind="activeChild"></compose>
   </fieldset>
 </template>
