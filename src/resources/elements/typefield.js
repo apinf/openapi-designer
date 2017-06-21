@@ -35,12 +35,13 @@ export class Typefield extends Field {
    */
   key = '';
   /**
-   * The placeholder for the key form field.
+   * The UI placeholder for the key form field.
    * @type {String}
    */
   keyPlaceholder = '';
   /**
-   * The key where to put the type of this field.
+   * The key where to put the type of this field in the output of this field.
+   * The default is {@linkplain x-oad-type} so it won't break the OpenAPI spec.
    * @type {String}
    */
   typeKey = 'x-oad-type';
@@ -88,10 +89,27 @@ export class Typefield extends Field {
     }
   }
 
-  /** @inheritdoc */
+  /**
+   * @inheritdoc
+   * @param {String} [args.valueKey] The key where to put the value of the child
+   *                                 field to in the output of this field.
+   * @param {String} [args.typeKey]  The key where to put the type of this field
+   *                                 in the output of this field.
+   * @param {String} [args.keyKey]   The key where to put the key of this field
+   *                                 ({@link #key}) in the output of this field.
+   * @param {Object} [args.types]    The schemas for the available types.
+   * @param {Boolean} [args.copyValue] Whether or not to copy the value over to
+   *                                   the new child when switching types.
+   * @param {Boolean} [args.collapsed] Whether or not to make the UI field be
+   *                                   collapsed by default.
+   * @param {String} [args.keyPlaceholder] The UI placeholder for the key form field.
+   * @param {String} [args.selectedType]   The type that should be selected by
+   *                                       default.
+   */
   init(id = '', args = {}) {
     args = Object.assign({
       valueKey: '',
+      // Set default typeKey to something that doesn't break the OpenAPI spec.
       typeKey: 'x-oad-type',
       keyKey: '',
       keyPlaceholder: 'Object key...',
