@@ -18,6 +18,14 @@ export class Optionfield extends Field {
    */
   dataSources = [];
   /**
+   * The type of checkboxes. {@linkplain multi} means multiple checkboxes and
+   * output as array with the keys of the selected checkboxes.
+   * {@linkplain simple} means a single checkbox and output as boolean that
+   * tells whether or not that one checkbox is checked.
+   * @type {String}
+   */
+  checkboxFormat = 'multi';
+  /**
    * Whether or not to hide this field if there are no choices.
    * @type {Boolean}
    */
@@ -39,10 +47,12 @@ export class Optionfield extends Field {
       choices: [],
       dataSources: [],
       format: 'dropdown',
+      checkboxFormat: 'multi',
       hideIfNoChoices: true
     }, args);
     this.hideIfNoChoices = args.hideIfNoChoices;
     this.argChoices = args.choices;
+    this.checkboxFormat = args.checkboxFormat;
 
     this.choices = [];
     for (const choice of args.choices) {
