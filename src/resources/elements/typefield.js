@@ -33,6 +33,7 @@ export class Typefield extends Field {
    * {@link #keyKey} is defined.
    * @type {String}
    */
+  @bindable
   key = '';
   /**
    * The UI placeholder for the key form field.
@@ -241,6 +242,10 @@ export class Typefield extends Field {
     } else {
       this.child.setValue(value);
     }
+  }
+
+  keyChanged() {
+    this.onChange();
   }
 
   setType(type) {
