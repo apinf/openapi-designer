@@ -157,6 +157,7 @@ export const types = {
       'required': {
         'label': 'Required subfields',
         'type': 'array',
+        'hideValueIfEmpty': true,
         'item': {
           'type': 'option',
           'format': 'dropdown',
