@@ -83,7 +83,7 @@ export const types = {
     'type': 'object',
     'label': 'Type #$index: ${#/name}',
     'legendChildren': {
-      'type': {
+      'x-oad-type': {
         'type': 'option',
         'columns': '4',
         'placeholder': 'Type name',
@@ -111,19 +111,26 @@ export const types = {
           'label': 'Type ${#/name}'
         }],
         'conditions': {
-          '../type': 'reference'
+          '../x-oad-type': 'reference'
+        }
+      },
+      'type': {
+        'type': 'link',
+        'target': '../x-oad-type',
+        'conditions': {
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'title': {
         'type': 'text',
         'conditions': {
-          '../type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'description': {
         'type': 'textarea',
         'conditions': {
-          '../type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'format': {
@@ -137,10 +144,10 @@ export const types = {
         'overrides': {
           'labelFormat': 'Array item',
           'legendChildren/name': null,
-          'legendChildren/type/columns': 8
+          'legendChildren/x-oad-type/columns': 8
         },
         'conditions': {
-          '../type': 'array'
+          '../x-oad-type': 'array'
         }
       },
       'properties': {
@@ -151,7 +158,7 @@ export const types = {
           '#/:item;labelFormat': 'Property #$index: ${#/name}'
         },
         'conditions': {
-          '../type': 'object'
+          '../x-oad-type': 'object'
         }
       },
       'required': {
@@ -170,7 +177,7 @@ export const types = {
           'label': 'Required subfield'
         },
         'conditions': {
-          '../type': 'object'
+          '../x-oad-type': 'object'
         }
       }
     }

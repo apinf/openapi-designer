@@ -41,7 +41,7 @@ export const parameter = {
       'overrides': {
         'labelFormat': 'Body schema',
         'legendChildren/name': null,
-        'legendChildren/type/columns': 8
+        'legendChildren/x-oad-type/columns': 8
       },
       'conditions': {
         '../in': 'body'

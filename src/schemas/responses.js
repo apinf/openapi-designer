@@ -18,7 +18,7 @@ export const response = {
           'overrides': {
             'labelFormat': 'Response body',
             'legendChildren/name': null,
-            'legendChildren/type/columns': 8
+            'legendChildren/x-oad-type/columns': 8
           }
         }
       }
