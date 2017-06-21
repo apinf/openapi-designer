@@ -7,6 +7,7 @@ import {types} from './types';
 
 export const fieldsToShow = {
   'header': [
+    'swagger',
     'info',
     'contact',
     'license',
