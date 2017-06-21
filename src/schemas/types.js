@@ -117,13 +117,13 @@ export const types = {
       'title': {
         'type': 'text',
         'conditions': {
-          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+          '../type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'description': {
         'type': 'textarea',
         'conditions': {
-          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+          '../type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'format': {
