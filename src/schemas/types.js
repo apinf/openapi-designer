@@ -88,7 +88,7 @@ export const types = {
         'columns': '4',
         'placeholder': 'Type name',
         'format': 'dropdown',
-        'choices': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null']
+        'choices': ['', 'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null']
       },
       'name': {
         'type': 'text',
@@ -152,6 +152,7 @@ export const types = {
         }
       },
       'required': {
+        'label': 'Required subfields',
         'type': 'array',
         'item': {
           'type': 'option',
