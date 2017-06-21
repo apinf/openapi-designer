@@ -36,6 +36,7 @@ const securityDefinitions = {
     'type': 'selectable',
     'defaultType': 'basic',
     'keyKey': 'key',
+    'typeKey': 'type',
     'types': {
       'basic': {
         'label': '',
@@ -116,6 +117,7 @@ const securityDefinitions = {
 export const security = {
   'type': 'object',
   'label': 'Security',
+  'showValueInParent': false,
   'children': {
     definitions: securityDefinitions,
     requirements: securityRequirements
