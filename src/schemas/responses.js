@@ -46,6 +46,7 @@ export const response = {
 const namedResponse = JSON.parse(JSON.stringify(response));
 namedResponse.keyKey = 'responseName';
 namedResponse.keyPlaceholder = 'Enter name...';
+namedResponse.label = 'Response #$index: ${#:key}';
 
 export const responses = {
   'type': 'array',
