@@ -73,7 +73,7 @@ const operationChildren = {
     'addIndexToChildLabel': false,
     'hideValueIfEmpty': false,
     'newItemText': 'New Response',
-    'keyField': 'httpStatus',
+    'keyField': 'status',
     'item': response
   },
   'parameters': {

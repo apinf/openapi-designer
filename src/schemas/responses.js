@@ -1,66 +1,51 @@
 export const response = {
-  'type': 'object',
-  'label': 'Response #$index for HTTP ${#/httpStatus}',
-  'legendChildren': {
-    'x-oad-type': {
-      'type': 'option',
-      'choices': ['response', 'reference']
-    }
-  },
-  'children': {
-    '$ref': {
-      'type': 'option',
-      'format': 'dropdown',
-      'label': 'Target',
-      'hideIfNoChoices': false,
-      'dataSources': [{
-        'source': '/global-definitions/responses',
-        'key': '#/responses/${#:key}',
-        'label': 'Response ${#:key}'
-      }],
-      'conditions': {
-        '../x-oad-type': 'reference'
+  'type': 'selectable',
+  'label': 'Response #$index for HTTP ${#:key}',
+  'keyKey': 'status',
+  'keyPlaceholder': 'Enter HTTP status code...',
+  'types': {
+    'response': {
+      'label': '',
+      'type': 'object',
+      'children': {
+        'description': {
+          'type': 'textarea'
+        },
+        'schema': {
+          'type': 'lazylink',
+          'target': '/global-definitions/types/:item',
+          'hideValueIfEmpty': true,
+          'overrides': {
+            'labelFormat': 'Response body',
+            'legendChildren/name': null,
+            'legendChildren/type/columns': 8
+          }
+        }
       }
     },
-    'httpStatus': {
-      'type': 'text',
-      'label': 'HTTP status code',
-      'keyPlaceholder': 'Enter HTTP status code...',
-      'infoText': 'Set to `default` to handle all other statuses',
-      'conditions': {
-        '../x-oad-type': 'response'
-      }
-    },
-    'description': {
-      'type': 'textarea',
-      'conditions': {
-        '../x-oad-type': 'response'
-      }
-    },
-    'schema': {
-      'type': 'lazylink',
-      'target': '/global-definitions/types/:item',
-      'hideValueIfEmpty': true,
-      'overrides': {
-        'labelFormat': 'Response schema',
-        'legendChildren/name': null,
-        'legendChildren/type/columns': 8
-      },
-      'conditions': {
-        '../x-oad-type': 'response'
+    'reference': {
+      'label': '',
+      'type': 'object',
+      'children': {
+        '$ref': {
+          'type': 'option',
+          'format': 'dropdown',
+          'label': 'Target',
+          'hideIfNoChoices': false,
+          'dataSources': [{
+            'source': '/global-definitions/responses',
+            'key': '#/responses/${#:key}',
+            'label': 'Response ${#:key}'
+          }]
+        }
       }
     }
   }
 };
 
 const namedResponse = JSON.parse(JSON.stringify(response));
-namedResponse.legendChildren['x-oad-type'].columns = 4;
-namedResponse.legendChildren.responseName = {
-  'type': 'text',
-  'placeholder': 'Enter name...',
-  'columns': 4
-};
-
+namedResponse.keyKey = 'responseName';
+namedResponse.keyPlaceholder = 'Enter name...';
 
 export const responses = {
   'type': 'array',
