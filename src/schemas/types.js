@@ -88,7 +88,10 @@ export const types = {
         'columns': '4',
         'placeholder': 'Type name',
         'format': 'dropdown',
-        'choices': ['', 'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null']
+        'choices': [
+          {'key': '', 'label': 'Choose type'},
+          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
+        ]
       },
       'name': {
         'type': 'text',
