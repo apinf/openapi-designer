@@ -161,6 +161,7 @@ export const types = {
         'item': {
           'type': 'option',
           'format': 'dropdown',
+          'hideIfNoChoices': false,
           'dataSources': [{
             'source': '../../properties/:child',
             'key': '${#/name}',
