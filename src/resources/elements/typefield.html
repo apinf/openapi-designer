@@ -12,6 +12,6 @@
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
     </h3>
-    <compose if.bind="!collapsed" containerless view-model.bind="child"></compose>
+    <compose if.bind="!collapsed && !child.noView" containerless view-model.bind="child"></compose>
   </fieldset>
 </template>

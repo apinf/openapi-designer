@@ -12,6 +12,7 @@ export class Linkfield extends Field {
    * @type {String}
    */
   target = '#';
+  noView = true;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
