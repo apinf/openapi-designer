@@ -1,7 +1,11 @@
 <template>
   <div class="array field has-children c${columns} columns" if.bind="display">
-    <h3 click.delegate="toggleCollapse()" class="title">
+    <h3 click.delegate="toggleCollapse()" if.bind="label" class="title">
       ${label}
+      <button class="collapse-button" if.bind="isCollapsible">
+        <img src="res/collapse-open.svg" alt="Collapse" if.bind="!collapsed"/>
+        <img src="res/collapse-closed.svg" alt="Collapse" if.bind="collapsed"/>
+      </button>
       <tooltip if.bind="helpText" text.bind="helpText">
         <img src="res/info.svg" alt="Info"/>
       </tooltip>

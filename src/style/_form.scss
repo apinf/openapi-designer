@@ -48,6 +48,19 @@
       width: auto;
       height: 1.2rem;
     }
+
+    > .collapse-button {
+      display: inline-block;
+
+      cursor: pointer;
+
+      border: none;
+      background: none;
+
+      > img {
+        opacity: .2;
+      }
+    }
   }
 
   &.dropdown.option {
