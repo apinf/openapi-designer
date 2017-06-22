@@ -8,9 +8,9 @@ export class App {
     // Allow access from browser console
     window.$oai = this;
 
-    this.forms = parseJSON('swagger', schema);
-    if (window.localStorage.cachedForm) {
-      this.forms.setValue(JSON.parse(window.localStorage.cachedForm));
+    this.forms = parseJSON('swagger', JSON.parse(JSON.stringify(schema)));
+    if (window.localStorage['openapi-v2-design']) {
+      this.forms.setValue(JSON.parse(window.localStorage['openapi-v2-design']));
     }
 
     this.activeForm = this.forms.getChild('header');
@@ -62,7 +62,7 @@ export class App {
   delete() {
     let userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
     if (userInput === true) {
-      delete localStorage.cachedForm;
+      delete localStorage['openapi-v2-design'];
       location.reload();
     }
   }
@@ -83,7 +83,7 @@ export class App {
   }
 
   saveFormLocal() {
-    window.localStorage.cachedForm = JSON.stringify(this.getFormData());
+    window.localStorage['openapi-v2-design'] = JSON.stringify(this.getFormData());
   }
 
   get currentFormJSON() {

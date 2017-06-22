@@ -1,4 +1,4 @@
-const mimeTypeArray = {
+export const mimeTypeArray = {
   'type': 'array',
   'item': {
     'type': 'text',
@@ -18,8 +18,7 @@ export const mime = {
   'type': 'object',
   'showValueInParent': false,
   'children': {
-    // Stringify+parse the object to remove pointers/references.
-    'consumes': JSON.parse(JSON.stringify(mimeTypeArray)),
-    'produces': JSON.parse(JSON.stringify(mimeTypeArray))
+    'consumes': mimeTypeArray,
+    'produces': mimeTypeArray
   }
 };
