@@ -105,6 +105,7 @@ export class Typefield extends Field {
    * @param {String} [args.keyPlaceholder] The UI placeholder for the key form field.
    * @param {String} [args.selectedType]   The type that should be selected by
    *                                       default.
+   * @param {Boolean} [args.isCollapsible] Set to false to disable collapsing.
    */
   init(id = '', args = {}) {
     args = Object.assign({
@@ -115,6 +116,7 @@ export class Typefield extends Field {
       keyPlaceholder: 'Object key...',
       copyValue: false,
       collapsed: false,
+      isCollapsible: true,
       types: { 'null': { 'type': 'text' } }
     }, args);
     this.types = args.types;
@@ -124,6 +126,7 @@ export class Typefield extends Field {
     this.keyPlaceholder = args.keyPlaceholder;
     this.copyValue = args.copyValue;
     this.collapsed = args.collapsed;
+    this.isCollapsible = args.isCollapsible;
     this.defaultType = args.defaultType;
     this.selectedType = args.defaultType || Object.keys(this.types)[0];
     this.selectedTypeChanged(this.selectedType);
