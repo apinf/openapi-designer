@@ -112,7 +112,8 @@ export const parameter = {
             ]
           }],
           'conditions': {
-            '../in': ['path', 'query', 'header', 'formData']
+            '../in': ['path', 'query', 'header', 'formData'],
+            '../type': 'array'
           }
         }
       }
