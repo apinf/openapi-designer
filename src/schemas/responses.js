@@ -52,6 +52,7 @@ export const responses = {
   'type': 'array',
   'format': 'map',
   'collapseManagement': true,
+  'isCollapsible': false,
   'addIndexToChildLabel': false,
   'keyField': 'responseName',
   'newItemText': 'New Response',

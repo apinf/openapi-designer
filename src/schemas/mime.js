@@ -17,6 +17,7 @@ export const mimeTypeArray = {
 export const mime = {
   'type': 'object',
   'showValueInParent': false,
+  'isCollapsible': false,
   'children': {
     'consumes': mimeTypeArray,
     'produces': mimeTypeArray

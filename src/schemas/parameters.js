@@ -147,6 +147,7 @@ export const parameters = {
   'type': 'array',
   'format': 'map',
   'collapseManagement': true,
+  'isCollapsible': false,
   'addIndexToChildLabel': false,
   'keyField': 'paramName',
   'newItemText': 'New Parameter',

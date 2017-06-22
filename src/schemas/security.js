@@ -123,6 +123,7 @@ export const security = {
   'type': 'object',
   'label': 'Security',
   'showValueInParent': false,
+  'isCollapsible': false,
   'children': {
     definitions: securityDefinitions,
     requirements: securityRequirements
