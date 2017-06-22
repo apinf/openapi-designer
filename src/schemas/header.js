@@ -4,6 +4,7 @@ import {externalDocs} from './externalDocs';
 export const header = {
   'type': 'object',
   'showValueInParent': false,
+  'isCollapsible': false,
   'children': {
     'info': {
       'type': 'object',

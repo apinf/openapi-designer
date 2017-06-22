@@ -78,6 +78,7 @@ export const types = {
   'showValueInParent': false,
   'addIndexToChildLabel': false,
   'collapseManagement': true,
+  'isCollapsible': false,
   'newItemText': 'New Type',
   'item': {
     'type': 'object',
