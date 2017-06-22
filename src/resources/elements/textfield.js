@@ -34,7 +34,8 @@ export class Textfield extends Field {
     args = Object.assign({
       placeholder: 'Enter value...',
       value: '',
-      autocomplete: undefined
+      autocomplete: undefined,
+      format: 'text'
     }, args);
     this.value = args.value;
     this.placeholder = args.placeholder;

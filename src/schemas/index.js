@@ -4,18 +4,19 @@ import {security} from './security';
 import {tags} from './tags';
 import {paths} from './paths';
 import {types} from './types';
+import {parameters} from './parameters';
+import {responses} from './responses';
 
 export const fieldsToShow = {
   'header': [
     'swagger',
     'info',
-    'contact',
-    'license',
     'host',
     'basePath',
-    'schemes'
+    'schemes',
+    'externalDocs'
   ],
-  'types': ['definitions'],
+  'global-definitions': ['definitions', 'parameters', 'responses'],
   'mime': ['consumes', 'produces'],
   'global-security': ['security', 'securityDefinitions']
 };
@@ -28,7 +29,29 @@ export const schema = {
     'global-security': security,
     tags,
     paths,
-    types,
+    'global-definitions': {
+      'type': 'object',
+      'format': 'tabs',
+      'label': 'Global definitions',
+      'showValueInParent': false,
+      'children': {
+        types,
+        parameters,
+        responses
+      }
+    },
+    'parameters': {
+      'type': 'link',
+      'target': '/global-definitions/parameters'
+    },
+    'responses': {
+      'type': 'link',
+      'target': '/global-definitions/responses'
+    },
+    'definitions': {
+      'type': 'link',
+      'target': '/global-definitions/types'
+    },
     'security': {
       'type': 'link',
       'target': '/global-security/requirements'
@@ -37,21 +60,13 @@ export const schema = {
       'type': 'link',
       'target': '/global-security/definitions'
     },
-    'definitions': {
-      'type': 'link',
-      'target': '/types'
-    },
     'info': {
       'type': 'link',
       'target': '/header/info'
     },
-    'contact': {
+    'externalDocs': {
       'type': 'link',
-      'target': '/header/contact'
-    },
-    'license': {
-      'type': 'link',
-      'target': '/header/license'
+      'target': '/header/externalDocs'
     },
     'host': {
       'type': 'link',

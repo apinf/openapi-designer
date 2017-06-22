@@ -1,3 +1,76 @@
+export const typeFormatChoices = [
+  {
+    'key': 'int32',
+    'label': '32-bit integer',
+    'conditions': {
+      '../type': 'integer'
+    }
+  },
+  {
+    'key': 'int64',
+    'label': '64-bit integer',
+    'conditions': {
+      '../type': 'integer'
+    }
+  },
+  {
+    'key': 'float',
+    'label': '32-bit floating point',
+    'conditions': {
+      '../type': 'number'
+    }
+  },
+  {
+    'key': 'double',
+    'label': '64-bit floating point',
+    'conditions': {
+      '../type': 'number'
+    }
+  },
+  {
+    'key': '',
+    'label': 'String',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'byte',
+    'label': 'Byte (Base64)',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'binary',
+    'label': 'Binary (octet sequence)',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'date',
+    'label': 'Date',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'date-time',
+    'label': 'Date and Time',
+    'conditions': {
+      '../type': 'string'
+    }
+  },
+  {
+    'key': 'password',
+    'label': 'Password',
+    'conditions': {
+      '../type': 'string'
+    }
+  }
+];
+
 export const types = {
   'type': 'array',
   'format': 'map',
@@ -5,16 +78,20 @@ export const types = {
   'showValueInParent': false,
   'addIndexToChildLabel': false,
   'collapseManagement': true,
+  'newItemText': 'New Type',
   'item': {
     'type': 'object',
-    'label': 'Type ${#/name}',
+    'label': 'Type #$index: ${#/name}',
     'legendChildren': {
-      'type': {
+      'x-oad-type': {
         'type': 'option',
         'columns': '4',
         'placeholder': 'Type name',
         'format': 'dropdown',
-        'choices': ['string', 'integer', 'number', 'array', 'object', 'reference', 'null']
+        'choices': [
+          {'key': '', 'label': 'Choose type'},
+          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
+        ]
       },
       'name': {
         'type': 'text',
@@ -24,79 +101,83 @@ export const types = {
     },
     'children': {
       '$ref': {
-        'type': 'text',
+        'type': 'option',
+        'format': 'dropdown',
         'label': 'Target',
+        'hideIfNoChoices': false,
+        'dataSources': [{
+          'source': '/global-definitions/types',
+          'key': '#/definitions/${#/name}',
+          'label': 'Type ${#/name}'
+        }],
         'conditions': {
-          '../type': 'reference'
+          '../x-oad-type': 'reference'
+        }
+      },
+      'type': {
+        'type': 'link',
+        'target': '../x-oad-type',
+        'conditions': {
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'title': {
         'type': 'text',
         'conditions': {
-          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'description': {
         'type': 'textarea',
         'conditions': {
-          '../type': ['string', 'integer', 'number', 'array', 'object', 'null']
+          '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
       },
       'format': {
         'type': 'option',
         'format': 'dropdown',
-        'choices': [
-          {
-            'key': 'int32',
-            'label': '32-bit integer',
-            'conditions': {
-              '../type': 'integer'
-            }
-          },
-          {
-            'key': 'int64',
-            'label': '64-bit integer',
-            'conditions': {
-              '../type': 'integer'
-            }
-          },
-          {
-            'key': 'float',
-            'label': '32-bit floating point',
-            'conditions': {
-              '../type': 'number'
-            }
-          },
-          {
-            'key': 'double',
-            'label': '64-bit floating point',
-            'conditions': {
-              '../type': 'number'
-            }
-          }
-        ]
+        'choices': typeFormatChoices
       },
-      'item': {
+      'items': {
         'type': 'lazylink',
-        'target': '/types/:item',
+        'target': '/global-definitions/types/:item',
         'overrides': {
           'labelFormat': 'Array item',
           'legendChildren/name': null,
-          'legendChildren/type/columns': 8
+          'legendChildren/x-oad-type/columns': 8
         },
         'conditions': {
-          '../type': 'array'
+          '../x-oad-type': 'array'
         }
       },
       'properties': {
         'type': 'lazylink',
-        'target': '/types',
+        'target': '/global-definitions/types',
         'overrides': {
           'labelFormat': 'Properties',
-          '#/:item;labelFormat': 'Property'
+          '#/:item;labelFormat': 'Property #$index: ${#/name}'
         },
         'conditions': {
-          '../type': 'object'
+          '../x-oad-type': 'object'
+        }
+      },
+      'required': {
+        'label': 'Required subfields',
+        'type': 'array',
+        'hideValueIfEmpty': true,
+        'item': {
+          'type': 'option',
+          'format': 'dropdown',
+          'hideIfNoChoices': false,
+          'dataSources': [{
+            'source': '../../properties/:child',
+            'key': '${#/name}',
+            'label': 'Field ${#/name}'
+          }],
+          'label': 'Required subfield'
+        },
+        'conditions': {
+          '../x-oad-type': 'object'
         }
       }
     }

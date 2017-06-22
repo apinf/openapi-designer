@@ -33,6 +33,7 @@ export class Typefield extends Field {
    * {@link #keyKey} is defined.
    * @type {String}
    */
+  @bindable
   key = '';
   /**
    * The UI placeholder for the key form field.
@@ -125,8 +126,7 @@ export class Typefield extends Field {
     this.copyValue = args.copyValue;
     this.collapsed = args.collapsed;
     this.defaultType = args.defaultType;
-    this.selectedType = args.defaultType || Object.keys(this.types)[0];
-    this.selectedTypeChanged(this.selectedType);
+    this.setType(args.defaultType || Object.keys(this.types)[0]);
     return super.init(id, args);
   }
 
@@ -244,8 +244,13 @@ export class Typefield extends Field {
     }
   }
 
+  keyChanged() {
+    this.onChange();
+  }
+
   setType(type) {
     this.selectedType = type;
+    this.selectedTypeChanged(type);
   }
 
   getType() {

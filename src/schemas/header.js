@@ -1,3 +1,6 @@
+import {schemes} from './schemes';
+import {externalDocs} from './externalDocs';
+
 export const header = {
   'type': 'object',
   'showValueInParent': false,
@@ -16,9 +19,35 @@ export const header = {
         'description': {
           'type': 'textarea'
         },
-        'termsofservice': {
+        'termsOfService': {
           'type': 'text',
           'label': 'Terms of Service'
+        },
+        'contact': {
+          'type': 'object',
+          'children': {
+            'name': {
+              'type': 'text'
+            },
+            'email': {
+              'type': 'text'
+            },
+            'url': {
+              'type': 'text',
+              'label': 'URL'
+            }
+          }
+        },
+        'license': {
+          'type': 'object',
+          'children': {
+            'name': {
+              'type': 'text'
+            },
+            'url': {
+              'type': 'text'
+            }
+          }
         }
       }
     },
@@ -34,50 +63,9 @@ export const header = {
           'type': 'text',
           'label': 'Base path'
         },
-        'schemes': {
-          'type': 'option',
-          'format': 'checkbox',
-          'choices': [{
-            'key': 'http',
-            'label': 'HTTP'
-          }, {
-            'key': 'https',
-            'label': 'HTTPS'
-          }, {
-            'key': 'ws',
-            'label': 'WebSocket'
-          }, {
-            'key': 'wss',
-            'label': 'Secure WebSocket'
-          }]
-        }
+        'schemes': schemes
       }
     },
-    'contact': {
-      'type': 'object',
-      'children': {
-        'name': {
-          'type': 'text'
-        },
-        'email': {
-          'type': 'text'
-        },
-        'url': {
-          'type': 'text',
-          'label': 'URL'
-        }
-      }
-    },
-    'license': {
-      'type': 'object',
-      'children': {
-        'name': {
-          'type': 'text'
-        },
-        'url': {
-          'type': 'text'
-        }
-      }
-    }
+    'externalDocs': externalDocs
   }
 };

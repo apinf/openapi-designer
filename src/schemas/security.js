@@ -1,25 +1,29 @@
-const securityRequirements = {
+export const securityRequirements = {
   'type': 'array',
-  'format': 'map',
-  'keyField': 'name',
-  'valueField': 'scopes',
-  'label': 'Requirements',
   'item': {
-    'label': 'Security Requirement',
-    'type': 'object',
-    'children': {
-      'name': {
-        'type': 'option',
-        'format': 'dropdown',
-        'dataSources': [{
-          'source': '/global-security/definitions',
-          'key': '#:key'
-        }]
-      },
-      'scopes': {
-        'type': 'array',
-        'item': {
-          'type': 'text'
+    'type': 'array',
+    'format': 'map',
+    'keyField': 'name',
+    'valueField': 'scopes',
+    'label': 'Requirements Object',
+    'item': {
+      'label': 'Security Requirement',
+      'type': 'object',
+      'children': {
+        'name': {
+          'type': 'option',
+          'format': 'dropdown',
+          'dataSources': [{
+            'source': '/global-security/definitions',
+            'key': '${#:key}'
+          }]
+        },
+        'scopes': {
+          'type': 'array',
+          'item': {
+            'type': 'text',
+            'label': 'OAuth2 scope'
+          }
         }
       }
     }
@@ -95,9 +99,10 @@ const securityDefinitions = {
             'type': 'array',
             'format': 'map',
             'keyField': 'key',
-            'valueField': 'value',
+            'valueField': 'description',
             'item': {
               'type': 'object',
+              'label': 'Scope',
               'children': {
                 'key': {
                   'type': 'text'
