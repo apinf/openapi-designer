@@ -7,13 +7,13 @@
     </legend>
     <h3 click.delegate="toggleCollapse()" if.bind="label" class="title">
       ${label}
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
       <button class="collapse-button" if.bind="isCollapsible">
         <img src="res/collapse-open.svg" alt="Collapse" if.bind="!collapsed"/>
         <img src="res/collapse-closed.svg" alt="Collapse" if.bind="collapsed"/>
       </button>
-      <tooltip if.bind="helpText" text.bind="helpText">
-        <img src="res/info.svg" alt="Info"/>
-      </tooltip>
     </h3>
     <div class="tabs" if.bind="!collapsed" ref="tabs">
       <template repeat.for="childElem of iterableChildren">
