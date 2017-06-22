@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="nav">
+  <div class="nav" if.bind="activeForm">
     <a class="nav-link" id="nav-about" href="#/about">
       About
     </a>
@@ -57,9 +57,54 @@
     </div>
   </div>
 
-  <div class="main">
+  <div class="main" if.bind="activeForm">
     <compose class="form" view-model.bind="activeForm"></compose>
     <div class="preview" textcontent.one-way="currentFormJSON"></div>
+  </div>
+  <div class="error" ref="errorPane" if.bind="!activeForm">
+    <style>
+      .error {
+        margin-top: 3rem;
+        text-align: center;
+      }
+
+      .error-data {
+        display: inline-block;
+        max-width: 30rem;
+        text-align: left;
+      }
+
+      .error-data > .message {
+        font-family: monospace;
+        margin-bottom: 1rem;
+      }
+
+      .error-data > .stacktrace {
+        white-space: pre-line;
+        font-family: monospace;
+      }
+
+      .error-data > .text {
+        margin: 2rem 0;
+      }
+    </style>
+    <div class="error-data">
+      <h1>Uh oh!</h1>
+      <div class="text">
+        It seems like something is broken.
+
+        Sometimes these issues are caused by an invalid OpenAPI document in the
+        cache. If this is the case, <a href="javascript:void(0)" click.delegate="delete()">deleting the data</a> should fix it.
+      </div>
+
+      <h3>Exception data</h3>
+      <div class="message">
+        ${exception}
+      </div>
+      <div class="stacktrace">
+        ${exception.stack}
+      </div>
+    </div>
   </div>
 
   <div class="brand-footer">
