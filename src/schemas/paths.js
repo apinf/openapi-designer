@@ -28,8 +28,8 @@ const operationChildren = {
     'children': {
       'consumes': mimeTypeArray,
       'produces': mimeTypeArray,
-      'schemes': schemes,
-      'security': securityRequirements
+      'security': securityRequirements,
+      'schemes': schemes
     }
   },
   'consumes': {
