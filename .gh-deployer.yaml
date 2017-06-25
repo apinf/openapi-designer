@@ -1,0 +1,6 @@
+shell: /bin/bash
+shell-args: [ "-c" ]
+
+commands:
+- npm install
+- au build
