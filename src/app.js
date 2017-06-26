@@ -8,9 +8,15 @@ export class App {
     // Allow access from browser console
     window.$oai = this;
 
-    this.forms = parseJSON('swagger', JSON.parse(JSON.stringify(schema)));
-    if (window.localStorage['openapi-v2-design']) {
-      this.forms.setValue(JSON.parse(window.localStorage['openapi-v2-design']));
+    try {
+      this.forms = parseJSON('swagger', JSON.parse(JSON.stringify(schema)));
+      if (window.localStorage['openapi-v2-design']) {
+        this.forms.setValue(JSON.parse(window.localStorage['openapi-v2-design']));
+      }
+    } catch (exception) {
+      console.log(exception);
+      this.exception = exception;
+      return;
     }
 
     this.activeForm = this.forms.getChild('header');
@@ -31,7 +37,9 @@ export class App {
   }
 
   attached() {
-    window.onhashchange();
+    if (window.onhashchange) {
+      window.onhashchange();
+    }
   }
 
   download(type) {
