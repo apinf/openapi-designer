@@ -8,7 +8,7 @@ export const externalDocs = {
     },
     'url': {
       'type': 'text',
-      'hideValueIfEmpty': true
+      'hideValueIfEmpty': false
     }
   }
 };
