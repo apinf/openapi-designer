@@ -19,11 +19,15 @@
     color: #337ab7 !important;
     border-radius: .25rem .25rem 0 0;
 
-    &:hover {
+    &:hover:not(.open) {
+      cursor: pointer;
+
       background-color: lighten(lightgray, 7%);
     }
 
     &.open {
+      cursor: default;
+
       color: black !important;
       border: 1px solid lightgray;
       border-bottom: 1px solid white;
@@ -39,9 +43,9 @@
 
     max-height: 2.5rem;
     margin-right: 1rem;
-
     // Place the action buttons just above the bottom border of the navigation bar.
     // margin-bottom and other such values don't work due to float: right.
+
     transform: translateY(calc(-.5rem - 1px));
 
     > div {
