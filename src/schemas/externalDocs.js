@@ -1,11 +1,14 @@
 export const externalDocs = {
   'type': 'object',
+  'hideValueIfEmpty': true,
   'children': {
     'description': {
-      'type': 'textarea'
+      'type': 'textarea',
+      'hideValueIfEmpty': true
     },
     'url': {
-      'type': 'text'
+      'type': 'text',
+      'hideValueIfEmpty': true
     }
   }
 };
