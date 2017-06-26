@@ -1,6 +1,6 @@
 import 'babel-polyfill';
+import {TCustomAttribute, Backend} from 'aurelia-i18n';
 import environment from './environment';
-import Backend from 'i18next-xhr-backend';
 
 export function configure(aurelia) {
   aurelia.use
@@ -15,7 +15,7 @@ export function configure(aurelia) {
         backend: {
           loadPath: './lang/{{lng}}.json'
         },
-        attributes: aliases,
+        attributes: ['t'],
         lng: 'fi',
         fallbackLng: 'en',
         debug: environment.debug
