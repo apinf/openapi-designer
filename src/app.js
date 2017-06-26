@@ -1,10 +1,14 @@
+import {inject} from 'aurelia-framework';
+import {I18N} from 'aurelia-i18n';
 import {parseJSON} from './resources/jsonparser';
 import {schema, fieldsToShow} from './schemas/index';
 import YAML from 'yamljs';
 import $ from 'jquery';
 
+@inject(I18N)
 export class App {
-  constructor() {
+  constructor(i18n) {
+    this.i18n = i18n;
     // Allow access from browser console
     window.$oai = this;
 
