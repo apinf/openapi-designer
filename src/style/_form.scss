@@ -175,6 +175,7 @@
 
       border-bottom: 1px solid lightgray;
       background-color: white;
+
       > .tab-link {
         display: inline;
 
@@ -186,11 +187,15 @@
         color: #337ab7 !important;
         border-radius: .25rem .25rem 0 0;
 
-        &:hover {
+        &:hover:not(.open) {
+          cursor: pointer;
+
           background-color: lighten(lightgray, 7%);
         }
 
         &.open {
+          cursor: default;
+
           color: black !important;
           border: 1px solid lightgray;
           border-bottom: 1px solid white;
