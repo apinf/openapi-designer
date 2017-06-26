@@ -1,5 +1,5 @@
-# open-api-designer
-Design interface for creating Open API (Swagger) specification files.
+# OpenAPI designer
+Design interface for creating OpenAPI (Swagger) specification files.
 [Live demo](http://apinf.org/open-api-designer/)
 
 ## Setup
@@ -9,4 +9,4 @@ Design interface for creating Open API (Swagger) specification files.
 3. Build the code (`au build`) and open `index.html` OR run the webserver integrated in Aurelia using `au run` and open the URL that is printed after building (usually `http://localhost:9000`)
 
 ## Resources
-- [Open API Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
+- [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
