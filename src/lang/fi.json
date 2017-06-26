@@ -15,7 +15,7 @@
         "json": "JSON",
         "yaml": "YAML"
       }
-    },
+    }
   },
   "error": {
     "title": "Hups!",
