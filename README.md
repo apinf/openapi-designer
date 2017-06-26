@@ -1,6 +1,6 @@
 # OpenAPI designer
 Design interface for creating OpenAPI (Swagger) specification files.
-[Live demo](http://apinf.org/open-api-designer/)
+[Live demo](https://openapi.design/)
 
 ## Setup
 0. Have a [Node.js](https://nodejs.org/) install that's not way too old (v4+ should work for everything).
