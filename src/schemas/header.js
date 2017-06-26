@@ -18,35 +18,44 @@ export const header = {
           'columns': 3
         },
         'description': {
-          'type': 'textarea'
+          'type': 'textarea',
+          'hideValueIfEmpty': true
         },
         'termsOfService': {
           'type': 'text',
-          'label': 'Terms of Service'
+          'label': 'Terms of Service',
+          'hideValueIfEmpty': true
         },
         'contact': {
           'type': 'object',
+          'hideValueIfEmpty': true,
           'children': {
             'name': {
-              'type': 'text'
+              'type': 'text',
+              'hideValueIfEmpty': true
             },
             'email': {
-              'type': 'text'
+              'type': 'text',
+              'hideValueIfEmpty': true
             },
             'url': {
               'type': 'text',
-              'label': 'URL'
+              'label': 'URL',
+              'hideValueIfEmpty': true
             }
           }
         },
         'license': {
           'type': 'object',
+          'hideValueIfEmpty': true,
           'children': {
             'name': {
-              'type': 'text'
+              'type': 'text',
+              'hideValueIfEmpty': true
             },
             'url': {
-              'type': 'text'
+              'type': 'text',
+              'hideValueIfEmpty': true
             }
           }
         }
