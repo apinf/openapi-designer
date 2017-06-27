@@ -109,7 +109,7 @@ export class Field {
     if (!this.localizations.hasOwnProperty(fieldName)) {
       const path = `${this.i18nPath}.${fieldName}`;
       let translation = Field.internationalizer.tr(path);
-      if (!translation || (typeof defaultValue == 'string' && translation === path)) {
+      if (!translation || (typeof defaultValue === 'string' && translation === path)) {
         translation = defaultValue;
       }
       this.localizations[fieldName] = translation;
