@@ -33,6 +33,21 @@
         "label": "URL"
       }
     },
+    "mime": {
+      "label": "MIME types",
+      "consumes": {
+        "label": "Consumes",
+        "item": {
+          "label": "MIME type"
+        }
+      },
+      "produces": {
+        "label": "Produces",
+        "item": {
+          "label": "MIME type"
+        }
+      }
+    },
     "header": {
       "label": "Header",
       "info": {
