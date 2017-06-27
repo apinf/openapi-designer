@@ -33,6 +33,18 @@
         "label": "URL"
       }
     },
+    "tags": {
+      "label": "Tag definitions",
+      "item": {
+        "label": "Tag",
+        "name": {
+          "label": "Name"
+        },
+        "description": {
+          "label": "Description"
+        }
+      }
+    },
     "mime": {
       "label": "MIME types",
       "consumes": {
