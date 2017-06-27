@@ -37,8 +37,9 @@
       "label": "Security",
       "definitions": {
         "label": "Definitions",
+        "newItemText": "New Security Definition",
         "item": {
-          "label": "Security definition #$index",
+          "label": "Security Definition #$index",
           "basic": {
             "description": {
               "label": "Description"
@@ -52,7 +53,11 @@
               "label": "Name"
             },
             "in": {
-              "label": "API key location"
+              "label": "API key location",
+              "choices": {
+                "query": "query",
+                "header": "header"
+              }
             }
           },
           "oauth2": {
@@ -60,7 +65,13 @@
               "label": "Description"
             },
             "flow": {
-              "label": "Flow"
+              "label": "Flow",
+              "choices": {
+                "implicit": "implicit",
+                "password": "password",
+                "application": "application",
+                "accessCode": "accessCode"
+              }
             },
             "authorizationUrl": {
               "label": "Authorization URL"
@@ -80,9 +91,28 @@
             }
           }
         }
+      },
+      "requirements": {
+        "label": "Requirements",
+        "newItemText": "New Requirements Object",
+        "item": {
+          "label": "Requirements Object #$index",
+          "newItemText": "New Security Requirement",
+          "item": {
+            "name": {
+              "label": "Name"
+            },
+            "scopes": {
+              "label": "Scopes",
+              "newItemText": "New OAuth2 Scope",
+              "item": {
+                "label": "OAuth2 scope #$index"
+              }
+            }
+          }
+        }
       }
     },
-
     "tags": {
       "label": "Tag definitions",
       "item": {
@@ -160,62 +190,6 @@
         },
         "schemes": {
           "label": "Default protocols"
-        }
-      }
-    },
-    "global-definitions": {
-      "label": "Definitions",
-      "parameters": {
-        "label": "Parameters"
-      },
-      "responses": {
-        "label": "Responses"
-      }
-    },
-    "types": {
-      "label": "Types",
-      "newItemText": "New Type",
-      "item": {
-        "label": "Type #$index: ${#/name}",
-        "x-oad-type": {
-          "choices": {
-            "choose": "Choose a type",
-            "string": "String",
-            "integer": "Integer",
-            "boolean": "Boolean",
-            "number": "Number",
-            "array": "Array",
-            "object": "Object",
-            "reference": "Reference",
-            "null": "Null"
-          }
-        },
-        "name": {
-          "placeholder": "Enter key..."
-        },
-        "$ref": {
-          "label": "Target"
-        },
-        "title": {
-          "label": "Title"
-        },
-        "description": {
-          "label": "Description"
-        },
-        "format": {
-          "label": "Format",
-          "choices": {
-            "int32": "32-bit integer",
-            "int64": "64-bit integer",
-            "float": "32-bit floating point",
-            "double": "64-bit floating point",
-            "string": "Plain string",
-            "byte": "Byte (Base64)",
-            "binary": "Binary (octet sequence)",
-            "date": "Date",
-            "date-time": "Date and Time",
-            "password": "Password"
-          }
         }
       }
     }
