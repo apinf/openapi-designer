@@ -22,5 +22,69 @@
     "body": "It seems like something is broken.\nSometimes these issues are caused by an invalid OpenAPI document in the cache. If this is the case, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">deleting the data</a> should fix it.",
     "data-title": "Exception data"
   },
-  "footer-powered-by": "Powered by"
+  "footer-powered-by": "Powered by",
+  "form": {
+    "externalDocs": {
+      "label": "External documentation",
+      "description": {
+        "label": "Description"
+      },
+      "url": {
+        "label": "URL"
+      }
+    },
+    "header": {
+      "label": "Header",
+      "info": {
+        "label": "Basic info",
+        "title": {
+          "label": "Title"
+        },
+        "version": {
+          "label": "Version"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "termsOfService": {
+          "label": "Terms of Service"
+        },
+        "contact": {
+          "label": "Contact",
+          "name": {
+            "label": "Name"
+          },
+          "email": {
+            "label": "Email"
+          },
+          "url": {
+            "label": "URL"
+          }
+        },
+        "license": {
+          "label": "License",
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "URL"
+          }
+        }
+      },
+      "host": {
+        "label": "Host settings",
+        "host": {
+          "label": "Hostname"
+        },
+        "basePath": {
+          "label": "Base path",
+          "placeholder": "e.g. /api/v2",
+          "helpText": "The base path that will be prepended to all other paths. Must start with a slash."
+        },
+        "schemes": {
+          "label": "Default protocols"
+        }
+      }
+    }
+  }
 }
