@@ -102,10 +102,17 @@
   &.checkbox.option > .box-wrapper {
     display: inline-block;
 
-    margin-right: .5rem;
+    margin-right: .75rem;
 
     > label {
+      position: relative;
+      top: -2px;
+
       display: inline;
+
+      margin-left: .125rem;
+
+      vertical-align: bottom;
 
       font-weight: normal;
     }
