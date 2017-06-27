@@ -1,6 +1,7 @@
 export const externalDocs = {
   'type': 'object',
   'hideValueIfEmpty': true,
+  'overrideI18nPath': 'form.externalDocs',
   'children': {
     'description': {
       'type': 'textarea',
