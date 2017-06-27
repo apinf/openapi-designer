@@ -22,7 +22,8 @@ toplevelParameterType.choices.push({
 const parameterFormat = {
   'type': 'option',
   'format': 'dropdown',
-  'choices': typeFormatChoices
+  'choices': typeFormatChoices,
+  'overrideI18nPath': 'form.types.item.format'
 };
 
 const toplevelParameterFormat = JSON.parse(JSON.stringify(parameterFormat));
@@ -34,19 +35,7 @@ const parameterCollectionFormat = {
   'type': 'option',
   'format': 'dropdown',
   'label': 'Collection format',
-  'choices': [{
-    'key': 'csv',
-    'label': 'CSV (foo,bar)'
-  }, {
-    'key': 'ssv',
-    'label': 'SSV (foo bar)'
-  }, {
-    'key': 'tsv',
-    'label': 'TSV (foo\\tbar)'
-  }, {
-    'key': 'pipes',
-    'label': 'Pipes (foo|bar)'
-  }],
+  'choices': ['csv', 'ssv', 'tsv', 'pipes'],
   'conditions': {
     '../type': 'array'
   }
@@ -86,7 +75,7 @@ toplevelParameterItemDefinition.conditions = {
 
 export const parameter = {
   'type': 'selectable',
-  'label': 'Parameter #$index: ${#/name}',
+  'overrideI18nPath': 'form.parameter',
   'types': {
     'parameter': {
       'type': 'object',
@@ -99,22 +88,7 @@ export const parameter = {
           'type': 'option',
           'format': 'dropdown',
           'label': 'Location',
-          'choices': [{
-            'key': 'path',
-            'label': 'Path'
-          }, {
-            'key': 'query',
-            'label': 'Query'
-          }, {
-            'key': 'header',
-            'label': 'Header'
-          }, {
-            'key': 'formData',
-            'label': 'Form data'
-          }, {
-            'key': 'body',
-            'label': 'Body'
-          }]
+          'choices': ['path', 'query', 'header', 'formData', 'body']
         },
         'description': {
           'type': 'textarea'
@@ -172,7 +146,9 @@ export const parameter = {
 export const namedParameter = JSON.parse(JSON.stringify(parameter));
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
-namedParameter.label = 'Parameter #$index: ${#/paramName}';
+namedParameter.overrideI18nKeys = {
+  'label': 'form.global-definitions.parameters.item.label'
+};
 
 export const parameters = {
   'type': 'array',

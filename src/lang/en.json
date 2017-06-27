@@ -1,4 +1,5 @@
 {
+  "blank": "",
   "nav": {
     "tab": {
       "about": "About",
@@ -190,6 +191,115 @@
         },
         "schemes": {
           "label": "Default protocols"
+        }
+      }
+    },
+    "global-definitions": {
+      "label": "Definitions",
+      "parameters": {
+        "label": "Parameters",
+        "newItemText": "New Parameter",
+        "item": {
+          "label": "Parameter #$index: ${#:key}"
+        }
+      },
+      "responses": {
+        "label": "Responses"
+      }
+    },
+    "parameter": {
+      "label": "Parameter #$index: ${#/name}",
+      "parameter": {
+        "name": {
+          "label": "Name"
+        },
+        "in": {
+          "name": "Location",
+          "choices": {
+            "path": "Path",
+            "query": "Query",
+            "header": "Header",
+            "formData": "Form data",
+            "body": "Body"
+          }
+        },
+        "description": {
+          "label": "Description"
+        },
+        "required": {
+          "label": "Required",
+          "helpText": "Is this parameter required?"
+        },
+        "allowEmptyValue": {
+          "label": "Allow empty value?"
+        },
+        "type": {
+          "label": "Type",
+          "choices": {
+            "string": "String",
+            "integer": "Integer",
+            "boolean": "Boolean",
+            "number": "Number",
+            "array": "Array",
+            "file": "File"
+          }
+        },
+        "collectionFormat": {
+          "label": "Collection format",
+          "choices": {
+            "csv": "CSV (foo,bar)",
+            "ssv": "SSV (foo bar)",
+            "tsv": "TSV (foo\\tbar)",
+            "pipes": "Pipes (foo|bar)"
+          }
+        }
+      }
+    },
+    "types": {
+      "label": "Types",
+      "newItemText": "New Type",
+      "item": {
+        "label": "Type #$index: ${#/name}",
+        "x-oad-type": {
+          "choices": {
+            "choose": "Choose a type",
+            "string": "String",
+            "integer": "Integer",
+            "boolean": "Boolean",
+            "number": "Number",
+            "array": "Array",
+            "object": "Object",
+            "reference": "Reference",
+            "null": "Null",
+            "file": "File"
+          }
+        },
+        "name": {
+          "placeholder": "Enter key..."
+        },
+        "$ref": {
+          "label": "Target"
+        },
+        "title": {
+          "label": "Title"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "format": {
+          "label": "Format",
+          "choices": {
+            "int32": "32-bit integer",
+            "int64": "64-bit integer",
+            "float": "32-bit floating point",
+            "double": "64-bit floating point",
+            "string": "Plain string",
+            "byte": "Byte (Base64)",
+            "binary": "Binary (octet sequence)",
+            "date": "Date",
+            "date-time": "Date and Time",
+            "password": "Password"
+          }
         }
       }
     }
