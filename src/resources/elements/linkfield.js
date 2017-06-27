@@ -6,6 +6,7 @@ import {Field} from './abstract/field';
  */
 @noView
 export class Linkfield extends Field {
+  static TYPE = 'link';
   /**
    * The target field from which to get the value. If the target refers to this
    * field, the value will be {@linkplain undefined}

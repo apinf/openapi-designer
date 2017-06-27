@@ -6,6 +6,7 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class Textfield extends Field {
+  static TYPE = 'text';
   /**
    * The text value of the input field.
    * @type {String}

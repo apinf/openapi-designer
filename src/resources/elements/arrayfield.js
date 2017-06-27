@@ -7,6 +7,7 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class Arrayfield extends Parentfield {
+  static TYPE = 'array';
   /**
    * The base object that is cloned whenever a new child is added.
    * @type {Field}

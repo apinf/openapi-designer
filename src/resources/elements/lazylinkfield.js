@@ -7,6 +7,7 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class LazyLinkfield extends Field {
+  static TYPE = 'lazylink';
   target = '#';
   overrides = {};
   child = undefined;

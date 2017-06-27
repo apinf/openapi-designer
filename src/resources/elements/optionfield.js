@@ -7,6 +7,7 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class Optionfield extends Field {
+  static TYPE = 'option';
   /**
    * The static choices.
    * @type {Array}

@@ -7,6 +7,7 @@ import {Parentfield} from './abstract/parentfield';
  */
 @containerless
 export class Objectfield extends Parentfield {
+  static TYPE = 'object';
   /** @inheritdoc */
   _children = {};
   /**
