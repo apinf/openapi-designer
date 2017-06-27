@@ -78,6 +78,7 @@ export class Field {
    * @type {String}
    */
   overrideI18nPath = undefined
+  overrideI18nKeys = {}
   /**
    * Object that contains cached localizations for this field for the current
    * language. Use {@link #i18n()} instead of directly accessing this object.
@@ -107,7 +108,12 @@ export class Field {
       fieldName = 'label';
     }
     if (!this.localizations.hasOwnProperty(fieldName)) {
-      const path = `${this.i18nPath}.${fieldName}`;
+      let path;
+      if (this.overrideI18nKeys.hasOwnProperty(fieldName)) {
+        path = this.overrideI18nKeys[fieldName];
+      } else {
+        path = `${this.i18nPath}.${fieldName}`;
+      }
       let translation = Field.internationalizer.tr(path);
       if (!translation || (typeof defaultValue === 'string' && translation === path)) {
         translation = defaultValue;
@@ -138,6 +144,8 @@ export class Field {
    * @param {String}   [args.overrideI18nPath]  The path to use as the I18n path
    *                                            of this field instead of the
    *                                            default.
+   * @param {Object}   [args.overrideI18nKeys]  I18n keys to override with other
+   *                                            I18n paths.
    * @return {Field}                    This field.
    */
   init(id, args = {}) {
@@ -147,7 +155,8 @@ export class Field {
       conditions: {},
       showValueInParent: true,
       hideValueIfEmpty: false,
-      overrideI18nPath: undefined
+      overrideI18nPath: undefined,
+      overrideI18nKeys: {}
     }, args);
     Field.eventAggregator.subscribe('i18n:locale:changed', () => this.localizations = {});
     this.id = id;
@@ -159,6 +168,7 @@ export class Field {
     this.showValueInParent = args.showValueInParent;
     this.hideValueIfEmpty = args.hideValueIfEmpty;
     this.overrideI18nPath = args.overrideI18nPath;
+    this.overrideI18nKeys = args.overrideI18nKeys || {};
     this.type = this.constructor.TYPE;
     return this;
   }
