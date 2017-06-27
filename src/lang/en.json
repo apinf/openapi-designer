@@ -210,57 +210,68 @@
         }
       },
       "responses": {
-        "label": "Responses"
+        "label": "Responses",
+        "newItemText": "New Response",
+        "item": {
+          "label": "Response #$index: ${#:key}"
+        }
+      }
+    },
+    "response": {
+      "label": "Response #$index for HTTP ${#:key}",
+      "description": {
+        "label": "Description"
+      },
+      "schema": {
+        "label": "Response body"
       }
     },
     "parameter": {
       "label": "Parameter #$index: ${#/name}",
-      "parameter": {
-        "name": {
-          "label": "Name"
-        },
-        "in": {
-          "label": "Location",
-          "choices": {
-            "path": "Path",
-            "query": "Query",
-            "header": "Header",
-            "formData": "Form data",
-            "body": "Body"
-          }
-        },
-        "description": {
-          "label": "Description"
-        },
-        "required": {
-          "label": "Required",
-          "helpText": "Is this parameter required?"
-        },
-        "allowEmptyValue": {
-          "label": "Allow empty value?"
-        },
-        "type": {
-          "label": "Type",
-          "choices": {
-            "string": "String",
-            "integer": "Integer",
-            "boolean": "Boolean",
-            "number": "Number",
-            "array": "Array",
-            "file": "File"
-          }
-        },
-        "items": {
-          "label": "Array items"
-        },
-        "collectionFormat": {
-          "label": "Collection format",
-          "choices": {
-            "csv": "CSV (foo,bar)",
-            "ssv": "SSV (foo bar)",
-            "tsv": "TSV (foo\\tbar)",
-            "pipes": "Pipes (foo|bar)"
-          }
+      "name": {
+        "label": "Name"
+      },
+      "in": {
+        "label": "Location",
+        "choices": {
+          "path": "Path",
+          "query": "Query",
+          "header": "Header",
+          "formData": "Form data",
+          "body": "Body"
+        }
+      },
+      "description": {
+        "label": "Description"
+      },
+      "required": {
+        "label": "Required",
+        "helpText": "Is this parameter required?"
+      },
+      "allowEmptyValue": {
+        "label": "Allow empty value?"
+      },
+      "type": {
+        "label": "Type",
+        "choices": {
+          "string": "String",
+          "integer": "Integer",
+          "boolean": "Boolean",
+          "number": "Number",
+          "array": "Array",
+          "file": "File"
+        }
+      },
+      "items": {
+        "label": "Array items"
+      },
+      "collectionFormat": {
+        "label": "Collection format",
+        "choices": {
+          "csv": "CSV (foo,bar)",
+          "ssv": "SSV (foo bar)",
+          "tsv": "TSV (foo\\tbar)",
+          "pipes": "Pipes (foo|bar)"
         }
       }
     },

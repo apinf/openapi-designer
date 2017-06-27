@@ -23,7 +23,7 @@ export class LazyLinkfield extends Field {
   get i18nPath() {
     const target = this.resolveRef(this.target);
     if (!target) {
-      return super.i18nPath;
+      return this.parent.i18nPath;
     }
     return target.i18nPath;
   }

@@ -53,7 +53,7 @@ toplevelParameterCollectionFormat.choices.push({
 
 export const parameterItemDefinition = {
   'type': 'object',
-  'overrideI18nPath': 'form.parameter.parameter',
+  'overrideI18nPath': 'form.parameter',
   'overrideI18nKeys': {
     'label': 'form.parameter.parameter.items.label'
   },
@@ -82,8 +82,8 @@ export const parameter = {
   'overrideI18nPath': 'form.parameter',
   'types': {
     'parameter': {
+      'overrideI18nPath': 'form.parameter',
       'type': 'object',
-      'label': '',
       'children': {
         'name': {
           'type': 'text'
@@ -128,8 +128,8 @@ export const parameter = {
       }
     },
     'reference': {
-      'label': '',
       'type': 'object',
+      'overrideI18nPath': 'form.parameter',
       'children': {
         '$ref': {
           'type': 'option',

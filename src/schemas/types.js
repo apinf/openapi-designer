@@ -84,6 +84,7 @@ export const types = {
   'item': {
     'type': 'object',
     'label': 'Type #$index: ${#/name}',
+    'overrideI18nPath': 'form.types.item',
     'legendChildren': {
       'x-oad-type': {
         'type': 'option',
