@@ -33,6 +33,56 @@
         "label": "URL"
       }
     },
+    "global-security": {
+      "label": "Security",
+      "definitions": {
+        "label": "Definitions",
+        "item": {
+          "label": "Security definition #$index",
+          "basic": {
+            "description": {
+              "label": "Description"
+            }
+          },
+          "apiKey": {
+            "description": {
+              "label": "Description"
+            },
+            "name": {
+              "label": "Name"
+            },
+            "in": {
+              "label": "API key location"
+            }
+          },
+          "oauth2": {
+            "description": {
+              "label": "Description"
+            },
+            "flow": {
+              "label": "Flow"
+            },
+            "authorizationUrl": {
+              "label": "Authorization URL"
+            },
+            "scopes": {
+              "label": "Scopes",
+              "newItemText": "New Scope",
+              "item": {
+                "label": "Scope #$index",
+                "key": {
+                  "label": "Key"
+                },
+                "description": {
+                  "label": "Description"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "tags": {
       "label": "Tag definitions",
       "item": {
