@@ -29,7 +29,7 @@ export const typeFormatChoices = [
   },
   {
     'key': '',
-    'label': 'String',
+    'i18nKey': 'string',
     'conditions': {
       '../type': 'string'
     }
@@ -80,6 +80,7 @@ export const types = {
   'collapseManagement': true,
   'isCollapsible': false,
   'newItemText': 'New Type',
+  'overrideI18nPath': 'form.types',
   'item': {
     'type': 'object',
     'label': 'Type #$index: ${#/name}',
@@ -90,7 +91,7 @@ export const types = {
         'placeholder': 'Type name',
         'format': 'dropdown',
         'choices': [
-          {'key': '', 'label': 'Choose type'},
+          {'key': '', 'i18nKey': 'choose'},
           'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
         ]
       },

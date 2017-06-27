@@ -54,49 +54,8 @@ export class Optionfield extends Field {
     this.hideIfNoChoices = args.hideIfNoChoices;
     this.argChoices = args.choices;
     this.checkboxFormat = args.checkboxFormat;
-
-    this.choices = [];
-    for (const choice of args.choices) {
-      if (typeof choice === 'string') {
-        // Parse a simple (label-only) choice definition.
-        this.choices.push({
-          key: choice,
-          label: choice,
-          selected: false,
-          conditionsFulfilled: true
-        });
-      } else {
-        // Parse a full choice definition.
-        const choiceParent = this;
-        this.choices.push({
-          key: choice.key,
-          label: choice.label || choice.key,
-          selected: false,
-          conditions: choice.conditions,
-          // A getter function to check whether all the conditions defined in
-          // the schema are fulfilled.
-          // The HTML templates can't do this complex logic, so we have to do it
-          // here.
-          get conditionsFulfilled() {
-            return Optionfield.conditionsFulfilled(choice.conditions, choiceParent);
-          }
-        });
-      }
-    }
-
+    this.choices = args.choices;
     this.dataSources = args.dataSources;
-
-    if (this.choices.length === 0 && this.dataSources.length === 0) {
-      // We don't want to leave the choices empty, so if there are no choices,
-      // make a checkbox with no label.
-      this.choices.push({
-        key: this.key,
-        label: '',
-        selected: false,
-        conditionsFulfilled: true
-      });
-      this.checkboxFormat = 'simple';
-    }
     return super.init(id, args);
   }
 
@@ -110,6 +69,48 @@ export class Optionfield extends Field {
   }
 
   created() {
+    const choices = this.choices;
+    this.choices = [];
+    for (const choice of choices) {
+      if (typeof choice === 'string') {
+        // Parse a simple (label-only) choice definition.
+        this.choices.push({
+          key: choice,
+          label: this.i18n(`choices.${choice}`, true),
+          selected: false,
+          conditionsFulfilled: true
+        });
+      } else {
+        // Parse a full choice definition.
+        const choiceParent = this;
+        this.choices.push({
+          key: choice.key,
+          i18nKey: choice.i18nKey,
+          label: this.i18n(`choices.${choice.key || choice.i18nKey}`, true),
+          selected: false,
+          conditions: choice.conditions,
+          // A getter function to check whether all the conditions defined in
+          // the schema are fulfilled.
+          // The HTML templates can't do this complex logic, so we have to do it
+          // here.
+          get conditionsFulfilled() {
+            return Optionfield.conditionsFulfilled(choice.conditions, choiceParent);
+          }
+        });
+      }
+    }
+    if (this.choices.length === 0 && this.dataSources.length === 0) {
+      // We don't want to leave the choices empty, so if there are no choices,
+      // make a checkbox with no label.
+      this.choices.push({
+        key: this.key,
+        label: '',
+        selected: false,
+        conditionsFulfilled: true
+      });
+      this.checkboxFormat = 'simple';
+    }
+
     const ds = this.dataSources;
     this.dataSources = [];
     for (let dataSource of ds) {

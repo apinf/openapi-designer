@@ -20,6 +20,13 @@ export class LazyLinkfield extends Field {
     return super.init(id, args);
   }
 
+  get i18nPath() {
+    if (!this.child) {
+      return super.i18nPath();
+    }
+    return this.child.i18nPath();
+  }
+
   /**
    * Check if this link doesn't currently have a child or if the child is empty.
    */
