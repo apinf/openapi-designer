@@ -112,6 +112,22 @@
           "label": "Default protocols"
         }
       }
+    },
+    "global-definitions": {
+      "label": "Definitions",
+      "types": {
+        "label": "Types",
+        "newItemText": "New Type",
+        "item": {
+          "label": "Type #$index: ${#/name}"
+        }
+      },
+      "parameters": {
+        "label": "Parameters"
+      },
+      "responses": {
+        "label": "Responses"
+      }
     }
   }
 }
