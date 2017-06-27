@@ -214,7 +214,7 @@
           "label": "Name"
         },
         "in": {
-          "name": "Location",
+          "label": "Location",
           "choices": {
             "path": "Path",
             "query": "Query",
@@ -243,6 +243,9 @@
             "array": "Array",
             "file": "File"
           }
+        },
+        "items": {
+          "label": "Array items"
         },
         "collectionFormat": {
           "label": "Collection format",

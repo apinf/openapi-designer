@@ -53,6 +53,10 @@ toplevelParameterCollectionFormat.choices.push({
 
 export const parameterItemDefinition = {
   'type': 'object',
+  'overrideI18nPath': 'form.parameter.parameter',
+  'overrideI18nKeys': {
+    'label': 'form.parameter.parameter.items.label'
+  },
   'children': {
     'type': parameterType,
     'format': parameterFormat,
