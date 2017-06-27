@@ -14,11 +14,6 @@ export class Textfield extends Field {
   @observable
   value = '';
   /**
-   * The UI placeholder when the field has no value.
-   * @type {String}
-   */
-  placeholder = 'Enter value...';
-  /**
    * Autocompletions that the text input should offer.
    * @type {String[]}
    */
@@ -33,19 +28,21 @@ export class Textfield extends Field {
    */
   init(id = '', args = {}) {
     args = Object.assign({
-      placeholder: 'Enter value...',
       value: '',
       autocomplete: undefined,
       format: 'text'
     }, args);
     this.value = args.value;
-    this.placeholder = args.placeholder;
     this.autocomplete = args.autocomplete;
     return super.init(id, args);
   }
 
   get listID() {
     return `autocomplete-${this.id}`;
+  }
+
+  get placeholder() {
+    return this.i18n('placeholder', 'Enter value...');
   }
 
   /**

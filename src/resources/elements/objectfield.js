@@ -131,12 +131,12 @@ export class Objectfield extends Parentfield {
     }
     clone.init(this.id, {
       format: this.format,
-      label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: parent || this.parent,
       index: this.index,
       hideValueIfEmpty: this.hideValueIfEmpty,
+      overrideI18nPath: this.overrideI18nPath,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });

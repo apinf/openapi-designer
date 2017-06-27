@@ -1,19 +1,23 @@
 import {inject} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
+import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
 import YAML from 'yamljs';
 import $ from 'jquery';
 
-@inject(I18N)
+@inject(I18N, EventAggregator)
 export class App {
-  constructor(i18n) {
-    this.i18n = i18n;
+  constructor(i18n, ea) {
+    Field.internationalizer = i18n;
+    Field.eventAggregator = ea;
+    console.log(Field.internationalizer, Field.eventAggregator);
     // Allow access from browser console
     window.$oai = this;
 
     try {
-      this.forms = parseJSON('swagger', JSON.parse(JSON.stringify(schema)));
+      this.forms = parseJSON('form', JSON.parse(JSON.stringify(schema)));
       if (window.localStorage['openapi-v2-design']) {
         this.forms.setValue(JSON.parse(window.localStorage['openapi-v2-design']));
       }

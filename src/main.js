@@ -16,7 +16,7 @@ export function configure(aurelia) {
           loadPath: './lang/{{lng}}.json'
         },
         attributes: ['t'],
-        lng: 'fi',
+        lng: 'en',
         fallbackLng: 'en',
         debug: environment.debug
       });

@@ -11,7 +11,7 @@ import {parseJSON} from '../jsonparser';
  */
 @containerless
 export class Typefield extends Collapsiblefield {
-  static type = 'selectable';
+  static TYPE = 'selectable';
   /**
    * The type that is currently selected.
    * @type {String}

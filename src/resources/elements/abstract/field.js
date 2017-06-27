@@ -28,19 +28,6 @@ export class Field {
    */
   format = '';
   /**
-   * The internal storage for a static label.
-   * @type {String}
-   * @private
-   */
-  _label = '';
-  /**
-   * The text to show in a popup when the user hovers over an info button.
-   * @type {String}
-   */
-  helpText = '';
-  formatLabel = false;
-  internationalizeLabel = false;
-  /**
    * The number of columns this element should use.
    * @type {Number}
    */
@@ -86,16 +73,58 @@ export class Field {
    * @type {Function[]}
    */
   changeListeners = []
+  /**
+   * The path to use as the I18n path of this field instead of the default.
+   * @type {String}
+   */
+  overrideI18nPath = undefined
+  /**
+   * Object that contains cached localizations for this field for the current
+   * language. Use {@link #i18n()} instead of directly accessing this object.
+   * This object is cleared when the locale changes so that the localizations
+   * would be updated.
+   * @type {Object}
+   */
+  localizations = {}
+
+  get i18nPath() {
+    if (this.overrideI18nPath) {
+      return this.overrideI18nPath;
+    } else if (!this.cachedI18nPath) {
+      if (!this.parent) {
+        this.cachedI18nPath = this.id;
+      } else if (this.parent.type === 'array') {
+        this.cachedI18nPath = `${this.parent.i18nPath}.item`;
+      } else {
+        this.cachedI18nPath = `${this.parent.i18nPath}.${this.id}`;
+      }
+    }
+    return this.cachedI18nPath;
+  }
+
+  i18n(fieldName, defaultValue) {
+    if (!fieldName) {
+      fieldName = 'label';
+    }
+    if (!this.localizations.hasOwnProperty(fieldName)) {
+      const path = `${this.i18nPath}.${fieldName}`;
+      let translation = Field.internationalizer.tr(path);
+      if (!translation || (typeof defaultValue == 'string' && translation === path)) {
+        translation = defaultValue;
+      }
+      this.localizations[fieldName] = translation;
+      return translation;
+    }
+    return this.localizations[fieldName];
+  }
 
   /**
    * Initialize this field with the base data.
    * @param  {String} id                The index of this field.
-   * @param  {String} [args.label]      The label of this field.
    * @param  {Number} [args.columns=8]  The number of columns this field should
    *                                    use.
    * @param  {String} [args.format]     The output and/or display format of the
    *                                    field.
-   * @param  {String} [args.helpText]   The help text describing this field.
    * @param  {Field}  [args.parent]     The parent of this field.
    * @param  {Number} [args.index]      The numerical index of this field within
    *                                    the parent.
@@ -106,28 +135,31 @@ export class Field {
    * @param  {Boolean} [args.hideValueIfEmpty]  Whether or not the value of this
    *                                            field should be hidden from the
    *                                            output when its empty.
+   * @param {String}   [args.overrideI18nPath]  The path to use as the I18n path
+   *                                            of this field instead of the
+   *                                            default.
    * @return {Field}                    This field.
    */
   init(id, args = {}) {
     args = Object.assign({
-      label: id.substr(0, 1).toUpperCase() + id.substr(1),
       columns: 8,
       format: '',
-      helpText: '',
       conditions: {},
       showValueInParent: true,
-      hideValueIfEmpty: false
+      hideValueIfEmpty: false,
+      overrideI18nPath: undefined
     }, args);
+    Field.eventAggregator.subscribe('i18n:locale:changed', () => this.localizations = {});
     this.id = id;
     this.format = args.format;
-    this.helpText = args.helpText;
-    this.labelFormat = args.label || args._label;
     this.conditions = args.conditions;
     this.columns = args.columns;
     this.index = args.index;
     this.parent = args.parent;
     this.showValueInParent = args.showValueInParent;
     this.hideValueIfEmpty = args.hideValueIfEmpty;
+    this.overrideI18nPath = args.overrideI18nPath;
+    this.type = this.constructor.TYPE;
     return this;
   }
 
@@ -179,17 +211,16 @@ export class Field {
    * @return {String} The label to display.
    */
   get label() {
-    let label = this._label;
-    if (this.internationalizeLabel) {
-      // TODO implement translation here
-      label = label;
-    }
-
-    if (!this.formatLabel) {
+    let label = this.i18n('label');
+    if (!label.includes('$')) {
       return label;
     }
 
     return this.formatReferencePlusField(this.formatIndex(label));
+  }
+
+  get helpText() {
+    return this.i18n('helpText', '');
   }
 
   /**
@@ -239,34 +270,6 @@ export class Field {
     }
     // Field name specified without braces, so just get the value of that field.
     return this[name];
-  }
-
-  /**
-   * Set the label format.
-   */
-  set labelFormat(newLabel) {
-    if (newLabel === undefined) {
-      return;
-    }
-    if (newLabel.includes('i18n:')) {
-      this.internationalizeLabel = true;
-      newLabel = newLabel.substr(5);
-      // TODO implement translation here
-      let translated = newLabel;
-      if (translated.includes('$')) {
-        this.formatLabel = true;
-      }
-    } else if (newLabel.includes('$')) {
-      this.formatLabel = true;
-    }
-    this._label = newLabel;
-  }
-
-  /**
-   * Get the label format.
-   */
-  get labelFormat() {
-    return this._label;
   }
 
   /**

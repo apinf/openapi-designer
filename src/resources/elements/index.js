@@ -8,12 +8,12 @@ import {LazyLinkfield} from './lazylinkfield';
 import {Typefield} from './typefield';
 
 export const fields = {
-  [Textfield.type]: Textfield,
-  [Textareafield.type]: Textareafield,
-  [Objectfield.type]: Objectfield,
-  [Arrayfield.type]: Arrayfield,
-  [Optionfield.type]: Optionfield,
-  [Linkfield.type]: Linkfield,
-  [LazyLinkfield.type]: LazyLinkfield,
-  [Typefield.type]: Typefield
+  [Textfield.TYPE]: Textfield,
+  [Textareafield.TYPE]: Textareafield,
+  [Objectfield.TYPE]: Objectfield,
+  [Arrayfield.TYPE]: Arrayfield,
+  [Optionfield.TYPE]: Optionfield,
+  [Linkfield.TYPE]: Linkfield,
+  [LazyLinkfield.TYPE]: LazyLinkfield,
+  [Typefield.TYPE]: Typefield
 };
