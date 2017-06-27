@@ -21,10 +21,11 @@ export class LazyLinkfield extends Field {
   }
 
   get i18nPath() {
-    if (!this.child) {
+    const target = this.resolveRef(this.target);
+    if (!target) {
       return super.i18nPath();
     }
-    return this.child.i18nPath();
+    return target.i18nPath();
   }
 
   /**
