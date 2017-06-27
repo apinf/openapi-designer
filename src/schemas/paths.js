@@ -109,6 +109,10 @@ export const paths = {
             'label': 'GET',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.get'
+            },
             'children': operationChildren
           },
           'put': {
@@ -116,6 +120,10 @@ export const paths = {
             'label': 'PUT',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.put'
+            },
             'children': operationChildren
           },
           'post': {
@@ -123,6 +131,10 @@ export const paths = {
             'label': 'POST',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.post'
+            },
             'children': operationChildren
           },
           'delete': {
@@ -130,6 +142,10 @@ export const paths = {
             'label': 'DELETE',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.delete'
+            },
             'children': operationChildren
           },
           'options': {
@@ -137,6 +153,10 @@ export const paths = {
             'label': 'OPTIONS',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.options'
+            },
             'children': operationChildren
           },
           'head': {
@@ -144,6 +164,10 @@ export const paths = {
             'label': 'HEAD',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.head'
+            },
             'children': operationChildren
           },
           'patch': {
@@ -151,6 +175,10 @@ export const paths = {
             'label': 'PATCH',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'overrideI18nPath': 'form.paths.item.operation',
+            'overrideI18nKeys': {
+              'label': 'form.paths.item.operation.methods.patch'
+            },
             'children': operationChildren
           },
           'parameters': {

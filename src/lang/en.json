@@ -34,6 +34,57 @@
         "label": "URL"
       }
     },
+    "paths": {
+      "label": "Paths",
+      "newItemText": "New Path",
+      "item": {
+        "label": "Path #$index: ${#:key}",
+        "operation": {
+          "methods": {
+            "get": "GET",
+            "put": "PUT",
+            "post": "POST",
+            "delete": "DELETE",
+            "options": "OPTIONS",
+            "head": "HEAD",
+            "patch": "PATCH"
+          },
+          "operationId": {
+            "label": "Operation ID"
+          },
+          "summary": {
+            "label": "Summary"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "deprecated": {
+            "label": "Deprecated?",
+            "choices": {
+              "blank": ""
+            }
+          },
+          "overrides": {
+            "label": "Overrides"
+          },
+          "tags": {
+            "label": "Tags",
+            "newItemText": "New Tag",
+            "item": {
+              "label": "Tag #$index"
+            }
+          },
+          "responses": {
+            "label": "Responses",
+            "newItemText": "New Response"
+          },
+          "parameters": {
+            "label": "Params",
+            "newItemText": "New Parameter"
+          }
+        }
+      }
+    },
     "global-security": {
       "label": "Security",
       "definitions": {
@@ -100,6 +151,7 @@
           "label": "Requirements Object #$index",
           "newItemText": "New Security Requirement",
           "item": {
+            "label": "Security Requirement #$index",
             "name": {
               "label": "Name"
             },
