@@ -60,7 +60,7 @@ export class Field {
    * when it's empty.
    * @type {Boolean}
    */
-  hideValueIfEmpty = false
+  hideValueIfEmpty = true
   /**
    * Whether or not this field has the field {@link #collapsed} and the method
    * {@link #toggleCollapse()}
@@ -164,7 +164,7 @@ export class Field {
       format: '',
       conditions: {},
       showValueInParent: true,
-      hideValueIfEmpty: false,
+      hideValueIfEmpty: true,
       overrideI18nPath: undefined,
       overrideI18nKeys: {},
       interpolations: {}

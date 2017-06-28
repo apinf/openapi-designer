@@ -9,11 +9,13 @@ export const securityRequirements = {
     'label': 'Requirements Object',
     'item': {
       'label': 'Security Requirement',
+      'hideValueIfEmpty': false,
       'type': 'object',
       'children': {
         'name': {
           'type': 'option',
           'format': 'dropdown',
+          'hideIfNoChoices': false,
           'dataSources': [{
             'source': '/global-security/definitions',
             'key': '${#:key}'
@@ -21,6 +23,7 @@ export const securityRequirements = {
         },
         'scopes': {
           'type': 'array',
+          'hideValueIfEmpty': false,
           'item': {
             'type': 'text',
             'label': 'OAuth2 scope'
