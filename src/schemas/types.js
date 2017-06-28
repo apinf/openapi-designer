@@ -154,6 +154,9 @@ export const types = {
         'target': '/global-definitions/types/:item',
         'overrides': {
           'labelFormat': 'Array item',
+          'i18n/keys': {
+            'label': 'form.types.item.items.label'
+          },
           'legendChildren/name': null,
           'legendChildren/x-oad-type/columns': 8
         },
@@ -165,8 +168,19 @@ export const types = {
         'type': 'lazylink',
         'target': '/global-definitions/types',
         'overrides': {
-          'labelFormat': 'Properties',
-          '#/:item;labelFormat': 'Property #$index: ${#/name}'
+          'i18n/keys': {
+            'label': 'form.types.item.properties.label'
+          },
+          '#/:item;i18n': {
+            'path': 'form.types.item',
+            'keys': {
+              'label': 'form.types.item.properties.item.label'
+            },
+            'interpolations': {
+              'name': '${#/name}',
+              'type': '${#/type}'
+            }
+          }
         },
         'conditions': {
           '../x-oad-type': 'object'

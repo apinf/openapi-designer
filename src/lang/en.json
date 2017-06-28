@@ -370,6 +370,21 @@
         "description": {
           "label": "Description"
         },
+        "items": {
+          "label": "Array item"
+        },
+        "properties": {
+          "label": "Properties",
+          "item": {
+            "label": "Property #{{index}}: {{-name}}"
+          }
+        },
+        "required": {
+          "label": "Required subfields",
+          "item": {
+            "label": "Required field"
+          }
+        },
         "format": {
           "label": "Format",
           "choices": {
