@@ -4,6 +4,9 @@ export const response = {
   'keyKey': 'status',
   'keyPlaceholder': 'Enter HTTP status code...',
   'overrideI18nPath': 'form.response',
+  'interpolations': {
+    'httpStatus': '${#:key}'
+  },
   'types': {
     'response': {
       'overrideI18nPath': 'form.response',
@@ -49,6 +52,9 @@ export const response = {
 const namedResponse = JSON.parse(JSON.stringify(response));
 namedResponse.keyKey = 'responseName';
 namedResponse.keyPlaceholder = 'Enter name...';
+namedResponse.interpolations = {
+  'name': '${#:key}'
+};
 namedResponse.overrideI18nKeys = {
   'label': 'form.global-definitions.responses.item.label'
 };
