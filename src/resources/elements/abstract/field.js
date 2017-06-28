@@ -73,7 +73,7 @@ export class Field {
    * when it's empty.
    * @type {Boolean}
    */
-  hideValueIfEmpty = false
+  hideValueIfEmpty = true
   /**
    * Whether or not this field has the field {@link #collapsed} and the method
    * {@link #toggleCollapse()}
@@ -116,7 +116,7 @@ export class Field {
       helpText: '',
       conditions: {},
       showValueInParent: true,
-      hideValueIfEmpty: false
+      hideValueIfEmpty: true
     }, args);
     this.id = id;
     this.format = args.format;
