@@ -1,5 +1,6 @@
-export const mimeTypeArray = {
+const mimeTypeArray = {
   'type': 'array',
+  'i18n': {},
   'item': {
     'type': 'text',
     'label': 'MIME type',
@@ -14,12 +15,17 @@ export const mimeTypeArray = {
   }
 };
 
+export const consumes = Object.assign({}, mimeTypeArray);
+consumes.i18n.path = 'form.mime.consumes';
+export const produces = Object.assign({}, mimeTypeArray);
+produces.i18n.path = 'form.mime.produces';
+
 export const mime = {
   'type': 'object',
   'showValueInParent': false,
   'isCollapsible': false,
   'children': {
-    'consumes': mimeTypeArray,
-    'produces': mimeTypeArray
+    'consumes': consumes,
+    'produces': produces
   }
 };

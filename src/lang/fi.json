@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "tab": {
+      "about": "Tietoja",
+      "header": "Ylätunniste",
+      "mime": "MIME-tyypit",
+      "security": "Turvallisuus",
+      "tags": "Tunnisteet",
+      "paths": "Polut",
+      "definitions": "Määritelmät"
+    },
+    "actions": {
+      "delete": "Poista tiedot",
+      "download": {
+        "json": "JSON",
+        "yaml": "YAML"
+      }
+    }
+  },
+  "error": {
+    "title": "Hups!",
+    "body": "Näyttää siltä, että jokin on rikki.\nJoskus nämä ongelmat aiheutuvat epäkelvollisista OpenAPI-asiakirjoista välimuistissa. Jos näin on käynyt, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">tietojen poistamisen</a> pitäisi korjata ongelma.",
+    "data-title": "Virheen tiedot"
+  },
+  "footer-powered-by": "Powered by"
+}

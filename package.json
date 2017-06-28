@@ -10,8 +10,12 @@
   "dependencies": {
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
+    "aurelia-event-aggregator": "^1.0.1",
+    "aurelia-i18n": "^1.6.1",
     "babel-polyfill": "^6.23.0",
     "bluebird": "^3.4.1",
+    "i18next": "^8.4.2",
+    "i18next-xhr-backend": "^1.4.2",
     "jquery": "^3.2.1",
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest",

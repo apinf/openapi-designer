@@ -7,17 +7,12 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class Arrayfield extends Parentfield {
+  static TYPE = 'array';
   /**
    * The base object that is cloned whenever a new child is added.
    * @type {Field}
    */
   item;
-  /**
-   * The text that is displayed in the new item -button rather than the label of
-   * the child.
-   * @type {String}
-   */
-  newItemText;
   /**
    * The field that is used as the key if {@link #format} is {@linkplain map}
    * @type {String}
@@ -42,9 +37,6 @@ export class Arrayfield extends Parentfield {
    * @inheritdoc
    * @param {Field}   [args.item]        The base object that is cloned to create
    *                                     new children.
-   * @param {String}  [args.newItemText] The text that is displayed in the new
-   *                                     item -button rather than the label of
-   *                                     the child.
    * @param {String}  [args.keyField]    The field that is used as the key if
    *                                     {@link #format} is {@linkplain map}
    * @param {String}  [args.valueField]  The field that is used as the value if
@@ -55,17 +47,20 @@ export class Arrayfield extends Parentfield {
   init(id = '', args = {}) {
     args = Object.assign({
       format: 'array',
-      newItemText: undefined,
       keyField: '_key',
       valueField: undefined,
       addIndexToChildLabel: true
     }, args);
     this.item = args.item;
-    this.newItemText = args.newItemText;
     this.keyField = args.keyField;
     this.valueField = args.valueField;
     this.addIndexToChildLabel = args.addIndexToChildLabel;
     return super.init(id, args);
+  }
+
+  get newItemText() {
+    const defaultNewText = `New ${this.item.label}`;
+    return this.localize('newItemText', defaultNewText);
   }
 
   /**

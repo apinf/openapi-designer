@@ -7,6 +7,7 @@ import {Parentfield} from './abstract/parentfield';
  */
 @containerless
 export class Objectfield extends Parentfield {
+  static TYPE = 'object';
   /** @inheritdoc */
   _children = {};
   /**
@@ -130,12 +131,12 @@ export class Objectfield extends Parentfield {
     }
     clone.init(this.id, {
       format: this.format,
-      label: this._label,
       columns: this.columns,
       collapsed: this.collapsed,
       parent: parent || this.parent,
       index: this.index,
       hideValueIfEmpty: this.hideValueIfEmpty,
+      i18n: this.i18n,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });

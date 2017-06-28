@@ -3,9 +3,17 @@ export const response = {
   'label': 'Response #$index for HTTP ${#:key}',
   'keyKey': 'status',
   'keyPlaceholder': 'Enter HTTP status code...',
+  'i18n': {
+    'path': 'form.response',
+    'interpolations': {
+      'httpStatus': '${#:key}'
+    }
+  },
   'types': {
     'response': {
-      'label': '',
+      'i18n': {
+        'path': 'form.response'
+      },
       'type': 'object',
       'children': {
         'description': {
@@ -16,7 +24,9 @@ export const response = {
           'target': '/global-definitions/types/:item',
           'hideValueIfEmpty': true,
           'overrides': {
-            'labelFormat': 'Response body',
+            'i18n/keys': {
+              'label': 'form.response.schema.label'
+            },
             'legendChildren/name': null,
             'legendChildren/x-oad-type/columns': 8
           }
@@ -24,7 +34,9 @@ export const response = {
       }
     },
     'reference': {
-      'label': '',
+      'i18n': {
+        'path': 'form.response'
+      },
       'type': 'object',
       'children': {
         '$ref': {
@@ -46,7 +58,12 @@ export const response = {
 const namedResponse = JSON.parse(JSON.stringify(response));
 namedResponse.keyKey = 'responseName';
 namedResponse.keyPlaceholder = 'Enter name...';
-namedResponse.label = 'Response #$index: ${#:key}';
+namedResponse.i18n.interpolations = {
+  'name': '${#:key}'
+};
+namedResponse.i18n.keys = {
+  'label': 'form.global-definitions.responses.item.label'
+};
 
 export const responses = {
   'type': 'array',

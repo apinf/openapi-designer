@@ -22,7 +22,10 @@ toplevelParameterType.choices.push({
 const parameterFormat = {
   'type': 'option',
   'format': 'dropdown',
-  'choices': typeFormatChoices
+  'choices': typeFormatChoices,
+  'i18n': {
+    'path': 'form.types.item.format'
+  }
 };
 
 const toplevelParameterFormat = JSON.parse(JSON.stringify(parameterFormat));
@@ -34,19 +37,7 @@ const parameterCollectionFormat = {
   'type': 'option',
   'format': 'dropdown',
   'label': 'Collection format',
-  'choices': [{
-    'key': 'csv',
-    'label': 'CSV (foo,bar)'
-  }, {
-    'key': 'ssv',
-    'label': 'SSV (foo bar)'
-  }, {
-    'key': 'tsv',
-    'label': 'TSV (foo\\tbar)'
-  }, {
-    'key': 'pipes',
-    'label': 'Pipes (foo|bar)'
-  }],
+  'choices': ['csv', 'ssv', 'tsv', 'pipes'],
   'conditions': {
     '../type': 'array'
   }
@@ -64,6 +55,12 @@ toplevelParameterCollectionFormat.choices.push({
 
 export const parameterItemDefinition = {
   'type': 'object',
+  'Path': 'form.parameter',
+  'i18n': {
+    'keys': {
+      'label': 'form.parameter.parameter.items.label'
+    }
+  },
   'children': {
     'type': parameterType,
     'format': parameterFormat,
@@ -86,11 +83,18 @@ toplevelParameterItemDefinition.conditions = {
 
 export const parameter = {
   'type': 'selectable',
-  'label': 'Parameter #$index: ${#/name}',
+  'i18n': {
+    'path': 'form.parameter',
+    'interpolations': {
+      'name': '${#/:child/name}'
+    }
+  },
   'types': {
     'parameter': {
+      'i18n': {
+        'path': 'form.parameter'
+      },
       'type': 'object',
-      'label': '',
       'children': {
         'name': {
           'type': 'text'
@@ -99,22 +103,7 @@ export const parameter = {
           'type': 'option',
           'format': 'dropdown',
           'label': 'Location',
-          'choices': [{
-            'key': 'path',
-            'label': 'Path'
-          }, {
-            'key': 'query',
-            'label': 'Query'
-          }, {
-            'key': 'header',
-            'label': 'Header'
-          }, {
-            'key': 'formData',
-            'label': 'Form data'
-          }, {
-            'key': 'body',
-            'label': 'Body'
-          }]
+          'choices': ['path', 'query', 'header', 'formData', 'body']
         },
         'description': {
           'type': 'textarea'
@@ -150,8 +139,10 @@ export const parameter = {
       }
     },
     'reference': {
-      'label': '',
       'type': 'object',
+      'i18n': {
+        'path': 'form.parameter'
+      },
       'children': {
         '$ref': {
           'type': 'option',
@@ -172,7 +163,12 @@ export const parameter = {
 export const namedParameter = JSON.parse(JSON.stringify(parameter));
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
-namedParameter.label = 'Parameter #$index: ${#/paramName}';
+namedParameter.i18n.interpolations = {
+  'name': '${#:key}'
+};
+namedParameter.i18n.keys = {
+  'label': 'form.global-definitions.parameters.item.label'
+};
 
 export const parameters = {
   'type': 'array',

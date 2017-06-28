@@ -29,7 +29,7 @@ export const typeFormatChoices = [
   },
   {
     'key': '',
-    'label': 'String',
+    'i18nKey': 'string',
     'conditions': {
       '../type': 'string'
     }
@@ -80,8 +80,18 @@ export const types = {
   'collapseManagement': true,
   'isCollapsible': false,
   'newItemText': 'New Type',
+  'i18n': {
+    'path': 'form.types'
+  },
   'item': {
     'type': 'object',
+    'i18n': {
+      'path': 'form.types.item',
+      'interpolations': {
+        'name': '${#/name}',
+        'type': '${#/x-oad-type}'
+      }
+    },
     'label': 'Type #$index: ${#/name}',
     'legendChildren': {
       'x-oad-type': {
@@ -90,7 +100,7 @@ export const types = {
         'placeholder': 'Type name',
         'format': 'dropdown',
         'choices': [
-          {'key': '', 'label': 'Choose type'},
+          {'key': '', 'i18nKey': 'choose'},
           'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
         ]
       },

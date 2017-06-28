@@ -7,6 +7,7 @@ import {Field} from './abstract/field';
  */
 @containerless
 export class LazyLinkfield extends Field {
+  static TYPE = 'lazylink';
   target = '#';
   overrides = {};
   child = undefined;
@@ -17,6 +18,14 @@ export class LazyLinkfield extends Field {
     this.target = args.target || '#';
     this.overrides = args.overrides || {};
     return super.init(id, args);
+  }
+
+  get i18nPath() {
+    const target = this.resolveRef(this.target);
+    if (!target) {
+      return this.parent.i18nPath;
+    }
+    return target.i18nPath;
   }
 
   /**

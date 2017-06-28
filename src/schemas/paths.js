@@ -1,4 +1,4 @@
-import {mimeTypeArray} from './mime';
+import {consumes, produces} from './mime';
 import {schemes} from './schemes';
 import {securityRequirements} from './security';
 import {response} from './responses';
@@ -26,8 +26,8 @@ const operationChildren = {
     'collapsed': 'true',
     'showValueInParent': false,
     'children': {
-      'consumes': mimeTypeArray,
-      'produces': mimeTypeArray,
+      'consumes': consumes,
+      'produces': produces,
       'security': securityRequirements,
       'schemes': schemes
     }
@@ -96,6 +96,11 @@ export const paths = {
   'item': {
     'type': 'selectable',
     'label': 'Path ${#:key}',
+    'i18n': {
+      'interpolations': {
+        'path': '${#:key}'
+      }
+    },
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {
@@ -109,6 +114,12 @@ export const paths = {
             'label': 'GET',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.get'
+              }
+            },
             'children': operationChildren
           },
           'put': {
@@ -116,6 +127,12 @@ export const paths = {
             'label': 'PUT',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.put'
+              }
+            },
             'children': operationChildren
           },
           'post': {
@@ -123,6 +140,12 @@ export const paths = {
             'label': 'POST',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.post'
+              }
+            },
             'children': operationChildren
           },
           'delete': {
@@ -130,6 +153,12 @@ export const paths = {
             'label': 'DELETE',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.delete'
+              }
+            },
             'children': operationChildren
           },
           'options': {
@@ -137,6 +166,12 @@ export const paths = {
             'label': 'OPTIONS',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.options'
+              }
+            },
             'children': operationChildren
           },
           'head': {
@@ -144,6 +179,12 @@ export const paths = {
             'label': 'HEAD',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.head'
+              }
+            },
             'children': operationChildren
           },
           'patch': {
@@ -151,6 +192,12 @@ export const paths = {
             'label': 'PATCH',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.patch'
+              }
+            },
             'children': operationChildren
           },
           'parameters': {
@@ -174,6 +221,9 @@ export const paths = {
             'format': 'dropdown',
             'label': 'Target',
             'hideIfNoChoices': false,
+            'i18n': {
+              'path': 'form.paths.item.reference'
+            },
             'dataSources': [{
               'source': '/paths',
               'key': '#/paths/${#:key}',

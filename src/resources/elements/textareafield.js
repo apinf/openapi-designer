@@ -6,6 +6,7 @@ import {Textfield} from './textfield';
  */
 @containerless
 export class Textareafield extends Textfield {
+  static TYPE = 'textarea';
   /**
    * The number of rows to set to the textarea by default.
    * @type {Number}

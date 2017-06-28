@@ -1,5 +1,8 @@
 export const securityRequirements = {
   'type': 'array',
+  'i18n': {
+    'path': 'form.global-security.requirements'
+  },
   'item': {
     'type': 'array',
     'format': 'map',
