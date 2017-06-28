@@ -1,4 +1,4 @@
-import {mimeTypeArray} from './mime';
+import {consumes, produces} from './mime';
 import {schemes} from './schemes';
 import {securityRequirements} from './security';
 import {response} from './responses';
@@ -26,8 +26,8 @@ const operationChildren = {
     'collapsed': 'true',
     'showValueInParent': false,
     'children': {
-      'consumes': mimeTypeArray,
-      'produces': mimeTypeArray,
+      'consumes': consumes,
+      'produces': produces,
       'security': securityRequirements,
       'schemes': schemes
     }

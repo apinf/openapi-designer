@@ -65,7 +65,10 @@
             }
           },
           "overrides": {
-            "label": "Overrides"
+            "label": "Overrides",
+            "schemes": {
+              "label": "Protocols"
+            }
           },
           "tags": {
             "label": "Tags",
