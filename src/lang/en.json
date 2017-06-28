@@ -282,10 +282,16 @@
       },
       "schema": {
         "label": "Response body"
+      },
+      "$ref": {
+        "label": "Target"
       }
     },
     "parameter": {
       "label": "Parameter #$index: ${#/name}",
+      "$ref": {
+        "label": "Target"
+      },
       "name": {
         "label": "Name"
       },
