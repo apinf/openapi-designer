@@ -202,6 +202,7 @@ export const paths = {
             'format': 'dropdown',
             'label': 'Target',
             'hideIfNoChoices': false,
+            'overrideI18nPath': 'form.paths.item.reference',
             'dataSources': [{
               'source': '/paths',
               'key': '#/paths/${#:key}',
