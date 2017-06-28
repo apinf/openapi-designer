@@ -23,7 +23,7 @@
     "body": "It seems like something is broken.\nSometimes these issues are caused by an invalid OpenAPI document in the cache. If this is the case, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">deleting the data</a> should fix it.",
     "data-title": "Exception data"
   },
-  "footer-powered-by": "Powered by",
+  "footer-product-of": "Product of",
   "form": {
     "externalDocs": {
       "label": "External documentation",
