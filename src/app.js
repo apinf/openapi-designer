@@ -16,9 +16,11 @@ export class App {
     window.$oai = this;
 
     try {
-      this.forms = parseJSON('form', JSON.parse(JSON.stringify(schema)));
+      const pointerlessSchema = JSON.parse(JSON.stringify(schema));
+      this.forms = parseJSON('form', pointerlessSchema);
       if (window.localStorage['openapi-v2-design']) {
-        this.forms.setValue(JSON.parse(window.localStorage['openapi-v2-design']));
+        const savedData = JSON.parse(window.localStorage['openapi-v2-design']);
+        this.forms.setValue(savedData);
       }
     } catch (exception) {
       console.log(exception);
