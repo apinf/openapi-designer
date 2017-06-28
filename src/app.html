@@ -42,7 +42,9 @@
           <img src="res/trash.svg" alt="Delete"/>
         </button>
         <div class="content">
-          <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">Delete data</a>
+          <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
+            Delete data
+          </a>
         </div>
       </div>
       <div class="download dropdown">
@@ -50,8 +52,12 @@
           <img src="res/download.svg" alt="Download"/>
         </button>
         <div class="content">
-          <a href="javascript:void(0)" click.delegate="download('json')" t="nav.actions.download.json">JSON</a>
-          <a href="javascript:void(0)" click.delegate="download('yaml')" t="nav.actions.download.yaml">YAML</a>
+          <a href="javascript:void(0)" click.delegate="download('json')" t="nav.actions.download.json">
+            JSON
+          </a>
+          <a href="javascript:void(0)" click.delegate="download('yaml')" t="nav.actions.download.yaml">
+            YAML
+          </a>
         </div>
       </div>
     </div>
@@ -126,7 +132,9 @@
       }
     </style>
     <div class="error-data">
-      <h1 t="error.title">Uh oh!</h1>
+      <h1 t="error.title">
+        Uh oh!
+      </h1>
       <div class="text" t="[html]error.body">
         It seems like something is broken.
 
@@ -134,7 +142,9 @@
         cache. If this is the case, <a href="javascript:void(0)" click.delegate="delete()">deleting the data</a> should fix it.
       </div>
 
-      <h3 t="error.data-title">Exception data</h3>
+      <h3 t="error.data-title">
+        Exception data
+      </h3>
       <div class="message">
         ${exception}
       </div>
@@ -146,7 +156,9 @@
 
   <div class="brand-footer">
     <div class="top-row">
-      <span class="product-of" t="footer-product-of">Product of</span>
+      <span class="product-of" t="footer-product-of">
+        Product of
+      </span>
     </div>
     <div class="bottom-row">
       <img class="apinf-logo" src="res/apinf-logo.png"/>

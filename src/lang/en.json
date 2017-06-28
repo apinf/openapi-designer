@@ -38,7 +38,7 @@
       "label": "Paths",
       "newItemText": "New Path",
       "item": {
-        "label": "Path #$index: ${#:key}",
+        "label": "Path #{{index}}: {{-path}}",
         "operation": {
           "methods": {
             "get": "GET",
@@ -74,7 +74,7 @@
             "label": "Tags",
             "newItemText": "New Tag",
             "item": {
-              "label": "Tag #$index"
+              "label": "Tag #{{index}}"
             }
           },
           "responses": {
@@ -97,7 +97,7 @@
         "label": "Definitions",
         "newItemText": "New Security Definition",
         "item": {
-          "label": "Security Definition #$index",
+          "label": "Security Definition #{{index}}",
           "basic": {
             "description": {
               "label": "Description"
@@ -138,7 +138,7 @@
               "label": "Scopes",
               "newItemText": "New Scope",
               "item": {
-                "label": "Scope #$index",
+                "label": "Scope #{{index}}",
                 "key": {
                   "label": "Key"
                 },
@@ -154,10 +154,10 @@
         "label": "Requirements",
         "newItemText": "New Requirements Object",
         "item": {
-          "label": "Requirements Object #$index",
+          "label": "Requirements Object #{{index}}",
           "newItemText": "New Security Requirement",
           "item": {
-            "label": "Security Requirement #$index",
+            "label": "Security Requirement #{{index}}",
             "name": {
               "label": "Name"
             },
@@ -165,7 +165,7 @@
               "label": "Scopes",
               "newItemText": "New OAuth2 Scope",
               "item": {
-                "label": "OAuth2 scope #$index"
+                "label": "OAuth2 scope #{{index}}"
               }
             }
           }
@@ -264,19 +264,19 @@
         "label": "Parameters",
         "newItemText": "New Parameter",
         "item": {
-          "label": "Parameter #$index: ${#:key}"
+          "label": "Parameter #{{index}}: {{-name}}"
         }
       },
       "responses": {
         "label": "Responses",
         "newItemText": "New Response",
         "item": {
-          "label": "Response #$index: ${#:key}"
+          "label": "Response #{{index}}: {{-name}}"
         }
       }
     },
     "response": {
-      "label": "Response #$index for HTTP ${#:key}",
+      "label": "Response #{{index}} for HTTP {{-httpStatus}}",
       "description": {
         "label": "Description"
       },
@@ -288,7 +288,7 @@
       }
     },
     "parameter": {
-      "label": "Parameter #$index: ${#/name}",
+      "label": "Parameter #{{index}}: {{-name}}",
       "$ref": {
         "label": "Target"
       },
@@ -343,7 +343,7 @@
       "label": "Types",
       "newItemText": "New Type",
       "item": {
-        "label": "Type #$index: ${#/name}",
+        "label": "Type #{{index}}: {{-name}}",
         "x-oad-type": {
           "choices": {
             "choose": "Choose a type",

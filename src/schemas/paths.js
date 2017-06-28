@@ -96,6 +96,9 @@ export const paths = {
   'item': {
     'type': 'selectable',
     'label': 'Path ${#:key}',
+    'interpolations': {
+      'path': '${#:key}'
+    },
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {

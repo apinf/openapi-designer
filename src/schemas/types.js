@@ -83,6 +83,10 @@ export const types = {
   'overrideI18nPath': 'form.types',
   'item': {
     'type': 'object',
+    'interpolations': {
+      'name': '${#/name}',
+      'type': '${#/x-oad-type}'
+    },
     'label': 'Type #$index: ${#/name}',
     'overrideI18nPath': 'form.types.item',
     'legendChildren': {

@@ -80,6 +80,9 @@ toplevelParameterItemDefinition.conditions = {
 export const parameter = {
   'type': 'selectable',
   'overrideI18nPath': 'form.parameter',
+  'interpolations': {
+    'name': '${#/:child/name}'
+  },
   'types': {
     'parameter': {
       'overrideI18nPath': 'form.parameter',
@@ -150,6 +153,9 @@ export const parameter = {
 export const namedParameter = JSON.parse(JSON.stringify(parameter));
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
+namedParameter.interpolations = {
+  'name': '${#:key}'
+};
 namedParameter.overrideI18nKeys = {
   'label': 'form.global-definitions.parameters.item.label'
 };
