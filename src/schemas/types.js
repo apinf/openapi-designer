@@ -80,15 +80,19 @@ export const types = {
   'collapseManagement': true,
   'isCollapsible': false,
   'newItemText': 'New Type',
-  'overrideI18nPath': 'form.types',
+  'i18n': {
+    'path': 'form.types'
+  },
   'item': {
     'type': 'object',
-    'interpolations': {
-      'name': '${#/name}',
-      'type': '${#/x-oad-type}'
+    'i18n': {
+      'path': 'form.types.item',
+      'interpolations': {
+        'name': '${#/name}',
+        'type': '${#/x-oad-type}'
+      }
     },
     'label': 'Type #$index: ${#/name}',
-    'overrideI18nPath': 'form.types.item',
     'legendChildren': {
       'x-oad-type': {
         'type': 'option',

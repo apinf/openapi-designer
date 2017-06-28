@@ -23,7 +23,9 @@ const parameterFormat = {
   'type': 'option',
   'format': 'dropdown',
   'choices': typeFormatChoices,
-  'overrideI18nPath': 'form.types.item.format'
+  'i18n': {
+    'path': 'form.types.item.format'
+  }
 };
 
 const toplevelParameterFormat = JSON.parse(JSON.stringify(parameterFormat));
@@ -53,9 +55,11 @@ toplevelParameterCollectionFormat.choices.push({
 
 export const parameterItemDefinition = {
   'type': 'object',
-  'overrideI18nPath': 'form.parameter',
-  'overrideI18nKeys': {
-    'label': 'form.parameter.parameter.items.label'
+  'Path': 'form.parameter',
+  'i18n': {
+    'keys': {
+      'label': 'form.parameter.parameter.items.label'
+    }
   },
   'children': {
     'type': parameterType,
@@ -79,13 +83,17 @@ toplevelParameterItemDefinition.conditions = {
 
 export const parameter = {
   'type': 'selectable',
-  'overrideI18nPath': 'form.parameter',
-  'interpolations': {
-    'name': '${#/:child/name}'
+  'i18n': {
+    'path': 'form.parameter',
+    'interpolations': {
+      'name': '${#/:child/name}'
+    }
   },
   'types': {
     'parameter': {
-      'overrideI18nPath': 'form.parameter',
+      'i18n': {
+        'path': 'form.parameter'
+      },
       'type': 'object',
       'children': {
         'name': {
@@ -132,7 +140,9 @@ export const parameter = {
     },
     'reference': {
       'type': 'object',
-      'overrideI18nPath': 'form.parameter',
+      'i18n': {
+        'path': 'form.parameter'
+      },
       'children': {
         '$ref': {
           'type': 'option',
@@ -153,10 +163,10 @@ export const parameter = {
 export const namedParameter = JSON.parse(JSON.stringify(parameter));
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
-namedParameter.interpolations = {
+namedParameter.i18n.interpolations = {
   'name': '${#:key}'
 };
-namedParameter.overrideI18nKeys = {
+namedParameter.i18n.keys = {
   'label': 'form.global-definitions.parameters.item.label'
 };
 

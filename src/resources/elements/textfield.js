@@ -42,7 +42,7 @@ export class Textfield extends Field {
   }
 
   get placeholder() {
-    return this.i18n('placeholder', 'Enter value...');
+    return this.localize('placeholder', 'Enter value...');
   }
 
   /**
