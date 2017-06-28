@@ -80,15 +80,19 @@ export const types = {
   'collapseManagement': true,
   'isCollapsible': false,
   'newItemText': 'New Type',
-  'overrideI18nPath': 'form.types',
+  'i18n': {
+    'path': 'form.types'
+  },
   'item': {
     'type': 'object',
-    'interpolations': {
-      'name': '${#/name}',
-      'type': '${#/x-oad-type}'
+    'i18n': {
+      'path': 'form.types.item',
+      'interpolations': {
+        'name': '${#/name}',
+        'type': '${#/x-oad-type}'
+      }
     },
     'label': 'Type #$index: ${#/name}',
-    'overrideI18nPath': 'form.types.item',
     'legendChildren': {
       'x-oad-type': {
         'type': 'option',
@@ -150,6 +154,9 @@ export const types = {
         'target': '/global-definitions/types/:item',
         'overrides': {
           'labelFormat': 'Array item',
+          'i18n/keys': {
+            'label': 'form.types.item.items.label'
+          },
           'legendChildren/name': null,
           'legendChildren/x-oad-type/columns': 8
         },
@@ -161,8 +168,19 @@ export const types = {
         'type': 'lazylink',
         'target': '/global-definitions/types',
         'overrides': {
-          'labelFormat': 'Properties',
-          '#/:item;labelFormat': 'Property #$index: ${#/name}'
+          'i18n/keys': {
+            'label': 'form.types.item.properties.label'
+          },
+          '#/:item;i18n': {
+            'path': 'form.types.item',
+            'keys': {
+              'label': 'form.types.item.properties.item.label'
+            },
+            'interpolations': {
+              'name': '${#/name}',
+              'type': '${#/type}'
+            }
+          }
         },
         'conditions': {
           '../x-oad-type': 'object'

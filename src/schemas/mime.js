@@ -1,5 +1,6 @@
 const mimeTypeArray = {
   'type': 'array',
+  'i18n': {},
   'item': {
     'type': 'text',
     'label': 'MIME type',
@@ -15,9 +16,9 @@ const mimeTypeArray = {
 };
 
 export const consumes = Object.assign({}, mimeTypeArray);
-consumes.overrideI18nPath = 'form.mime.consumes';
+consumes.i18n.path = 'form.mime.consumes';
 export const produces = Object.assign({}, mimeTypeArray);
-produces.overrideI18nPath = 'form.mime.produces';
+produces.i18n.path = 'form.mime.produces';
 
 export const mime = {
   'type': 'object',

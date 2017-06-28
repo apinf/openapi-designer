@@ -1,7 +1,7 @@
 # Open API designer project charter
 
 ## Objective
-The goal is to have an OpenAPI design tool and a storage backend that can be integrated with APInf platform.
+The goal is to have an OpenAPI design tool and a storage backend that can be integrated with APInf platform. We will host the on our  servers and we are open if anyone want to use or build their own interface above it. Whoever uses our Open API Designer service to design their APIs, we offer them free cataloging at https://apinf.io 
 
 ## Risks
 * Duplication of effort

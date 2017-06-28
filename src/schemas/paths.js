@@ -96,8 +96,10 @@ export const paths = {
   'item': {
     'type': 'selectable',
     'label': 'Path ${#:key}',
-    'interpolations': {
-      'path': '${#:key}'
+    'i18n': {
+      'interpolations': {
+        'path': '${#:key}'
+      }
     },
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
@@ -112,9 +114,11 @@ export const paths = {
             'label': 'GET',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.get'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.get'
+              }
             },
             'children': operationChildren
           },
@@ -123,9 +127,11 @@ export const paths = {
             'label': 'PUT',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.put'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.put'
+              }
             },
             'children': operationChildren
           },
@@ -134,9 +140,11 @@ export const paths = {
             'label': 'POST',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.post'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.post'
+              }
             },
             'children': operationChildren
           },
@@ -145,9 +153,11 @@ export const paths = {
             'label': 'DELETE',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.delete'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.delete'
+              }
             },
             'children': operationChildren
           },
@@ -156,9 +166,11 @@ export const paths = {
             'label': 'OPTIONS',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.options'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.options'
+              }
             },
             'children': operationChildren
           },
@@ -167,9 +179,11 @@ export const paths = {
             'label': 'HEAD',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.head'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.head'
+              }
             },
             'children': operationChildren
           },
@@ -178,9 +192,11 @@ export const paths = {
             'label': 'PATCH',
             'hideValueIfEmpty': true,
             'isCollapsible': false,
-            'overrideI18nPath': 'form.paths.item.operation',
-            'overrideI18nKeys': {
-              'label': 'form.paths.item.operation.methods.patch'
+            'i18n': {
+              'path': 'form.paths.item.operation',
+              'keys': {
+                'label': 'form.paths.item.operation.methods.patch'
+              }
             },
             'children': operationChildren
           },
@@ -205,7 +221,9 @@ export const paths = {
             'format': 'dropdown',
             'label': 'Target',
             'hideIfNoChoices': false,
-            'overrideI18nPath': 'form.paths.item.reference',
+            'i18n': {
+              'path': 'form.paths.item.reference'
+            },
             'dataSources': [{
               'source': '/paths',
               'key': '#/paths/${#:key}',

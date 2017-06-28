@@ -60,7 +60,7 @@ export class Arrayfield extends Parentfield {
 
   get newItemText() {
     const defaultNewText = `New ${this.item.label}`;
-    return this.i18n('newItemText', defaultNewText);
+    return this.localize('newItemText', defaultNewText);
   }
 
   /**

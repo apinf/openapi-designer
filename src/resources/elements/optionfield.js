@@ -76,7 +76,7 @@ export class Optionfield extends Field {
         // Parse a simple (label-only) choice definition.
         this.choices.push({
           key: choice,
-          label: this.i18n(`choices.${choice}`, true),
+          label: this.localize(`choices.${choice}`, true),
           selected: false,
           conditionsFulfilled: true
         });
@@ -86,7 +86,7 @@ export class Optionfield extends Field {
         this.choices.push({
           key: choice.key,
           i18nKey: choice.i18nKey,
-          label: this.i18n(`choices.${choice.key || choice.i18nKey}`, true),
+          label: this.localize(`choices.${choice.key || choice.i18nKey}`, true),
           selected: false,
           conditions: choice.conditions,
           // A getter function to check whether all the conditions defined in
@@ -104,7 +104,7 @@ export class Optionfield extends Field {
       // make a checkbox with no label.
       this.choices.push({
         key: this.key,
-        i18nKey: 'blank',
+        i18nKey: '/blank',
         selected: false,
         conditionsFulfilled: true
       });
