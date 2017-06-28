@@ -12,7 +12,6 @@ export class App {
   constructor(i18n, ea) {
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
-    console.log(Field.internationalizer, Field.eventAggregator);
     // Allow access from browser console
     window.$oai = this;
 
