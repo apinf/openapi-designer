@@ -80,6 +80,18 @@ export class App {
     }
   }
 
+  openInfo() {
+    $(this.infoModal).removeClass('hidden');
+  }
+
+  closeInfo() {
+    $(this.infoModal).addClass('hidden');
+  }
+
+  dontCloseInfo(evt) {
+    evt.stopPropagation();
+  }
+
   getFormData() {
     const data = this.forms.getValue();
     data.swagger = '2.0';
