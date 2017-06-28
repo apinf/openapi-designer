@@ -138,6 +138,7 @@ export class Objectfield extends Parentfield {
       hideValueIfEmpty: this.hideValueIfEmpty,
       overrideI18nPath: this.overrideI18nPath,
       overrideI18nKeys: this.overrideI18nKeys,
+      interpolations: this.interpolations,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });
