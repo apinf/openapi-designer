@@ -108,7 +108,9 @@ export class Field {
     }
     if (!this.localizations.hasOwnProperty(fieldName)) {
       let path;
-      if (this.i18n.keys.hasOwnProperty(fieldName)) {
+      if (fieldName.includes('/')) {
+        path = fieldName.substr(fieldName.indexOf('/') + 1);
+      } else if (this.i18n.keys.hasOwnProperty(fieldName)) {
         path = this.i18n.keys[fieldName];
       } else {
         path = `${this.i18nPath}.${fieldName}`;

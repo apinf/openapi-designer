@@ -104,7 +104,7 @@ export class Optionfield extends Field {
       // make a checkbox with no label.
       this.choices.push({
         key: this.key,
-        i18nKey: 'blank',
+        i18nKey: '/blank',
         selected: false,
         conditionsFulfilled: true
       });

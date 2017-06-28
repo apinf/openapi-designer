@@ -24,10 +24,8 @@ export const response = {
           'target': '/global-definitions/types/:item',
           'hideValueIfEmpty': true,
           'overrides': {
-            'i18n': {
-              'keys': {
-                'label': 'form.response.schema.label'
-              }
+            'i18n/keys': {
+              'label': 'form.response.schema.label'
             },
             'legendChildren/name': null,
             'legendChildren/x-oad-type/columns': 8
