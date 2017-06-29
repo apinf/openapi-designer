@@ -70,7 +70,12 @@ export class App {
         const file = fileInput[0].files[0];
         const reader = new FileReader();
         reader.addEventListener('load', () => {
-          const data = JSON.parse(reader.result);
+          let data;
+          if (file.name.endsWith('.yaml') || file.name.endsWith('.yml')) {
+            data = YAML.parse(reader.result);
+          } else {
+            data = JSON.parse(reader.result);
+          }
           this.forms.setValue(data);
         }, false);
         reader.readAsText(file);
