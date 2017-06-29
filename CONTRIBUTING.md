@@ -6,3 +6,6 @@
 - Explain why there is an issue
   - For feature requests, explain why the feature is useful
   - For bugs/usability issues, explain the problem in detail
+
+## Pull requests
+- Prefer merging over rebasing, especially when there are other branches based on pull requests.
