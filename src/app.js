@@ -119,7 +119,11 @@ export class App {
       }
       return output;
     }
-    const data = JSON.stringify(this.activeForm.getValue(), '', '  ');
-    return `"${this.activeForm.id}": ${data}`;
+    const data = this.activeForm.getValue();
+    if (!data || (typeof data === 'object' && Object.entries(data).length === 0)) {
+      return '';
+    }
+    const stringData = JSON.stringify(data, '', '  ');
+    return `"${this.activeForm.id}": ${stringData}`;
   }
 }
