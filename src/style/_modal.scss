@@ -81,3 +81,10 @@
     margin-top: 0;
   }
 }
+
+.paste-modal > textarea {
+  width: 100%;
+  height: 70vh;
+
+  font-family: monospace !important;
+}

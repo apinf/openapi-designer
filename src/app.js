@@ -56,30 +56,50 @@ export class App {
     }
   }
 
-  import(type) {
-    if (type === 'paste') {
-      alert('Paste imports have not yet been implemented.');
-    } else if (type === 'file') {
-      const fileInput = $('<input/>', { type: 'file' });
-      fileInput.css({display: 'none'});
-      fileInput.appendTo($('body'));
-      fileInput.trigger('click');
+  importFile() {
+    const fileInput = $('<input/>', { type: 'file' });
+    fileInput.css({display: 'none'});
+    fileInput.appendTo('body');
+    fileInput.trigger('click');
 
-      fileInput.change(() => {
-        const file = fileInput[0].files[0];
-        const reader = new FileReader();
-        reader.addEventListener('load', () => {
-          let data;
+    fileInput.change(() => {
+      const file = fileInput[0].files[0];
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        let data;
+        try {
           if (file.name.endsWith('.yaml') || file.name.endsWith('.yml')) {
             data = YAML.parse(reader.result);
           } else {
             data = JSON.parse(reader.result);
           }
-          this.forms.setValue(data);
-        }, false);
-        reader.readAsText(file);
-      });
+        } catch (ex) {
+          console.error(ex);
+          return;
+          // Oh noes!
+        }
+        this.forms.setValue(data);
+      }, false);
+      reader.readAsText(file);
+    });
+  }
+
+  importPasted() {
+    const rawData = $(this.pasteImportData).val();
+    let data;
+    try {
+      data = YAML.parse(rawData);
+    } catch (_) {
+      try {
+        data = JSON.parse(rawData);
+      } catch (ex) {
+        console.error(ex);
+        return;
+        // Oh noes!
+      }
     }
+    this.forms.setValue(data);
+    this.closePasteImport();
   }
 
   download(type) {
@@ -123,8 +143,12 @@ export class App {
     $(this.infoModal).addClass('hidden');
   }
 
-  dontCloseInfo(evt) {
-    evt.stopPropagation();
+  openPasteImport() {
+    $(this.pasteModal).removeClass('hidden');
+  }
+
+  closePasteImport() {
+    $(this.pasteModal).addClass('hidden');
   }
 
   getFormData() {

@@ -22,6 +22,13 @@
       }
     }
   },
+  "modal": {
+    "paste": {
+      "title": "Import OpenAPI document",
+      "placeholder": "Paste your OpenAPI document here...",
+      "do": "Import"
+    }
+  },
   "error": {
     "title": "Uh oh!",
     "body": "It seems like something is broken.\nSometimes these issues are caused by an invalid OpenAPI document in the cache. If this is the case, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">deleting the data</a> should fix it.",
