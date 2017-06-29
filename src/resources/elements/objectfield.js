@@ -96,6 +96,7 @@ export class Objectfield extends Parentfield {
    *                       as the object key.
    */
   setValue(value) {
+    this.onSetValue(value);
     for (const [key, field] of Object.entries(value)) {
       if (this._children.hasOwnProperty(key)) {
         this._children[key].setValue(field);
@@ -147,6 +148,7 @@ export class Objectfield extends Parentfield {
       parent: parent || this.parent,
       index: this.index,
       hideValueIfEmpty: this.hideValueIfEmpty,
+      setValueListeners: this.setValueListeners,
       i18n: this.i18n,
       children: clonedChildren,
       legendChildren: clonedLegendChildren

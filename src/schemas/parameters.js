@@ -61,6 +61,7 @@ export const parameterItemDefinition = {
       'label': 'form.parameter.parameter.items.label'
     }
   },
+  'hideValueIfEmpty': false,
   'children': {
     'type': parameterType,
     'format': parameterFormat,
@@ -89,21 +90,34 @@ export const parameter = {
       'name': '${#/:child/name}'
     }
   },
+  'setValueListeners': [
+    (field, newValue) =>
+      field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'parameter')
+  ],
   'types': {
     'parameter': {
       'i18n': {
         'path': 'form.parameter'
       },
+      'setValueListeners': [
+        (field, newValue) => {
+          if (newValue.hasOwnProperty('in')) {
+            field.children.in.setValue(newValue.in);
+          }
+        }
+      ],
       'type': 'object',
       'children': {
         'name': {
-          'type': 'text'
+          'type': 'text',
+          'hideValueIfEmpty': false
         },
         'in': {
           'type': 'option',
           'format': 'dropdown',
           'label': 'Location',
-          'choices': ['path', 'query', 'header', 'formData', 'body']
+          'choices': ['path', 'query', 'header', 'formData', 'body'],
+          'hideValueIfEmpty': false
         },
         'description': {
           'type': 'textarea'
@@ -120,6 +134,7 @@ export const parameter = {
             'legendChildren/name': null,
             'legendChildren/x-oad-type/columns': 8
           },
+          'hideValueIfEmpty': false,
           'conditions': {
             '../in': 'body'
           }
@@ -160,7 +175,7 @@ export const parameter = {
   }
 };
 
-export const namedParameter = JSON.parse(JSON.stringify(parameter));
+export const namedParameter = $.extend(true, {}, parameter);
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
 namedParameter.i18n.interpolations = {

@@ -197,6 +197,7 @@ export class Typefield extends Collapsiblefield {
    * @param {Object} value The value to set to this field.
    */
   setValue(value) {
+    this.onSetValue(value);
     // If the key is available in the given value object, get the key from there
     // and delete the field (from the value object) it was stored in.
     if (this.keyKey && value.hasOwnProperty(this.keyKey)) {

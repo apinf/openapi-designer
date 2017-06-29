@@ -15,7 +15,18 @@
       "download": {
         "json": "JSON",
         "yaml": "YAML"
+      },
+      "import": {
+        "paste": "Paste",
+        "file": "Choose file"
       }
+    }
+  },
+  "modal": {
+    "paste": {
+      "title": "Import OpenAPI document",
+      "placeholder": "Paste your OpenAPI document here...",
+      "do": "Import"
     }
   },
   "error": {

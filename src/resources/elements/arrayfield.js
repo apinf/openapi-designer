@@ -126,6 +126,7 @@ export class Arrayfield extends Parentfield {
    *                                {@link #format}.
    */
   setValue(value) {
+    this.onSetValue(value);
     this._children = [];
     for (let [key, item] of Object.entries(value)) {
       const index = this.addChild();

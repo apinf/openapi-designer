@@ -16,7 +16,7 @@ export class App {
     window.$oai = this;
 
     try {
-      const pointerlessSchema = JSON.parse(JSON.stringify(schema));
+      const pointerlessSchema = $.extend(true, {}, schema);
       this.forms = parseJSON('form', pointerlessSchema);
       if (window.localStorage['openapi-v2-design']) {
         const savedData = JSON.parse(window.localStorage['openapi-v2-design']);
@@ -54,6 +54,52 @@ export class App {
     if (window.onhashchange) {
       window.onhashchange();
     }
+  }
+
+  importFile() {
+    const fileInput = $('<input/>', { type: 'file' });
+    fileInput.css({display: 'none'});
+    fileInput.appendTo('body');
+    fileInput.trigger('click');
+
+    fileInput.change(() => {
+      const file = fileInput[0].files[0];
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        let data;
+        try {
+          if (file.name.endsWith('.yaml') || file.name.endsWith('.yml')) {
+            data = YAML.parse(reader.result);
+          } else {
+            data = JSON.parse(reader.result);
+          }
+        } catch (ex) {
+          console.error(ex);
+          return;
+          // Oh noes!
+        }
+        this.forms.setValue(data);
+      }, false);
+      reader.readAsText(file);
+    });
+  }
+
+  importPasted() {
+    const rawData = $(this.pasteImportData).val();
+    let data;
+    try {
+      data = YAML.parse(rawData);
+    } catch (_) {
+      try {
+        data = JSON.parse(rawData);
+      } catch (ex) {
+        console.error(ex);
+        return;
+        // Oh noes!
+      }
+    }
+    this.forms.setValue(data);
+    this.closePasteImport();
   }
 
   download(type) {
@@ -97,8 +143,12 @@ export class App {
     $(this.infoModal).addClass('hidden');
   }
 
-  dontCloseInfo(evt) {
-    evt.stopPropagation();
+  openPasteImport() {
+    $(this.pasteModal).removeClass('hidden');
+  }
+
+  closePasteImport() {
+    $(this.pasteModal).addClass('hidden');
   }
 
   getFormData() {

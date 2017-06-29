@@ -37,13 +37,26 @@
     </a>
 
     <div class="actions">
-      <div class="download dropdown">
+      <div class="delete dropdown">
         <button class="button">
           <img src="res/trash.svg" alt="Delete"/>
         </button>
         <div class="content">
           <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
             Delete data
+          </a>
+        </div>
+      </div>
+      <div class="import dropdown">
+        <button class="button">
+          <img src="res/import.svg" alt="Import"/>
+        </button>
+        <div class="content">
+          <a href="javascript:void(0)" click.delegate="openPasteImport()" t="nav.actions.import.paste">
+            Paste
+          </a>
+          <a href="javascript:void(0)" click.delegate="importFile()" t="nav.actions.import.file">
+            Choose file
           </a>
         </div>
       </div>
@@ -165,8 +178,22 @@
     </div>
   </div>
 
+  <div class="modal-wrapper hidden" ref="pasteModal" click.delegate="closePasteImport()">
+    <div class="modal" click.delegate="$event.stopPropagation()">
+      <div class="modal-header" t="modal.paste.title">Import API specification</div>
+      <div class="modal-content paste-modal">
+        <textarea ref="pasteImportData" t="[placeholder]modal.paste.placeholder"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="paste-modal-do" t="modal.paste.do" click.delegate="importPasted()">
+          Import
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-wrapper hidden" ref="infoModal" click.delegate="closeInfo()">
-    <div class="modal" ref="container" click.delegate="dontCloseInfo($event)">
+    <div class="modal" click.delegate="$event.stopPropagation()">
       <div class="modal-header">About OpenAPI designer</div>
       <div class="modal-content info-modal">
         <h3>Copyright and license</h3>

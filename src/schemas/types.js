@@ -85,6 +85,15 @@ export const types = {
   },
   'item': {
     'type': 'object',
+    'setValueListeners': [
+      (field, newValue) => {
+        if (newValue.hasOwnProperty('$ref')) {
+          field.legendChildren['x-oad-type'].setValue('reference');
+        } else if (newValue.hasOwnProperty('type')) {
+          field.legendChildren['x-oad-type'].setValue(newValue.type);
+        }
+      }
+    ],
     'i18n': {
       'path': 'form.types.item',
       'interpolations': {

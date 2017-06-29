@@ -54,33 +54,13 @@ export class Optionfield extends Field {
     this.hideIfNoChoices = args.hideIfNoChoices;
     this.argChoices = args.choices;
     this.checkboxFormat = args.checkboxFormat;
-    this.choices = args.choices;
-    this.dataSources = args.dataSources;
-    return super.init(id, args);
-  }
-
-  /**
-   * Check if this Optionfield is empty. An Optionfield is empty either if the
-   * value is false or the value array (checkbox-formatted field) is empty.
-   */
-  isEmpty() {
-    const value = this.getValue();
-    return !value || (Array.isArray(value) && value.length === 0);
-  }
-
-  /**
-   * Called by Aurelia when this field is created.
-   * Used for initializing choices and data sources.
-   */
-  created() {
-    const choices = this.choices;
     this.choices = [];
-    for (const choice of choices) {
+    for (const choice of args.choices) {
       if (typeof choice === 'string') {
         // Parse a simple (label-only) choice definition.
         this.choices.push({
           key: choice,
-          label: this.localize(`choices.${choice}`, true),
+          labelI18nKey: `choices.${choice}`,
           selected: false,
           conditionsFulfilled: true
         });
@@ -90,7 +70,7 @@ export class Optionfield extends Field {
         this.choices.push({
           key: choice.key,
           i18nKey: choice.i18nKey,
-          label: this.localize(`choices.${choice.key || choice.i18nKey}`, true),
+          labelI18nKey: `choices.${choice.key || choice.i18nKey}`,
           selected: false,
           conditions: choice.conditions,
           // A getter function to check whether all the conditions defined in
@@ -109,12 +89,33 @@ export class Optionfield extends Field {
       this.choices.push({
         key: this.key,
         i18nKey: '/blank',
+        labelI18nKey: '/blank',
         selected: false,
         conditionsFulfilled: true
       });
       this.checkboxFormat = 'simple';
     }
+    this.dataSources = args.dataSources;
+    return super.init(id, args);
+  }
 
+  /**
+   * Check if this Optionfield is empty. An Optionfield is empty either if the
+   * value is false or the value array (checkbox-formatted field) is empty.
+   */
+  isEmpty() {
+    const value = this.getValue();
+    return !value || (Array.isArray(value) && value.length === 0);
+  }
+
+  /**
+   * Called by Aurelia when this field is created.
+   * Used for initializing choices and data sources.
+   */
+  created() {
+    for (const choice of this.choices) {
+      choice.label = this.localize(choice.labelI18nKey);
+    }
     const ds = this.dataSources;
     this.dataSources = [];
     for (let dataSource of ds) {
@@ -257,7 +258,11 @@ export class Optionfield extends Field {
    *                                format of this field.
    */
   setValue(value) {
-    if (Array.isArray(value) && this.format === 'checkbox') {
+    this.onSetValue(value);
+    if (typeof value === 'boolean' && this.format === 'checkbox' && this.checkboxFormat === 'simple') {
+      this.choices[0].selected = value;
+      return;
+    } else if (Array.isArray(value) && this.format === 'checkbox') {
       for (const choice of this.choices) {
         if (value.includes(choice.key)) {
           choice.selected = true;

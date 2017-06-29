@@ -101,6 +101,10 @@ export const paths = {
         'path': '${#:key}'
       }
     },
+    'setValueListeners': [
+      (field, newValue) =>
+        field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'operation')
+    ],
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {

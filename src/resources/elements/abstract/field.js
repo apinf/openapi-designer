@@ -74,6 +74,11 @@ export class Field {
    */
   changeListeners = []
   /**
+   * Functions that will be called when {@link #setValue} is called.
+   * @type {Function[]}
+   */
+  setValueListeners = []
+  /**
    * I18n settings
    * @type {Object}
    */
@@ -169,6 +174,7 @@ export class Field {
       conditions: {},
       showValueInParent: true,
       hideValueIfEmpty: true,
+      setValueListeners: [],
       i18n: {}
     }, args);
     args.i18n = Object.assign({
@@ -185,6 +191,7 @@ export class Field {
     this.parent = args.parent;
     this.showValueInParent = args.showValueInParent;
     this.hideValueIfEmpty = args.hideValueIfEmpty;
+    this.setValueListeners = args.setValueListeners;
     this.i18n = args.i18n;
     this.i18n.interpolations.index = '$index';
     this.type = this.constructor.TYPE;
@@ -397,6 +404,25 @@ export class Field {
    */
   addChangeListener(func) {
     this.changeListeners.push(func);
+  }
+
+  /**
+   * Called with {@link #setValue} to run listeners.
+   */
+  onSetValue(newValue) {
+    for (const listener of this.setValueListeners) {
+      if (typeof listener === 'function') {
+        listener(this, newValue);
+      }
+    }
+  }
+
+  /**
+   * Add a function to be called when {@link #setValue} is called.
+   * @param {Function} func The callback function.
+   */
+  addSetValueListener(func) {
+    this.setValueListeners.push(func);
   }
 
   /**

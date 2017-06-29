@@ -118,6 +118,7 @@ export class LazyLinkfield extends Field {
    * @param {Object} value The new value to set to the target field.
    */
   setValue(value) {
+    this.onSetValue(value);
     if (!this.child) {
       // Caching values helps when using setValue() in a big form. By caching
       // the values, we won't lose setValue data due to dependencies of this
