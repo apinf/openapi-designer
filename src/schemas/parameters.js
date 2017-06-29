@@ -61,6 +61,7 @@ export const parameterItemDefinition = {
       'label': 'form.parameter.parameter.items.label'
     }
   },
+  'hideValueIfEmpty': false,
   'children': {
     'type': parameterType,
     'format': parameterFormat,
@@ -108,13 +109,15 @@ export const parameter = {
       'type': 'object',
       'children': {
         'name': {
-          'type': 'text'
+          'type': 'text',
+          'hideValueIfEmpty': false
         },
         'in': {
           'type': 'option',
           'format': 'dropdown',
           'label': 'Location',
-          'choices': ['path', 'query', 'header', 'formData', 'body']
+          'choices': ['path', 'query', 'header', 'formData', 'body'],
+          'hideValueIfEmpty': false
         },
         'description': {
           'type': 'textarea'
@@ -131,6 +134,7 @@ export const parameter = {
             'legendChildren/name': null,
             'legendChildren/x-oad-type/columns': 8
           },
+          'hideValueIfEmpty': false,
           'conditions': {
             '../in': 'body'
           }
