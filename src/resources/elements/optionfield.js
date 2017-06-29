@@ -253,6 +253,7 @@ export class Optionfield extends Field {
    *                                format of this field.
    */
   setValue(value) {
+    this.onSetValue(value);
     if (Array.isArray(value) && this.format === 'checkbox') {
       for (const choice of this.choices) {
         if (value.includes(choice.key)) {

@@ -65,6 +65,7 @@ export class Textfield extends Field {
    * @param {String} value The new text to set to the input field.
    */
   setValue(value) {
+    this.onSetValue(value);
     this.value = value;
   }
 

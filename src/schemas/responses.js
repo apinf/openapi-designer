@@ -9,6 +9,10 @@ export const response = {
       'httpStatus': '${#:key}'
     }
   },
+  'setValueListeners': [
+    (field, newValue) =>
+      field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'response')
+  ],
   'types': {
     'response': {
       'i18n': {
@@ -55,7 +59,7 @@ export const response = {
   }
 };
 
-const namedResponse = JSON.parse(JSON.stringify(response));
+const namedResponse = $.extend(true, {}, response);
 namedResponse.keyKey = 'responseName';
 namedResponse.keyPlaceholder = 'Enter name...';
 namedResponse.i18n.interpolations = {

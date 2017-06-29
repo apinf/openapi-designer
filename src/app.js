@@ -16,7 +16,7 @@ export class App {
     window.$oai = this;
 
     try {
-      const pointerlessSchema = JSON.parse(JSON.stringify(schema));
+      const pointerlessSchema = $.extend(true, {}, schema);
       this.forms = parseJSON('form', pointerlessSchema);
       if (window.localStorage['openapi-v2-design']) {
         const savedData = JSON.parse(window.localStorage['openapi-v2-design']);

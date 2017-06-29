@@ -89,11 +89,22 @@ export const parameter = {
       'name': '${#/:child/name}'
     }
   },
+  'setValueListeners': [
+    (field, newValue) =>
+      field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'parameter')
+  ],
   'types': {
     'parameter': {
       'i18n': {
         'path': 'form.parameter'
       },
+      'setValueListeners': [
+        (field, newValue) => {
+          if (newValue.hasOwnProperty('in')) {
+            field.children.in.setValue(newValue.in);
+          }
+        }
+      ],
       'type': 'object',
       'children': {
         'name': {
@@ -160,7 +171,7 @@ export const parameter = {
   }
 };
 
-export const namedParameter = JSON.parse(JSON.stringify(parameter));
+export const namedParameter = $.extend(true, {}, parameter);
 namedParameter.keyKey = 'paramName';
 namedParameter.keyPlaceholder = 'Enter name...';
 namedParameter.i18n.interpolations = {
