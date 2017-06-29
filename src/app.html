@@ -37,13 +37,26 @@
     </a>
 
     <div class="actions">
-      <div class="download dropdown">
+      <div class="delete dropdown">
         <button class="button">
           <img src="res/trash.svg" alt="Delete"/>
         </button>
         <div class="content">
           <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
             Delete data
+          </a>
+        </div>
+      </div>
+      <div class="import dropdown">
+        <button class="button">
+          <img src="res/import.svg" alt="Import"/>
+        </button>
+        <div class="content">
+          <!--<a href="javascript:void(0)" click.delegate="import('paste')" t="nav.actions.import.paste">
+            Paste
+          </a>-->
+          <a href="javascript:void(0)" click.delegate="import('file')" t="nav.actions.import.file">
+            Choose file
           </a>
         </div>
       </div>

@@ -55,8 +55,9 @@
       height: 2rem;
     }
 
-    > .download.dropdown > .content {
+    > .dropdown > .content {
       transform: translateX(calc(2rem - 100%));
+      white-space: nowrap;
     }
   }
 }
