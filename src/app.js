@@ -113,7 +113,9 @@ export class App {
       const rawData = this.getFormData();
       let output = '';
       for (const field of fieldsToShow[this.activeForm.id]) {
-        output += `"${field}": ${JSON.stringify(rawData[field], '', '  ')}\n`;
+        if (rawData[field]) {
+          output += `"${field}": ${JSON.stringify(rawData[field], '', '  ')}\n`;
+        }
       }
       return output;
     }
