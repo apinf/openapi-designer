@@ -37,3 +37,15 @@
     }
   }
 }
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &, &:visited {
+    color: #0288d1;
+  }
+}
