@@ -60,8 +60,7 @@ export class App {
     if (type === 'paste') {
       alert('Paste imports have not yet been implemented.');
     } else if (type === 'file') {
-      const fileInput = $('<input/>');
-      fileInput.attr('type', 'file');
+      const fileInput = $('<input/>', { type: 'file' });
       fileInput.css({display: 'none'});
       fileInput.appendTo($('body'));
       fileInput.trigger('click');
