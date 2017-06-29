@@ -108,7 +108,9 @@ export class Typefield extends Collapsiblefield {
    * Check if this field doesn't currently have a child or if the child is empty.
    */
   isEmpty() {
-    if (!this.child) {
+    if (this.key.length !== 0) {
+      return false;
+    } else if (!this.child) {
       return true;
     }
     return this.child.isEmpty();
