@@ -41,6 +41,7 @@
     }
 
     > .modal-footer {
+      border-top: 1px solid #AAA;
       border-radius: 0 0 .25rem .25rem;
     }
   }
@@ -87,4 +88,21 @@
   height: 70vh;
 
   font-family: monospace !important;
+}
+
+.paste-modal-do {
+  display: block;
+
+  margin-left: auto;
+  padding: .5rem 1.5rem;
+
+  border: none;
+  border-radius: .25rem;
+  background-color: #FAC51E;
+
+  font-size: 1rem;
+
+  &:hover:not(.open) {
+    background-color: #F99B1A;
+  }
 }
