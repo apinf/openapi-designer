@@ -108,6 +108,10 @@ export class Optionfield extends Field {
     return !value || (Array.isArray(value) && value.length === 0);
   }
 
+  /**
+   * Called by Aurelia when this field is created.
+   * Used for initializing choices and data sources.
+   */
   created() {
     for (const choice of this.choices) {
       choice.label = this.localize(choice.labelI18nKey);

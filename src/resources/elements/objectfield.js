@@ -28,6 +28,10 @@ export class Objectfield extends Parentfield {
     return super.init(id, args);
   }
 
+  /**
+   * Called by Aurelia when this Objectfield is attached to the DOM.
+   * This function is used for activating the first tab by default.
+   */
   attached() {
     // Is this a tabbed objectfield that has children?
     if (this.iterableChildren.length > 0 && this.format === 'tabs') {
@@ -70,14 +74,17 @@ export class Objectfield extends Parentfield {
     return value;
   }
 
+  /** @inheritdoc */
   get allChildren() {
     return Object.assign({}, this.legendChildren, this._children);
   }
 
+  /** @inheritdoc */
   get iterableLegendChildren() {
     return this.legendChildren ? Object.values(this.legendChildren) : [];
   }
 
+  /** @inheritdoc */
   get hasLegend() {
     return this.legendChildren && this.iterableLegendChildren.length > 0;
   }
@@ -108,6 +115,10 @@ export class Objectfield extends Parentfield {
     this.onChange(child);
   }
 
+  /**
+   * Switch to the tab of the given child element.
+   * @param  {Field} toChild The child whose tab to switch to.
+   */
   switchTab(toChild) {
     this.activeChild = toChild;
     const tabElem = $(`#tab-${toChild.path.replace(/\./g, '\\.')}`);
@@ -145,6 +156,7 @@ export class Objectfield extends Parentfield {
     return clone;
   }
 
+  /** @inheritdoc */
   resolvePath(path) {
     const parentResolveResult = super.resolvePath(path);
     if (parentResolveResult) {
