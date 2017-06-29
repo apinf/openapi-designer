@@ -45,6 +45,27 @@
         "label": "URL"
       }
     },
+    "enum": {
+      "label": "Allowed values",
+      "item": {
+        "label": "Allowed value",
+        "string": {
+          "label": "String"
+        },
+        "integer": {
+          "label": "Integer"
+        },
+        "number": {
+          "label": "number"
+        },
+        "boolean": {
+          "label": "boolean"
+        },
+        "array": {
+          "label": "array"
+        }
+      }
+    },
     "paths": {
       "label": "Paths",
       "newItemText": "New Path",

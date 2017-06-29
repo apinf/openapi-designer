@@ -3,7 +3,7 @@ import {mime} from './mime';
 import {security} from './security';
 import {tags} from './tags';
 import {paths} from './paths';
-import {types} from './types';
+import {types, enumItem} from './types';
 import {parameters, parameterItemDefinition} from './parameters';
 import {responses} from './responses';
 
@@ -44,6 +44,7 @@ export const schema = {
         responses
       }
     },
+    'enum-item': enumItem,
     'parameter-item-definition': hiddenParameterItemDefinition,
     'parameters': {
       'type': 'link',
