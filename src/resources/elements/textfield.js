@@ -37,10 +37,17 @@ export class Textfield extends Field {
     return super.init(id, args);
   }
 
+  /**
+   * Get the ID for the autocomplete list DOM element.
+   */
   get listID() {
     return `autocomplete-${this.id}`;
   }
 
+  /**
+   * Get the placeholder for this field. Defaults to {@linkplain Enter value...}
+   * @return {String} The localized placeholder for this field.
+   */
   get placeholder() {
     return this.localize('placeholder', 'Enter value...');
   }
@@ -68,6 +75,10 @@ export class Textfield extends Field {
     this.value = value;
   }
 
+  /**
+   * Called by Aurelia when the value string changes.
+   * Used to trigger {@link #onChange}.
+   */
   valueChanged() {
     this.onChange();
   }

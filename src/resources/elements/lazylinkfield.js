@@ -20,6 +20,7 @@ export class LazyLinkfield extends Field {
     return super.init(id, args);
   }
 
+  /** @inheritdoc */
   get i18nPath() {
     const target = this.resolveRef(this.target);
     if (!target) {
