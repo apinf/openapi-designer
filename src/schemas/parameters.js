@@ -1,4 +1,4 @@
-import {typeFormatChoices} from './types';
+import {typeFormatChoices, enumArray} from './types';
 
 const parameterType = {
   'type': 'option',
@@ -82,6 +82,11 @@ toplevelParameterItemDefinition.conditions = {
   '../type': 'array'
 };
 
+const enumIfNotInBody = Object.assign({}, enumArray);
+enumIfNotInBody.conditions = {
+  '../in': ['path', 'query', 'header', 'formData']
+};
+
 export const parameter = {
   'type': 'selectable',
   'i18n': {
@@ -150,7 +155,8 @@ export const parameter = {
         'type': toplevelParameterType,
         'format': toplevelParameterFormat,
         'collectionFormat': toplevelParameterCollectionFormat,
-        'items': toplevelParameterItemDefinition
+        'items': toplevelParameterItemDefinition,
+        'enum': enumIfNotInBody
       }
     },
     'reference': {

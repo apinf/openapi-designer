@@ -253,7 +253,9 @@ export class Field {
    */
   get label() {
     let label = this.localize('label');
-    if (!label.includes('$')) {
+    if (!label) {
+      return '';
+    } else if (!label.includes('$')) {
       return label;
     }
 

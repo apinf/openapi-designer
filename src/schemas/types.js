@@ -71,6 +71,73 @@ export const typeFormatChoices = [
   }
 ];
 
+// I18n config to make the label blank.
+const blankLabel = {
+  'keys': {
+    'label': 'blank'
+  }
+};
+
+export const enumItem = {
+  'type': 'selectable',
+  'i18n': {
+    'path': 'form.enum.item',
+    'keys': {
+      'label': 'blank'
+    }
+  },
+  'isCollapsible': false,
+  'typeKey': '',
+  'setValueListeners': [
+    (field, newValue) => field.setType(typeof newValue)
+  ],
+  'types': {
+    'string': {
+      'type': 'text',
+      'i18n': blankLabel
+    },
+    'integer': {
+      'type': 'text',
+      'format': 'number',
+      'i18n': blankLabel
+    },
+    'number': {
+      'type': 'text',
+      'format': 'number',
+      'i18n': blankLabel
+    },
+    'boolean': {
+      'type': 'option',
+      'format': 'checkbox',
+      'hideValueIfEmpty': false,
+      'i18n': blankLabel
+    },
+    'array': {
+      'type': 'array',
+      'item': {
+        'type': 'lazylink',
+        'target': '/enum-item'
+      },
+      'hideValueIfEmpty': false,
+      'i18n': blankLabel
+    }
+  }
+};
+
+export const enumArray = {
+  'type': 'array',
+  'i18n': {
+    'path': 'form.enum'
+  },
+  'hideValueIfEmpty': true,
+  'item': enumItem
+};
+
+const enumIfHasType = Object.assign({}, enumArray);
+enumIfHasType.conditions = {
+  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
+};
+
 export const types = {
   'type': 'array',
   'format': 'map',
@@ -158,6 +225,7 @@ export const types = {
         'format': 'dropdown',
         'choices': typeFormatChoices
       },
+      'enum': enumIfHasType,
       'items': {
         'type': 'lazylink',
         'target': '/global-definitions/types/:item',
