@@ -58,6 +58,11 @@ export class Arrayfield extends Parentfield {
     return super.init(id, args);
   }
 
+  /**
+   * Get the text that is displayed in the button that adds a new item to this
+   * array.
+   * @return {String} The localized text.
+   */
   get newItemText() {
     const defaultNewText = `New ${this.item.label}`;
     return this.localize('newItemText', defaultNewText);
@@ -188,6 +193,7 @@ export class Arrayfield extends Parentfield {
     return clone;
   }
 
+  /** @inheritdoc */
   resolvePath(path) {
     const parentResolveResult = super.resolvePath(path);
     if (parentResolveResult) {

@@ -13,6 +13,11 @@ export class Linkfield extends Field {
    * @type {String}
    */
   target = '#';
+  /**
+   * Whether or not this field has a view. {@link Linkfield}s don't have a view,
+   * so this is hardcoded to false.
+   * @type {Boolean}
+   */
   noView = true;
 
   /** @inheritdoc */
@@ -47,6 +52,7 @@ export class Linkfield extends Field {
     return field;
   }
 
+  /** @inheritdoc */
   resolvePath(path) {
     const parentResolveResult = super.resolvePath(path);
     if (parentResolveResult) {

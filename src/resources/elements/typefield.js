@@ -218,19 +218,30 @@ export class Typefield extends Collapsiblefield {
     }
   }
 
+  /**
+   * Called by Aurelia when the key of this field changes.
+   * Used to trigger {@link #onChange}.
+   */
   keyChanged() {
     this.onChange();
   }
 
+  /**
+   * Set the selected type.
+   */
   setType(type) {
     this.selectedType = type;
     this.selectedTypeChanged(type);
   }
 
+  /**
+   * Get the currently selected type name.
+   */
   getType() {
     return this.selectedType;
   }
 
+  /** @inheritdoc */
   resolvePath(path) {
     const parentResolveResult = super.resolvePath(path);
     if (parentResolveResult) {

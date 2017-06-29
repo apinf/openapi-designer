@@ -87,6 +87,9 @@ export class Field {
    */
   localizations = {}
 
+  /**
+   * Get the path to this field for i18n purposes.
+   */
   get i18nPath() {
     if (this.i18n.path) {
       return this.i18n.path;
@@ -102,6 +105,15 @@ export class Field {
     return this.i18n.cachedPath;
   }
 
+  /**
+   * Localize a string under this field. The {@link #i18nPath} of this field is
+   * prepended to the {@linkplain fieldName} parameter.
+   * @param  {String} fieldName    The name of the i18n field.
+   * @param  {String} defaultValue The value to use if a translation is not found.
+   *                               If not specified, the default value will be
+   *                               the whole i18n path ({@link #i18nPath} + {@linkplain fieldName})
+   * @return {String}              The localized string.
+   */
   localize(fieldName, defaultValue) {
     if (!fieldName) {
       fieldName = 'label';
@@ -196,10 +208,16 @@ export class Field {
     return `${this.parent.path}.${this.id}`;
   }
 
+  /**
+   * Getter for {@link shouldDisplay}
+   */
   get display() {
     return this.shouldDisplay();
   }
 
+  /**
+   * Check whether or not this field should be displayed.
+   */
   shouldDisplay() {
     for (const [path, value] of Object.entries(this.conditions)) {
       const elem = this.resolveRef(path);
@@ -235,6 +253,9 @@ export class Field {
     return this.formatReferencePlusField(this.formatIndex(label));
   }
 
+  /**
+   * Get the help text for this field.
+   */
   get helpText() {
     return this.localize('helpText', '');
   }
@@ -354,6 +375,10 @@ export class Field {
    */
   setValue(value) { }
 
+  /**
+   * Called automatically when this field or its children change.
+   * @param  {Field} field The field that changed.
+   */
   onChange(field) {
     field = field || this;
     if (this.parent) {
@@ -365,6 +390,11 @@ export class Field {
     }
   }
 
+  /**
+   * Add a function that is called whenever this field or any of its children
+   * change.
+   * @param {Function} func The callback function.
+   */
   addChangeListener(func) {
     this.changeListeners.push(func);
   }
