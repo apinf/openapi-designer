@@ -36,6 +36,10 @@
   },
   "footer-product-of": "Product of",
   "form": {
+    "global": {
+      "placeholder": "Enter value...",
+      "newItemText": "New {{label}}"
+    },
     "externalDocs": {
       "label": "External documentation",
       "description": {
@@ -62,7 +66,7 @@
           "label": "boolean"
         },
         "array": {
-          "label": "array"
+          "label": "Array"
         }
       }
     },
@@ -91,10 +95,7 @@
             "label": "Description"
           },
           "deprecated": {
-            "label": "Deprecated?",
-            "choices": {
-              "blank": ""
-            }
+            "label": "Deprecated?"
           },
           "overrides": {
             "label": "Overrides",
@@ -148,8 +149,8 @@
             "in": {
               "label": "API key location",
               "choices": {
-                "query": "query",
-                "header": "header"
+                "query": "Query",
+                "header": "Header"
               }
             }
           },
@@ -160,14 +161,17 @@
             "flow": {
               "label": "Flow",
               "choices": {
-                "implicit": "implicit",
-                "password": "password",
-                "application": "application",
-                "accessCode": "accessCode"
+                "implicit": "Implicit",
+                "password": "Password",
+                "application": "Application",
+                "accessCode": "Access code"
               }
             },
             "authorizationUrl": {
               "label": "Authorization URL"
+            },
+            "tokenUrl": {
+              "label": "Token URL"
             },
             "scopes": {
               "label": "Scopes",

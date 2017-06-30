@@ -56,6 +56,11 @@ export class App {
     }
   }
 
+  setLanguage(lang) {
+    window.localStorage.language = lang;
+    location.reload();
+  }
+
   importFile() {
     const fileInput = $('<input/>', { type: 'file' });
     fileInput.css({display: 'none'});
