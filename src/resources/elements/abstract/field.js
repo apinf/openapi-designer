@@ -133,6 +133,7 @@ export class Field {
         path = `${this.i18nPath}.${fieldName}`;
       }
       let translation = Field.internationalizer.tr(path, this.i18n.interpolations);
+      // Use default value if translation is null or equal to the i18n path.
       if (!translation || (typeof defaultValue === 'string' && translation === path)) {
         translation = defaultValue;
       }
@@ -140,6 +141,29 @@ export class Field {
       return translation;
     }
     return this.localizations[fieldName];
+  }
+
+  static globalLocalizations = {};
+
+  /**
+   * Localize a string globally.
+   * @param  {String} path         The i18n path.
+   * @param  {String} defaultValue The value to use if a translation is not found.
+   *                               If not specified, the default value will be
+   *                               the i18n path.
+   * @return {String}              The localized string.
+   */
+  static localizeGlobal(path, defaultValue, interpolations) {
+    if (!Field.globalLocalizations.hasOwnProperty(path)) {
+      let translation = Field.internationalizer.tr(path, interpolations);
+      // Use default value if translation is null or equal to the i18n path.
+      if (!translation || (typeof defaultValue === 'string' && translation === path)) {
+        translation = defaultValue;
+      }
+      Field.globalLocalizations[path] = translation;
+      return translation;
+    }
+    return Field.globalLocalizations[path];
   }
 
   /**

@@ -18,6 +18,7 @@ export class Textfield extends Field {
    * @type {String[]}
    */
   autocomplete = undefined;
+  defaultPlaceholder = Field.localizeGlobal('form.global.placeholder', 'Enter value...');
 
   /**
    * @inheritdoc
@@ -49,7 +50,7 @@ export class Textfield extends Field {
    * @return {String} The localized placeholder for this field.
    */
   get placeholder() {
-    return this.localize('placeholder', 'Enter value...');
+    return this.localize('placeholder', this.defaultPlaceholder);
   }
 
   /**
