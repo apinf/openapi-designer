@@ -83,7 +83,8 @@ export class Optionfield extends Field {
         });
       }
     }
-    if (this.choices.length === 0 && this.dataSources.length === 0) {
+    this.dataSources = args.dataSources;
+    if (this.format === 'checkbox' && this.choices.length === 0 && this.dataSources.length === 0) {
       // We don't want to leave the choices empty, so if there are no choices,
       // make a checkbox with no label.
       this.choices.push({
@@ -95,7 +96,6 @@ export class Optionfield extends Field {
       });
       this.checkboxFormat = 'simple';
     }
-    this.dataSources = args.dataSources;
     return super.init(id, args);
   }
 
