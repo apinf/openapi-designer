@@ -1,4 +1,5 @@
 {
+  "blank": "",
   "nav": {
     "tab": {
       "about": "Tietoja",
@@ -21,10 +22,433 @@
       }
     }
   },
+  "modal": {
+    "paste": {
+      "title": "Tuo OpenAPI-asiakirja",
+      "placeholder": "Liitä OpenAPI-asiakirjasi tähän...",
+      "do": "Tuo dokumentti"
+    }
+  },
   "error": {
     "title": "Hups!",
     "body": "Näyttää siltä, että jokin on rikki.\nJoskus nämä ongelmat aiheutuvat epäkelvollisista OpenAPI-asiakirjoista välimuistissa. Jos näin on käynyt, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">tietojen poistamisen</a> pitäisi korjata ongelma.",
     "data-title": "Virheen tiedot"
   },
-  "footer-product-of": "Product of"
+  "footer-product-of": "Product of",
+  "form": {
+    "global": {
+      "placeholder": "Anna arvo...",
+      "newItemText": "Uusi {{label}}"
+    },
+    "externalDocs": {
+      "label": "Ulkoinen dokumentaatio",
+      "description": {
+        "label": "Kuvaus"
+      },
+      "url": {
+        "label": "Linkki"
+      }
+    },
+    "enum": {
+      "label": "Sallitut arvot",
+      "item": {
+        "label": "Sallittu arvo",
+        "string": {
+          "label": "Merkkijono"
+        },
+        "integer": {
+          "label": "Kokonaisluku"
+        },
+        "number": {
+          "label": "Luku"
+        },
+        "boolean": {
+          "label": "Totuusarvo"
+        },
+        "array": {
+          "label": "Lista"
+        }
+      }
+    },
+    "paths": {
+      "label": "Polut",
+      "newItemText": "Uusi Polku",
+      "item": {
+        "label": "Polku #{{index}}: {{-path}}",
+        "operation": {
+          "methods": {
+            "get": "GET",
+            "put": "PUT",
+            "post": "POST",
+            "delete": "DELETE",
+            "options": "OPTIONS",
+            "head": "HEAD",
+            "patch": "PATCH"
+          },
+          "operationId": {
+            "label": "Toiminnan ID"
+          },
+          "summary": {
+            "label": "Tiivistelmä"
+          },
+          "description": {
+            "label": "Kuvaus"
+          },
+          "deprecated": {
+            "label": "Vanhentunut?"
+          },
+          "overrides": {
+            "label": "Ohitukset",
+            "schemes": {
+              "label": "Protokollat"
+            }
+          },
+          "tags": {
+            "label": "Tunnisteet",
+            "newItemText": "Uusi tunniste",
+            "item": {
+              "label": "Tunniste #{{index}}"
+            }
+          },
+          "responses": {
+            "label": "Vastaukset",
+            "newItemText": "Uusi Vastaus"
+          },
+          "parameters": {
+            "label": "Parametrit",
+            "newItemText": "Uusi Parametri"
+          }
+        },
+        "reference": {
+          "label": "Kohde",
+          "choices": {
+            "choose": "Valitse kohde..."
+          }
+        }
+      }
+    },
+    "global-security": {
+      "label": "Turvallisuus",
+      "definitions": {
+        "label": "Määritelmät",
+        "newItemText": "Uusi Turvallisuusmääritelmä",
+        "item": {
+          "label": "Turvallisuusmääritelmä #{{index}}",
+          "basic": {
+            "description": {
+              "label": "Kuvaus"
+            }
+          },
+          "apiKey": {
+            "description": {
+              "label": "Kuvaus"
+            },
+            "name": {
+              "label": "Nimi"
+            },
+            "in": {
+              "label": "API-avaimen sijainti",
+              "choices": {
+                "query": "Query-merkkijono",
+                "header": "HTTP-ylätunniste"
+              }
+            }
+          },
+          "oauth2": {
+            "description": {
+              "label": "Kuvaus"
+            },
+            "flow": {
+              "label": "Flow",
+              "choices": {
+                "implicit": "Implisiittinen",
+                "password": "Salasana",
+                "application": "Ohjelma",
+                "accessCode": "Pääsykoodi"
+              }
+            },
+            "authorizationUrl": {
+              "label": "Valtuutuslinkki"
+            },
+            "scopes": {
+              "label": "Soveltamisalat",
+              "newItemText": "Uusi Soveltamisala",
+              "item": {
+                "label": "Soveltamisala #{{index}}",
+                "key": {
+                  "label": "Avain"
+                },
+                "description": {
+                  "label": "Kuvaus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "requirements": {
+        "label": "Vaatimukset",
+        "newItemText": "Uusi Vaatimusobjekti",
+        "item": {
+          "label": "Vaatimusobjekti #{{index}}",
+          "newItemText": "Uusi turvallisuusvaatimus",
+          "item": {
+            "label": "Turvallisuusvaatimus #{{index}}",
+            "name": {
+              "label": "Nimi",
+              "choices": {
+                "choose": "Valitse turvallisuusmääritelmä..."
+              }
+            },
+            "scopes": {
+              "label": "Soveltamisalat",
+              "newItemText": "Uusi OAuth2-soveltamisala",
+              "item": {
+                "label": "OAuth2-soveltamisala #{{index}}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": {
+      "label": "Tunnisteet",
+      "item": {
+        "label": "Tunniste",
+        "name": {
+          "label": "Nimi"
+        },
+        "description": {
+          "label": "Kuvaus"
+        }
+      }
+    },
+    "mime": {
+      "label": "MIME-tyypit",
+      "consumes": {
+        "label": "Consumes (untranslated)",
+        "item": {
+          "label": "MIME-tyyppi"
+        }
+      },
+      "produces": {
+        "label": "Produces (untranslated)",
+        "item": {
+          "label": "MIME-tyyppi"
+        }
+      }
+    },
+    "header": {
+      "label": "Ylätunniste",
+      "info": {
+        "label": "Perustiedot",
+        "title": {
+          "label": "Otsikko"
+        },
+        "version": {
+          "label": "Versio"
+        },
+        "description": {
+          "label": "Kuvaus"
+        },
+        "termsOfService": {
+          "label": "Käyttöehdot"
+        },
+        "contact": {
+          "label": "Yhteystiedot",
+          "name": {
+            "label": "Nimi"
+          },
+          "email": {
+            "label": "Sähköposti"
+          },
+          "url": {
+            "label": "Linkki"
+          }
+        },
+        "license": {
+          "label": "Lisenssi",
+          "name": {
+            "label": "Nimi"
+          },
+          "url": {
+            "label": "Linkki"
+          }
+        }
+      },
+      "host": {
+        "label": "Isäntäasetukset",
+        "host": {
+          "label": "Isännän nimi"
+        },
+        "basePath": {
+          "label": "Peruspolku",
+          "placeholder": "esim. /api/v2",
+          "helpText": "Polku, joka lisätään aina ennen muita polkuja. Alettava kauttaviivalla."
+        },
+        "schemes": {
+          "label": "Vakioprotokollat",
+          "choices": {
+            "http": "HTTP",
+            "https": "HTTPS",
+            "ws": "Websocket",
+            "wss": "Turvallinen Websocket"
+          }
+        }
+      }
+    },
+    "global-definitions": {
+      "label": "Määritelmät",
+      "parameters": {
+        "label": "Parametrit",
+        "newItemText": "Uusi Parametri",
+        "item": {
+          "label": "Parametri #{{index}}: {{-name}}"
+        }
+      },
+      "responses": {
+        "label": "Vastaukset",
+        "newItemText": "Uusi Vastaus",
+        "item": {
+          "label": "Vastaus #{{index}}: {{-name}}"
+        }
+      }
+    },
+    "response": {
+      "label": "Vastaus #{{index}} HTTP {{-httpStatus}} -menetelmälle",
+      "description": {
+        "label": "Kuvaus"
+      },
+      "schema": {
+        "label": "Vastauselin"
+      },
+      "$ref": {
+        "label": "Kohde",
+        "choices": {
+          "choose": "Valitse vastaus..."
+        }
+      }
+    },
+    "parameter": {
+      "label": "Parametri #{{index}}: {{-name}}",
+      "$ref": {
+        "label": "Kohde",
+        "choices": {
+          "choose": "Valitse parametri..."
+        }
+      },
+      "name": {
+        "label": "Nimi"
+      },
+      "in": {
+        "label": "Sijainti",
+        "choices": {
+          "path": "Polku",
+          "query": "Query-merkkijono",
+          "header": "HTTP-ylätunniste",
+          "formData": "Lomakkeen tiedot",
+          "body": "Pyyntöelin"
+        }
+      },
+      "description": {
+        "label": "Kuvaus"
+      },
+      "required": {
+        "label": "Vaadittu",
+        "helpText": "Onko tämä parametri pakollinen?"
+      },
+      "allowEmptyValue": {
+        "label": "Hyväksytäänkö tyhjät arvot?"
+      },
+      "type": {
+        "label": "Tyyppi",
+        "choices": {
+          "string": "Merkkijono",
+          "integer": "Kokonaisluku",
+          "boolean": "Totuusarvo",
+          "number": "Luku",
+          "array": "Lista",
+          "file": "Tiedosto"
+        }
+      },
+      "items": {
+        "label": "Listan sisältö"
+      },
+      "collectionFormat": {
+        "label": "Keräysmuoto",
+        "choices": {
+          "csv": "CSV (foo,bar)",
+          "ssv": "SSV (foo bar)",
+          "tsv": "TSV (foo\\tbar)",
+          "pipes": "Putket (foo|bar)"
+        }
+      }
+    },
+    "types": {
+      "label": "Tyypit",
+      "newItemText": "Uusi Tyyppi",
+      "item": {
+        "label": "Tyyppi #{{index}}: {{-name}}",
+        "x-oad-type": {
+          "choices": {
+            "choose": "Valitse tyyppi",
+            "string": "Merkkijono",
+            "integer": "Kokonaisluku",
+            "boolean": "Totuusarvo",
+            "number": "Luku",
+            "array": "Lista",
+            "object": "Objekti",
+            "reference": "Referenssi",
+            "null": "Tyhjä",
+            "file": "Tiedosto"
+          }
+        },
+        "name": {
+          "placeholder": "Anna avain..."
+        },
+        "$ref": {
+          "label": "Target",
+          "choices": {
+            "choose": "Valitse kohde..."
+          }
+        },
+        "title": {
+          "label": "Otsikko"
+        },
+        "description": {
+          "label": "Kuvaus"
+        },
+        "items": {
+          "label": "Listan sisältö"
+        },
+        "properties": {
+          "label": "Objektin sisältö",
+          "item": {
+            "label": "Esine #{{index}}: {{-name}}"
+          }
+        },
+        "required": {
+          "label": "Vaaditut alakentät",
+          "item": {
+            "label": "Vaadittu kenttä"
+          }
+        },
+        "format": {
+          "label": "Formaatti",
+          "choices": {
+            "int32": "32-bittinen kokonaisluku",
+            "int64": "64-bittinen kokonaisluku",
+            "float": "32-bittinen liukuluku",
+            "double": "64-bittinen liukuluku",
+            "string": "Tavallinen merkkijono",
+            "byte": "Tavu (Base64)",
+            "binary": "Binääri (Oktettisekvenssi)",
+            "date": "Päiväys",
+            "date-time": "Päiväys ja Aika",
+            "password": "Salasana"
+          }
+        }
+      }
+    }
+  }
 }
