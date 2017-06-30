@@ -144,6 +144,14 @@ export class Field {
 
   static globalLocalizations = {};
 
+  /**
+   * Localize a string globally.
+   * @param  {String} path         The i18n path.
+   * @param  {String} defaultValue The value to use if a translation is not found.
+   *                               If not specified, the default value will be
+   *                               the i18n path.
+   * @return {String}              The localized string.
+   */
   static localizeGlobal(path, defaultValue, interpolations) {
     if (!Field.globalLocalizations.hasOwnProperty(path)) {
       let translation = Field.internationalizer.tr(path, interpolations);
