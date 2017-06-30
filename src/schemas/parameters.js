@@ -170,6 +170,10 @@ export const parameter = {
           'format': 'dropdown',
           'label': 'Target',
           'hideIfNoChoices': false,
+          'choices': [{
+            'key': '',
+            'i18nKey': 'choose'
+          }],
           'dataSources': [{
             'source': '/global-definitions/parameters',
             'key': '#/parameters/${#:key}',
