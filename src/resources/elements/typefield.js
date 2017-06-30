@@ -104,6 +104,16 @@ export class Typefield extends Collapsiblefield {
     return super.init(id, args);
   }
 
+  created() {
+    this.possibleTypes = [];
+    for (const type of Object.keys(this.types)) {
+      this.possibleTypes.push({
+        key: type,
+        label: this.localize(`${type}.label`)
+      });
+    }
+  }
+
   /**
    * Check if this field doesn't currently have a child or if the child is empty.
    */
@@ -257,13 +267,5 @@ export class Typefield extends Collapsiblefield {
       return this.child.resolvePath(path.splice(1));
     }
     return undefined;
-  }
-
-  /**
-   * Get all the possible type names.
-   * @return {String[]} The names of the possible types.
-   */
-  get possibleTypes() {
-    return Object.keys(this.types);
   }
 }

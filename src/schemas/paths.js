@@ -99,6 +99,9 @@ export const paths = {
     'i18n': {
       'interpolations': {
         'path': '${#:key}'
+      },
+      'keys': {
+        'reference.label': 'form.paths.item.reference.optionLabel'
       }
     },
     'setValueListeners': [

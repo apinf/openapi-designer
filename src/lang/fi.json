@@ -433,7 +433,10 @@
         "required": {
           "label": "Vaaditut alakentät",
           "item": {
-            "label": "Vaadittu kenttä"
+            "label": "Vaadittu kenttä",
+            "choices": {
+              "choose": "Valitse kenttä..."
+            }
           }
         },
         "format": {

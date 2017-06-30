@@ -76,6 +76,7 @@
       "item": {
         "label": "Path #{{index}}: {{-path}}",
         "operation": {
+          "label": "Path",
           "methods": {
             "get": "GET",
             "put": "PUT",
@@ -121,6 +122,7 @@
         },
         "reference": {
           "label": "Target",
+          "optionLabel": "Reference",
           "choices": {
             "choose": "Choose a target type..."
           }
@@ -135,11 +137,13 @@
         "item": {
           "label": "Security Definition #{{index}}",
           "basic": {
+            "label": "Basic",
             "description": {
               "label": "Description"
             }
           },
           "apiKey": {
+            "label": "API key",
             "description": {
               "label": "Description"
             },
@@ -155,6 +159,7 @@
             }
           },
           "oauth2": {
+            "label": "OAuth2",
             "description": {
               "label": "Description"
             },
@@ -318,6 +323,12 @@
       }
     },
     "response": {
+      "response": {
+        "label": "Response"
+      },
+      "reference": {
+        "label": "Reference"
+      },
       "label": "Response #{{index}} for HTTP {{-httpStatus}}",
       "description": {
         "label": "Description"
@@ -333,6 +344,12 @@
       }
     },
     "parameter": {
+      "parameter": {
+        "label": "Parameter"
+      },
+      "reference": {
+        "label": "Reference"
+      },
       "label": "Parameter #{{index}}: {{-name}}",
       "$ref": {
         "label": "Target",
@@ -433,7 +450,10 @@
         "required": {
           "label": "Required subfields",
           "item": {
-            "label": "Required field"
+            "label": "Required field",
+            "choices": {
+              "choose": "Choose a field..."
+            }
           }
         },
         "format": {
