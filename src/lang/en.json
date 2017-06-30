@@ -119,7 +119,10 @@
           }
         },
         "reference": {
-          "label": "Target"
+          "label": "Target",
+          "choices": {
+            "choose": "Choose a target type..."
+          }
         }
       }
     },
@@ -191,7 +194,10 @@
           "item": {
             "label": "Security Requirement #{{index}}",
             "name": {
-              "label": "Name"
+              "label": "Name",
+              "choices": {
+                "choose": "Choose a security definition..."
+              }
             },
             "scopes": {
               "label": "Scopes",
@@ -316,13 +322,19 @@
         "label": "Response body"
       },
       "$ref": {
-        "label": "Target"
+        "label": "Target",
+        "choices": {
+          "choose": "Choose a target Response..."
+        }
       }
     },
     "parameter": {
       "label": "Parameter #{{index}}: {{-name}}",
       "$ref": {
-        "label": "Target"
+        "label": "Target",
+        "choices": {
+          "choose": "Choose a target Parameter..."
+        }
       },
       "name": {
         "label": "Name"
@@ -394,7 +406,10 @@
           "placeholder": "Enter key..."
         },
         "$ref": {
-          "label": "Target"
+          "label": "Target",
+          "choices": {
+            "choose": "Choose a target type..."
+          }
         },
         "title": {
           "label": "Title"

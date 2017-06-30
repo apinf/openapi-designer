@@ -18,6 +18,10 @@ export const securityRequirements = {
           'type': 'option',
           'format': 'dropdown',
           'hideIfNoChoices': false,
+          'choices': [{
+            'key': '',
+            'i18nKey': 'choose'
+          }],
           'dataSources': [{
             'source': '/global-security/definitions',
             'key': '${#:key}'

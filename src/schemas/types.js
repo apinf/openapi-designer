@@ -192,6 +192,10 @@ export const types = {
         'format': 'dropdown',
         'label': 'Target',
         'hideIfNoChoices': false,
+        'choices': [{
+          'key': '',
+          'i18nKey': 'choose'
+        }],
         'dataSources': [{
           'source': '/global-definitions/types',
           'key': '#/definitions/${#/name}',

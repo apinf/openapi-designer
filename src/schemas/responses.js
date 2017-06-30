@@ -48,6 +48,10 @@ export const response = {
           'format': 'dropdown',
           'label': 'Target',
           'hideIfNoChoices': false,
+          'choices': [{
+            'key': '',
+            'i18nKey': 'choose'
+          }],
           'dataSources': [{
             'source': '/global-definitions/responses',
             'key': '#/responses/${#:key}',
