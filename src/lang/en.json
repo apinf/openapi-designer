@@ -170,6 +170,9 @@
             "authorizationUrl": {
               "label": "Authorization URL"
             },
+            "tokenUrl": {
+              "label": "Token URL"
+            },
             "scopes": {
               "label": "Scopes",
               "newItemText": "New Scope",

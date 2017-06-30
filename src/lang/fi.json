@@ -170,6 +170,9 @@
             "authorizationUrl": {
               "label": "Valtuutuslinkki"
             },
+            "tokenUrl": {
+              "label": "Token URL (untranslated)"
+            },
             "scopes": {
               "label": "Soveltamisalat",
               "newItemText": "Uusi Soveltamisala",
