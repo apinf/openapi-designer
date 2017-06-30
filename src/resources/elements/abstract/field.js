@@ -142,6 +142,20 @@ export class Field {
     return this.localizations[fieldName];
   }
 
+  static globalLocalizations = {};
+
+  static localizeGlobal(path, defaultValue, interpolations) {
+    if (!Field.globalLocalizations.hasOwnProperty(path)) {
+      let translation = Field.internationalizer.tr(path, interpolations);
+      if (!translation || (typeof defaultValue === 'string' && translation === path)) {
+        translation = defaultValue;
+      }
+      Field.globalLocalizations[path] = translation;
+      return translation;
+    }
+    return Field.globalLocalizations[path];
+  }
+
   /**
    * Initialize this field with the base data.
    * @param  {String} id                The index of this field.

@@ -32,6 +32,9 @@ export class Arrayfield extends Parentfield {
   addIndexToChildLabel = true;
   /** @inheritdoc */
   _children = [];
+  defaultNewText = Field.localizeGlobal('form.global.newItemText', 'New ${label}', {
+    'label': '${label}'
+  })
 
   /**
    * @inheritdoc
@@ -64,8 +67,8 @@ export class Arrayfield extends Parentfield {
    * @return {String} The localized text.
    */
   get newItemText() {
-    const defaultNewText = `New ${this.item.label}`;
-    return this.localize('newItemText', defaultNewText);
+    const defaultText = this.defaultNewText.replace(/\${label}/g, this.item.label);
+    return this.localize('newItemText', defaultText);
   }
 
   /**
