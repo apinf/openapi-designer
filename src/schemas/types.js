@@ -275,6 +275,10 @@ export const types = {
           'type': 'option',
           'format': 'dropdown',
           'hideIfNoChoices': false,
+          'choices': [{
+            'key': '',
+            'i18nKey': 'choose'
+          }],
           'dataSources': [{
             'source': '../../properties/:child',
             'key': '${#/name}',
