@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="type field has-children c${columns} columns" if.bind="display">
+  <fieldset class="type field has-children c${columns} columns ${validationResult.valid ? '' : 'validation-error'}" if.bind="display">
     <legend if.bind="!collapsed">
       <select value.two-way="selectedType">
         <option repeat.for="type of possibleTypes" value.bind="type.key">${type.label}</option>
@@ -8,6 +8,9 @@
     </legend>
     <h3 click.delegate="toggleCollapse()" if.bind="label" class="title">
       ${label}
+      <tooltip class="error-tooltip" if.bind="!validationResult.valid" text.bind="validationResult.error">
+        <img src="res/error.svg" alt="Error"/>
+      </tooltip>
       <tooltip if.bind="helpText" text.bind="helpText">
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
