@@ -65,7 +65,8 @@ export class Validation {
   }
 
   hostname(field) {
-    if (/^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(field.getValue()) !== null) {
+    const val = field.getValue();
+    if (!val || /^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(val) !== null) {
       return { valid: true };
     }
     return {
@@ -75,7 +76,8 @@ export class Validation {
   }
 
   email(field) {
-    if (/^\S+@\S+$/.exec(field)) {
+    const val = field.getValue();
+    if (!val || /^\S+@\S+$/.exec(val) !== null) {
       return { valid: true };
     }
     return {
