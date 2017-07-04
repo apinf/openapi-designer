@@ -247,27 +247,81 @@ export class Field {
   }
 
   /**
-   * Check whether or not this field should be displayed.
+   * Check a list of conditions. Uses {@link Field#checkCondition} for checking
+   * the single conditions.
+   *
+   * @param  {Object} conditions         The conditions. The key is the path to
+   *                                     the field and the value is the expected
+   *                                     value of that field.
+   * @param  {Field}  [parentField=this] The field to use for resolving field
+   *                                     paths.
+   * @return {Boolean}                   Whether or not ALL the conditions were
+   *                                     fulfilled.
    */
-  shouldDisplay() {
-    for (const [path, value] of Object.entries(this.conditions)) {
-      const elem = this.resolveRef(path);
-
-      if (!elem) {
-        return false;
-      }
-
-      const elemValue = elem.getValue();
-
-      if (Array.isArray(value)) {
-        if (!value.includes(elemValue)) {
-          return false;
-        }
-      } else if (value !== elemValue) {
+  static checkConditions(conditions, parentField) {
+    if (!conditions) {
+      return true;
+    }
+    for (const [fieldPath, expectedValue] of Object.entries(conditions)) {
+      if (!Field.checkCondition(fieldPath, expectedValue, parentField)) {
         return false;
       }
     }
     return true;
+  }
+
+  /**
+   * Check that the field at the given path has a certain value.
+   *
+   * If the expected value is undefined, this will check if the value of the
+   * field is defined.
+   * If the value of the field is an array, but the expected value is not, this
+   * will check if the field value contains the expected value.
+   * If the value of the field is NOT an array, but the expected value is, this
+   * will check if the expected value contains the field value.
+   *
+   * If the expected value is a function, this will return the value of that
+   * function when called with the field value as a parameter.
+   *
+   * If none of the cases above happen, this will return
+   * {@linkplain expectedValue === fieldValue}
+   *
+   * @param  {String} fieldPath          The path to the field whose value to
+   *                                     check. Relative to {@linkplain parentField}.
+   * @param  {Field}  expectedValue      The expected value of the field.
+   * @param  {Field}  [parentField=this] The field to use for resolving
+   *                                     {@linkplain fieldPath}.
+   * @return {Boolean}                   Whether or not the field at the given
+   *                                     path has the given value.
+   */
+  static checkCondition(fieldPath, expectedValue, parentField) {
+    if (!parentField) {
+      return false;
+    }
+    const field = parentField.resolveRef(fieldPath);
+    if (!field) {
+      return false;
+    }
+    const fieldValue = field.getValue();
+    if (expectedValue === undefined || expectedValue === null) {
+      return fieldValue !== undefined && fieldValue !== null;
+    } else if (Array.isArray(expectedValue) && !Array.isArray(fieldValue)) {
+      return expectedValue.includes(fieldValue);
+    } else if (!Array.isArray(expectedValue) && Array.isArray(fieldValue)) {
+      return fieldValue.includes(expectedValue);
+    } else if (typeof expectedValue === 'function') {
+      return expectedValue(fieldValue);
+    } else if (typeof expectedValue !== 'object') {
+      return expectedValue === fieldValue;
+    }
+    return false;
+  }
+
+  /**
+   * Check whether or not this field should be displayed.
+   */
+  shouldDisplay() {
+    return Field.checkConditions(this.conditions, this);
   }
 
   /**

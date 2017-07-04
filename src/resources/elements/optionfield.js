@@ -78,7 +78,7 @@ export class Optionfield extends Field {
           // The HTML templates can't do this complex logic, so we have to do it
           // here.
           get conditionsFulfilled() {
-            return Optionfield.conditionsFulfilled(choice.conditions, choiceParent);
+            return Field.checkConditions(choice.conditions, choiceParent);
           }
         });
       }
@@ -133,8 +133,8 @@ export class Optionfield extends Field {
             key: child.formatReferencePlusField(dataSource.key),
             selected: false,
             get conditionsFulfilled() {
-              return Optionfield.conditionsFulfilled(dataSource.localConditions, target)
-                  && Optionfield.conditionsFulfilled(dataSource.targetConditions, target);
+              return Field.checkConditions(dataSource.localConditions, target)
+                  && Field.checkConditions(dataSource.targetConditions, target);
             }
           };
           if (dataSource.label) {
@@ -161,21 +161,6 @@ export class Optionfield extends Field {
       }
     }
     return false;
-  }
-
-  static conditionsFulfilled(conditions, parentField) {
-    if (conditions) {
-      for (const [fieldPath, expectedValue] of Object.entries(conditions)) {
-        const field = parentField.resolveRef(fieldPath);
-        const value = field ? field.getValue() : undefined;
-        if (Array.isArray(value) && !value.includes(expectedValue)) {
-          return false;
-        } else if (value !== expectedValue) {
-          return false;
-        }
-      }
-    }
-    return true;
   }
 
   get allChoices() {
