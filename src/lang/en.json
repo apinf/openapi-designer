@@ -35,6 +35,9 @@
     "data-title": "Exception data"
   },
   "footer-product-of": "Product of",
+  "validation": {
+    "required-is-empty": "This field is required!"
+  },
   "form": {
     "global": {
       "placeholder": "Enter value...",
