@@ -29,6 +29,12 @@
     }
   }
 
+  &.validation-error {
+      label, .title {
+          color: #9F3A38;
+      }
+  }
+
   label, .title {
     &:empty {
       display: none;
@@ -138,6 +144,14 @@
       margin-bottom: 0;
 
       border-bottom: .125rem solid $main-color;
+    }
+
+    &.validation-error {
+      margin-bottom: 0;
+
+      color: #9F3A38;
+      border-bottom: .125rem solid #E0B4B4;
+      background-color: #FFF6F6;
     }
   }
 

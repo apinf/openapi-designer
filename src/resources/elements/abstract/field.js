@@ -79,7 +79,23 @@ export class Field {
    */
   setValueListeners = []
   /**
-   * I18n settings
+   * Validation settings.
+   * @type {Object}
+   */
+  validation = {}
+  /**
+   * Results of validating the current value of this field. Should be cleared
+   * whenever the value changes.
+   * @type {Object}
+   */
+  _validationResult = undefined
+  /**
+   * Function ID -> validation function mappings.
+   * @type {Object}
+   */
+  static validationFunctions = {};
+  /**
+   * I18n settings.
    * @type {Object}
    */
   i18n = {}
@@ -166,6 +182,27 @@ export class Field {
     return Field.globalLocalizations[path];
   }
 
+  get validationResult() {
+    if (!this._validationResult) {
+      this._validationResult = this.validate();
+    }
+    return this._validationResult;
+  }
+
+  validate() {
+    for (const funcID of this.validation) {
+      if (!Field.validationFunctions.hasOwnProperty(funcID)) {
+        continue;
+      }
+      const func = Field.validationFunctions[funcID];
+      const result = func(this);
+      if (!result.valid) {
+        return result;
+      }
+    }
+    return { valid: true };
+  }
+
   /**
    * Initialize this field with the base data.
    * @param  {String} id                The index of this field.
@@ -189,7 +226,8 @@ export class Field {
    *                                            I18n keys that should be replaced
    *                                            by another I18n path.
    * @param {Object} [args.i18n.interpolations] I18n interpolations.
-   * @return {Field}                    This field.
+   * @param {String[]} [args.validation]        Validation function IDs.
+   * @return {Field}   This field.
    */
   init(id, args = {}) {
     args = Object.assign({
@@ -199,7 +237,8 @@ export class Field {
       showValueInParent: true,
       hideValueIfEmpty: true,
       setValueListeners: [],
-      i18n: {}
+      i18n: {},
+      validation: []
     }, args);
     args.i18n = Object.assign({
       path: '',
@@ -218,6 +257,7 @@ export class Field {
     this.setValueListeners = args.setValueListeners;
     this.i18n = args.i18n;
     this.i18n.interpolations.index = '$index';
+    this.validation = args.validation;
     this.type = this.constructor.TYPE;
     return this;
   }
@@ -464,6 +504,7 @@ export class Field {
    * @param  {Field} field The field that changed.
    */
   onChange(field) {
+    this._validationResult = undefined;
     field = field || this;
     if (this.parent) {
       this.parent.onChange(field);
@@ -487,6 +528,7 @@ export class Field {
    * Called with {@link #setValue} to run listeners.
    */
   onSetValue(newValue) {
+    this._validationResult = undefined;
     for (const listener of this.setValueListeners) {
       if (typeof listener === 'function') {
         listener(this, newValue);

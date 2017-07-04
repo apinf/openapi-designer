@@ -1,12 +1,21 @@
 <template>
-  <div class="text field c${columns} columns" if.bind="display">
+  <div class="text field c${columns} columns ${validationResult.valid ? '' : 'validation-error'}" if.bind="display">
     <label for.bind="id">
       ${label}
+      <tooltip class="error-tooltip" if.bind="!validationResult.valid" text.bind="validationResult.error">
+        <img src="res/error.svg" alt="Error"/>
+      </tooltip>
       <tooltip if.bind="helpText" text.bind="helpText">
         <img src="res/info.svg" alt="Info"/>
       </tooltip>
     </label>
-    <input type.bind="format" id.bind="id" list.bind="listID & attr" value.bind="value" placeholder.bind="placeholder">
+    <input
+      class="${validationResult.valid ? '' : 'validation-error'}"
+      type.bind="format"
+      id.bind="id"
+      list.bind="listID & attr"
+      value.bind="value"
+      placeholder.bind="placeholder">
     <datalist if.bind="autocomplete" id.bind="listID">
       <option repeat.for="completion of autocomplete" value.bind="completion"/>
     </datalist>

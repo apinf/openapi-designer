@@ -48,6 +48,16 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+
+    Field.validationFunctions.required = field => {
+      if (field.isEmpty()) {
+        return {
+          valid: false,
+          error: i18n.tr('validation.required-is-empty')
+        };
+      }
+      return { valid: true };
+    };
   }
 
   attached() {
