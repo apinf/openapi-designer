@@ -258,7 +258,7 @@ export class Field {
    * @return {Boolean}                   Whether or not ALL the conditions were
    *                                     fulfilled.
    */
-  static checkConditions(conditions, parentField = this) {
+  static checkConditions(conditions, parentField) {
     for (const [fieldPath, expectedValue] of Object.entries(conditions)) {
       if (!Field.checkCondition(fieldPath, expectedValue, parentField)) {
         return false;
@@ -291,7 +291,10 @@ export class Field {
    * @return {Boolean}                   Whether or not the field at the given
    *                                     path has the given value.
    */
-  static checkCondition(fieldPath, expectedValue, parentField = this) {
+  static checkCondition(fieldPath, expectedValue, parentField) {
+    if (!parentField) {
+      return false;
+    }
     const field = parentField.resolveRef(fieldPath);
     if (!field) {
       return false;
@@ -315,7 +318,7 @@ export class Field {
    * Check whether or not this field should be displayed.
    */
   shouldDisplay() {
-    return Field.checkConditions(this.conditions);
+    return Field.checkConditions(this.conditions, this);
   }
 
   /**
