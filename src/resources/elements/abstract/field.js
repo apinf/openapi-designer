@@ -259,6 +259,9 @@ export class Field {
    *                                     fulfilled.
    */
   static checkConditions(conditions, parentField) {
+    if (!conditions) {
+      return true;
+    }
     for (const [fieldPath, expectedValue] of Object.entries(conditions)) {
       if (!Field.checkCondition(fieldPath, expectedValue, parentField)) {
         return false;
