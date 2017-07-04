@@ -15,7 +15,6 @@ export class App {
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
     // Allow access from browser console
-    window.Field = Field;
     window.$oai = this;
 
     try {
