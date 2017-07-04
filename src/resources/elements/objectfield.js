@@ -150,6 +150,7 @@ export class Objectfield extends Parentfield {
       hideValueIfEmpty: this.hideValueIfEmpty,
       setValueListeners: this.setValueListeners,
       i18n: this.i18n,
+      validation: this.validation,
       children: clonedChildren,
       legendChildren: clonedLegendChildren
     });
