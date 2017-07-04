@@ -92,6 +92,13 @@ export class Validation {
     return { valid: true };
   }
 
+  keyPath(field) {
+    if (!field.key.startsWith('/')) {
+      field.key = `/${field.key}`;
+    }
+    return { valid: true };
+  }
+
   hostname(field) {
     const val = field.getValue();
     if (!val || /^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(val) !== null) {

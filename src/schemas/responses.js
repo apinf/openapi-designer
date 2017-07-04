@@ -78,7 +78,6 @@ namedResponse.i18n.keys = {
 export const responses = {
   'type': 'array',
   'format': 'map',
-  'validation': ['required'],
   'collapseManagement': true,
   'isCollapsible': false,
   'addIndexToChildLabel': false,
