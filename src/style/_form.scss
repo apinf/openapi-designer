@@ -30,9 +30,9 @@
   }
 
   &.validation-error {
-      label, .title {
-          color: #9F3A38;
-      }
+    label, .title {
+      color: #9F3A38;
+    }
   }
 
   label, .title {
@@ -89,6 +89,7 @@
 
     > select {
       width: 100%;
+      margin-bottom: .0625rem;
       padding: .25rem 0;
 
       border: none;
@@ -101,6 +102,14 @@
 
       &:hover {
         border-bottom: .0625rem solid $main-color;
+      }
+
+      &.validation-error {
+        margin-bottom: 0;
+
+        color: #9F3A38;
+        border-bottom: .125rem solid #E0B4B4;
+        background-color: #FFF6F6;
       }
     }
   }
