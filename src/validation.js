@@ -68,6 +68,8 @@ export class Validation {
     const val = field.getValue();
     if (!val || /^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(val) !== null) {
       return { valid: true };
+    } else if (/^\[?([0-9A-Fa-f]{0,4}:?)+\]?(\:[0-9]{1,5})?$/.exec(val) !== null) {
+      return { valid: true };
     }
     return {
       valid: false,
