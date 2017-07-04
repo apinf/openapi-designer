@@ -3,6 +3,7 @@ const mimeTypeArray = {
   'item': {
     'type': 'text',
     'label': 'MIME type',
+    'validation': ['required', 'noDuplicateValues'],
     'autocomplete': [
       'application/json',
       'application/xml',

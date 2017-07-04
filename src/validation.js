@@ -34,7 +34,10 @@ export class Validation {
   noDuplicateKeys(field) {
     const parent = field.parent;
     if (parent.type !== 'array' || parent.format !== 'map') {
-      return { valid: false, error: 'Invalid validator noDuplicateKeys for field with non-map parent' };
+      return {
+        valid: false,
+        error: 'Invalid validator noDuplicateKeys for field with non-map parent'
+      };
     }
 
     const keyField = parent.keyField;
@@ -47,6 +50,31 @@ export class Validation {
         return {
           valid: false,
           error: `Duplicate key ${key}`
+        };
+      }
+    }
+    return { valid: true };
+  }
+
+  @listen('../')
+  noDuplicateValues(field) {
+    const parent = field.parent;
+    if (parent.type !== 'array') {
+      return {
+        valid: false,
+        error: 'Invalid validator noDuplicateKeys for field with non-array parent'
+      };
+    }
+
+    const value = field.getValue();
+    for (const child of parent.children) {
+      if (child === field) {
+        continue;
+      }
+      if (child.getValue() === value) {
+        return {
+          valid: false,
+          error: `Duplicate value ${value}`
         };
       }
     }

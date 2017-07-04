@@ -265,6 +265,7 @@ export class Field {
     for (const funcID of args.validation) {
       const func = Field.validationFunctions[funcID];
       if (!func) {
+        console.error('Validator', funcID, 'not found!');
         continue;
       }
       this.validation.push(funcID);
