@@ -11,7 +11,8 @@ export const externalDocs = {
     },
     'url': {
       'type': 'text',
-      'hideValueIfEmpty': false
+      'hideValueIfEmpty': false,
+      'validation': ['requiredIfParent']
     }
   }
 };

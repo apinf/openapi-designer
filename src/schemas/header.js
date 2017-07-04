@@ -11,11 +11,13 @@ export const header = {
       'children': {
         'title': {
           'type': 'text',
-          'columns': 5
+          'columns': 5,
+          'validation': ['required']
         },
         'version': {
           'type': 'text',
-          'columns': 3
+          'columns': 3,
+          'validation': ['required']
         },
         'description': {
           'type': 'textarea',
@@ -24,7 +26,8 @@ export const header = {
         'termsOfService': {
           'type': 'text',
           'label': 'Terms of Service',
-          'hideValueIfEmpty': true
+          'hideValueIfEmpty': true,
+          'validation': ['url']
         },
         'contact': {
           'type': 'object',
@@ -36,12 +39,14 @@ export const header = {
             },
             'email': {
               'type': 'text',
-              'hideValueIfEmpty': true
+              'hideValueIfEmpty': true,
+              'validation': ['email']
             },
             'url': {
               'type': 'text',
               'label': 'URL',
-              'hideValueIfEmpty': true
+              'hideValueIfEmpty': true,
+              'validation': ['url']
             }
           }
         },
@@ -51,11 +56,13 @@ export const header = {
           'children': {
             'name': {
               'type': 'text',
-              'hideValueIfEmpty': true
+              'hideValueIfEmpty': true,
+              'validation': ['requiredIfParent']
             },
             'url': {
               'type': 'text',
-              'hideValueIfEmpty': true
+              'hideValueIfEmpty': true,
+              'validation': ['url']
             }
           }
         }
@@ -67,11 +74,13 @@ export const header = {
       'showValueInParent': false,
       'children': {
         'host': {
-          'type': 'text'
+          'type': 'text',
+          'validation': ['hostname']
         },
         'basePath': {
           'type': 'text',
-          'label': 'Base path'
+          'label': 'Base path',
+          'validation': ['path']
         },
         'schemes': schemes
       }

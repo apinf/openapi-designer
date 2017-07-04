@@ -191,12 +191,16 @@ export class Field {
 
   validate() {
     for (const funcID of this.validation) {
-      if (!Field.validationFunctions.hasOwnProperty(funcID)) {
+      const func = Field.validationFunctions[funcID];
+      if (!func) {
         continue;
       }
-      const func = Field.validationFunctions[funcID];
-      const result = func(this);
+      const result = func.call(Field.validationFunctions, this);
       if (!result.valid) {
+        if (result.replacement) {
+          this.setValue(result.replacement);
+          return { valid: true };
+        }
         return result;
       }
     }

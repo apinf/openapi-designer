@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
 import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
+import {Validation} from './validation';
 import YAML from 'yamljs';
 import $ from 'jquery';
 
@@ -12,7 +13,9 @@ export class App {
   constructor(i18n, ea) {
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
+    Field.validationFunctions = new Validation(i18n);
     // Allow access from browser console
+    window.Field = Field;
     window.$oai = this;
 
     try {
@@ -48,16 +51,6 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
-
-    Field.validationFunctions.required = field => {
-      if (field.isEmpty()) {
-        return {
-          valid: false,
-          error: i18n.tr('validation.required-is-empty')
-        };
-      }
-      return { valid: true };
-    };
   }
 
   attached() {
