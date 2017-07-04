@@ -281,6 +281,10 @@ export class Optionfield extends Field {
    * @private
    */
   getViewStrategy() {
+    // Dropdowns break on IE, so we have a separate HTML file for IE.
+    if (!!document.documentMode && this.format === 'dropdown') {
+      return `resources/elements/optionfield-${this.format}-ie.html`;
+    }
     return `resources/elements/optionfield-${this.format}.html`;
   }
 }
