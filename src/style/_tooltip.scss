@@ -27,4 +27,8 @@ tooltip {
     font-size: .9rem;
     font-weight: normal;
   }
+
+  &.error-tooltip img {
+    transform: rotate(180deg);
+  }
 }
