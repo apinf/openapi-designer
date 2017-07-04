@@ -13,6 +13,7 @@ export const response = {
     (field, newValue) =>
       field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'response')
   ],
+  'validation': ['noDuplicateKeys'],
   'types': {
     'response': {
       'i18n': {
@@ -21,7 +22,8 @@ export const response = {
       'type': 'object',
       'children': {
         'description': {
-          'type': 'textarea'
+          'type': 'textarea',
+          'validation': ['required']
         },
         'schema': {
           'type': 'lazylink',
@@ -76,6 +78,7 @@ namedResponse.i18n.keys = {
 export const responses = {
   'type': 'array',
   'format': 'map',
+  'validation': ['required'],
   'collapseManagement': true,
   'isCollapsible': false,
   'addIndexToChildLabel': false,

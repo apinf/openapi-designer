@@ -261,7 +261,20 @@ export class Field {
     this.setValueListeners = args.setValueListeners;
     this.i18n = args.i18n;
     this.i18n.interpolations.index = '$index';
-    this.validation = args.validation;
+    this.validation = [];
+    for (const funcID of args.validation) {
+      const func = Field.validationFunctions[funcID];
+      if (!func) {
+        continue;
+      }
+      this.validation.push(funcID);
+      if (func.listen) {
+        for (const listenTarget of func.listen) {
+          this.resolveRef(listenTarget).addChangeListener(() =>
+            this._validationResult = undefined);
+        }
+      }
+    }
     this.type = this.constructor.TYPE;
     return this;
   }
