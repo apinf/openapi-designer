@@ -64,8 +64,24 @@ export class Validation {
     return { valid: true };
   }
 
+  hostname(field) {
+    if (/^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(field.getValue()) !== null) {
+      return { valid: true };
+    }
+    return {
+      valid: false,
+      error: this.i18n.tr('validation.invalid-hostname')
+    };
+  }
+
   email(field) {
-    return { valid: true };
+    if (/^\S+@\S+$/.exec(field)) {
+      return { valid: true };
+    }
+    return {
+      valid: false,
+      error: this.i18n.tr('validation.invalid-email')
+    };
   }
 
   url(field) {
