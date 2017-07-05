@@ -90,10 +90,11 @@
           },
           "operationId": {
             "label": "Operation ID",
-            "placeholder": "Enter an unique operationId for {{operation}}"
+            "placeholder": "Enter an unique operationId for this operation."
           },
           "summary": {
-            "label": "Summary"
+            "label": "Summary",
+            "placeholder": "Enter a short summary for what the operation does"
           },
           "description": {
             "label": "Description"
@@ -168,7 +169,7 @@
             "label": "OAuth2",
             "description": {
               "label": "Description",
-              "placeholder": "Describe the security scheme"
+              "placeholder": "Describe the security scheme here."
             },
             "flow": {
               "label": "Flow",
@@ -222,7 +223,7 @@
               "newItemText": "New OAuth2 Scope",
               "item": {
                 "label": "OAuth2 scope #{{index}}",
-                "placeholder": "e.g. delete entries from the database"
+                "placeholder": "e.g. access user data"
               }
             }
           }
@@ -273,7 +274,7 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Describe the API here."
+          "placeholder": "Enter a description of the API here."
         },
         "termsOfService": {
           "label": "Terms of Service",

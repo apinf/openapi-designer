@@ -125,9 +125,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.get'
-              },
-              'interpolations': {
-                'operation': 'GET'
               }
             },
             'children': operationChildren
@@ -141,9 +138,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.put'
-              },
-              'interpolations': {
-                'operation': 'PUT'
               }
             },
             'children': operationChildren
@@ -157,9 +151,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.post'
-              },
-              'interpolations': {
-                'operation': 'POST'
               }
             },
             'children': operationChildren
@@ -173,9 +164,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.delete'
-              },
-              'interpolations': {
-                'operation': 'DELETE'
               }
             },
             'children': operationChildren
@@ -189,9 +177,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.options'
-              },
-              'interpolations': {
-                'operation': 'OPTIONS'
               }
             },
             'children': operationChildren
@@ -205,9 +190,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.head'
-              },
-              'interpolations': {
-                'operation': 'HEAD'
               }
             },
             'children': operationChildren
@@ -221,9 +203,6 @@ export const paths = {
               'path': 'form.paths.item.operation',
               'keys': {
                 'label': 'form.paths.item.operation.methods.patch'
-              },
-              'interpolations': {
-                'operation': 'PATCH'
               }
             },
             'children': operationChildren
