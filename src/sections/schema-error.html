@@ -1,0 +1,26 @@
+<template>
+  <require from="style/error.css"></require>
+	<div class="error" ref="errorPane" if.bind="!activeForm">
+    <div class="error-data">
+      <h1 t="error.title">
+        Uh oh!
+      </h1>
+      <div class="text" t="[html]error.body">
+        It seems like something is broken.
+
+        Sometimes these issues are caused by an invalid OpenAPI document in the
+        cache. If this is the case, <a href="javascript:void(0)" click.delegate="delete()">deleting the data</a> should fix it.
+      </div>
+
+      <h3 t="error.data-title">
+        Exception data
+      </h3>
+      <div class="message">
+        ${exception}
+      </div>
+      <div class="stacktrace">
+        ${exception.stack}
+      </div>
+    </div>
+  </div>
+</template>
