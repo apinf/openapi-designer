@@ -1,15 +1,23 @@
 <template>
-	<div class="modal-wrapper hidden" data-dl-type="json" ref="downloadErrorModal" click.delegate="closeDownloadError()">
-    <div class="modal" click.delegate="$event.stopPropagation()">
-      <div class="modal-header" t="modal.download-error.title">Validtion errors detected</div>
-      <div class="modal-content download-error-modal" ref="downloadErrorContent">
-
-      </div>
-      <div class="modal-footer">
-        <button class="download-error-modal-download" t="modal.download-error.download-anyway" click.delegate="download(undefined, true)">
-          Download anyway
-        </button>
-      </div>
-    </div>
-  </div>
+	<modal view-model.ref="downloadErrorModal" ref="downloadErrorBox" class="download-error">
+		<div slot="header" t="modal.download-error.title">Validation errors detected</div>
+		<div slot="content">
+			<!--
+				Unpacking the data
+					[path, message] of downloadErrors
+				didn't work for some reason.
+			-->
+			<div class="data" repeat.for="data of downloadErrors">
+				Error at <span class="path">${data[0]}</span>: <span class="message">${data[1]}</span>
+			</div>
+		</div>
+		<div slot="footer" class="footer">
+			<button class="cancel" t="modal.download-error.cancel" click.delegate="downloadErrorModal.close()">
+				Cancel
+			</button>
+			<button class="continue" t="modal.download-error.download-anyway" click.delegate="download(undefined, true)">
+				Download anyway
+			</button>
+		</div>
+	</modal>
 </template>

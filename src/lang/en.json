@@ -27,6 +27,11 @@
       "title": "Import OpenAPI document",
       "placeholder": "Paste your OpenAPI document here...",
       "do": "Import"
+    },
+    "download-error": {
+      "title": "Validation errors detected!",
+      "cancel": "Cancel",
+      "download-anyway": "Download anyway"
     }
   },
   "error": {

@@ -224,7 +224,9 @@ export class Field {
   revalidate(errorCollection) {
     this._validationResult = this.validate();
     if (errorCollection && !this._validationResult.valid) {
-      errorCollection[this.path] = this._validationResult.error;
+      // Remove first part from labelPath
+      const labelPath = this.labelPath.replace('form.label > ', '');
+      errorCollection[labelPath] = this._validationResult.error;
     }
     return this._validationResult;
   }
@@ -309,6 +311,7 @@ export class Field {
   isEmpty() {
     return true;
   }
+
   /**
    * Recursively get an unique identifier for this field.
    */
@@ -317,6 +320,16 @@ export class Field {
       return this.id;
     }
     return `${this.parent.path}.${this.id}`;
+  }
+
+  /**
+   * Recursively get the path to this field with labels.
+   */
+  get labelPath() {
+    if (!this.parent) {
+      return this.label;
+    }
+    return `${this.parent.labelPath} > ${this.label}`;
   }
 
   /**

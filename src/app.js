@@ -113,29 +113,18 @@ export class App {
     if (!force) {
       let errors = {};
       this.forms.revalidate(errors);
-      errors = Object.entries(errors);
-      if (errors.length > 0) {
-        const modal = $(this.downloadErrorModal);
-        modal.attr('data-dl-type', type);
-        modal.removeClass('hidden');
-        const content = $(this.downloadErrorContent);
-        content.empty();
-        for (const [location, error] of errors) {
-          const locationEntry = $('<div></div>').text(location).addClass('location');
-          const errorEntry = $('<div></div>').text(error).addClass('message');
-          $('<div></div>')
-            .addClass('error')
-            .append(locationEntry)
-            .append(errorEntry)
-            .appendTo(content);
-        }
+      this.downloadErrors = Object.entries(errors);
+      if (this.downloadErrors.length > 0) {
+        $(this.downloadErrorBox).attr('data-dl-type', type);
+        this.downloadErrorModal.open();
         return;
       }
     } else {
-      $(this.downloadErrorModal).addClass('hidden');
+      downloadError.close();
     }
+    this.downloadErrors = [];
     if (!type) {
-      type = $(this.downloadErrorModal).attr('data-dl-type');
+      type = $(this.downloadErrorBox).attr('data-dl-type');
     }
     let data;
     if (type === 'json') {
