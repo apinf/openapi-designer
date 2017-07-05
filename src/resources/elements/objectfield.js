@@ -75,6 +75,20 @@ export class Objectfield extends Parentfield {
   }
 
   /** @inheritdoc */
+  revalidate() {
+    const validation = super.revalidate();
+    if (this.hasLegend) {
+      for (const [index, child] of Object.entries(this.legendChildren)) {
+        validation[index] = child.revalidate();
+        if (!validation[index].valid || validation[index].childrenValid === false) {
+          validation.childrenValid = false;
+        }
+      }
+    }
+    return validation;
+  }
+
+  /** @inheritdoc */
   get allChildren() {
     return Object.assign({}, this.legendChildren, this._children);
   }

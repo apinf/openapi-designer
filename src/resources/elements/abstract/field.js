@@ -182,6 +182,11 @@ export class Field {
     return Field.globalLocalizations[path];
   }
 
+  /**
+   * Get the latest validation result. If the value has changed since the last
+   * validation, this will revalidate the field before returning.
+   * @return {Object} The validation result.
+   */
   get validationResult() {
     if (!this._validationResult) {
       this._validationResult = this.validate();
@@ -189,6 +194,10 @@ export class Field {
     return this._validationResult;
   }
 
+  /**
+   * Validate the value of this field.
+   * @return {Object} The validation result.
+   */
   validate() {
     for (const funcID of this.validation) {
       const func = Field.validationFunctions[funcID];
@@ -205,6 +214,16 @@ export class Field {
       }
     }
     return { valid: true };
+  }
+
+  /**
+   * Revalidate this field and its children.
+   * @return {Object} The validation result of this field along with all its
+   *                  children nested.
+   */
+  revalidate() {
+    this._validationResult = this.validate();
+    return this._validationResult;
   }
 
   /**
