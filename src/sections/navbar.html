@@ -1,64 +1,82 @@
 <template>
-	<div class="nav" if.bind="activeForm">
-    <a class="nav-link open" t="nav.tab.about" id="nav-about" href="#/about">
-      About
-    </a>
-    <a class="nav-link" t="nav.tab.header" id="nav-header" href="#/header">
-      Header
-    </a>
-    <a class="nav-link" t="nav.tab.mime" id="nav-mime" href="#/mime">
-      MIME types
-    </a>
-    <a class="nav-link" t="nav.tab.security" id="nav-global-security" href="#/global-security">
-      Security
-    </a>
-    <a class="nav-link" t="nav.tab.tags" id="nav-tags" href="#/tags">
-      Tags
-    </a>
-    <a class="nav-link" t="nav.tab.paths" id="nav-paths" href="#/paths">
-      Paths
-    </a>
-    <a class="nav-link" t="nav.tab.definitions" id="nav-global-definitions" href="#/global-definitions">
-      Definitions
-    </a>
+	<div class="nav-wrapper ${showBoth ? '' : 'no-split-view'}" if.bind="activeForm">
+		<div class="nav">
+	    <a class="nav-link open" t="nav.tab.about" id="nav-about" href="#/about">
+	      About
+	    </a>
+	    <a class="nav-link" t="nav.tab.header" id="nav-header" href="#/header">
+	      Header
+	    </a>
+	    <a class="nav-link" t="nav.tab.mime" id="nav-mime" href="#/mime">
+	      MIME types
+	    </a>
+	    <a class="nav-link" t="nav.tab.security" id="nav-global-security" href="#/global-security">
+	      Security
+	    </a>
+	    <a class="nav-link" t="nav.tab.tags" id="nav-tags" href="#/tags">
+	      Tags
+	    </a>
+	    <a class="nav-link" t="nav.tab.paths" id="nav-paths" href="#/paths">
+	      Paths
+	    </a>
+	    <a class="nav-link" t="nav.tab.definitions" id="nav-global-definitions" href="#/global-definitions">
+	      Definitions
+	    </a>
 
-    <div class="actions">
-      <div class="delete dropdown">
-        <button class="button">
-          <img src="res/trash.svg" alt="Delete"/>
-        </button>
-        <div class="content">
-          <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
-            Delete data
-          </a>
-        </div>
-      </div>
-      <div class="import dropdown">
-        <button class="button">
-          <img src="res/import.svg" alt="Import"/>
-        </button>
-        <div class="content">
-          <a href="javascript:void(0)" click.delegate="pasteModal.open()" t="nav.actions.import.paste">
-            Paste
-          </a>
-          <a href="javascript:void(0)" click.delegate="importFile()" t="nav.actions.import.file">
-            Choose file
-          </a>
-        </div>
-      </div>
-      <div class="download dropdown">
-        <button class="button">
-          <img src="res/download.svg" alt="Download"/>
-        </button>
-        <div class="content">
-          <a href="javascript:void(0)" click.delegate="download('json')" t="nav.actions.download.json">
-            JSON
-          </a>
-          <a href="javascript:void(0)" click.delegate="download('yaml')" t="nav.actions.download.yaml">
-            YAML
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+	    <div class="actions">
+	      <div class="split dropdown">
+	        <button class="button">
+	          <img src="res/split.svg" alt="Delete"/>
+	        </button>
+	        <div class="content">
+	          <a href="javascript:void(0)" click.delegate="split('editor')" t="nav.actions.split.editor">
+							Editor only
+						</a>
+	          <a href="javascript:void(0)" click.delegate="split('both')" t="nav.actions.split.both">
+							Split view
+						</a>
+	          <a href="javascript:void(0)" click.delegate="split('preview')" t="nav.actions.split.preview">
+							Preview only
+						</a>
+	        </div>
+	      </div>
+	      <div class="delete dropdown">
+	        <button class="button">
+	          <img src="res/trash.svg" alt="Delete"/>
+	        </button>
+	        <div class="content">
+	          <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
+	            Delete data
+	          </a>
+	        </div>
+	      </div>
+	      <div class="import dropdown">
+	        <button class="button">
+	          <img src="res/import.svg" alt="Import"/>
+	        </button>
+	        <div class="content">
+	          <a href="javascript:void(0)" click.delegate="pasteModal.open()" t="nav.actions.import.paste">
+	            Paste
+	          </a>
+	          <a href="javascript:void(0)" click.delegate="importFile()" t="nav.actions.import.file">
+	            Choose file
+	          </a>
+	        </div>
+	      </div>
+	      <div class="download dropdown">
+	        <button class="button">
+	          <img src="res/download.svg" alt="Download"/>
+	        </button>
+	        <div class="content">
+	          <a href="javascript:void(0)" click.delegate="download('json')" t="nav.actions.download.json">
+	            JSON
+	          </a>
+	          <a href="javascript:void(0)" click.delegate="download('yaml')" t="nav.actions.download.yaml">
+	            YAML
+	          </a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </template>

@@ -11,6 +11,11 @@
       "definitions": "Definitions"
     },
     "actions": {
+      "split": {
+        "editor": "Editor only",
+        "both": "Split view",
+        "preview": "Preview only"
+      },
       "delete": "Delete data",
       "download": {
         "json": "JSON",
@@ -53,10 +58,12 @@
     "externalDocs": {
       "label": "External documentation",
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "e.g. find out more about this API"
       },
       "url": {
-        "label": "URL"
+        "label": "URL",
+        "placeholder": "e.g. http://example.com/docs"
       }
     },
     "enum": {
@@ -97,13 +104,16 @@
             "patch": "PATCH"
           },
           "operationId": {
-            "label": "Operation ID"
+            "label": "Operation ID",
+            "placeholder": "Enter an unique operationId for this operation."
           },
           "summary": {
-            "label": "Summary"
+            "label": "Summary",
+            "placeholder": "Enter a short summary for what the operation does."
           },
           "description": {
-            "label": "Description"
+            "label": "Description",
+            "placeholder": "Enter a thorough description of the operation here."
           },
           "deprecated": {
             "label": "Deprecated?"
@@ -149,16 +159,19 @@
           "basic": {
             "label": "Basic",
             "description": {
-              "label": "Description"
+              "label": "Description",
+              "placeholder": "Describe the security scheme here."
             }
           },
           "apiKey": {
             "label": "API key",
             "description": {
-              "label": "Description"
+              "label": "Description",
+              "placeholder": "Describe the security scheme here."
             },
             "name": {
-              "label": "Name"
+              "label": "Name",
+              "placeholder": "e.g. api_key"
             },
             "in": {
               "label": "API key location",
@@ -171,7 +184,8 @@
           "oauth2": {
             "label": "OAuth2",
             "description": {
-              "label": "Description"
+              "label": "Description",
+              "placeholder": "Describe the security scheme here."
             },
             "flow": {
               "label": "Flow",
@@ -183,10 +197,12 @@
               }
             },
             "authorizationUrl": {
-              "label": "Authorization URL"
+              "label": "Authorization URL",
+              "placeholder": "e.g. https://example.com/oauth/dialog"
             },
             "tokenUrl": {
-              "label": "Token URL"
+              "label": "Token URL",
+              "placeholder": "e.g. https://example.com/oauth/token"
             },
             "scopes": {
               "label": "Scopes",
@@ -194,10 +210,12 @@
               "item": {
                 "label": "Scope #{{index}}",
                 "key": {
-                  "label": "Key"
+                  "label": "Key",
+                  "placeholder": "e.g. pets:read"
                 },
                 "description": {
-                  "label": "Description"
+                  "label": "Description",
+                  "placeholder": "Describe e.g. what this OAuth2 scope grants access to."
                 }
               }
             }
@@ -220,9 +238,11 @@
             },
             "scopes": {
               "label": "Scopes",
+              "helpText": "The scope names tell what scope names are required for the execution. Must be empty for non-oauth2 type security schemes.",
               "newItemText": "New OAuth2 Scope",
               "item": {
-                "label": "OAuth2 scope #{{index}}"
+                "label": "OAuth2 scope #{{index}}",
+                "placeholder": "e.g. pets:read"
               }
             }
           }
@@ -234,10 +254,12 @@
       "item": {
         "label": "Tag",
         "name": {
-          "label": "Name"
+          "label": "Name",
+          "placeholder": "e.g. user_operations"
         },
         "description": {
-          "label": "Description"
+          "label": "Description",
+          "placeholder": "Describe what is tagged with this."
         }
       }
     },
@@ -246,13 +268,15 @@
       "consumes": {
         "label": "Consumes",
         "item": {
-          "label": "MIME type"
+          "label": "MIME type",
+          "placeholder": "e.g. application/json"
         }
       },
       "produces": {
         "label": "Produces",
         "item": {
-          "label": "MIME type"
+          "label": "MIME type",
+          "placeholder": "e.g. application/json"
         }
       }
     },
@@ -261,43 +285,53 @@
       "info": {
         "label": "Basic info",
         "title": {
-          "label": "Title"
+          "label": "Title",
+          "placeholder": "e.g. Example API"
         },
         "version": {
-          "label": "Version"
+          "label": "Version",
+          "placeholder": "e.g. 1.0.0"
         },
         "description": {
-          "label": "Description"
+          "label": "Description",
+          "placeholder": "Enter a description of the API here."
         },
         "termsOfService": {
-          "label": "Terms of Service"
+          "label": "Terms of Service",
+          "placeholder": "e.g. http://example.com/terms/"
         },
         "contact": {
           "label": "Contact",
           "name": {
-            "label": "Name"
+            "label": "Name",
+            "placeholder": "e.g. John Smith"
           },
           "email": {
-            "label": "Email"
+            "label": "Email",
+            "placeholder": "e.g. johnsmith@example.com"
           },
           "url": {
-            "label": "URL"
+            "label": "URL",
+            "placeholder": "e.g. http://example.com/contact"
           }
         },
         "license": {
           "label": "License",
           "name": {
-            "label": "Name"
+            "label": "Name",
+            "placeholder": "e.g. MIT"
           },
           "url": {
-            "label": "URL"
+            "label": "URL",
+            "placeholder": "e.g. https://mit-license.org/"
           }
         }
       },
       "host": {
         "label": "Host settings",
         "host": {
-          "label": "Hostname"
+          "label": "Hostname",
+          "placeholder": "e.g. example.com"
         },
         "basePath": {
           "label": "Base path",
@@ -341,7 +375,8 @@
       },
       "label": "Response #{{index}} for HTTP {{-httpStatus}}",
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "Describe the response here."
       },
       "schema": {
         "label": "Response body"
@@ -368,7 +403,8 @@
         }
       },
       "name": {
-        "label": "Name"
+        "label": "Name",
+        "placeholder": "Enter name..."
       },
       "in": {
         "label": "Location",
@@ -381,7 +417,8 @@
         }
       },
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "Enter description..."
       },
       "required": {
         "label": "Required",
@@ -443,10 +480,12 @@
           }
         },
         "title": {
-          "label": "Title"
+          "label": "Title",
+          "placeholder": "Enter title..."
         },
         "description": {
-          "label": "Description"
+          "label": "Description",
+          "placeholder": "Enter description..."
         },
         "items": {
           "label": "Array item"

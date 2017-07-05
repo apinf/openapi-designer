@@ -11,6 +11,7 @@ import $ from 'jquery';
 @inject(I18N, EventAggregator)
 export class App {
   constructor(i18n, ea) {
+    this.split(window.localStorage.split || 'both');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
@@ -50,6 +51,13 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+  }
+
+  split(type) {
+    this.showEditor = type !== 'preview';
+    this.showPreview = type !== 'editor';
+    this.showBoth = type === 'both';
+    window.localStorage.split = type;
   }
 
   attached() {
