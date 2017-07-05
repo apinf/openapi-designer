@@ -109,7 +109,34 @@ export class App {
     this.closePasteImport();
   }
 
-  download(type) {
+  download(type, force) {
+    if (!force) {
+      let errors = {};
+      this.forms.revalidate(errors);
+      errors = Object.entries(errors);
+      if (errors.length > 0) {
+        const modal = $(this.downloadErrorModal);
+        modal.attr('data-dl-type', type);
+        modal.removeClass('hidden');
+        const content = $(this.downloadErrorContent);
+        content.empty();
+        for (const [location, error] of errors) {
+          const locationEntry = $('<div></div>').text(location).addClass('location');
+          const errorEntry = $('<div></div>').text(error).addClass('message');
+          $('<div></div>')
+            .addClass('error')
+            .append(locationEntry)
+            .append(errorEntry)
+            .appendTo(content);
+        }
+        return;
+      }
+    } else {
+      $(this.downloadErrorModal).addClass('hidden');
+    }
+    if (!type) {
+      type = $(this.downloadErrorModal).attr('data-dl-type');
+    }
     let data;
     if (type === 'json') {
       data = this.json;

@@ -184,6 +184,20 @@
     </div>
   </div>
 
+  <div class="modal-wrapper hidden" data-dl-type="json" ref="downloadErrorModal" click.delegate="closeDownloadError()">
+    <div class="modal" click.delegate="$event.stopPropagation()">
+      <div class="modal-header" t="modal.download-error.title">Validtion errors detected</div>
+      <div class="modal-content download-error-modal" ref="downloadErrorContent">
+
+      </div>
+      <div class="modal-footer">
+        <button class="download-error-modal-download" t="modal.download-error.download-anyway" click.delegate="download(undefined, true)">
+          Download anyway
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-wrapper hidden" ref="pasteModal" click.delegate="closePasteImport()">
     <div class="modal" click.delegate="$event.stopPropagation()">
       <div class="modal-header" t="modal.paste.title">Import API specification</div>
