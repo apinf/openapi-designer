@@ -89,7 +89,30 @@ export const enumItem = {
   'isCollapsible': false,
   'typeKey': '',
   'setValueListeners': [
-    (field, newValue) => field.setType(typeof newValue)
+    (field, newValue) => {
+      if (!newValue) {
+        return;
+      }
+      switch (typeof newValue) {
+      case 'number':
+        if (Number.isInteger(newValue)) {
+          field.setType('integer');
+        } else {
+          field.setType('number');
+        }
+        break;
+      case 'object':
+        if (Array.isArray(newValue)) {
+          field.setType('array');
+        }
+        // falls through
+      case 'null':
+        field.setType('string');
+        break;
+      default:
+        field.setType(typeof newValue);
+      }
+    }
   ],
   'types': {
     'string': {
