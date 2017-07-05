@@ -54,7 +54,7 @@
     "enum": {
       "label": "Allowed values",
       "item": {
-        "label": "Allowed value", 
+        "label": "Allowed value",
         "string": {
           "label": "String"
         },
@@ -69,6 +69,7 @@
         },
         "array": {
           "label": "Array"
+      "label": "Allowed values",
         }
       }
     },
@@ -94,7 +95,7 @@
           },
           "summary": {
             "label": "Summary",
-            "placeholder": "Enter a short summary for what the operation does"
+            "placeholder": "Enter a short summary for what the operation does."
           },
           "description": {
             "label": "Description",
@@ -195,10 +196,12 @@
               "item": {
                 "label": "Scope #{{index}}",
                 "key": {
-                  "label": "Key"
+                  "label": "Key",
+                  "placeholder": "e.g. pets:read"
                 },
                 "description": {
-                  "label": "Description"
+                  "label": "Description",
+                  "placeholder": "Describe e.g. what this OAuth2 scope grants access to."
                 }
               }
             }
@@ -225,7 +228,7 @@
               "newItemText": "New OAuth2 Scope",
               "item": {
                 "label": "OAuth2 scope #{{index}}",
-                "placeholder": "e.g. "
+                "placeholder": "e.g. pets:read"
               }
             }
           }
@@ -242,7 +245,7 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Describe what is tagged with this"
+          "placeholder": "Describe what is tagged with this."
         }
       }
     },
@@ -269,7 +272,7 @@
         "label": "Basic info",
         "title": {
           "label": "Title",
-          "placeholder": "e.g. example API"
+          "placeholder": "e.g. Example API"
         },
         "version": {
           "label": "Version",
