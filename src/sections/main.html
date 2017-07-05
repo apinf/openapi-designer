@@ -1,0 +1,7 @@
+<template>
+	<div class="main" if.bind="activeForm">
+    <compose view="./about.html" containerless></compose>
+    <compose class="form" view-model.bind="activeForm" if.bind="activeForm !== 'about'"></compose>
+    <div class="preview" textcontent.one-way="currentFormJSON" if.bind="activeForm !== 'about'"></div>
+  </div>
+</template>

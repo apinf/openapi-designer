@@ -1,0 +1,29 @@
+.error {
+  margin-top: 3rem;
+
+  text-align: center;
+}
+
+.error-data {
+  display: inline-block;
+
+  max-width: 30rem;
+
+  text-align: left;
+
+  > .message {
+    margin-bottom: 1rem;
+
+    font-family: monospace;
+  }
+
+  > .stacktrace {
+    white-space: pre-line;
+
+    font-family: monospace;
+  }
+
+  > .text {
+    margin: 2rem 0;
+  }
+}
