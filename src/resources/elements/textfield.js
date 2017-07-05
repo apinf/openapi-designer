@@ -62,9 +62,13 @@ export class Textfield extends Field {
 
   /**
    * @inheritdoc
-   * @return {String} The text in the input field.
+   * @return {String|Number} The text in the input field. Returns as a Number if
+   *                         the format has been set to number.
    */
   getValue() {
+    if (this.format === 'number') {
+      return +this.value;
+    }
     return this.value;
   }
 
