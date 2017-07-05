@@ -73,7 +73,7 @@ const operationChildren = {
     'addIndexToChildLabel': false,
     'hideValueIfEmpty': false,
     'newItemText': 'New Response',
-    'validation': ['required'],
+    'validation': ['requiredIfParent'],
     'keyField': 'status',
     'item': response
   },
