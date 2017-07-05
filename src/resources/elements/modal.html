@@ -1,0 +1,9 @@
+<template>
+	<div class="modal-wrapper hidden" ref="wrapper" click.delegate="close()">
+    <div class="modal" click.delegate="$event.stopPropagation()">
+      <div class="modal-header"><slot name="header"></slot></div>
+      <div class="modal-content"><slot name="content"></slot></div>
+      <div class="modal-footer"><slot name="footer"></slot></div>
+    </div>
+  </div>
+</template>

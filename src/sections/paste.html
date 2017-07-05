@@ -1,0 +1,15 @@
+<template>
+	<modal view-model.ref="pasteModal">
+    <div slot="header" t="modal.paste.title">
+      Import OpenAPI specification
+    </div>
+    <div slot="content">
+      <textarea ref="pasteImportData" t="[placeholder]modal.paste.placeholder"></textarea>
+    </div>
+    <div slot="footer">
+      <button class="paste-modal-do" t="modal.paste.do" click.delegate="importPasted()">
+        Import
+      </button>
+    </div>
+  </modal>
+</template>
