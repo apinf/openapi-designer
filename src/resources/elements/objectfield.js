@@ -75,11 +75,11 @@ export class Objectfield extends Parentfield {
   }
 
   /** @inheritdoc */
-  revalidate() {
-    const validation = super.revalidate();
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
     if (this.hasLegend) {
       for (const [index, child] of Object.entries(this.legendChildren)) {
-        validation[index] = child.revalidate();
+        validation[index] = child.revalidate(errorCollection);
         if (!validation[index].valid || validation[index].childrenValid === false) {
           validation.childrenValid = false;
         }

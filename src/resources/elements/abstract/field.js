@@ -221,8 +221,11 @@ export class Field {
    * @return {Object} The validation result of this field along with all its
    *                  children nested.
    */
-  revalidate() {
+  revalidate(errorCollection) {
     this._validationResult = this.validate();
+    if (errorCollection && !this._validationResult.valid) {
+      errorCollection[this.path] = this._validationResult.error;
+    }
     return this._validationResult;
   }
 

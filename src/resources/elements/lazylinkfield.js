@@ -40,10 +40,10 @@ export class LazyLinkfield extends Field {
   }
 
   /** @inheritdoc */
-  revalidate() {
-    const validation = super.revalidate();
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
     if (this.child) {
-      validation.child = this.child.revalidate();
+      validation.child = this.child.revalidate(errorCollection);
     } else {
       validation.child = { valid: true };
     }

@@ -75,11 +75,11 @@ export class Parentfield extends Collapsiblefield {
   }
 
   /** @inheritdoc */
-  revalidate() {
-    const validation = super.revalidate();
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
     validation.childrenValid = true;
     for (const [index, child] of Object.entries(this._children)) {
-      validation[index] = child.revalidate();
+      validation[index] = child.revalidate(errorCollection);
       if (!validation[index].valid || validation[index].childrenValid === false) {
         validation.childrenValid = false;
       }
