@@ -48,13 +48,13 @@
       },
       "url": {
         "label": "URL",
-        "placeholder": "e.g. http://example.com/api_documentation"
+        "placeholder": "e.g. http://example.com/docs"
       }
     },
     "enum": {
       "label": "Allowed values",
       "item": {
-        "label": "Allowed value",
+        "label": "Allowed value", 
         "string": {
           "label": "String"
         },
@@ -97,7 +97,8 @@
             "placeholder": "Enter a short summary for what the operation does"
           },
           "description": {
-            "label": "Description"
+            "label": "Description",
+            "placeholder": "Enter a thorough description of the operation here."
           },
           "deprecated": {
             "label": "Deprecated?"
@@ -144,14 +145,14 @@
             "label": "Basic",
             "description": {
               "label": "Description",
-              "placeholder": "e.g. a basic security scheme"
+              "placeholder": "Describe the security scheme here."
             }
           },
           "apiKey": {
             "label": "API key",
             "description": {
               "label": "Description",
-              "placeholder": "e.g. an API key security scheme"
+              "placeholder": "Describe the security scheme here."
             },
             "name": {
               "label": "Name",
@@ -220,10 +221,11 @@
             },
             "scopes": {
               "label": "Scopes",
+              "helpText": "The scope names tell what scope names are required for the execution. Must be empty for non-oauth2 type security schemes.",
               "newItemText": "New OAuth2 Scope",
               "item": {
                 "label": "OAuth2 scope #{{index}}",
-                "placeholder": "e.g. access user data"
+                "placeholder": "e.g. "
               }
             }
           }
@@ -236,10 +238,11 @@
         "label": "Tag",
         "name": {
           "label": "Name",
-          "placeholder": "e.g. user"
+          "placeholder": "e.g. user_operations"
         },
         "description": {
-          "label": "Describe what is tagged with this"
+          "label": "Description",
+          "placeholder": "Describe what is tagged with this"
         }
       }
     },
@@ -355,7 +358,8 @@
       },
       "label": "Response #{{index}} for HTTP {{-httpStatus}}",
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "Describe the response here."
       },
       "schema": {
         "label": "Response body"
@@ -382,7 +386,8 @@
         }
       },
       "name": {
-        "label": "Name"
+        "label": "Name",
+        "placeholder": "Enter name..."
       },
       "in": {
         "label": "Location",
@@ -395,7 +400,8 @@
         }
       },
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "Enter description..."
       },
       "required": {
         "label": "Required",
@@ -457,10 +463,12 @@
           }
         },
         "title": {
-          "label": "Title"
+          "label": "Title",
+          "placeholder": "Enter title..."
         },
         "description": {
-          "label": "Description"
+          "label": "Description",
+          "placeholder": "Enter description..."
         },
         "items": {
           "label": "Array item"
