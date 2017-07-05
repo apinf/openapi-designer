@@ -48,7 +48,8 @@
   "validation": {
     "required-is-empty": "This field is required!",
     "invalid-hostname": "Invalid hostname!",
-    "invalid-email": "Invalid email!"
+    "invalid-email": "Invalid email!",
+    "invalid-http-status": "Invalid HTTP status code!"
   },
   "form": {
     "global": {

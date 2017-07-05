@@ -13,7 +13,7 @@ export const response = {
     (field, newValue) =>
       field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'response')
   ],
-  'validation': ['noDuplicateKeys'],
+  'validation': ['noDuplicateKeys', 'keyHTTPStatus'],
   'types': {
     'response': {
       'i18n': {
@@ -74,6 +74,7 @@ namedResponse.i18n.interpolations = {
 namedResponse.i18n.keys = {
   'label': 'form.global-definitions.responses.item.label'
 };
+namedResponse.validation = ['noDuplicateKeys'];
 
 export const responses = {
   'type': 'array',

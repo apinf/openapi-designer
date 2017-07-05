@@ -92,6 +92,16 @@ export class Validation {
     return { valid: true };
   }
 
+  keyHTTPStatus(field) {
+    if (/^[1-5]{1}[0-9]{2}$/.exec(field.key) === null) {
+      return {
+        valid: false,
+        error: this.i18n.tr('validation.invalid-http-status')
+      };
+    }
+    return { valid: true };
+  }
+
   keyPath(field) {
     if (!field.key.startsWith('/')) {
       field.key = `/${field.key}`;
