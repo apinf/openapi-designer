@@ -1,6 +1,10 @@
 <template>
-	<div class="main ${showEditor ? 'has-editor' : ''} ${showPreview ? 'has-preview' : ''}" if.bind="activeForm">
-    <compose view="./about.html" if.bind="showEditor" containerless></compose>
+	<div class="main
+				${showEditor ? 'has-editor' : ''}
+				${showPreview ? 'has-preview' : ''}
+				${showBoth ? 'has-both' : ''}"
+			if.bind="activeForm">
+    <compose view="./about.html" containerless></compose>
     <compose class="form" view-model.bind="activeForm" if.bind="showEditor && activeForm !== 'about'"></compose>
     <div class="preview" textcontent.one-way="currentFormJSON" if.bind="showPreview && activeForm !== 'about'"></div>
   </div>
