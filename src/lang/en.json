@@ -11,6 +11,11 @@
       "definitions": "Definitions"
     },
     "actions": {
+      "split": {
+        "editor": "Editor only",
+        "both": "Split view",
+        "preview": "Preview only"
+      },
       "delete": "Delete data",
       "download": {
         "json": "JSON",

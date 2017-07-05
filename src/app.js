@@ -10,6 +10,7 @@ import $ from 'jquery';
 @inject(I18N, EventAggregator)
 export class App {
   constructor(i18n, ea) {
+    this.split(window.localStorage.split || 'both');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     // Allow access from browser console
@@ -48,6 +49,12 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+  }
+
+  split(type) {
+    this.showEditor = type !== 'preview';
+    this.showPreview = type !== 'editor';
+    window.localStorage.split = type;
   }
 
   attached() {

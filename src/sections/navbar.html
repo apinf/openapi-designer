@@ -23,6 +23,22 @@
     </a>
 
     <div class="actions">
+      <div class="split dropdown">
+        <button class="button">
+          <img src="res/split.svg" alt="Delete"/>
+        </button>
+        <div class="content">
+          <a href="javascript:void(0)" click.delegate="split('editor')" t="nav.actions.split.editor">
+						Editor only
+					</a>
+          <a href="javascript:void(0)" click.delegate="split('both')" t="nav.actions.split.both">
+						Split view
+					</a>
+          <a href="javascript:void(0)" click.delegate="split('preview')" t="nav.actions.split.preview">
+						Preview only
+					</a>
+        </div>
+      </div>
       <div class="delete dropdown">
         <button class="button">
           <img src="res/trash.svg" alt="Delete"/>
