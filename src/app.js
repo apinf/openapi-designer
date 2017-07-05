@@ -54,6 +54,7 @@ export class App {
   split(type) {
     this.showEditor = type !== 'preview';
     this.showPreview = type !== 'editor';
+    this.showBoth = type === 'both';
     window.localStorage.split = type;
   }
 

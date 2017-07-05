@@ -1,12 +1,14 @@
 .main {
   margin: 1rem 1.5rem 5rem;
 
-  &.has-preview:not(.has-editor) > .preview {
-    width: 100%;
-  }
+  &.has-preview:not(.has-editor) > .preview,
+      &.has-editor:not(.has-preview) > .form {
+    display: block;
+    float: none;
 
-  &.has-editor:not(.has-preview) > .form {
     width: 100%;
+    max-width: 50rem;
+    margin: auto;
   }
 
   .form {
