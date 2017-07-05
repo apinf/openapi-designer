@@ -1,4 +1,4 @@
-.nav {
+.nav-wrapper {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -8,6 +8,13 @@
   border-bottom: 1px solid lightgray;
   background-color: white;
 
+  &.no-split-view > .nav {
+    max-width: 50rem;
+    margin: auto;
+  }
+}
+
+.nav-wrapper > .nav {
   > .nav-link {
     display: inline;
 
