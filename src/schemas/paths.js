@@ -109,7 +109,7 @@ export const paths = {
       (field, newValue) =>
         field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'operation')
     ],
-    'validation': ['keyPath', 'noDuplicateKeys'],
+    'validation': ['keyPath', 'noDuplicateKeys', 'pathParametersExistsInAllOperations'],
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {

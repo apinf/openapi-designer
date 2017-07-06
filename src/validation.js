@@ -102,6 +102,76 @@ export class Validation {
     return { valid: true };
   }
 
+  pathParametersExistsInAllOperations(field) {
+    if (field.getType() !== 'operation') {
+      // We don't need to check references here, they're checked wherever the
+      // reference is pointing.
+      return { valid: true };
+    }
+
+    const parseParamRef = target => {
+      // Matches `#/parameters/<paramName>`
+      const [, paramName] = /^\#\/parameters\/(.+)$/.exec(target);
+      if (!paramName) {
+        return undefined;
+      }
+      return field.resolveRef(`/global-definitions/${paramName}`).getValue();
+    };
+    const isParamInArray = (paramsField, lookingForParam) => {
+      for (const arrayParam of paramsField.children) {
+        let paramData = arrayParam.getValue();
+        if (paramData.$ref) {
+          paramData = parseParamRef(paramData.$ref);
+          // No handling for nested $refs due to risk of circular reference.
+          if (!paramData || paramData.$ref) {
+            continue;
+          }
+        }
+        if (paramData.in === 'path' && paramData.name === lookingForParam) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const path = field.key;
+    // The outer path field is a Typefield, but we only need the inner non-reference
+    // Path field.
+    field = field.child;
+
+    const matches = path.match(/\{([^}]+?)\}/g);
+    if (!matches) {
+      // No parameters defined.
+      return { valid: true };
+    }
+
+    const pathwideParams = field.children.parameters;
+    ParamsInPath: for (const match of matches) {
+      // Remove first and last character (the curly braces)
+      const parameter = match.slice(1, -1);
+      if (isParamInArray(pathwideParams, parameter)) {
+        continue ParamsInPath;
+      }
+      Methods: for (const [method, child] of Object.entries(field.children)) {
+        if (method === 'parameters' || child.isEmpty()) {
+          continue Methods;
+        }
+
+        if (!isParamInArray(child.children.parameters, parameter)) {
+          return {
+            valid: false,
+            error: this.i18n.tr('validation.param-not-implemented', {
+              parameter,
+              method: method.toUpperCase()
+            })
+          };
+        }
+      }
+      return { valid: true };
+    }
+    return { valid: true };
+  }
+
   keyPath(field) {
     if (!field.key.startsWith('/')) {
       field.key = `/${field.key}`;

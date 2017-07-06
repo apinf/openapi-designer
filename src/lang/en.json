@@ -49,7 +49,8 @@
     "required-is-empty": "This field is required!",
     "invalid-hostname": "Invalid hostname!",
     "invalid-email": "Invalid email!",
-    "invalid-http-status": "Invalid HTTP status code!"
+    "invalid-http-status": "Invalid HTTP status code!",
+    "param-not-implemented": "The path parameter {{parameter}} has not been implemented in HTTP {{method}}"
   },
   "form": {
     "global": {
