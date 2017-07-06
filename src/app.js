@@ -12,6 +12,7 @@ import $ from 'jquery';
 export class App {
   @bindable
   language = window.localStorage.language || 'en';
+  enableBranding = true;
 
   constructor(i18n, ea) {
     this.split(window.localStorage.split || 'split');
