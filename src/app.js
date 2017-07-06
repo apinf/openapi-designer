@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
@@ -10,6 +10,9 @@ import $ from 'jquery';
 
 @inject(I18N, EventAggregator)
 export class App {
+  @bindable
+  language = window.localStorage.language || 'en';
+
   constructor(i18n, ea) {
     this.split(window.localStorage.split || 'both');
     Field.internationalizer = i18n;
@@ -51,6 +54,11 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+  }
+
+  languageChanged() {
+    window.localStorage.language = this.language;
+    location.reload();
   }
 
   split(type) {
