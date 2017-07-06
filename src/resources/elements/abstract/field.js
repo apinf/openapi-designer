@@ -329,6 +329,10 @@ export class Field {
     if (!this.parent) {
       return this.label;
     }
+    const label = this.label;
+    if (!label || this.parent.type === 'selectable') {
+      return this.parent.labelPath;
+    }
     return `${this.parent.labelPath} > ${this.label}`;
   }
 
