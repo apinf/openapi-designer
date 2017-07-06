@@ -23,6 +23,7 @@ const parameterFormat = {
   'type': 'option',
   'format': 'dropdown',
   'choices': typeFormatChoices,
+  'columns': '4',
   'i18n': {
     'path': 'form.types.item.format'
   }
