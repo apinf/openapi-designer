@@ -8,31 +8,26 @@
       "security": "Security",
       "tags": "Tags",
       "paths": "Paths",
-      "definitions": "Definitions"
+      "definitions": "Definitions",
+      "output-editor": "Editable output"
     },
     "actions": {
       "split": {
         "editor": "Editor only",
-        "both": "Split view",
-        "preview": "Preview only"
+        "split": "Editor & Preview",
+        "output": "Editable output"
       },
       "delete": "Delete data",
       "download": {
         "json": "JSON",
         "yaml": "YAML"
-      },
-      "import": {
-        "paste": "Paste",
-        "file": "Choose file"
       }
     }
   },
+  "output-editor": {
+    "save": "Save changes"
+  },
   "modal": {
-    "paste": {
-      "title": "Import OpenAPI document",
-      "placeholder": "Paste your OpenAPI document here...",
-      "do": "Import"
-    },
     "download-error": {
       "title": "Validation errors detected!",
       "cancel": "Cancel",

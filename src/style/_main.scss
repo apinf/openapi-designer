@@ -1,15 +1,45 @@
 .main {
   margin: 1rem 1.5rem 5rem;
 
-  &.has-preview:not(.has-editor) > .preview,
-      &.has-editor:not(.has-preview) > .form,
-      &:not(.has-both) > .about {
+  &.has-editor:not(.split-view) > .form,
+      &:not(.split-view) > .about,
+      > .output-editor {
     display: block;
     float: none;
 
     width: 100%;
     max-width: 60rem;
     margin: auto;
+  }
+
+  .output-editor {
+    textarea {
+      width: 100%;
+      height: 100%;
+
+      resize: vertical;
+
+      font-family: monospace !important;
+    }
+
+    .actions {
+      margin-top: .5rem;
+
+      .save {
+        float: right;
+
+        padding: .5rem 2rem;
+
+        text-transform: uppercase;
+
+        border: none;
+        background-color: $main-color;
+
+        &:hover {
+          background-color: $dark-color;
+        }
+      }
+    }
   }
 
   .form {

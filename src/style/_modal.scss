@@ -83,32 +83,6 @@
   }
 }
 
-.paste-modal {
-  textarea {
-    width: 100%;
-    height: 50vh;
-
-    font-family: monospace !important;
-  }
-
-  .download {
-    display: block;
-
-    margin-left: auto;
-    padding: .5rem 1.5rem;
-
-    border: none;
-    border-radius: .25rem;
-    background-color: #FAC51E;
-
-    font-size: 1rem;
-
-    &:hover:not(.open) {
-      background-color: #F99B1A;
-    }
-  }
-}
-
 .download-error {
   .data {
     line-height: 1.5;

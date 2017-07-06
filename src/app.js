@@ -14,7 +14,7 @@ export class App {
   language = window.localStorage.language || 'en';
 
   constructor(i18n, ea) {
-    this.split(window.localStorage.split || 'both');
+    this.split(window.localStorage.split || 'split');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
@@ -49,7 +49,7 @@ export class App {
       } else {
         return;
       }
-      $('.nav > .nav-link.open').removeClass('open');
+      $('.nav > .editor-nav > .nav-link.open').removeClass('open');
       $(`#nav-${formID}`).addClass('open');
     };
 
@@ -62,9 +62,9 @@ export class App {
   }
 
   split(type) {
-    this.showEditor = type !== 'preview';
-    this.showPreview = type !== 'editor';
-    this.showBoth = type === 'both';
+    this.showEditor = type === 'editor' || type === 'split';
+    this.showOutput = type === 'output';
+    this.splitView = type === 'split';
     window.localStorage.split = type;
   }
 
@@ -106,24 +106,6 @@ export class App {
       }, false);
       reader.readAsText(file);
     });
-  }
-
-  importPasted() {
-    const rawData = $(this.pasteImportData).val();
-    let data;
-    try {
-      data = YAML.parse(rawData);
-    } catch (_) {
-      try {
-        data = JSON.parse(rawData);
-      } catch (ex) {
-        console.error(ex);
-        return;
-        // Oh noes!
-      }
-    }
-    this.forms.setValue(data);
-    this.closePasteImport();
   }
 
   download(type, force) {

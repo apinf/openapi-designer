@@ -15,7 +15,11 @@
 }
 
 .nav-wrapper > .nav {
-  > .nav-link {
+  > .nav-links {
+    display: inline-block;
+  }
+
+  > .nav-links > .nav-link {
     display: inline;
 
     box-sizing: border-box;
@@ -62,7 +66,23 @@
       height: 2rem;
     }
 
-    > .dropdown > .content {
+    > .button {
+      display: block;
+
+      padding: .75rem 1rem;
+
+      transform: translateX(calc(2rem - 100%));
+      white-space: nowrap;
+      text-decoration: none;
+
+      color: black;
+
+      &:hover {
+        background-color: #EAEAEA;
+      }
+    }
+
+    > .dropdown > .content, > .button {
       transform: translateX(calc(2rem - 100%));
       white-space: nowrap;
     }

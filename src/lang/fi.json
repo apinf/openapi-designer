@@ -15,18 +15,7 @@
       "download": {
         "json": "JSON",
         "yaml": "YAML"
-      },
-      "import": {
-        "paste": "Liitä",
-        "file": "Valitse tiedosto"
       }
-    }
-  },
-  "modal": {
-    "paste": {
-      "title": "Tuo OpenAPI-asiakirja",
-      "placeholder": "Liitä OpenAPI-asiakirjasi tähän...",
-      "do": "Tuo dokumentti"
     }
   },
   "error": {
