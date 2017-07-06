@@ -30,7 +30,7 @@
   }
 
   &.validation-error {
-    label, .title {
+    > label, > .title {
       color: #9F3A38;
     }
   }
