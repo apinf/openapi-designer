@@ -175,6 +175,7 @@ export class Validation {
     // Path field.
     field = field.child;
 
+    // Matches all path parameters: {paramName}
     const matches = path.match(/\{([^}]+?)\}/g);
     if (!matches) {
       // No parameters defined.
@@ -217,8 +218,10 @@ export class Validation {
 
   hostname(field) {
     const val = field.getValue();
+    // Loosely matches IPv4 addresses and hostnames. Port is allowed but optional.
     if (!val || /^[^\.\s\n:]+(\.[^\.\s\n:]+)+(\:[0-9]{1,5})?$/.exec(val) !== null) {
       return { valid: true };
+    // Loosely matches IPv6 addresses. Port is allowed but optional.
     } else if (/^\[?([0-9A-Fa-f]{0,4}:?)+\]?(\:[0-9]{1,5})?$/.exec(val) !== null) {
       return { valid: true };
     }
@@ -230,6 +233,7 @@ export class Validation {
 
   email(field) {
     const val = field.getValue();
+    // Very loosely matches email addresses: `name@host`
     if (!val || /^\S+@\S+$/.exec(val) !== null) {
       return { valid: true };
     }
