@@ -31,7 +31,7 @@
   },
   "error": {
     "title": "Hups!",
-    "body": "Näyttää siltä, että jokin on rikki.\nJoskus nämä ongelmat aiheutuvat epäkelvollisista OpenAPI-asiakirjoista välimuistissa. Jos näin on käynyt, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">tietojen poistamisen</a> pitäisi korjata ongelma.",
+    "body": "Näyttää siltä, että jokin on rikki.\nJoskus nämä ongelmat aiheutuvat epäkelvollisista OpenAPI-asiakirjoista välimuistissa. Jos näin on käynyt, <a href='javascript:$oai.delete()'>tietojen poistamisen</a> pitäisi korjata ongelma.",
     "data-title": "Virheen tiedot"
   },
   "footer-product-of": "Product of",

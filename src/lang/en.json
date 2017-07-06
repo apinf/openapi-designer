@@ -41,7 +41,7 @@
   },
   "error": {
     "title": "Uh oh!",
-    "body": "It seems like something is broken.\nSometimes these issues are caused by an invalid OpenAPI document in the cache. If this is the case, <a href=\"javascript:void(0)\" click.delegate=\"delete()\">deleting the data</a> should fix it.",
+    "body": "It seems like something is broken.\nSometimes these issues are caused by an invalid OpenAPI document in the cache. If this is the case, <a href='javascript:$oai.delete()'>deleting the data</a> should fix it.",
     "data-title": "Exception data"
   },
   "footer-product-of": "Product of",
