@@ -196,6 +196,7 @@ namedParameter.i18n.interpolations = {
 namedParameter.i18n.keys = {
   'label': 'form.global-definitions.parameters.item.label'
 };
+namedParameter.validation = ['noDuplicateKeys', 'keyRequired'];
 
 export const parameters = {
   'type': 'array',

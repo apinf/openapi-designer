@@ -75,7 +75,7 @@ namedResponse.i18n.interpolations = {
 namedResponse.i18n.keys = {
   'label': 'form.global-definitions.responses.item.label'
 };
-namedResponse.validation = ['noDuplicateKeys'];
+namedResponse.validation = ['noDuplicateKeys', 'keyRequired'];
 
 export const responses = {
   'type': 'array',

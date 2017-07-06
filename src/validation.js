@@ -19,6 +19,16 @@ export class Validation {
     return { valid: true };
   }
 
+  keyRequired(field) {
+    if (field.key.length === 0) {
+      return {
+        valid: false,
+        error: this.i18n.tr('validation.key-is-required')
+      };
+    }
+    return { valid: true };
+  }
+
   @listen('../')
   requiredIfParent(field) {
     if (field.isEmpty() && !field.parent.isEmpty()) {
