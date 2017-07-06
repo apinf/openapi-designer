@@ -425,7 +425,10 @@
       },
       "required": {
         "label": "Required",
-        "helpText": "Is this parameter required?"
+        "helpText": "Is this parameter required?",
+        "choices": {
+          "required": ""
+        }
       },
       "allowEmptyValue": {
         "label": "Allow empty value?"

@@ -34,6 +34,7 @@ export const response = {
               'label': 'form.response.schema.label'
             },
             'legendChildren/name': null,
+            'legendChildren/x-oad-type/validation': [],
             'legendChildren/x-oad-type/columns': 8
           }
         }

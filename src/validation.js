@@ -19,6 +19,16 @@ export class Validation {
     return { valid: true };
   }
 
+  requiredIfLegendTypeIsReference(field) {
+    if (field.isEmpty() && field.resolveRef('../x-oad-type').getValue() === 'reference') {
+      return {
+        valid: false,
+        error: this.i18n.tr('validation.required-is-empty')
+      };
+    }
+    return { valid: true };
+  }
+
   keyRequired(field) {
     if (field.key.length === 0) {
       return {
@@ -102,8 +112,24 @@ export class Validation {
     return { valid: true };
   }
 
+  @listen('../')
+  requiredTrueIfInPath(field) {
+    const locationField = field.resolveRef('../in');
+    if (!locationField) {
+      return { valid: true };
+    }
+    const location = locationField.getValue();
+    if (location === 'path' && !field.getValue()) {
+      return {
+        valid: false,
+        replacement: true
+      };
+    }
+    return { valid: true };
+  }
+
   keyHTTPStatus(field) {
-    if (/^[1-5]{1}[0-9]{2}$/.exec(field.key) === null) {
+    if (field.key !== 'default' && /^[1-5]{1}[0-9]{2}$/.exec(field.key) === null) {
       return {
         valid: false,
         error: this.i18n.tr('validation.invalid-http-status')

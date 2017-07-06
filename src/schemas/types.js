@@ -226,7 +226,7 @@ export const types = {
           'key': '#/definitions/${#/name}',
           'label': 'Type ${#/name}'
         }],
-        'validation': ['required'],
+        'validation': ['requiredIfLegendTypeIsReference'],
         'conditions': {
           '../x-oad-type': 'reference'
         }

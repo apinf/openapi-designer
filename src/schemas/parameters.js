@@ -131,7 +131,11 @@ export const parameter = {
         },
         'required': {
           'type': 'option',
-          'format': 'checkbox'
+          'format': 'checkbox',
+          'hideValueIfEmpty': false,
+          'checkboxFormat': 'simple',
+          'choices': ['required'],
+          'validation': ['requiredTrueIfInPath']
         },
         'schema': {
           'type': 'lazylink',
