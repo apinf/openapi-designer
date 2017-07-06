@@ -39,7 +39,7 @@ export class Validation {
     return { valid: true };
   }
 
-  @listen('../')
+  @listen('..')
   requiredIfParent(field) {
     if (field.isEmpty() && !field.parent.isEmpty()) {
       return {
@@ -50,7 +50,7 @@ export class Validation {
     return { valid: true };
   }
 
-  @listen('../')
+  @listen('..')
   noDuplicateKeys(field) {
     const parent = field.parent;
     if (parent.type !== 'array' || parent.format !== 'map') {
@@ -76,7 +76,7 @@ export class Validation {
     return { valid: true };
   }
 
-  @listen('../')
+  @listen('..')
   noDuplicateValues(field) {
     const parent = field.parent;
     if (parent.type !== 'array') {
@@ -112,7 +112,7 @@ export class Validation {
     return { valid: true };
   }
 
-  @listen('../')
+  @listen('..')
   requiredTrueIfInPath(field) {
     const locationField = field.resolveRef('../in');
     if (!locationField) {
