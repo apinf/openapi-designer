@@ -1,11 +1,19 @@
 <template>
   <div class="main
         ${showEditor ? 'has-editor' : ''}
-        ${showPreview ? 'has-preview' : ''}
-        ${showBoth ? 'has-both' : ''}"
+        ${splitView ? 'split-view' : ''}
+        ${showOutput ? 'has-output-editor' : ''}"
       if.bind="activeForm">
     <compose view="./about.html" containerless></compose>
     <compose class="form" view-model.bind="activeForm" if.bind="showEditor && activeForm !== 'about'"></compose>
-    <div class="preview" textcontent.one-way="currentFormJSON" if.bind="showPreview && activeForm !== 'about'"></div>
+    <div class="preview" textcontent.one-way="currentFormJSON" if.bind="splitView && activeForm !== 'about'"></div>
+    <div class="output-editor" if.bind="showOutput">
+      <textarea value.bind="json" rows="30"></textarea>
+      <div class="actions">
+        <button class="save" t="output-editor.save" click.delegate="importOutputEditor()">
+          Save changes
+        </button>
+      </div>
+    </div>
   </div>
 </template>
