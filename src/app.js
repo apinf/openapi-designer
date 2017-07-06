@@ -70,6 +70,7 @@ export class App {
   }
 
   importFile() {
+    delete(true);
     const fileInput = $('<input/>', { type: 'file' });
     fileInput.css({display: 'none'});
     fileInput.appendTo('body');
@@ -140,12 +141,17 @@ export class App {
     }
   }
 
-  delete() {
-    let userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
-    if (userInput === true) {
-      delete localStorage['openapi-v2-design'];
-      location.reload();
+  delete(force) {
+    if (!force) {
+      const userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
+      if (!userInput) {
+        return;
+      }
     }
+    const pointerlessSchema = $.extend(true, {}, schema);
+    this.forms = parseJSON('form', pointerlessSchema);
+    delete localStorage['openapi-v2-design'];
+    window.onhashchange();
   }
 
   getFormData() {
