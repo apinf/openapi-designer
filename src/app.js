@@ -108,24 +108,6 @@ export class App {
     });
   }
 
-  importPasted() {
-    const rawData = $(this.pasteImportData).val();
-    let data;
-    try {
-      data = YAML.parse(rawData);
-    } catch (_) {
-      try {
-        data = JSON.parse(rawData);
-      } catch (ex) {
-        console.error(ex);
-        return;
-        // Oh noes!
-      }
-    }
-    this.forms.setValue(data);
-    this.closePasteImport();
-  }
-
   download(type, force) {
     if (!force) {
       let errors = {};
