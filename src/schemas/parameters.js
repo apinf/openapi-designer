@@ -115,7 +115,8 @@ export const parameter = {
       'children': {
         'name': {
           'type': 'text',
-          'hideValueIfEmpty': false
+          'hideValueIfEmpty': false,
+          'validation': ['required']
         },
         'in': {
           'type': 'option',
@@ -174,6 +175,7 @@ export const parameter = {
             'key': '',
             'i18nKey': 'choose'
           }],
+          'validation': ['required'],
           'dataSources': [{
             'source': '/global-definitions/parameters',
             'key': '#/parameters/${#:key}',

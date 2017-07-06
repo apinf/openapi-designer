@@ -53,7 +53,8 @@ export const response = {
           'choices': [{
             'key': '',
             'i18nKey': 'choose'
-          }],
+          }]
+          'validation': ['required'],,
           'dataSources': [{
             'source': '/global-definitions/responses',
             'key': '#/responses/${#:key}',

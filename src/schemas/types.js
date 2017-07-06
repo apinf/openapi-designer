@@ -201,12 +201,14 @@ export const types = {
         'choices': [
           {'key': '', 'i18nKey': 'choose'},
           'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
-        ]
+        ],
+        'validation': ['required']
       },
       'name': {
         'type': 'text',
         'columns': '4',
-        'label': 'Enter key...'
+        'label': 'Enter key...',
+        'validation': ['required']
       }
     },
     'children': {
@@ -224,6 +226,7 @@ export const types = {
           'key': '#/definitions/${#/name}',
           'label': 'Type ${#/name}'
         }],
+        'validation': ['required'],
         'conditions': {
           '../x-oad-type': 'reference'
         }
