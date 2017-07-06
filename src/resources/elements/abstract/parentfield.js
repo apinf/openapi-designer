@@ -74,6 +74,19 @@ export class Parentfield extends Collapsiblefield {
     return undefined;
   }
 
+  /** @inheritdoc */
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
+    validation.childrenValid = true;
+    for (const [index, child] of Object.entries(this._children)) {
+      validation[index] = child.revalidate(errorCollection);
+      if (!validation[index].valid || validation[index].childrenValid === false) {
+        validation.childrenValid = false;
+      }
+    }
+    return validation;
+  }
+
   /**
    * @inheritdoc
    * @param {Boolean} [args.collapseManagement] Whether or not to automatically

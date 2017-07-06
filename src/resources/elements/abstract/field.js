@@ -79,7 +79,23 @@ export class Field {
    */
   setValueListeners = []
   /**
-   * I18n settings
+   * Validation settings.
+   * @type {Object}
+   */
+  validation = {}
+  /**
+   * Results of validating the current value of this field. Should be cleared
+   * whenever the value changes.
+   * @type {Object}
+   */
+  _validationResult = undefined
+  /**
+   * Function ID -> validation function mappings.
+   * @type {Object}
+   */
+  static validationFunctions = {};
+  /**
+   * I18n settings.
    * @type {Object}
    */
   i18n = {}
@@ -167,6 +183,55 @@ export class Field {
   }
 
   /**
+   * Get the latest validation result. If the value has changed since the last
+   * validation, this will revalidate the field before returning.
+   * @return {Object} The validation result.
+   */
+  get validationResult() {
+    if (!this._validationResult) {
+      this._validationResult = this.validate();
+    }
+    return this._validationResult;
+  }
+
+  /**
+   * Validate the value of this field.
+   * @return {Object} The validation result.
+   */
+  validate() {
+    for (const funcID of this.validation) {
+      const func = Field.validationFunctions[funcID];
+      if (!func) {
+        continue;
+      }
+      const result = func.call(Field.validationFunctions, this);
+      if (!result.valid) {
+        if (result.replacement) {
+          this.setValue(result.replacement);
+          return { valid: true };
+        }
+        return result;
+      }
+    }
+    return { valid: true };
+  }
+
+  /**
+   * Revalidate this field and its children.
+   * @return {Object} The validation result of this field along with all its
+   *                  children nested.
+   */
+  revalidate(errorCollection) {
+    this._validationResult = this.validate();
+    if (errorCollection && !this._validationResult.valid) {
+      // Remove first part from labelPath
+      const labelPath = this.labelPath.replace('form.label > ', '');
+      errorCollection[labelPath] = this._validationResult.error;
+    }
+    return this._validationResult;
+  }
+
+  /**
    * Initialize this field with the base data.
    * @param  {String} id                The index of this field.
    * @param  {Number} [args.columns=8]  The number of columns this field should
@@ -189,7 +254,8 @@ export class Field {
    *                                            I18n keys that should be replaced
    *                                            by another I18n path.
    * @param {Object} [args.i18n.interpolations] I18n interpolations.
-   * @return {Field}                    This field.
+   * @param {String[]} [args.validation]        Validation function IDs.
+   * @return {Field}   This field.
    */
   init(id, args = {}) {
     args = Object.assign({
@@ -199,7 +265,8 @@ export class Field {
       showValueInParent: true,
       hideValueIfEmpty: true,
       setValueListeners: [],
-      i18n: {}
+      i18n: {},
+      validation: []
     }, args);
     args.i18n = Object.assign({
       path: '',
@@ -218,6 +285,21 @@ export class Field {
     this.setValueListeners = args.setValueListeners;
     this.i18n = args.i18n;
     this.i18n.interpolations.index = '$index';
+    this.validation = [];
+    for (const funcID of args.validation) {
+      const func = Field.validationFunctions[funcID];
+      if (!func) {
+        console.error('Validator', funcID, 'not found!');
+        continue;
+      }
+      this.validation.push(funcID);
+      if (func.listen) {
+        for (const listenTarget of func.listen) {
+          this.resolveRef(listenTarget).addChangeListener(() =>
+            this._validationResult = undefined);
+        }
+      }
+    }
     this.type = this.constructor.TYPE;
     return this;
   }
@@ -229,6 +311,7 @@ export class Field {
   isEmpty() {
     return true;
   }
+
   /**
    * Recursively get an unique identifier for this field.
    */
@@ -237,6 +320,20 @@ export class Field {
       return this.id;
     }
     return `${this.parent.path}.${this.id}`;
+  }
+
+  /**
+   * Recursively get the path to this field with labels.
+   */
+  get labelPath() {
+    if (!this.parent) {
+      return this.label;
+    }
+    const label = this.label;
+    if (!label || this.parent.type === 'selectable') {
+      return this.parent.labelPath;
+    }
+    return `${this.parent.labelPath} > ${this.label}`;
   }
 
   /**
@@ -467,6 +564,7 @@ export class Field {
    * @param  {Field} field The field that changed.
    */
   onChange(field) {
+    this._validationResult = undefined;
     field = field || this;
     if (this.parent) {
       this.parent.onChange(field);
@@ -490,6 +588,7 @@ export class Field {
    * Called with {@link #setValue} to run listeners.
    */
   onSetValue(newValue) {
+    this._validationResult = undefined;
     for (const listener of this.setValueListeners) {
       if (typeof listener === 'function') {
         listener(this, newValue);

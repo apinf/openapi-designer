@@ -23,6 +23,7 @@ const parameterFormat = {
   'type': 'option',
   'format': 'dropdown',
   'choices': typeFormatChoices,
+  'columns': '4',
   'i18n': {
     'path': 'form.types.item.format'
   }
@@ -115,7 +116,8 @@ export const parameter = {
       'children': {
         'name': {
           'type': 'text',
-          'hideValueIfEmpty': false
+          'hideValueIfEmpty': false,
+          'validation': ['required']
         },
         'in': {
           'type': 'option',
@@ -129,7 +131,11 @@ export const parameter = {
         },
         'required': {
           'type': 'option',
-          'format': 'checkbox'
+          'format': 'checkbox',
+          'hideValueIfEmpty': false,
+          'checkboxFormat': 'simple',
+          'choices': ['required'],
+          'validation': ['requiredTrueIfInPath']
         },
         'schema': {
           'type': 'lazylink',
@@ -174,6 +180,7 @@ export const parameter = {
             'key': '',
             'i18nKey': 'choose'
           }],
+          'validation': ['required'],
           'dataSources': [{
             'source': '/global-definitions/parameters',
             'key': '#/parameters/${#:key}',
@@ -194,6 +201,7 @@ namedParameter.i18n.interpolations = {
 namedParameter.i18n.keys = {
   'label': 'form.global-definitions.parameters.item.label'
 };
+namedParameter.validation = ['noDuplicateKeys', 'keyRequired'];
 
 export const parameters = {
   'type': 'array',

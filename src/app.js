@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
 import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
+import {Validation} from './validation';
 import YAML from 'yamljs';
 import $ from 'jquery';
 
@@ -13,6 +14,7 @@ export class App {
     this.split(window.localStorage.split || 'both');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
+    Field.validationFunctions = new Validation(i18n);
     // Allow access from browser console
     window.$oai = this;
 
@@ -115,7 +117,23 @@ export class App {
     this.closePasteImport();
   }
 
-  download(type) {
+  download(type, force) {
+    if (!force) {
+      let errors = {};
+      this.forms.revalidate(errors);
+      this.downloadErrors = Object.entries(errors);
+      if (this.downloadErrors.length > 0) {
+        $(this.downloadErrorBox).attr('data-dl-type', type);
+        this.downloadErrorModal.open();
+        return;
+      }
+    } else {
+      this.downloadErrorModal.close();
+    }
+    this.downloadErrors = [];
+    if (!type) {
+      type = $(this.downloadErrorBox).attr('data-dl-type');
+    }
     let data;
     if (type === 'json') {
       data = this.json;

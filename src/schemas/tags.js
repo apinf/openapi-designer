@@ -8,7 +8,8 @@ export const tags = {
     'label': 'Tag',
     'children': {
       'name': {
-        'type': 'text'
+        'type': 'text',
+        'validation': ['required']
       },
       'description': {
         'type': 'textarea'

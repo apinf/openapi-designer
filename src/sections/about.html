@@ -1,45 +1,45 @@
 <template>
-	<div class="about" if.bind="activeForm === 'about'">
-		<div class="about-inner">
-			<h3>What is OpenAPI designer?</h3>
-			<p>
-				OpenAPI designer allows you to create and edit API design files.
-				It is a a form based editor for designing APIs.
-				It currently supports the <a href="http://swagger.io/">OpenAPI/Swagger</a> version 2.0.
-			</p>
+  <div class="about" if.bind="activeForm === 'about'">
+    <div class="about-inner">
+      <h3>What is OpenAPI designer?</h3>
+      <p>
+        OpenAPI designer allows you to create and edit API design files.
+        It is a a form based editor for designing APIs.
+        It currently supports the <a href="http://swagger.io/">OpenAPI/Swagger</a> version 2.0.
+      </p>
 
-			<h3>Why use OpenAPI designer?</h3>
-			<p>
-				Developers can get started more easily if they can view an API design document and can try out the API calls.
-				API designers can share the design file and get feedback from other stakeholders. This facilitates collaborative API design process.
-			</p>
-			<p>
-				Coding skills and understanding of JSON/YAML is not required for using the OpenAPI designer.
-				The UI guides the user through the process of creating the required information.
-			</p>
+      <h3>Why use OpenAPI designer?</h3>
+      <p>
+        Developers can get started more easily if they can view an API design document and can try out the API calls.
+        API designers can share the design file and get feedback from other stakeholders. This facilitates collaborative API design process.
+      </p>
+      <p>
+        Coding skills and understanding of JSON/YAML is not required for using the OpenAPI designer.
+        The UI guides the user through the process of creating the required information.
+      </p>
 
-			<h3>How to use it?</h3>
-			<p>
-				When the editor is opened, there is an empty form. The design file can be created by adding paths, types, operations and parameters.
-				Types, Parameters, Operations and Tags can be designed globally and referred to under Paths.
-				You can download the designed file as JSON or YAML.
-				The downloaded file can be viewed in viewers such as <a href="http://swagger.io/swagger-ui/">Swagger UI</a>.
-			</p>
-			<p>
-				Future enhancements include importing a pre-existing design file or modifications and saving the design file to <a href="https://openapi.space">OpenAPI space</a>.
-				OpenAPI <a href="https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md">version 3.0</a> support is also on the roadmap.
-			</p>
+      <h3>How to use it?</h3>
+      <p>
+        When the editor is opened, there is an empty form. The design file can be created by adding paths, types, operations and parameters.
+        Types, Parameters, Operations and Tags can be designed globally and referred to under Paths.
+        You can download the designed file as JSON or YAML.
+        The downloaded file can be viewed in viewers such as <a href="http://swagger.io/swagger-ui/">Swagger UI</a>.
+      </p>
+      <p>
+        Future enhancements include saving the design file to <a href="https://openapi.space">OpenAPI space</a>.
+        OpenAPI <a href="https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md">version 3.0</a> support is also on the roadmap.
+      </p>
 
-			<h3>More information</h3>
-			<p>
-				Visit the <a href="https://github.com/apinf/openapi-designer">project repository</a> in Github
-			</p>
+      <h3>More information</h3>
+      <p>
+        Visit the <a href="https://github.com/apinf/openapi-designer">project repository</a> in Github
+      </p>
 
-			<!--<h3>Temporary language changer</h3>
-			<p>
-				<a href="javascript:void(0)" click.delegate="setLanguage('fi')">Finnish</a>
-				<a href="javascript:void(0)" click.delegate="setLanguage('en')">English</a>
-			</p>-->
-		</div>
-	</div>
+      <!--<h3>Temporary language changer</h3>
+      <p>
+        <a href="javascript:void(0)" click.delegate="setLanguage('fi')">Finnish</a>
+        <a href="javascript:void(0)" click.delegate="setLanguage('en')">English</a>
+      </p>-->
+    </div>
+  </div>
 </template>

@@ -73,6 +73,7 @@ const operationChildren = {
     'addIndexToChildLabel': false,
     'hideValueIfEmpty': false,
     'newItemText': 'New Response',
+    'validation': ['requiredIfParent'],
     'keyField': 'status',
     'item': response
   },
@@ -108,6 +109,7 @@ export const paths = {
       (field, newValue) =>
         field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'operation')
     ],
+    'validation': ['keyPath', 'noDuplicateKeys', 'pathParametersExistsInAllOperations'],
     'keyKey': 'name',
     'keyPlaceholder': 'Enter path...',
     'types': {

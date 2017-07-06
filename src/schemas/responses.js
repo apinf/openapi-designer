@@ -13,6 +13,7 @@ export const response = {
     (field, newValue) =>
       field.setType(newValue.hasOwnProperty('$ref') ? 'reference' : 'response')
   ],
+  'validation': ['noDuplicateKeys', 'keyHTTPStatus'],
   'types': {
     'response': {
       'i18n': {
@@ -21,7 +22,8 @@ export const response = {
       'type': 'object',
       'children': {
         'description': {
-          'type': 'textarea'
+          'type': 'textarea',
+          'validation': ['required']
         },
         'schema': {
           'type': 'lazylink',
@@ -32,6 +34,7 @@ export const response = {
               'label': 'form.response.schema.label'
             },
             'legendChildren/name': null,
+            'legendChildren/x-oad-type/validation': [],
             'legendChildren/x-oad-type/columns': 8
           }
         }
@@ -52,6 +55,7 @@ export const response = {
             'key': '',
             'i18nKey': 'choose'
           }],
+          'validation': ['required'],
           'dataSources': [{
             'source': '/global-definitions/responses',
             'key': '#/responses/${#:key}',
@@ -72,6 +76,7 @@ namedResponse.i18n.interpolations = {
 namedResponse.i18n.keys = {
   'label': 'form.global-definitions.responses.item.label'
 };
+namedResponse.validation = ['noDuplicateKeys', 'keyRequired'];
 
 export const responses = {
   'type': 'array',

@@ -83,26 +83,45 @@
   }
 }
 
-.paste-modal > textarea {
-  width: 100%;
-  height: 50vh;
+.paste-modal {
+  textarea {
+    width: 100%;
+    height: 50vh;
 
-  font-family: monospace !important;
+    font-family: monospace !important;
+  }
+
+  .download {
+    display: block;
+
+    margin-left: auto;
+    padding: .5rem 1.5rem;
+
+    border: none;
+    border-radius: .25rem;
+    background-color: #FAC51E;
+
+    font-size: 1rem;
+
+    &:hover:not(.open) {
+      background-color: #F99B1A;
+    }
+  }
 }
 
-.paste-modal-do {
-  display: block;
+.download-error {
+  .data {
+    line-height: 1.5;
 
-  margin-left: auto;
-  padding: .5rem 1.5rem;
+    .path {
+      font-style: italic;
+    }
+  }
 
-  border: none;
-  border-radius: .25rem;
-  background-color: #FAC51E;
+  .footer {
+    display: block;
 
-  font-size: 1rem;
-
-  &:hover:not(.open) {
-    background-color: #F99B1A;
+    width: 16rem;
+    margin-left: auto;
   }
 }

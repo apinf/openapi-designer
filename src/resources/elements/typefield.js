@@ -114,6 +114,20 @@ export class Typefield extends Collapsiblefield {
     }
   }
 
+  /** @inheritdoc */
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
+    if (this.child) {
+      validation.child = this.child.revalidate(errorCollection);
+    } else {
+      validation.child = { valid: true };
+    }
+    validation.childrenValid = validation.child.hasOwnProperty('childrenValid')
+        ? validation.child.childrenValid
+        : validation.child.valid;
+    return validation;
+  }
+
   /**
    * Check if this field doesn't currently have a child or if the child is empty.
    */

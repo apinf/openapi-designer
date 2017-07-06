@@ -39,6 +39,20 @@ export class LazyLinkfield extends Field {
     return this.child.isEmpty();
   }
 
+  /** @inheritdoc */
+  revalidate(errorCollection) {
+    const validation = super.revalidate(errorCollection);
+    if (this.child) {
+      validation.child = this.child.revalidate(errorCollection);
+    } else {
+      validation.child = { valid: true };
+    }
+    validation.childrenValid = validation.child.hasOwnProperty('childrenValid')
+        ? validation.child.childrenValid
+        : validation.child.valid;
+    return validation;
+  }
+
   /**
    * Create the child of this field. Basically copy the target, set the parent
    * and apply field overrides.
