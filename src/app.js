@@ -128,7 +128,7 @@ export class App {
         return;
       }
     } else {
-      downloadError.close();
+      this.downloadErrorModal.close();
     }
     this.downloadErrors = [];
     if (!type) {
