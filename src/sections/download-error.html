@@ -1,23 +1,23 @@
 <template>
-	<modal view-model.ref="downloadErrorModal" ref="downloadErrorBox" class="download-error">
-		<div slot="header" t="modal.download-error.title">Validation errors detected</div>
-		<div slot="content">
-			<!--
-				Unpacking the data
-					[path, message] of downloadErrors
-				didn't work for some reason.
-			-->
-			<div class="data" repeat.for="data of downloadErrors">
-				Error at <span class="path">${data[0]}</span>: <span class="message">${data[1]}</span>
-			</div>
-		</div>
-		<div slot="footer" class="footer">
-			<button class="cancel" t="modal.download-error.cancel" click.delegate="downloadErrorModal.close()">
-				Cancel
-			</button>
-			<button class="continue" t="modal.download-error.download-anyway" click.delegate="download(undefined, true)">
-				Download anyway
-			</button>
-		</div>
-	</modal>
+  <modal view-model.ref="downloadErrorModal" ref="downloadErrorBox" class="download-error">
+    <div slot="header" t="modal.download-error.title">Validation errors detected</div>
+    <div slot="content">
+      <!--
+        Unpacking the data
+          [path, message] of downloadErrors
+        didn't work for some reason.
+      -->
+      <div class="data" repeat.for="data of downloadErrors">
+        Error at <span class="path">${data[0]}</span>: <span class="message">${data[1]}</span>
+      </div>
+    </div>
+    <div slot="footer" class="footer">
+      <button class="cancel" t="modal.download-error.cancel" click.delegate="downloadErrorModal.close()">
+        Cancel
+      </button>
+      <button class="continue" t="modal.download-error.download-anyway" click.delegate="download(undefined, true)">
+        Download anyway
+      </button>
+    </div>
+  </modal>
 </template>
