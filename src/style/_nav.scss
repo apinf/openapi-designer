@@ -12,6 +12,10 @@
     max-width: 60rem;
     margin: auto;
   }
+
+  &.split-view {
+    z-index: 10;
+  }
 }
 
 .nav-wrapper > .nav {
