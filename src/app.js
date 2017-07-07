@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
 import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
+import {sky} from './sky';
 import {Validation} from './validation';
 import YAML from 'yamljs';
 import $ from 'jquery';
@@ -13,12 +14,14 @@ export class App {
   @bindable
   language = window.localStorage.language || 'en';
   enableBranding = true;
+  sky = [];
 
   constructor(i18n, ea) {
     this.split(window.localStorage.split || 'split');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
+    this.sky = sky;
     // Allow access from browser console
     window.$oai = this;
 
@@ -148,6 +151,10 @@ export class App {
       downloadLink.click();
       document.body.removeChild(downloadLink);
     }
+  }
+
+  upload(theCloud) {
+    theCloud.upload(this.getFormData());
   }
 
   delete(force) {
