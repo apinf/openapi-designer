@@ -1,17 +1,25 @@
 <template>
   <div class="brand-footer-wrapper">
     <div class="brand-footer ${splitView ? 'split-view' : ''}">
-      <div class="top-row">
-        <span class="product-of" t="footer-product-of">
+      <div class="buttons">
+        <div class="language-wrapper">
+          <select value.bind="language" class="language">
+            <option value="en">English</option>
+            <option value="fi">Suomi</option>
+          </select>
+        </div>
+        <a class="info" href="javascript:void(0)" click.delegate="infoModal.open()">
+          <img class="info" src="res/info-logo.svg"/>
+        </a>
+        <a class="github" href="https://github.com/apinf/open-api-designer">
+          <img class="github" src="res/github.svg"/>
+        </a>
+      </div>
+      <div class="apinf-logo">
+        <span t="footer-product-of">
           Product of
         </span>
-      </div>
-      <div class="bottom-row">
-        <select value.bind="language" class="language">
-          <option value="en">English</option>
-          <option value="fi">Suomi</option>
-        </select>
-        <img class="apinf-logo" src="res/apinf-logo.png"/>
+        <img src="res/apinf-logo.png"/>
       </div>
     </div>
   </div>
