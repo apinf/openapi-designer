@@ -85,7 +85,9 @@
 
   .apinf-logo {
     position: relative;
+    left: calc(100% - 12rem);
 
+    width: 12rem;
     height: 3.5rem;
 
     transform: translateY(-.25rem);
