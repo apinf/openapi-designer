@@ -23,6 +23,12 @@ h3 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
+input[type="text"], textarea {
+  background-color: $background-color
+}
+
 body {
   margin: 0;
+
+  background-color: $background-color;
 }

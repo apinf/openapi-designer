@@ -1,10 +1,9 @@
 .brand-header-wrapper {
   box-sizing: border-box;
   height: 3.5rem;
-  margin-bottom: 1.5rem;
   padding: .5rem 1.5rem;
 
-  background-color: black;
+  background-color: white;
 }
 
 .brand-header {
@@ -46,7 +45,7 @@
   margin-top: .5rem;
   padding: .25rem 1.5rem;
 
-  background-color: black;
+  background-color: #555;
 }
 
 .brand-footer {
@@ -58,7 +57,7 @@
   .language {
     color: white;
     border: none;
-    background-color: black;
+    background-color: inherit;
   }
 
   .top-row {
