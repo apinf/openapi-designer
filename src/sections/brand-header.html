@@ -1,13 +1,15 @@
 <template>
-  <div class="brand-header">
-    <img class="logo" src="res/openapi-designer-logo.png"/>
-    <div class="right">
-      <a href="javascript:void(0)" click.delegate="infoModal.open()">
-        <img class="info" src="res/info-logo.svg"/>
-      </a>
-      <a href="https://github.com/apinf/open-api-designer">
-        <img class="github" src="res/github.svg"/>
-      </a>
+  <div class="brand-header-wrapper">
+    <div class="brand-header ${splitView ? 'split-view' : ''}">
+      <img class="logo" src="res/openapi-designer-logo.png"/>
+      <div class="right">
+        <a href="javascript:void(0)" click.delegate="infoModal.open()">
+          <img class="info" src="res/info-logo.svg"/>
+        </a>
+        <a href="https://github.com/apinf/open-api-designer">
+          <img class="github" src="res/github.svg"/>
+        </a>
+      </div>
     </div>
   </div>
 </template>
