@@ -15,23 +15,6 @@
   .logo {
     height: 2.5rem;
   }
-
-  .right {
-    float: right;
-
-    a {
-      display: inline-block;
-
-      width: 2rem;
-      height: 2rem;
-      padding: .25rem .5rem;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
 }
 
 .brand-footer-wrapper {
@@ -101,6 +84,12 @@
   }
 
   .apinf-logo {
+    position: relative;
+
+    height: 3.5rem;
+
+    transform: translateY(-.25rem);
+
     span {
       position: absolute;
       top: .25rem;
