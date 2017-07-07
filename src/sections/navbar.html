@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-wrapper ${splitView ? '' : 'no-split-view'}" if.bind="activeForm">
+  <div class="nav-wrapper ${splitView ? 'split-view' : ''}" if.bind="activeForm">
     <div class="nav">
       <div class="editor-nav nav-links" if.bind="!showOutput">
         <a class="nav-link open" t="nav.tab.about" id="nav-about" href="#/about">

@@ -4,7 +4,7 @@
         ${splitView ? 'split-view' : ''}
         ${showOutput ? 'has-output-editor' : ''}"
       if.bind="activeForm">
-    <compose view="./about.html" containerless></compose>
+    <compose view="./about.html" if.bind="showEditor && activeForm === 'about'" containerless></compose>
     <compose class="form" view-model.bind="activeForm" if.bind="showEditor && activeForm !== 'about'"></compose>
     <div class="preview" textcontent.one-way="currentFormJSON" if.bind="splitView && activeForm !== 'about'"></div>
     <div class="output-editor" if.bind="showOutput">

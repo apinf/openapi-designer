@@ -8,7 +8,7 @@
   border-bottom: 1px solid lightgray;
   background-color: white;
 
-  &.no-split-view > .nav {
+  &:not(.split-view) > .nav {
     max-width: 60rem;
     margin: auto;
   }
