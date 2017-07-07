@@ -46,14 +46,10 @@
 
     .language-wrapper {
       display: inline-block;
+      float: left;
 
       height: 3rem;
       margin-right: 1rem;
-      // Translate up half of the height of .language
-      // 2rem (height) + 2 * 0.25rem (padding) = 2.5rem
-      // 2.5rem / 2 = 1.25rem
-
-      transform: translateY(-1.25rem);
 
       .language {
         box-sizing: border-box;
@@ -85,12 +81,11 @@
 
   .apinf-logo {
     position: relative;
+    bottom: .25rem;
     left: calc(100% - 12rem);
 
     width: 12rem;
     height: 3.5rem;
-
-    transform: translateY(-.25rem);
 
     span {
       position: absolute;
