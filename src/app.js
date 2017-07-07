@@ -80,6 +80,24 @@ export class App {
     location.reload();
   }
 
+  importOutputEditor() {
+    const rawData = $(this.outputEditor).val();
+    let data;
+    try {
+      data = YAML.parse(rawData);
+    } catch (_) {
+      try {
+        data = JSON.parse(rawData);
+      } catch (ex) {
+        console.error(ex);
+        return;
+        // Oh noes!
+      }
+    }
+    delete(true);
+    this.forms.setValue(data);
+  }
+
   importFile() {
     delete(true);
     const fileInput = $('<input/>', { type: 'file' });
