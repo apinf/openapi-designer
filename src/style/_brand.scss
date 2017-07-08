@@ -46,14 +46,10 @@
 
     .language-wrapper {
       display: inline-block;
+      float: left;
 
       height: 3rem;
       margin-right: 1rem;
-      // Translate up half of the height of .language
-      // 2rem (height) + 2 * 0.25rem (padding) = 2.5rem
-      // 2.5rem / 2 = 1.25rem
-
-      transform: translateY(-1.25rem);
 
       .language {
         box-sizing: border-box;
@@ -88,13 +84,11 @@
     left: calc(100% - 12rem);
 
     width: 12rem;
-    height: 3.5rem;
-
-    transform: translateY(-.25rem);
+    height: 3rem;
 
     span {
       position: absolute;
-      top: .25rem;
+      top: 0;
       right: .5rem;
 
       height: .75rem;
@@ -109,7 +103,7 @@
     img {
       position: absolute;
       right: .5rem;
-      bottom: .25rem;
+      bottom: 0;
 
       height: 2rem;
     }
