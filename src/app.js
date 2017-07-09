@@ -6,6 +6,8 @@ import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
 import {Validation} from './validation';
 import YAML from 'yamljs';
+import SwaggerUIBundle from 'swagger-ui';
+import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
 import $ from 'jquery';
 
 @inject(I18N, EventAggregator)
@@ -15,7 +17,6 @@ export class App {
   enableBranding = true;
 
   constructor(i18n, ea) {
-    this.split(window.localStorage.split || 'split');
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
@@ -57,15 +58,55 @@ export class App {
     this.forms.addChangeListener(() => this.saveFormLocal());
   }
 
+  bind() {
+    this.split(window.localStorage.split || 'split');
+  }
+
   languageChanged() {
     window.localStorage.language = this.language;
     location.reload();
+  }
+
+  showRichPreview() {
+    if (!this.richPreviewObj) {
+      // The DOM isn't ready yet, but swagger-ui requires it to be ready.
+      // Let's try again a bit later.
+      console.log('DOM not ready. Retrying rich preview in 0.5s...');
+      setTimeout(() => this.showRichPreview(), 500);
+      return;
+    }
+    setTimeout(() => {
+      const url = `data:application/json;charset=utf-8,${encodeURIComponent(this.json)}`;
+      this.richPreview = new SwaggerUIBundle({
+        url,
+        dom_id: '#rich-preview',
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: 'StandaloneLayout'
+      });
+    }, 0);
+  }
+
+  hideRichPreview() {
+    this.richPreview = undefined;
+    $(this.richPreviewObj).empty();
   }
 
   split(type) {
     this.showEditor = type === 'editor' || type === 'split';
     this.showOutput = type === 'output';
     this.splitView = type === 'split';
+    this.showPreview = type === 'preview';
+    if (this.showPreview) {
+      this.showRichPreview();
+    } else if (this.richPreview) {
+      this.hideRichPreview();
+    }
     window.localStorage.split = type;
   }
 

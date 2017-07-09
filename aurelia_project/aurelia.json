@@ -121,6 +121,11 @@
           "text",
           "jquery",
           {
+            "name": "swagger-ui",
+            "path": "../node_modules/swagger-ui-dist",
+            "main": "swagger-ui-bundle"
+          },
+          {
             "name": "yamljs",
             "path": "../node_modules/yamljs",
             "main": "lib/Yaml"

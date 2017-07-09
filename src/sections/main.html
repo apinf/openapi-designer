@@ -15,5 +15,10 @@
         </button>
       </div>
     </div>
+    <div class="rich-preview-wrapper" if.bind="showPreview">
+      <require from="swagger-ui/swagger-ui.css"></require>
+      <require from="style/swagger-ui.css"></require>
+      <div id="rich-preview" ref="richPreviewObj"></div>
+    </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="nav-wrapper ${splitView ? 'split-view' : ''}" if.bind="activeForm">
     <div class="nav">
-      <div class="editor-nav nav-links" if.bind="!showOutput">
+      <div class="editor-nav nav-links" if.bind="splitView || showEditor">
         <a class="nav-link open" t="nav.tab.about" id="nav-about" href="#/about">
           About
         </a>
@@ -29,6 +29,11 @@
           Editable output
         </a>
       </div>
+      <div class="nav-links" if.bind="showPreview">
+        <a class="nav-link open" t="nav.tab.rich-preview" id="nav-rich-preview" href="javascript:void(0)">
+          Rich preview
+        </a>
+      </div>
 
       <div class="actions">
         <div class="split dropdown">
@@ -44,6 +49,9 @@
             </a>
             <a href="javascript:void(0)" click.delegate="split('output')" t="nav.actions.split.output">
               Editable Output
+            </a>
+            <a href="javascript:void(0)" click.delegate="split('preview')" t="nav.actions.split.preview">
+              Rich Preview
             </a>
           </div>
         </div>
