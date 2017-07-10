@@ -61,6 +61,12 @@
         color: white;
         border: none;
         background-color: inherit;
+
+        // IE doesn't want to change the background color, so this is an IE-specific
+        // patch that changes the text color back to black.
+        @media all and (-ms-high-contrast:none) {
+          color: black;
+        }
       }
     }
 
