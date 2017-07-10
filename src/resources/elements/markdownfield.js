@@ -25,6 +25,8 @@ export class Markdownfield extends Textareafield {
       status: false,
       tabSize: 2,
       toolbar: false,
+      autoDownloadFontAwesome: false,
+      forceSync: true,
       spellChecker: false
     });
   }
