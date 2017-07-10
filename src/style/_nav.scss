@@ -1,6 +1,7 @@
 .nav-wrapper {
   position: -webkit-sticky;
   position: sticky;
+  z-index: 10;
   top: 0;
 
   padding: .5rem 1rem;
@@ -11,10 +12,6 @@
   &:not(.split-view) > .nav {
     max-width: 60rem;
     margin: auto;
-  }
-
-  &.split-view {
-    z-index: 10;
   }
 }
 
