@@ -59,8 +59,9 @@ export const parameterItemDefinition = {
   'Path': 'form.parameter',
   'i18n': {
     'keys': {
-      'label': 'form.parameter.parameter.items.label'
-    }
+      'label': 'form.parameter.items.label'
+    },
+    'path': 'form.parameter'
   },
   'hideValueIfEmpty': false,
   'children': {
