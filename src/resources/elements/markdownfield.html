@@ -1,0 +1,23 @@
+<template>
+  <div class="markdown field c${columns} columns ${validationResult.valid ? '' : 'validation-error'}" if.bind="display">
+    <require from="simplemde.css"></require>
+    <label for.bind="id">
+      ${label}
+      <tooltip class="error-tooltip" if.bind="!validationResult.valid" text.bind="validationResult.error">
+        <img src="res/error.svg" alt="Error"/>
+      </tooltip>
+      <tooltip if.bind="helpText" text.bind="helpText">
+        <img src="res/info.svg" alt="Info"/>
+      </tooltip>
+    </label>
+    <textarea
+      class="${validationResult.valid ? '' : 'validation-error'}"
+      ref="editorElem"
+      type="text"
+      rows.bind="rows"
+      id.bind="id"
+      value.bind="value"
+      placeholder.bind="placeholder"
+    ></textarea>
+  </div>
+</template>

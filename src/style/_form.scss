@@ -127,7 +127,7 @@
     }
   }
 
-  &.text input, &.textarea textarea {
+  &.text input, &.textarea textarea, &.markdown .CodeMirror {
     display: block;
 
     width: 100%;
@@ -144,7 +144,7 @@
       border-bottom: .0625rem solid $main-color;
     }
 
-    &:focus {
+    &:focus, &.CodeMirror-focused {
       margin-bottom: 0;
 
       border-bottom: .125rem solid $main-color;
@@ -154,6 +154,15 @@
       color: #CF0001;
       border-bottom: .0625rem solid #CF0001;
     }
+  }
+
+  &.markdown .CodeMirror {
+    // Height is required to actually make the field smaller.
+    height: 5rem;
+    // Minimum height is required to tell CodeMirror that it can be that small.
+    min-height: 5rem;
+
+    background-color: inherit;
   }
 
   &.has-children {
