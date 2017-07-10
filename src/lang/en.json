@@ -9,13 +9,15 @@
       "tags": "Tags",
       "paths": "Paths",
       "definitions": "Definitions",
-      "output-editor": "Editable output"
+      "output-editor": "Editable output",
+      "rich-preview": "Rich preview"
     },
     "actions": {
       "split": {
         "editor": "Editor only",
         "split": "Editor & Preview",
-        "output": "Editable output"
+        "output": "Editable output",
+        "preview": "Rich preview"
       },
       "delete": "Delete data",
       "download": {

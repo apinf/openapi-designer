@@ -3,7 +3,8 @@
 
   &.has-editor:not(.split-view) > .form,
       &:not(.split-view) > .about,
-      > .output-editor {
+      > .output-editor,
+      > .rich-preview-wrapper {
     display: block;
     float: none;
 
