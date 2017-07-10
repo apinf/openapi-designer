@@ -1,3 +1,10 @@
 .url, .topbar {
   display: none;
 }
+
+// The authorize button in the white bar near the top is not inside the white
+// bar by default, so this improves the situation.
+.swagger-ui .scheme-container {
+   margin-left: 40px !important;
+   padding-right: 40px !important;
+}
