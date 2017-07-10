@@ -1,8 +1,9 @@
 import {containerless} from 'aurelia-framework';
 import {Textareafield} from './textareafield';
 import SimpleMDE from 'simplemde';
+
 /**
- * Textareafield is a {@link Textfield} that has a multi-row text input.
+ * Markdownfield is a {@link Textareafield} that supports WYSIWYG markdown editing.
  */
 @containerless
 export class Markdownfield extends Textareafield {

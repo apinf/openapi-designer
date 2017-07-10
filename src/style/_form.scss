@@ -162,6 +162,8 @@
     // Minimum height is required to tell CodeMirror that it can be that small.
     min-height: 5rem;
 
+    cursor: text;
+
     background-color: inherit;
   }
 
