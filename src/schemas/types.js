@@ -295,6 +295,15 @@ export const types = {
           '../x-oad-type': 'array'
         }
       },
+      'uniqueItems': {
+        'type': 'option',
+        'format': 'checkbox',
+        'checkboxFormat': 'simple',
+        'choices': [{'i18nKey': '/blank', 'key': ''}],
+        'conditions': {
+          '../x-oad-type': 'array'
+        }
+      },
       'properties': {
         'type': 'lazylink',
         'target': '/global-definitions/types',

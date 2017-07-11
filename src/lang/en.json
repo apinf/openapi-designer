@@ -501,6 +501,9 @@
         "items": {
           "label": "Array item"
         },
+        "uniqueItems": {
+          "label": "Require items to be unique?"
+        },
         "additionalProperties": {
           "label": "Schema for additional properties"
         },
