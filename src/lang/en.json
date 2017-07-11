@@ -66,6 +66,9 @@
         "placeholder": "e.g. http://example.com/docs"
       }
     },
+    "defaultValue": {
+      "label": "Default value"
+    },
     "enum": {
       "label": "Allowed values",
       "item": {

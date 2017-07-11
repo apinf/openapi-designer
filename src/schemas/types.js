@@ -147,6 +147,17 @@ export const enumItem = {
   }
 };
 
+const defaultValue = Object.assign({}, enumItem);
+defaultValue.i18n = {
+  'path': 'form.enum.item',
+  'keys': {
+    'label': 'form.defaultValue.label'
+  }
+};
+defaultValue.conditions = {
+  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
+};
+
 export const enumArray = {
   'type': 'array',
   'i18n': {
@@ -160,6 +171,7 @@ const enumIfHasType = Object.assign({}, enumArray);
 enumIfHasType.conditions = {
   '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
 };
+
 
 export const types = {
   'type': 'array',
@@ -281,6 +293,7 @@ export const types = {
         'choices': typeFormatChoices
       },
       'enum': enumIfHasType,
+      'default': defaultValue,
       'readOnly': {
         'type': 'option',
         'format': 'checkbox',
