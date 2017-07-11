@@ -128,7 +128,7 @@ export const parameter = {
           'hideValueIfEmpty': false
         },
         'description': {
-          'type': 'textarea'
+          'type': 'markdown'
         },
         'required': {
           'type': 'option',

@@ -13,7 +13,7 @@ const operationChildren = {
     'type': 'text'
   },
   'description': {
-    'type': 'textarea',
+    'type': 'markdown',
     'hideValueIfEmpty': true
   },
   'deprecated': {

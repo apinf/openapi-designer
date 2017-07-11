@@ -12,7 +12,7 @@ export const tags = {
         'validation': ['required']
       },
       'description': {
-        'type': 'textarea'
+        'type': 'markdown'
       },
       'externalDocs': externalDocs
     }

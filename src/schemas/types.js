@@ -245,7 +245,7 @@ export const types = {
         }
       },
       'description': {
-        'type': 'textarea',
+        'type': 'markdown',
         'conditions': {
           '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
