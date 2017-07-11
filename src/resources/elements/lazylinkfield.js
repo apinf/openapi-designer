@@ -33,7 +33,10 @@ export class LazyLinkfield extends Field {
    * Check if this link doesn't currently have a child or if the child is empty.
    */
   isEmpty() {
-    if (!this.child && !this.cachedValue) {
+    if (!this.child) {
+      if (this.cachedValue) {
+        return false;
+      }
       return true;
     }
     return this.child.isEmpty();
