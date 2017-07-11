@@ -457,6 +457,13 @@
     "types": {
       "label": "Types",
       "newItemText": "New Type",
+      "allOf": {
+        "label": "Joined types",
+        "newItemText": "New joined type",
+        "item": {
+          "label": "Joined type #$index"
+        }
+      },
       "item": {
         "label": "Type #{{index}}: {{-name}}",
         "x-oad-type": {
@@ -469,6 +476,7 @@
             "array": "Array",
             "object": "Object",
             "reference": "Reference",
+            "allOf": "Joined types",
             "null": "Null",
             "file": "File"
           }

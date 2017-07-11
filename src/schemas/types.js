@@ -177,7 +177,9 @@ export const types = {
     'type': 'object',
     'setValueListeners': [
       (field, newValue) => {
-        if (newValue.hasOwnProperty('$ref')) {
+        if (newValue.hasOwnProperty('allOf')) {
+          field.legendChildren['x-oad-type'].setValue('allOf');
+        } else if (newValue.hasOwnProperty('$ref')) {
           field.legendChildren['x-oad-type'].setValue('reference');
         } else if (newValue.hasOwnProperty('type')) {
           field.legendChildren['x-oad-type'].setValue(newValue.type);
@@ -200,7 +202,7 @@ export const types = {
         'format': 'dropdown',
         'choices': [
           {'key': '', 'i18nKey': 'choose'},
-          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
+          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'allOf', 'null'
         ],
         'validation': ['required']
       },
@@ -229,6 +231,27 @@ export const types = {
         'validation': ['requiredIfLegendTypeIsReference'],
         'conditions': {
           '../x-oad-type': 'reference'
+        }
+      },
+      'allOf': {
+        'type': 'array',
+        'i18n': {
+          'path': 'form.types.allOf'
+        },
+        'item': {
+          'type': 'lazylink',
+          'target': '/global-definitions/types/:item',
+          'overrides': {
+            'i18n/overrides': {
+              'label': 'form.types.allOf.item.label'
+            },
+            'legendChildren/name': null,
+            'legendChildren/x-oad-type/columns': 8
+          }
+        },
+        'validation': ['requiredIfLegendTypeIsAllOf'],
+        'conditions': {
+          '../x-oad-type': 'allOf'
         }
       },
       'type': {
