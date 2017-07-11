@@ -22,12 +22,24 @@ export class Markdownfield extends Textareafield {
       indentWithTabs: true,
       lineWrapping: true,
       placeholder: this.placeholder,
+      initialValue: this.value,
       status: false,
       tabSize: 2,
       toolbar: false,
       autoDownloadFontAwesome: false,
-      forceSync: true,
       spellChecker: false
     });
+    this.editor.codemirror.on('change', () => this.value = this.editor.value());
+  }
+
+  detached() {
+    this.editor = undefined;
+  }
+
+  setValue(newValue) {
+    super.setValue(newValue);
+    if (this.editor) {
+      this.editor.value(newValue);
+    }
   }
 }
