@@ -235,6 +235,7 @@ export const types = {
       },
       'allOf': {
         'type': 'array',
+        'hideValueIfEmpty': false,
         'i18n': {
           'path': 'form.types.allOf'
         },
