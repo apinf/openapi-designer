@@ -17,6 +17,9 @@ export class Markdownfield extends Textareafield {
   }
 
   attached() {
+    if (this.editor || !this.editorElem) {
+      return;
+    }
     this.editor = new SimpleMDE({
       element: this.editorElem,
       indentWithTabs: true,
@@ -29,10 +32,12 @@ export class Markdownfield extends Textareafield {
       autoDownloadFontAwesome: false,
       spellChecker: false
     });
+    this.editor.codemirror.viewportMargin = 'Infinity';
     this.editor.codemirror.on('change', () => this.value = this.editor.value());
   }
 
   detached() {
+    this.editor.toTextArea();
     this.editor = undefined;
   }
 

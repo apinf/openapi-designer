@@ -134,8 +134,6 @@
     margin-bottom: .0625rem;
     padding: .25rem 0;
 
-    resize: vertical;
-
     border: none;
     border-bottom: .0625rem solid $border-color;
     border-radius: .25rem .25rem 0 0;
@@ -157,14 +155,15 @@
   }
 
   &.markdown .CodeMirror {
-    // Height is required to actually make the field smaller.
-    height: 5rem;
-    // Minimum height is required to tell CodeMirror that it can be that small.
-    min-height: 5rem;
+    height: auto;
 
     cursor: text;
 
     background-color: inherit;
+
+    &, .CodeMirror-scroll {
+      min-height: 5rem;
+    }
 
     // Fix resizing on Webkit-based browsers
     @media screen and (-webkit-min-device-pixel-ratio:0) {
