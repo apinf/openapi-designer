@@ -166,6 +166,11 @@
 
     background-color: inherit;
 
+    // Fix resizing on Webkit-based browsers
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      overflow-y: auto;
+    }
+
     pre {
       padding: 0;
     }
