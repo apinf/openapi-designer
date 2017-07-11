@@ -242,9 +242,10 @@ export const types = {
           'type': 'lazylink',
           'target': '/global-definitions/types/:item',
           'overrides': {
-            'i18n/overrides': {
+            'i18n/keys': {
               'label': 'form.types.allOf.item.label'
             },
+            'i18n/interpolations/index': '${..:humanIndex}',
             'legendChildren/name': null,
             'legendChildren/x-oad-type/columns': 8
           }

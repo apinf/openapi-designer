@@ -284,7 +284,9 @@ export class Field {
     this.hideValueIfEmpty = args.hideValueIfEmpty;
     this.setValueListeners = args.setValueListeners;
     this.i18n = args.i18n;
-    this.i18n.interpolations.index = '$index';
+    if (!this.i18n.interpolations.index) {
+      this.i18n.interpolations.index = '$index';
+    }
     this.validation = [];
     for (const funcID of args.validation) {
       const func = Field.validationFunctions[funcID];
@@ -435,6 +437,10 @@ export class Field {
     }
 
     return this.formatReferencePlusField(this.formatIndex(label));
+  }
+
+  get humanIndex() {
+    return this.index + 1;
   }
 
   /**

@@ -461,7 +461,7 @@
         "label": "Joined types",
         "newItemText": "New joined type",
         "item": {
-          "label": "Joined type #$index"
+          "label": "Joined type #{{-index}}"
         }
       },
       "item": {
