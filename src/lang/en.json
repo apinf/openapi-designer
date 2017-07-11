@@ -501,6 +501,9 @@
         "items": {
           "label": "Array item"
         },
+        "additionalProperties": {
+          "label": "Schema for additional properties"
+        },
         "properties": {
           "label": "Properties",
           "item": {
@@ -508,11 +511,11 @@
           }
         },
         "required": {
-          "label": "Required subfields",
+          "label": "Required properties",
           "item": {
-            "label": "Required field",
+            "label": "Required properties",
             "choices": {
-              "choose": "Choose a field..."
+              "choose": "Choose a property..."
             }
           }
         },

@@ -158,7 +158,7 @@ export const enumArray = {
 
 const enumIfHasType = Object.assign({}, enumArray);
 enumIfHasType.conditions = {
-  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
+  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
 };
 
 export const types = {
@@ -312,6 +312,22 @@ export const types = {
               'type': '${#/type}'
             }
           }
+        },
+        'conditions': {
+          '../x-oad-type': 'object'
+        }
+      },
+      'additionalProperties': {
+        'type': 'lazylink',
+        'target': '/global-definitions/types/:item',
+        'overrides': {
+          'i18n/keys': {
+            'label': 'form.types.item.additionalProperties.label'
+          },
+          'legendChildren/name': null,
+          'legendChildren/x-oad-type/columns': 8,
+          'legendChildren/x-oad-type/validation': [],
+          'collapsed': true
         },
         'conditions': {
           '../x-oad-type': 'object'
