@@ -37,8 +37,10 @@ export class Markdownfield extends Textareafield {
   }
 
   detached() {
-    this.editor.toTextArea();
-    this.editor = undefined;
+    if (this.editor) {
+      this.editor.toTextArea();
+      this.editor = undefined;
+    }
   }
 
   setValue(newValue) {
