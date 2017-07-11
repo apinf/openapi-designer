@@ -169,6 +169,28 @@
     pre {
       padding: 0;
     }
+
+    .cm-comment {
+      // Make sure code blocks are monospace
+      font-family: monospace !important;
+    }
+
+    // Improve link coloring
+    .cm-link {
+      color: #2aa198;
+
+      &.cm-formatting {
+        color: #7f8c8d;
+      }
+    }
+
+    .cm-url {
+      color: #337ab7;
+
+      &.cm-formatting {
+        color: #7f8c8d;
+      }
+    }
   }
 
   &.has-children {
