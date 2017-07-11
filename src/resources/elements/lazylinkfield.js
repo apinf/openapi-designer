@@ -33,7 +33,7 @@ export class LazyLinkfield extends Field {
    * Check if this link doesn't currently have a child or if the child is empty.
    */
   isEmpty() {
-    if (!this.child) {
+    if (!this.child && !this.cachedValue) {
       return true;
     }
     return this.child.isEmpty();
@@ -152,7 +152,7 @@ export class LazyLinkfield extends Field {
    *                  {@link #resolveTarget} returns {@linkplain undefined}.
    */
   getValue() {
-    return this.child ? this.child.getValue() : undefined;
+    return this.child ? this.child.getValue() : this.cachedValue;
   }
 
   resolvePath(path) {
