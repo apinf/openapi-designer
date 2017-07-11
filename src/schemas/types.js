@@ -281,6 +281,17 @@ export const types = {
         'choices': typeFormatChoices
       },
       'enum': enumIfHasType,
+      'readOnly': {
+        'type': 'option',
+        'format': 'checkbox',
+        'checkboxFormat': 'simple',
+        'choices': [{'i18nKey': '/blank', 'key': ''}],
+        'conditions': {
+          // Check if the property this readOnly field is in is the child of a
+          // object property/definition.
+          '../../../../x-oad-type': 'object'
+        }
+      },
       'items': {
         'type': 'lazylink',
         'target': '/global-definitions/types/:item',

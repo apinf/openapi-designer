@@ -498,6 +498,10 @@
           "label": "Description",
           "placeholder": "Enter description..."
         },
+        "readOnly": {
+          "label": "Read-only?",
+          "helpText": "If checked, this property doesn't affect anything when sent from the client. Read-only fields should not be marked as required."
+        },
         "items": {
           "label": "Array item"
         },
