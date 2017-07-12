@@ -180,7 +180,6 @@ export const allOf = {
   },
   'item': {
     'type': 'lazylink',
-    'slightlyLessLazy': true,
     'target': '/global-definitions/types/:item',
     'overrides': {
       'i18n': {
@@ -275,8 +274,7 @@ export const types = {
         'target': '/types-allof',
         'conditions': {
           '../x-oad-type': 'allOf'
-        },
-        'slightlyLessLazy': true
+        }
       },
       'type': {
         'type': 'link',
