@@ -29,16 +29,6 @@ export class Validation {
     return { valid: true };
   }
 
-  requiredIfLegendTypeIsAllOf(field) {
-    if (field.isEmpty() && field.resolveRef('../x-oad-type').getValue() === 'allOf') {
-      return {
-        valid: false,
-        error: this.i18n.tr('validation.required-is-empty')
-      };
-    }
-    return { valid: true };
-  }
-
   keyRequired(field) {
     if (field.key.length === 0) {
       return {

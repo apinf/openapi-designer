@@ -195,8 +195,7 @@ export const allOf = {
       'legendChildren/name': null,
       'legendChildren/x-oad-type/columns': 8
     }
-  },
-  'validation': ['requiredIfLegendTypeIsAllOf']
+  }
 };
 
 export const types = {
@@ -276,7 +275,8 @@ export const types = {
         'target': '/types-allof',
         'conditions': {
           '../x-oad-type': 'allOf'
-        }
+        },
+        'slightlyLessLazy': true
       },
       'type': {
         'type': 'link',

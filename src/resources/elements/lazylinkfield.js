@@ -119,11 +119,12 @@ export class LazyLinkfield extends Field {
     // appears, the child will be deleted. This is what makes this link field
     // lazy.
     const display = super.shouldDisplay();
-    if (display) {
+    if (display && (!this.parent || !this.parent.isCollapsible || !this.parent.collapsed)) {
       if (this.child === undefined) {
         this.createChild();
       }
     } else if (this.child !== undefined) {
+      this.cachedValue = this.child.getValue();
       this.deleteChild();
     }
     return display;
