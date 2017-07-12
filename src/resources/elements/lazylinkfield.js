@@ -36,6 +36,8 @@ export class LazyLinkfield extends Field {
    */
   isEmpty() {
     if (!this.child) {
+      // If not slightlyLessLazy, ignore the cached value and state that the
+      // field is empty. Otherwise, check the cached value first.
       return !this.slightlyLessLazy || !this.cachedValue;
     }
     return this.child.isEmpty();
