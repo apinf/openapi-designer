@@ -183,10 +183,15 @@ export const allOf = {
     'slightlyLessLazy': true,
     'target': '/global-definitions/types/:item',
     'overrides': {
-      'i18n/keys': {
-        'label': 'form.types.allOf.item.label'
+      'i18n': {
+        'path': 'form.types.item',
+        'keys': {
+          'label': 'form.types.allOf.item.label'
+        },
+        'interpolations': {
+          'index': '${..:humanIndex}'
+        }
       },
-      'i18n/interpolations/index': '${..:humanIndex}',
       'legendChildren/name': null,
       'legendChildren/x-oad-type/columns': 8
     }
