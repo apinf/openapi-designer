@@ -66,6 +66,9 @@
         "placeholder": "e.g. http://example.com/docs"
       }
     },
+    "defaultValue": {
+      "label": "Default value"
+    },
     "enum": {
       "label": "Allowed values",
       "item": {
@@ -457,6 +460,13 @@
     "types": {
       "label": "Types",
       "newItemText": "New Type",
+      "allOf": {
+        "label": "Joined types",
+        "newItemText": "New joined type",
+        "item": {
+          "label": "Joined type #{{-index}}"
+        }
+      },
       "item": {
         "label": "Type #{{index}}: {{-name}}",
         "x-oad-type": {
@@ -469,6 +479,7 @@
             "array": "Array",
             "object": "Object",
             "reference": "Reference",
+            "allOf": "Joined types",
             "null": "Null",
             "file": "File"
           }
@@ -490,8 +501,18 @@
           "label": "Description",
           "placeholder": "Enter description..."
         },
+        "readOnly": {
+          "label": "Read-only?",
+          "helpText": "If checked, this property doesn't affect anything when sent from the client. Read-only fields should not be marked as required."
+        },
         "items": {
           "label": "Array item"
+        },
+        "uniqueItems": {
+          "label": "Require items to be unique?"
+        },
+        "additionalProperties": {
+          "label": "Schema for additional properties"
         },
         "properties": {
           "label": "Properties",
@@ -500,11 +521,11 @@
           }
         },
         "required": {
-          "label": "Required subfields",
+          "label": "Required properties",
           "item": {
-            "label": "Required field",
+            "label": "Required properties",
             "choices": {
-              "choose": "Choose a field..."
+              "choose": "Choose a property..."
             }
           }
         },

@@ -132,7 +132,7 @@ export class Arrayfield extends Parentfield {
     this.onSetValue(value);
     this._children = [];
     for (let [key, item] of Object.entries(value)) {
-      const index = this.addChild();
+      const index = this.addChild(true);
       if (this.format === 'map') {
         if (this.valueField) {
           item = { [this.valueField]: item };
@@ -146,7 +146,7 @@ export class Arrayfield extends Parentfield {
   /**
    * Add a new blank child to this array.
    */
-  addChild() {
+  addChild(forceCollapse) {
     if (!(this.item instanceof Field)) {
       return;
     }
@@ -160,7 +160,9 @@ export class Arrayfield extends Parentfield {
       field.labelFormat = `${field.labelFormat} #$index`;
     }
     this._children.push(field);
-    if (this.collapseManagement) {
+    if (forceCollapse === true) {
+      field.collapsed = true;
+    } else if (this.collapseManagement) {
       field.setCollapsed(false);
     }
     this.onChange(field);
