@@ -12,7 +12,7 @@ export const externalDocs = {
     'url': {
       'type': 'text',
       'hideValueIfEmpty': false,
-      'validation': ['requiredIfParent']
+      'validation': ['requiredIfParent', 'url']
     }
   }
 };

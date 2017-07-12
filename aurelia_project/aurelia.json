@@ -121,6 +121,11 @@
           "text",
           "jquery",
           {
+            "name": "valid-url",
+            "path": "../node_modules/valid-url",
+            "main": "index"
+          },
+          {
             "name": "swagger-ui",
             "path": "../node_modules/swagger-ui-dist",
             "main": "swagger-ui-bundle"
