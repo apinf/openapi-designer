@@ -172,6 +172,27 @@ enumIfHasType.conditions = {
   '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
 };
 
+export const allOf = {
+  'type': 'array',
+  'hideValueIfEmpty': false,
+  'i18n': {
+    'path': 'form.types.allOf'
+  },
+  'item': {
+    'type': 'lazylink',
+    'slightlyLessLazy': true,
+    'target': '/global-definitions/types/:item',
+    'overrides': {
+      'i18n/keys': {
+        'label': 'form.types.allOf.item.label'
+      },
+      'i18n/interpolations/index': '${..:humanIndex}',
+      'legendChildren/name': null,
+      'legendChildren/x-oad-type/columns': 8
+    }
+  },
+  'validation': ['requiredIfLegendTypeIsAllOf']
+};
 
 export const types = {
   'type': 'array',
@@ -246,25 +267,8 @@ export const types = {
         }
       },
       'allOf': {
-        'type': 'array',
-        'hideValueIfEmpty': false,
-        'i18n': {
-          'path': 'form.types.allOf'
-        },
-        'item': {
-          'type': 'lazylink',
-          'slightlyLessLazy': true,
-          'target': '/global-definitions/types/:item',
-          'overrides': {
-            'i18n/keys': {
-              'label': 'form.types.allOf.item.label'
-            },
-            'i18n/interpolations/index': '${..:humanIndex}',
-            'legendChildren/name': null,
-            'legendChildren/x-oad-type/columns': 8
-          }
-        },
-        'validation': ['requiredIfLegendTypeIsAllOf'],
+        'type': 'lazylink',
+        'target': '/types-allof',
         'conditions': {
           '../x-oad-type': 'allOf'
         }

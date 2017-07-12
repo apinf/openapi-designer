@@ -36,7 +36,7 @@ export class LazyLinkfield extends Field {
    */
   isEmpty() {
     if (!this.child) {
-      return this.slightlyLessLazy && !this.cachedValue;
+      return !this.slightlyLessLazy || !this.cachedValue;
     }
     return this.child.isEmpty();
   }
