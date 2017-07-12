@@ -253,6 +253,7 @@ export const types = {
         },
         'item': {
           'type': 'lazylink',
+          'slightlyLessLazy': true,
           'target': '/global-definitions/types/:item',
           'overrides': {
             'i18n/keys': {

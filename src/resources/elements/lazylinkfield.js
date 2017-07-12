@@ -12,11 +12,13 @@ export class LazyLinkfield extends Field {
   overrides = {};
   child = undefined;
   cachedValue = undefined;
+  slightlyLessLazy = false;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
     this.target = args.target || '#';
     this.overrides = args.overrides || {};
+    this.slightlyLessLazy = !!args.slightlyLessLazy;
     return super.init(id, args);
   }
 
@@ -34,10 +36,7 @@ export class LazyLinkfield extends Field {
    */
   isEmpty() {
     if (!this.child) {
-      if (this.cachedValue) {
-        return false;
-      }
-      return true;
+      return this.slightlyLessLazy && !this.cachedValue;
     }
     return this.child.isEmpty();
   }
@@ -155,7 +154,12 @@ export class LazyLinkfield extends Field {
    *                  {@link #resolveTarget} returns {@linkplain undefined}.
    */
   getValue() {
-    return this.child ? this.child.getValue() : this.cachedValue;
+    if (this.child) {
+      return this.child.getValue();
+    } else if (this.slightlyLessLazy) {
+      return this.cachedValue;
+    }
+    return undefined;
   }
 
   resolvePath(path) {
