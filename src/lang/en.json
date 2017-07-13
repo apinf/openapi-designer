@@ -48,7 +48,8 @@
     "invalid-hostname": "Invalid hostname!",
     "invalid-email": "Invalid email!",
     "invalid-http-status": "Invalid HTTP status code!",
-    "param-not-implemented": "The path parameter {{parameter}} has not been implemented in HTTP {{method}}"
+    "param-not-implemented": "The path parameter {{parameter}} has not been implemented in HTTP {{method}}",
+    "invalid-url": "Invalid URL!"
   },
   "form": {
     "global": {
