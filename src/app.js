@@ -76,7 +76,7 @@ export class App {
       return;
     }
     setTimeout(() => {
-      const url = `data:application/json;charset=utf-8,${encodeURIComponent(this.json)}`;
+      const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.json);
       this.richPreview = new SwaggerUIBundle({
         url,
         dom_id: '#rich-preview',
