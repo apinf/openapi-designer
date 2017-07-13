@@ -52,6 +52,9 @@
   }
 
   > .actions {
+    position: relative;
+    z-index: 9;
+
     float: right;
 
     max-height: 2.5rem;
