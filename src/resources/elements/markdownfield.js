@@ -17,9 +17,19 @@ export class Markdownfield extends Textareafield {
   }
 
   attached() {
-    if (this.editor || !this.editorElem) {
+    if (this.editor) {
+      return;
+    } else if (!this.editorElem) {
+      // This shouldn't happen, but it seems to happen sometimes anyway.
+      //
+      // Try again in a second.
+      setTimeout(() => this.attached(), 1000);
       return;
     }
+    this.createEditor();
+  }
+
+  createEditor() {
     this.editor = new SimpleMDE({
       element: this.editorElem,
       indentWithTabs: true,
