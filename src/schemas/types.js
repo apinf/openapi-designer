@@ -139,7 +139,7 @@ export const enumItem = {
       'type': 'array',
       'item': {
         'type': 'lazylink',
-        'target': '/enum-item'
+        'target': '/common/enum-item'
       },
       'hideValueIfEmpty': false,
       'i18n': blankLabel
@@ -271,7 +271,7 @@ export const types = {
       },
       'allOf': {
         'type': 'lazylink',
-        'target': '/types-allof',
+        'target': '/common/types-allof',
         'conditions': {
           '../x-oad-type': 'allOf'
         }

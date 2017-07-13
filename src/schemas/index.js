@@ -44,9 +44,16 @@ export const schema = {
         responses
       }
     },
-    'enum-item': enumItem,
-    'types-allof': allOf,
-    'parameter-item-definition': hiddenParameterItemDefinition,
+    // Common fields that are only used as lazylink targets.
+    'common': {
+      'type': 'object',
+      'showValueInParent': false,
+      'children': {
+        'enum-item': enumItem,
+        'types-allof': allOf,
+        'parameter-item-definition': hiddenParameterItemDefinition
+      }
+    },
     'parameters': {
       'type': 'link',
       'target': '/global-definitions/parameters'

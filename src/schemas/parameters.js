@@ -70,7 +70,7 @@ export const parameterItemDefinition = {
     'collectionFormat': parameterCollectionFormat,
     'items': {
       'type': 'lazylink',
-      'target': '/parameter-item-definition',
+      'target': '/common/parameter-item-definition',
       'conditions': {
         '../type': 'array'
       }
