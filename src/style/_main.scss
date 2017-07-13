@@ -127,17 +127,20 @@ a {
   .about .ie11-only {
     display: block !important;
 
-    margin: 100px 0;
+    width: 40rem;
+    margin: 4rem auto 6rem;
+    padding: 2rem;
+
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
 
     h1 {
-      margin-bottom: 1rem;
+      margin: 1rem 0;
 
       font-size: 4rem;
     }
 
     p {
-      max-width: 30rem;
-
       font-size: 1.2rem;
     }
   }
