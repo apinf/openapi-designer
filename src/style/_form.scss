@@ -44,9 +44,7 @@
   .title {
     display: flex;
 
-    margin: 0;
-    margin-bottom: .5rem;
-    margin-left: .25rem;
+    margin: 0 .25rem .5rem;
 
     &:last-child {
       margin-bottom: 0;
@@ -59,6 +57,9 @@
 
     > .collapse-button {
       display: inline-block;
+
+      height: 1.5rem;
+      padding: 0 .25rem;
 
       cursor: pointer;
 
