@@ -12,13 +12,11 @@ export class LazyLinkfield extends Field {
   overrides = {};
   child = undefined;
   cachedValue = undefined;
-  slightlyLessLazy = false;
 
   /** @inheritdoc */
   init(id = '', args = {}) {
     this.target = args.target || '#';
     this.overrides = args.overrides || {};
-    this.slightlyLessLazy = !!args.slightlyLessLazy;
     return super.init(id, args);
   }
 
@@ -36,9 +34,7 @@ export class LazyLinkfield extends Field {
    */
   isEmpty() {
     if (!this.child) {
-      // If not slightlyLessLazy, ignore the cached value and state that the
-      // field is empty. Otherwise, check the cached value first.
-      return !this.slightlyLessLazy || !this.cachedValue;
+      return !this.cachedValue;
     }
     return this.child.isEmpty();
   }
@@ -119,8 +115,9 @@ export class LazyLinkfield extends Field {
     // appears, the child will be deleted. This is what makes this link field
     // lazy.
     const display = super.shouldDisplay();
-    if (display && (!this.parent || !this.parent.isCollapsible || !this.parent.collapsed)) {
-      if (this.child === undefined) {
+    if (display) {
+      const isParentCollapsed = this.parent && this.parent.isCollapsible && this.parent.collapsed;
+      if (this.child === undefined && !isParentCollapsed) {
         this.createChild();
       }
     } else if (this.child !== undefined) {
@@ -159,10 +156,8 @@ export class LazyLinkfield extends Field {
   getValue() {
     if (this.child) {
       return this.child.getValue();
-    } else if (this.slightlyLessLazy) {
-      return this.cachedValue;
     }
-    return undefined;
+    return this.cachedValue;
   }
 
   resolvePath(path) {
