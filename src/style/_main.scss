@@ -118,3 +118,27 @@ a {
     color: #0288d1;
   }
 }
+
+.ie11-only {
+  display: none;
+}
+
+@media all and (-ms-high-contrast:none) {
+  .about .ie11-only {
+    display: block !important;
+
+    margin: 100px 0;
+
+    h1 {
+      margin-bottom: 1rem;
+
+      font-size: 4rem;
+    }
+
+    p {
+      max-width: 30rem;
+
+      font-size: 1.2rem;
+    }
+  }
+}
