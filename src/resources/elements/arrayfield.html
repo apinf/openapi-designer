@@ -1,6 +1,6 @@
 <template>
   <div class="array field has-children c${columns} columns ${validationResult.valid ? '' : 'validation-error'}" if.bind="display">
-    <h3 click.delegate="toggleCollapse()" if.bind="label" class="title">
+    <h4 click.delegate="toggleCollapse()" if.bind="label" class="title">
       ${label}
       <tooltip class="error-tooltip" if.bind="!validationResult.valid" text.bind="validationResult.error">
         <img src="res/error.svg" alt="Error"/>
@@ -12,7 +12,7 @@
         <img src="res/collapse-open.svg" alt="Collapse" if.bind="!collapsed"/>
         <img src="res/collapse-closed.svg" alt="Collapse" if.bind="collapsed"/>
       </button>
-    </h3>
+    </h4>
     <div class="controls" if.bind="!collapsed">
       <button class="new-item" click.delegate="addChild()">
         ${newItemText ? newItemText : "New " + item.label}
@@ -24,10 +24,6 @@
           <div class="controls">
             <button class="delete-button" click.delegate="childElem.delete()">
               <img src="res/delete.svg" alt="Delete"/>
-            </button>
-            <button class="collapse-button" if.bind="childElem.isCollapsible" click.delegate="childElem.toggleCollapse()">
-              <img src="res/collapse-open.svg" alt="Collapse" if.bind="!childElem.collapsed"/>
-              <img src="res/collapse-closed.svg" alt="Collapse" if.bind="childElem.collapsed"/>
             </button>
           </div>
           <div class="actualItem">
