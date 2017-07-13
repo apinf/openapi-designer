@@ -116,7 +116,7 @@ export class LazyLinkfield extends Field {
     // lazy.
     const display = super.shouldDisplay();
     if (display) {
-      const isParentCollapsed = (!this.parent || !this.parent.isCollapsible || !this.parent.collapsed);
+      const isParentCollapsed = this.parent && this.parent.isCollapsible && this.parent.collapsed;
       if (this.child === undefined && !isParentCollapsed) {
         this.createChild();
       }
