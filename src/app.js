@@ -80,6 +80,8 @@ export class App {
       this.richPreview = new SwaggerUIBundle({
         url,
         dom_id: '#rich-preview',
+        // Disable Swagger.io online validation (AKA spyware)
+        validatorUrl: null,
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset
