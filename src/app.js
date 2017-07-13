@@ -67,13 +67,29 @@ export class App {
     location.reload();
   }
 
-  showRichPreview() {
+  cancelRichPreview() {
+    this.richPreviewErrorModal.close();
+    this.split(this.previousSplit);
+  }
+
+  showRichPreview(force = false) {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
       // Let's try again a bit later.
       console.log('DOM not ready. Retrying rich preview in 0.5s...');
       setTimeout(() => this.showRichPreview(), 500);
       return;
+    }
+    if (!force) {
+      let errors = {};
+      this.forms.revalidate(errors);
+      this.richPreviewErrors = Object.entries(errors);
+      if (this.richPreviewErrors.length > 0) {
+        this.richPreviewErrorModal.open();
+        return;
+      }
+    } else {
+      this.richPreviewErrorModal.close();
     }
     setTimeout(() => {
       const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.json);
@@ -100,6 +116,7 @@ export class App {
   }
 
   split(type) {
+    this.previousSplit = window.localStorage.split || 'split';
     this.showEditor = type === 'editor' || type === 'split';
     this.showOutput = type === 'output';
     this.splitView = type === 'split';
