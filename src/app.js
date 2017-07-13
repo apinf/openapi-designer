@@ -146,6 +146,20 @@ export class App {
     fileInput.appendTo('body');
     fileInput.trigger('click');
 
+    // IE/Edge don't want to trigger change events, so I have to do it for them...
+    //
+    // Check that the browser is IE/Edge
+    if (!!window.StyleMedia) {
+      // Check if there is a file every 0.5 seconds
+      const interval = setInterval(() => {
+        if (fileInput[0].files[0]) {
+          // The file was found, so trigger a change event and stop the interval.
+          fileInput.trigger('change');
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+
     fileInput.change(() => {
       const file = fileInput[0].files[0];
       const reader = new FileReader();
