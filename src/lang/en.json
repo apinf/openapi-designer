@@ -256,7 +256,7 @@
     "tags": {
       "label": "Tag definitions",
       "item": {
-        "label": "Tag",
+        "label": "Tag #{{index}}: {{-name}}",
         "name": {
           "label": "Name",
           "placeholder": "e.g. user_operations"

@@ -6,6 +6,11 @@ export const tags = {
   'item': {
     'type': 'object',
     'label': 'Tag',
+    'i18n': {
+      'interpolations': {
+        'name': '${#/name}'
+      }
+    },
     'children': {
       'name': {
         'type': 'text',
