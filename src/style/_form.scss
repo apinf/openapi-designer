@@ -343,27 +343,21 @@
 
           width: 2.5rem;
 
-          transform: translateY(-1rem);
+          transform: translateY(.5rem);
 
-          > .delete-button, > .collapse-button {
+          > .delete-button {
             display: inline-block;
 
             cursor: pointer;
-            transform: translateY(50%);
 
             border: none;
             background: none;
-          }
 
-          > .delete-button > img {
-            width: 1rem;
-            height: 1rem;
-            padding: .25rem;
-          }
-
-          > .collapse-button > img {
-            width: 1.5rem;
-            height: 1.5rem;
+            > img {
+              width: 1rem;
+              height: 1rem;
+              padding: .25rem;
+            }
           }
         }
 
