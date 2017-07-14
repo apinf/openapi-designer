@@ -12,10 +12,10 @@
       </div>
     </div>
     <div slot="footer" class="footer">
-      <button class="cancel" t="modal.validation-error.cancel" click.delegate="cancelRichPreview()">
+      <button class="cancel" t="modal.validation-error.cancel" click.delegate="richPreviewErrorModal.close()">
         Cancel
       </button>
-      <button class="continue" t="modal.validation-error.show-rich-preview-anyway" click.delegate="showRichPreview(true)">
+      <button class="continue" t="modal.validation-error.show-rich-preview-anyway" click.delegate="split('preview', true)">
         Open anyway
       </button>
     </div>
