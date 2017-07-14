@@ -75,6 +75,7 @@ export class App {
       setTimeout(() => this.showRichPreview(), 500);
       return;
     }
+
     setTimeout(() => {
       const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.json);
       this.richPreview = new SwaggerUIBundle({
@@ -99,7 +100,21 @@ export class App {
     $(this.richPreviewObj).empty();
   }
 
-  split(type) {
+  split(type, force = false) {
+    if (type === 'preview') {
+      if (!force) {
+        let errors = {};
+        this.forms.revalidate(errors);
+        this.richPreviewErrors = Object.entries(errors);
+        if (this.richPreviewErrors.length > 0) {
+          this.richPreviewErrorModal.open();
+          return;
+        }
+      } else {
+        this.richPreviewErrorModal.close();
+      }
+    }
+    this.previousSplit = window.localStorage.split || 'split';
     this.showEditor = type === 'editor' || type === 'split';
     this.showOutput = type === 'output';
     this.splitView = type === 'split';

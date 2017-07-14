@@ -1,5 +1,5 @@
 <template>
-  <modal view-model.ref="downloadErrorModal" ref="downloadErrorBox" class="download-error">
+  <modal view-model.ref="richPreviewErrorModal" ref="richPreviewErrorBox" class="rich-preview-error">
     <div slot="header" t="modal.validation-error.title">Validation errors detected</div>
     <div slot="content">
       <!--
@@ -7,16 +7,16 @@
           [path, message] of downloadErrors
         didn't work for some reason.
       -->
-      <div class="data" repeat.for="data of downloadErrors">
+      <div class="data" repeat.for="data of richPreviewErrors">
         Error at <span class="path">${data[0]}</span>: <span class="message">${data[1]}</span>
       </div>
     </div>
     <div slot="footer" class="footer">
-      <button class="cancel" t="modal.validation-error.cancel" click.delegate="downloadErrorModal.close()">
+      <button class="cancel" t="modal.validation-error.cancel" click.delegate="richPreviewErrorModal.close()">
         Cancel
       </button>
-      <button class="continue" t="modal.validation-error.download-anyway" click.delegate="download(undefined, true)">
-        Download anyway
+      <button class="continue" t="modal.validation-error.show-rich-preview-anyway" click.delegate="split('preview', true)">
+        Open anyway
       </button>
     </div>
   </modal>

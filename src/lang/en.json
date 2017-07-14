@@ -30,10 +30,11 @@
     "save": "Save changes"
   },
   "modal": {
-    "download-error": {
+    "validation-error": {
       "title": "Validation errors detected!",
       "cancel": "Cancel",
-      "download-anyway": "Download anyway"
+      "download-anyway": "Download anyway",
+      "show-rich-preview-anyway": "Open preview anyway"
     }
   },
   "error": {
