@@ -255,6 +255,7 @@
     },
     "tags": {
       "label": "Tag definitions",
+      "newItemText": "New Tag",
       "item": {
         "label": "Tag #{{index}}: {{-name}}",
         "name": {
