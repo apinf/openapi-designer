@@ -67,11 +67,6 @@ export class App {
     location.reload();
   }
 
-  cancelRichPreview() {
-    this.richPreviewErrorModal.close();
-    this.split(this.previousSplit);
-  }
-
   showRichPreview() {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
