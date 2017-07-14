@@ -71,6 +71,7 @@
     "defaultValue": {
       "label": "Default value"
     },
+    "supports-markdown": "This field supports formatting with Markdown.",
     "enum": {
       "label": "Allowed values",
       "item": {
@@ -110,7 +111,7 @@
           },
           "operationId": {
             "label": "Operation ID",
-            "placeholder": "Enter an unique operationId for this operation."
+            "placeholder": "Enter an unique identifier for this operation."
           },
           "summary": {
             "label": "Summary",
@@ -265,7 +266,7 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Describe what is tagged with this."
+          "placeholder": "Describe what kind of operations are tagged with this tag."
         }
       }
     },
@@ -424,7 +425,7 @@
       },
       "description": {
         "label": "Description",
-        "placeholder": "Enter description..."
+        "placeholder": "Describe the parameter here."
       },
       "required": {
         "label": "Required",
@@ -465,7 +466,7 @@
       "newItemText": "New Type",
       "allOf": {
         "label": "Joined types",
-        "newItemText": "New joined type",
+        "newItemText": "Join a new type",
         "item": {
           "label": "Joined type #{{-index}}"
         }
@@ -502,7 +503,7 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Enter description..."
+          "placeholder": "Describe the type here."
         },
         "readOnly": {
           "label": "Read-only?",
