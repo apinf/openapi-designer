@@ -1,3 +1,5 @@
+import validURL from 'valid-url';
+
 function listen(...fields) {
   return function(target, key, descriptor) {
     descriptor.value.listen = fields;
@@ -244,6 +246,13 @@ export class Validation {
   }
 
   url(field) {
-    return { valid: true };
+    const val = field.getValue();
+    if (!val || validURL.isUri(val)) {
+      return { valid: true };
+    }
+    return {
+      valid: false,
+      error: this.i18n.tr('validation.invalid-url')
+    };
   }
 }

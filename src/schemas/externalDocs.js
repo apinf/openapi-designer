@@ -6,13 +6,13 @@ export const externalDocs = {
   },
   'children': {
     'description': {
-      'type': 'textarea',
+      'type': 'markdown',
       'hideValueIfEmpty': true
     },
     'url': {
       'type': 'text',
       'hideValueIfEmpty': false,
-      'validation': ['requiredIfParent']
+      'validation': ['requiredIfParent', 'url']
     }
   }
 };

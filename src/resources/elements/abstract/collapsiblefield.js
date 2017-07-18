@@ -32,10 +32,10 @@ export class Collapsiblefield extends Field {
   /**
    * Set the collapse status of this field.
    */
-  setCollapsed(collapsed) {
+  setCollapsed(collapsed, triggerChange = true) {
     if (this.isCollapsible) {
       this.collapsed = collapsed;
-      if (this.parent) {
+      if (this.parent && triggerChange) {
         this.parent.childCollapseChanged(this, this.collapsed);
       }
     }

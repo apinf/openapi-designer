@@ -20,7 +20,7 @@ export const header = {
           'validation': ['required']
         },
         'description': {
-          'type': 'textarea',
+          'type': 'markdown',
           'hideValueIfEmpty': true
         },
         'termsOfService': {

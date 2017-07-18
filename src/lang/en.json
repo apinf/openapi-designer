@@ -9,13 +9,15 @@
       "tags": "Tags",
       "paths": "Paths",
       "definitions": "Definitions",
-      "output-editor": "Editable output"
+      "output-editor": "Editable output",
+      "rich-preview": "Rich preview"
     },
     "actions": {
       "split": {
         "editor": "Editor only",
         "split": "Editor & Preview",
-        "output": "Editable output"
+        "output": "Editable output",
+        "preview": "Rich preview"
       },
       "delete": "Delete data",
       "download": {
@@ -28,10 +30,11 @@
     "save": "Save changes"
   },
   "modal": {
-    "download-error": {
+    "validation-error": {
       "title": "Validation errors detected!",
       "cancel": "Cancel",
-      "download-anyway": "Download anyway"
+      "download-anyway": "Download anyway",
+      "show-rich-preview-anyway": "Open preview anyway"
     }
   },
   "error": {
@@ -43,10 +46,11 @@
   "validation": {
     "required-is-empty": "This field is required!",
     "key-is-required": "The key for this field is required!",
-    "invalid-hostname": "Invalid hostname!",
-    "invalid-email": "Invalid email!",
-    "invalid-http-status": "Invalid HTTP status code!",
-    "param-not-implemented": "The path parameter {{parameter}} has not been implemented in HTTP {{method}}"
+    "invalid-hostname": "Invalid hostname! Valid examples: example.com, api.example.com:8080",
+    "invalid-email": "Invalid email! Valid example: john.smith@example.com",
+    "invalid-http-status": "Invalid HTTP status code! Valid examples: default, 200",
+    "param-not-implemented": "The path parameter {{parameter}} has not been implemented in HTTP {{method}}",
+    "invalid-url": "Invalid URL! Valid example: http://example.com"
   },
   "form": {
     "global": {
@@ -64,6 +68,10 @@
         "placeholder": "e.g. http://example.com/docs"
       }
     },
+    "defaultValue": {
+      "label": "Default value"
+    },
+    "supports-markdown": "This field supports formatting with Markdown.",
     "enum": {
       "label": "Allowed values",
       "item": {
@@ -103,7 +111,7 @@
           },
           "operationId": {
             "label": "Operation ID",
-            "placeholder": "Enter an unique operationId for this operation."
+            "placeholder": "Enter an unique identifier for this operation."
           },
           "summary": {
             "label": "Summary",
@@ -249,15 +257,16 @@
     },
     "tags": {
       "label": "Tag definitions",
+      "newItemText": "New Tag",
       "item": {
-        "label": "Tag",
+        "label": "Tag #{{index}}: {{-name}}",
         "name": {
           "label": "Name",
           "placeholder": "e.g. user_operations"
         },
         "description": {
           "label": "Description",
-          "placeholder": "Describe what is tagged with this."
+          "placeholder": "Describe what kind of operations are tagged with this tag."
         }
       }
     },
@@ -416,7 +425,7 @@
       },
       "description": {
         "label": "Description",
-        "placeholder": "Enter description..."
+        "placeholder": "Describe the parameter here."
       },
       "required": {
         "label": "Required",
@@ -455,6 +464,13 @@
     "types": {
       "label": "Types",
       "newItemText": "New Type",
+      "allOf": {
+        "label": "Joined types",
+        "newItemText": "Join a new type",
+        "item": {
+          "label": "Joined type #{{-index}}"
+        }
+      },
       "item": {
         "label": "Type #{{index}}: {{-name}}",
         "x-oad-type": {
@@ -467,6 +483,7 @@
             "array": "Array",
             "object": "Object",
             "reference": "Reference",
+            "allOf": "Joined types",
             "null": "Null",
             "file": "File"
           }
@@ -486,10 +503,20 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Enter description..."
+          "placeholder": "Describe the type here."
+        },
+        "readOnly": {
+          "label": "Read-only?",
+          "helpText": "If checked, this property doesn't affect anything when sent from the client. Read-only fields should not be marked as required."
         },
         "items": {
           "label": "Array item"
+        },
+        "uniqueItems": {
+          "label": "Require items to be unique?"
+        },
+        "additionalProperties": {
+          "label": "Schema for additional properties"
         },
         "properties": {
           "label": "Properties",
@@ -498,11 +525,11 @@
           }
         },
         "required": {
-          "label": "Required subfields",
+          "label": "Required properties",
           "item": {
-            "label": "Required field",
+            "label": "Required properties",
             "choices": {
-              "choose": "Choose a field..."
+              "choose": "Choose a property..."
             }
           }
         },

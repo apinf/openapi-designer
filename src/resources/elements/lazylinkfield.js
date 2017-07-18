@@ -34,7 +34,7 @@ export class LazyLinkfield extends Field {
    */
   isEmpty() {
     if (!this.child) {
-      return true;
+      return !this.cachedValue;
     }
     return this.child.isEmpty();
   }
@@ -116,10 +116,12 @@ export class LazyLinkfield extends Field {
     // lazy.
     const display = super.shouldDisplay();
     if (display) {
-      if (this.child === undefined) {
+      const isParentCollapsed = this.parent && this.parent.isCollapsible && this.parent.collapsed;
+      if (this.child === undefined && !isParentCollapsed) {
         this.createChild();
       }
     } else if (this.child !== undefined) {
+      this.cachedValue = this.child.getValue();
       this.deleteChild();
     }
     return display;
@@ -152,7 +154,10 @@ export class LazyLinkfield extends Field {
    *                  {@link #resolveTarget} returns {@linkplain undefined}.
    */
   getValue() {
-    return this.child ? this.child.getValue() : undefined;
+    if (this.child) {
+      return this.child.getValue();
+    }
+    return this.cachedValue;
   }
 
   resolvePath(path) {

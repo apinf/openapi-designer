@@ -1,6 +1,11 @@
 $main-color: #FFC107;
 $dark-color: darken($main-color, 5%);
 $border-color: #DBDBDB;
+$background-color: #f7f7f7;
+
+.loader:before, .loader:after {
+  background: $background-color !important;
+}
 
 @import "dropdown";
 @import "tooltip";

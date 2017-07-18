@@ -3,13 +3,31 @@
 
   &.has-editor:not(.split-view) > .form,
       &:not(.split-view) > .about,
-      > .output-editor {
+      > .output-editor,
+      > .rich-preview-wrapper {
     display: block;
     float: none;
 
     width: 100%;
     max-width: 60rem;
     margin: auto;
+  }
+
+  &.split-view {
+    position: absolute;
+    top: 5.75rem;
+    right: 0;
+    bottom: 3.5rem;
+    left: 0;
+
+    margin: 1rem 1.5rem;
+
+    > .about, > .form, > .preview {
+      overflow-y: auto;
+
+      box-sizing: border-box;
+      height: 100%;
+    }
   }
 
   .output-editor {

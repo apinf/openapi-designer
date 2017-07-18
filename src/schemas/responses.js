@@ -22,7 +22,7 @@ export const response = {
       'type': 'object',
       'children': {
         'description': {
-          'type': 'textarea',
+          'type': 'markdown',
           'validation': ['required']
         },
         'schema': {

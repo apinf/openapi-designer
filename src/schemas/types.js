@@ -139,12 +139,23 @@ export const enumItem = {
       'type': 'array',
       'item': {
         'type': 'lazylink',
-        'target': '/enum-item'
+        'target': '/common/enum-item'
       },
       'hideValueIfEmpty': false,
       'i18n': blankLabel
     }
   }
+};
+
+const defaultValue = Object.assign({}, enumItem);
+defaultValue.i18n = {
+  'path': 'form.enum.item',
+  'keys': {
+    'label': 'form.defaultValue.label'
+  }
+};
+defaultValue.conditions = {
+  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
 };
 
 export const enumArray = {
@@ -158,7 +169,32 @@ export const enumArray = {
 
 const enumIfHasType = Object.assign({}, enumArray);
 enumIfHasType.conditions = {
-  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
+  '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'null']
+};
+
+export const allOf = {
+  'type': 'array',
+  'hideValueIfEmpty': false,
+  'i18n': {
+    'path': 'form.types.allOf'
+  },
+  'item': {
+    'type': 'lazylink',
+    'target': '/global-definitions/types/:item',
+    'overrides': {
+      'i18n': {
+        'path': 'form.types.item',
+        'keys': {
+          'label': 'form.types.allOf.item.label'
+        },
+        'interpolations': {
+          'index': '${..:humanIndex}'
+        }
+      },
+      'legendChildren/name': null,
+      'legendChildren/x-oad-type/columns': 8
+    }
+  }
 };
 
 export const types = {
@@ -177,7 +213,9 @@ export const types = {
     'type': 'object',
     'setValueListeners': [
       (field, newValue) => {
-        if (newValue.hasOwnProperty('$ref')) {
+        if (newValue.hasOwnProperty('allOf')) {
+          field.legendChildren['x-oad-type'].setValue('allOf');
+        } else if (newValue.hasOwnProperty('$ref')) {
           field.legendChildren['x-oad-type'].setValue('reference');
         } else if (newValue.hasOwnProperty('type')) {
           field.legendChildren['x-oad-type'].setValue(newValue.type);
@@ -200,7 +238,7 @@ export const types = {
         'format': 'dropdown',
         'choices': [
           {'key': '', 'i18nKey': 'choose'},
-          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'null'
+          'string', 'integer', 'boolean', 'number', 'array', 'object', 'reference', 'allOf', 'null'
         ],
         'validation': ['required']
       },
@@ -231,6 +269,13 @@ export const types = {
           '../x-oad-type': 'reference'
         }
       },
+      'allOf': {
+        'type': 'lazylink',
+        'target': '/common/types-allof',
+        'conditions': {
+          '../x-oad-type': 'allOf'
+        }
+      },
       'type': {
         'type': 'link',
         'target': '../x-oad-type',
@@ -245,7 +290,7 @@ export const types = {
         }
       },
       'description': {
-        'type': 'textarea',
+        'type': 'markdown',
         'conditions': {
           '../x-oad-type': ['string', 'integer', 'boolean', 'number', 'array', 'object', 'null']
         }
@@ -256,6 +301,18 @@ export const types = {
         'choices': typeFormatChoices
       },
       'enum': enumIfHasType,
+      'default': defaultValue,
+      'readOnly': {
+        'type': 'option',
+        'format': 'checkbox',
+        'checkboxFormat': 'simple',
+        'choices': [{'i18nKey': '/blank', 'key': ''}],
+        'conditions': {
+          // Check if the property this readOnly field is in is the child of a
+          // object property/definition.
+          '../../../../x-oad-type': 'object'
+        }
+      },
       'items': {
         'type': 'lazylink',
         'target': '/global-definitions/types/:item',
@@ -267,6 +324,15 @@ export const types = {
           'legendChildren/name': null,
           'legendChildren/x-oad-type/columns': 8
         },
+        'conditions': {
+          '../x-oad-type': 'array'
+        }
+      },
+      'uniqueItems': {
+        'type': 'option',
+        'format': 'checkbox',
+        'checkboxFormat': 'simple',
+        'choices': [{'i18nKey': '/blank', 'key': ''}],
         'conditions': {
           '../x-oad-type': 'array'
         }
@@ -288,6 +354,22 @@ export const types = {
               'type': '${#/type}'
             }
           }
+        },
+        'conditions': {
+          '../x-oad-type': 'object'
+        }
+      },
+      'additionalProperties': {
+        'type': 'lazylink',
+        'target': '/global-definitions/types/:item',
+        'overrides': {
+          'i18n/keys': {
+            'label': 'form.types.item.additionalProperties.label'
+          },
+          'legendChildren/name': null,
+          'legendChildren/x-oad-type/columns': 8,
+          'legendChildren/x-oad-type/validation': [],
+          'collapsed': true
         },
         'conditions': {
           '../x-oad-type': 'object'

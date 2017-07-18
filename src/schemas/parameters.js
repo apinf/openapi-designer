@@ -59,8 +59,9 @@ export const parameterItemDefinition = {
   'Path': 'form.parameter',
   'i18n': {
     'keys': {
-      'label': 'form.parameter.parameter.items.label'
-    }
+      'label': 'form.parameter.items.label'
+    },
+    'path': 'form.parameter'
   },
   'hideValueIfEmpty': false,
   'children': {
@@ -69,7 +70,7 @@ export const parameterItemDefinition = {
     'collectionFormat': parameterCollectionFormat,
     'items': {
       'type': 'lazylink',
-      'target': '/parameter-item-definition',
+      'target': '/common/parameter-item-definition',
       'conditions': {
         '../type': 'array'
       }
@@ -127,7 +128,7 @@ export const parameter = {
           'hideValueIfEmpty': false
         },
         'description': {
-          'type': 'textarea'
+          'type': 'markdown'
         },
         'required': {
           'type': 'option',

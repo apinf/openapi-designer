@@ -31,7 +31,7 @@
 
   &.validation-error {
     > label, > .title {
-      color: #9F3A38;
+      color: #CF0001;
     }
   }
 
@@ -44,9 +44,7 @@
   .title {
     display: flex;
 
-    margin: 0;
-    margin-bottom: .5rem;
-    margin-left: .25rem;
+    margin: 0 .25rem .5rem;
 
     &:last-child {
       margin-bottom: 0;
@@ -60,14 +58,13 @@
     > .collapse-button {
       display: inline-block;
 
+      height: 1.5rem;
+      padding: 0 .25rem;
+
       cursor: pointer;
 
       border: none;
       background: none;
-
-      > img {
-        opacity: .2;
-      }
     }
   }
 
@@ -105,10 +102,8 @@
       }
 
       &.validation-error {
-        margin-bottom: 0;
-
-        color: #9F3A38;
-        border-bottom: .125rem solid #E0B4B4;
+        color: #CF0001;
+        border-bottom: .0625rem solid #CF0001;
         background-color: #FFF6F6;
       }
     }
@@ -133,14 +128,12 @@
     }
   }
 
-  &.text input, &.textarea textarea {
+  &.text input, &.textarea textarea, &.markdown .CodeMirror {
     display: block;
 
     width: 100%;
     margin-bottom: .0625rem;
     padding: .25rem 0;
-
-    resize: vertical;
 
     border: none;
     border-bottom: .0625rem solid $border-color;
@@ -150,18 +143,58 @@
       border-bottom: .0625rem solid $main-color;
     }
 
-    &:focus {
+    &:focus, &.CodeMirror-focused {
       margin-bottom: 0;
 
       border-bottom: .125rem solid $main-color;
     }
 
     &.validation-error {
-      margin-bottom: 0;
+      color: #CF0001;
+      border-bottom: .0625rem solid #CF0001;
+    }
+  }
 
-      color: #9F3A38;
-      border-bottom: .125rem solid #E0B4B4;
-      background-color: #FFF6F6;
+  &.markdown .CodeMirror {
+    height: auto;
+
+    cursor: text;
+
+    background-color: inherit;
+
+    &, .CodeMirror-scroll {
+      min-height: 5rem;
+    }
+
+    // Fix resizing on Webkit-based browsers
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      overflow-y: auto;
+    }
+
+    pre {
+      padding: 0;
+    }
+
+    .cm-comment {
+      // Make sure code blocks are monospace
+      font-family: monospace !important;
+    }
+
+    // Improve link coloring
+    .cm-link {
+      color: #2aa198;
+
+      &.cm-formatting {
+        color: #7f8c8d;
+      }
+    }
+
+    .cm-url {
+      color: #337ab7;
+
+      &.cm-formatting {
+        color: #7f8c8d;
+      }
     }
   }
 
@@ -202,10 +235,11 @@
 
   &.tabbed.object {
     > .tabs {
+      margin-bottom: 1rem;
       padding: .5rem 1rem;
 
       border-bottom: 1px solid lightgray;
-      background-color: white;
+      background-color: $background-color;
 
       > .tab-link {
         display: inline;
@@ -229,7 +263,7 @@
 
           color: black !important;
           border: 1px solid lightgray;
-          border-bottom: 1px solid white;
+          border-bottom: 1px solid $background-color;
 
           &:focus {
             outline: 1px dotted lightgray;
@@ -310,31 +344,21 @@
 
           width: 2.5rem;
 
-          transform: translateY(-1rem);
+          transform: translateY(.5rem);
 
-          > .delete-button, > .collapse-button {
+          > .delete-button {
             display: inline-block;
 
             cursor: pointer;
-            transform: translateY(50%);
 
             border: none;
             background: none;
 
             > img {
-              opacity: .2;
+              width: 1rem;
+              height: 1rem;
+              padding: .25rem;
             }
-          }
-
-          > .delete-button > img {
-            width: 1rem;
-            height: 1rem;
-            padding: .25rem;
-          }
-
-          > .collapse-button > img {
-            width: 1.5rem;
-            height: 1.5rem;
           }
         }
 

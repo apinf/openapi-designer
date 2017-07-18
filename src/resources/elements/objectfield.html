@@ -5,7 +5,7 @@
         <compose containerless view-model.bind="childElem"></compose>
       </template>
     </legend>
-    <h3 click.delegate="toggleCollapse()" if.bind="label" class="title">
+    <h4 click.delegate="toggleCollapse()" if.bind="label" class="title">
       ${label}
       <tooltip if.bind="helpText" text.bind="helpText">
         <img src="res/info.svg" alt="Info"/>
@@ -14,7 +14,7 @@
         <img src="res/collapse-open.svg" alt="Collapse" if.bind="!collapsed"/>
         <img src="res/collapse-closed.svg" alt="Collapse" if.bind="collapsed"/>
       </button>
-    </h3>
+    </h4>
     <template repeat.for="childElem of iterableChildren">
       <compose containerless if.bind="!collapsed && !childElem.noView" view-model.bind="childElem"></compose>
     </template>
