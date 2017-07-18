@@ -35,6 +35,13 @@
       "cancel": "Cancel",
       "download-anyway": "Download anyway",
       "show-rich-preview-anyway": "Open preview anyway"
+    },
+    "space-login": {
+      "title": "Log in to OpenAPI space",
+      "username": "Enter username...",
+      "password": "Enter password...",
+      "cancel": "Cancel",
+      "login": "Log in"
     }
   },
   "error": {

@@ -70,6 +70,30 @@ export class App {
     location.reload();
   }
 
+  spaceLogin() {
+    const SPACE_BASE = 'https://openapi.space/api/v1';
+    $.ajax({
+      type: 'POST',
+      url: `${SPACE_BASE}/auth/login`,
+      contentType: 'application/json',
+      data: JSON.stringify({
+        username: this.spaceUsername.value,
+        password: this.spacePassword.value
+      })
+    }).then(data => {
+      window.localStorage.spaceToken = data.token;
+      window.localStorage.spaceUser = data.username;
+      this.spaceLoginModal.close();
+      if (this.pendingSkyUpload) {
+        this.pendingSkyUpload();
+        this.pendingSkyUpload = undefined;
+      }
+    }).fail(err => {
+      // TODO show error to user
+      console.error(err);
+    });
+  }
+
   showRichPreview() {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
@@ -244,7 +268,7 @@ export class App {
   }
 
   upload(theCloud) {
-    theCloud.upload(this.getFormData());
+    theCloud.upload.call(theCloud, this.getFormData(), this);
   }
 
   delete(force) {
