@@ -64,7 +64,7 @@ export class App {
         this.forms.setValue(savedData);
       }
     } catch (exception) {
-      console.log(exception);
+      console.error(exception);
       this.exception = exception;
       return;
     }
@@ -139,7 +139,6 @@ export class App {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
       // Let's try again a bit later.
-      console.log('DOM not ready. Retrying rich preview in 0.5s...');
       setTimeout(() => this.showRichPreview(), 500);
       return;
     }
@@ -321,7 +320,6 @@ export class App {
             this.i18n.tr('notify.import-failed.title'),
             this.i18n.tr('notify.import-failed.body', {error: ex}),
             'error');
-          console.error(ex);
           return;
         }
         this.forms.setValue(data);
