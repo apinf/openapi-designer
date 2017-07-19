@@ -13,9 +13,8 @@ COPY package-lock.json package.json /app/
 RUN npm install 
 
 ADD . .
-# TODO add arg support for building other environments than
-# the one in use at the git repo (e.g. production)
-RUN au build
+ARG env=dev
+RUN au build --env $env
 
 RUN rm -rf /usr/share/nginx/html
 RUN ln -s /app /usr/share/nginx/html
