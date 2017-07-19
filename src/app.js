@@ -19,23 +19,26 @@ import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
 // Aurelia is probably not completely guilt-free either.
 //
 // To add a new pnotify module, you must add it to both of the arrays below in
-// the same format as the existing three extra modules.
+// the same format as the existing extra modules.
 require(
   [
     'pnotify',
-    'pnotify/pnotify.nonblock',
     'pnotify/pnotify.animate',
     'pnotify/pnotify.confirm'
   ],
   () => require(
     [
       'pnotify',
-      'pnotify.nonblock',
       'pnotify.animate',
       'pnotify.confirm'
     ],
     pnfTemp => window.PNotify = pnfTemp));
 
+window.stack_bottomright = {
+  dir1: 'up',
+  dir2: 'left',
+  push: 'up'
+};
 
 @inject(I18N, EventAggregator)
 export class App {
@@ -187,19 +190,12 @@ export class App {
       title,
       text,
       type,
-      stack: {
-        dir1: 'up',
-        dir2: 'left',
-        push: 'up'
-      },
+      stack: stack_bottomright,
       addclass: 'stack-bottomright',
       animate: {
         animate: true,
         in_class: 'slideInUp',
         out_class: 'slideOutDown'
-      },
-      nonblock: {
-        nonblock: true
       }
     });
     notif.get().click(() => {
@@ -219,23 +215,21 @@ export class App {
         title,
         text,
         type,
-        stack: {
-          dir1: 'up',
-          dir2: 'left',
-          push: 'up'
-        },
+        stack: stack_bottomright,
         addclass: 'stack-bottomright',
         animate: {
           animate: true,
-          in_class: 'slideInUp',
-          out_class: 'slideOutDown'
+          in_class: 'bounceInUp',
+          out_class: 'bounceOutDown'
         },
         confirm: {
           confirm: true
         }
       });
-      notif.get().on('pnotify.confirm', resolve);
-      notif.get().on('pnotify.cancel', reject);
+      notif.get()
+        .on('pnotify.confirm', resolve)
+        .on('pnotify.cancel', reject)
+        .click(() => notif.remove());
     });
   }
 
