@@ -12,6 +12,12 @@ export const sky = [
         designer.pendingSkyUpload = () => this.upload(apiSpec, designer);
         return;
       }
+      if (!apiSpec || !apiSpec.info || !apiSpec.info.title) {
+        const title = designer.i18n.tr('sky.space.upload-failed.title');
+        const body = designer.i18n.tr('sky.space.upload-failed.missing-title');
+        designer.notify(body, title, 'error');
+        return;
+      }
       const apiTitle = apiSpec.info.title;
       const version = apiSpec.info.version;
       const url = `${this.baseURL}/apis/${window.localStorage.spaceUser}/${apiTitle}`;

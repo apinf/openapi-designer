@@ -44,7 +44,8 @@
         "invalid-document": "Invalid Swagger document",
         "access-denied": "Access denied",
         "version-published": "Can't edit published API",
-        "unknown": "Unknown error: HTTP {{status}}"
+        "unknown": "Unknown error: HTTP {{status}}",
+        "missing-title": "The API must have a title in order to upload to OpenAPI space."
       }
     }
   },
