@@ -2,7 +2,7 @@ import {inject, bindable} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
-import {Field} from './resources/elements/abstract/field';
+import {Field} from './resources/form/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
 import {sky} from './sky';
 import {Validation} from './validation';

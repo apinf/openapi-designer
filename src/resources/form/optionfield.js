@@ -283,8 +283,8 @@ export class Optionfield extends Field {
   getViewStrategy() {
     // Dropdowns break on IE and Edge, so we have a separate HTML file for them.
     if (!!window.StyleMedia && this.format === 'dropdown') {
-      return `resources/elements/optionfield-${this.format}-ie.html`;
+      return `resources/form/optionfield-${this.format}-ie.html`;
     }
-    return `resources/elements/optionfield-${this.format}.html`;
+    return `resources/form/optionfield-${this.format}.html`;
   }
 }
