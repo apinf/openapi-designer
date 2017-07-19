@@ -7,10 +7,38 @@ import {schema, fieldsToShow} from './schemas/index';
 import {sky} from './sky';
 import {Validation} from './validation';
 import YAML from 'yamljs';
-import PNotify from 'pnotify';
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
-import $ from 'jquery';
+
+// I have no idea why this works.
+// PNotify has a very interesting module system that I couldn't get to work work
+// when importing in any other way than by using the monstrosity below.
+// Aurelia is probably not completely guilt-free either.
+//
+// To add a new pnotify module, you must add it to both of the arrays below in
+// the same format as the existing extra modules.
+require(
+  [
+    'pnotify',
+    'pnotify/pnotify.animate',
+    'pnotify/pnotify.confirm'
+  ],
+  () => require(
+    [
+      'pnotify',
+      'pnotify.animate',
+      'pnotify.confirm'
+    ],
+    pnfTemp => window.PNotify = pnfTemp));
+
+window.stack_bottomright = {
+  dir1: 'up',
+  dir2: 'left',
+  push: 'up'
+};
 
 @inject(I18N, EventAggregator)
 export class App {
@@ -36,7 +64,7 @@ export class App {
         this.forms.setValue(savedData);
       }
     } catch (exception) {
-      console.log(exception);
+      console.error(exception);
       this.exception = exception;
       return;
     }
@@ -90,9 +118,20 @@ export class App {
         this.pendingSkyUpload();
         this.pendingSkyUpload = undefined;
       }
-    }).fail(err => {
-      // TODO show error to user
-      console.error(err);
+    }).fail(({status}) => {
+      const title = this.i18n.tr('notify.space-login-failed.title');
+      let body;
+      switch (status) {
+      case 404:
+        body = this.i18n.tr('notify.space-login-failed.incorrect-username');
+        break;
+      case 401:
+        body = this.i18n.tr('notify.space-login-failed.incorrect-password');
+        break;
+      default:
+        body = this.i18n.tr('notify.space-login-failed.unknown-error', {status});
+      }
+      this.notify(title, body, 'error');
     });
   }
 
@@ -100,7 +139,6 @@ export class App {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
       // Let's try again a bit later.
-      console.log('DOM not ready. Retrying rich preview in 0.5s...');
       setTimeout(() => this.showRichPreview(), 500);
       return;
     }
@@ -156,32 +194,52 @@ export class App {
     window.localStorage.split = type;
   }
 
-  notify(title, text = '', type = 'info', url = '') {
+  notify(title, text = '', type = 'info', url = '', onclick = undefined) {
     /*eslint no-new: 0*/
     const notif = new PNotify({
       title,
       text,
       type,
-      stack: {
-        dir1: 'up',
-        dir2: 'left',
-        push: 'up'
-      },
+      stack: stack_bottomright,
       addclass: 'stack-bottomright',
       animate: {
         animate: true,
         in_class: 'slideInUp',
         out_class: 'slideOutDown'
-      },
-      nonblock: {
-        nonblock: true
       }
     });
     notif.get().click(() => {
       notif.remove();
+      if (onclick) {
+        onclick();
+      }
       if (url) {
         window.open(url, '_blank');
       }
+    });
+  }
+
+  confirm(title, text, type = 'info') {
+    return new Promise((resolve, reject) => {
+      const notif = new PNotify({
+        title,
+        text,
+        type,
+        stack: stack_bottomright,
+        addclass: 'stack-bottomright',
+        animate: {
+          animate: true,
+          in_class: 'bounceInUp',
+          out_class: 'bounceOutDown'
+        },
+        confirm: {
+          confirm: true
+        }
+      });
+      notif.get()
+        .on('pnotify.confirm', resolve)
+        .on('pnotify.cancel', reject)
+        .click(() => notif.remove());
     });
   }
 
@@ -206,13 +264,23 @@ export class App {
       try {
         data = JSON.parse(rawData);
       } catch (ex) {
-        console.error(ex);
+        this.notify(
+          this.i18n.tr('notify.import-failed.title'),
+          this.i18n.tr('notify.import-failed.body', {error: ex}),
+          'error');
         return;
-        // Oh noes!
       }
     }
     delete(true);
     this.forms.setValue(data);
+    this.notify(
+      this.i18n.tr('notify.editor-import-complete.title'),
+      this.i18n.tr('notify.editor-import-complete.body', {
+        title: this.forms.resolveRef('#/header/info/title').getValue(),
+        version: this.forms.resolveRef('#/header/info/version').getValue()
+      }),
+      'success'
+    );
   }
 
   importFile() {
@@ -248,11 +316,21 @@ export class App {
             data = JSON.parse(reader.result);
           }
         } catch (ex) {
-          console.error(ex);
+          this.notify(
+            this.i18n.tr('notify.import-failed.title'),
+            this.i18n.tr('notify.import-failed.body', {error: ex}),
+            'error');
           return;
-          // Oh noes!
         }
         this.forms.setValue(data);
+        this.notify(
+          this.i18n.tr('notify.import-complete.title'),
+          this.i18n.tr('notify.import-complete.body', {
+            title: this.forms.resolveRef('#/header/info/title').getValue(),
+            version: this.forms.resolveRef('#/header/info/version').getValue()
+          }),
+          'success'
+        );
       }, false);
       reader.readAsText(file);
     });
@@ -303,17 +381,34 @@ export class App {
     theCloud.upload.call(theCloud, this.getFormData(), this);
   }
 
-  delete(force) {
+  delete(force = false, notify = false) {
     if (!force) {
-      const userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
-      if (!userInput) {
-        return;
-      }
+      this.confirm(
+        this.i18n.tr('confirm.delete.title'),
+        this.i18n.tr('confirm.delete.body')
+      ).then(() => this.delete(true, notify))
+      .catch(() => void (0));
+      return;
+    }
+    let oldData;
+    if (notify) {
+      oldData = this.forms.getValue();
     }
     const pointerlessSchema = $.extend(true, {}, schema);
     this.forms = parseJSON('form', pointerlessSchema);
     delete localStorage['openapi-v2-design'];
     window.onhashchange();
+    if (notify) {
+      this.notify(
+        this.i18n.tr('notify.delete.title'),
+        this.i18n.tr('notify.delete.body'),
+        'info',
+        '',
+        () => {
+          this.delete(true, false);
+          this.forms.setValue(oldData);
+        });
+    }
   }
 
   getFormData() {

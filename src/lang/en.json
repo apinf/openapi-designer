@@ -44,8 +44,39 @@
         "invalid-document": "Invalid Swagger document",
         "access-denied": "Access denied",
         "version-published": "Can't edit published API",
-        "unknown": "Unknown error: HTTP {{status}}"
+        "unknown": "Unknown error: HTTP {{status}}",
+        "missing-title": "The API must have a title in order to upload to OpenAPI space."
       }
+    }
+  },
+  "notify": {
+    "import-complete": {
+      "title": "Import complete",
+      "body": "{{title}} v{{version}} has been imported into the designer."
+    },
+    "import-failed": {
+      "title": "Import failed",
+      "body": "Failed to import document: {{error}}"
+    },
+    "editor-import-complete": {
+      "title": "Edited output saved",
+      "body": "You changes to the output editor have been saved."
+    },
+    "delete": {
+      "title": "Document deleted",
+      "body": "The data in the editor has been deleted.\n\nClick here to recover."
+    },
+    "space-login-failed": {
+      "title": "Login failed",
+      "incorrect-username": "Incorrect username.",
+      "incorrect-password": "Incorrect password.",
+      "unknown": "Unknown error: HTTP {{status}}"
+    }
+  },
+  "confirm": {
+    "delete": {
+      "title": "Confirm deletion",
+      "body": "Are you sure you want to delete ALL data?"
     }
   },
   "modal": {
