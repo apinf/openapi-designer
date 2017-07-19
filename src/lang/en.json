@@ -48,6 +48,24 @@
       }
     }
   },
+  "notify": {
+    "import-complete": {
+      "title": "Import complete",
+      "body": "{{title}} v{{version}} has been imported into the designer."
+    },
+    "import-failed": {
+      "title": "Import failed",
+      "body": "Failed to import document: {{error}}"
+    },
+    "editor-import-complete": {
+      "title": "Edited output saved",
+      "body": "You changes to the output editor have been saved."
+    },
+    "delete": {
+      "title": "Document deleted",
+      "body": "The data in the editor has been deleted.\n\nClick here to recover."
+    }
+  },
   "modal": {
     "validation-error": {
       "title": "Validation errors detected!",

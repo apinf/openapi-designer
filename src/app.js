@@ -156,7 +156,7 @@ export class App {
     window.localStorage.split = type;
   }
 
-  notify(title, text = '', type = 'info', url = '') {
+  notify(title, text = '', type = 'info', url = '', onclick = undefined) {
     /*eslint no-new: 0*/
     const notif = new PNotify({
       title,
@@ -179,6 +179,9 @@ export class App {
     });
     notif.get().click(() => {
       notif.remove();
+      if (onclick) {
+        onclick();
+      }
       if (url) {
         window.open(url, '_blank');
       }
@@ -206,13 +209,23 @@ export class App {
       try {
         data = JSON.parse(rawData);
       } catch (ex) {
-        console.error(ex);
+        this.notify(
+          this.i18n.tr('notify.import-failed.title'),
+          this.i18n.tr('notify.import-failed.body', {error: ex}),
+          'error');
         return;
-        // Oh noes!
       }
     }
     delete(true);
     this.forms.setValue(data);
+    this.notify(
+      this.i18n.tr('notify.editor-import-complete.title'),
+      this.i18n.tr('notify.editor-import-complete.body', {
+        title: this.forms.resolveRef('#/header/info/title').getValue(),
+        version: this.forms.resolveRef('#/header/info/version').getValue()
+      }),
+      'success'
+    );
   }
 
   importFile() {
@@ -248,11 +261,22 @@ export class App {
             data = JSON.parse(reader.result);
           }
         } catch (ex) {
+          this.notify(
+            this.i18n.tr('notify.import-failed.title'),
+            this.i18n.tr('notify.import-failed.body', {error: ex}),
+            'error');
           console.error(ex);
           return;
-          // Oh noes!
         }
         this.forms.setValue(data);
+        this.notify(
+          this.i18n.tr('notify.import-complete.title'),
+          this.i18n.tr('notify.import-complete.body', {
+            title: this.forms.resolveRef('#/header/info/title').getValue(),
+            version: this.forms.resolveRef('#/header/info/version').getValue()
+          }),
+          'success'
+        );
       }, false);
       reader.readAsText(file);
     });
@@ -303,17 +327,32 @@ export class App {
     theCloud.upload.call(theCloud, this.getFormData(), this);
   }
 
-  delete(force) {
+  delete(force = false, notify = false) {
     if (!force) {
       const userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
       if (!userInput) {
         return;
       }
     }
+    let oldData;
+    if (notify) {
+      oldData = this.forms.getValue();
+    }
     const pointerlessSchema = $.extend(true, {}, schema);
     this.forms = parseJSON('form', pointerlessSchema);
     delete localStorage['openapi-v2-design'];
     window.onhashchange();
+    if (notify) {
+      this.notify(
+        this.i18n.tr('notify.delete.title'),
+        this.i18n.tr('notify.delete.body'),
+        'info',
+        '',
+        () => {
+          this.delete(true, false);
+          this.forms.setValue(oldData);
+        });
+    }
   }
 
   getFormData() {
