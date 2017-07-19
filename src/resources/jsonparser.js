@@ -1,4 +1,4 @@
-import {fields} from './elements/index';
+import {fields} from './form/index';
 
 /**
  * Parse an object into a {@link Field}.

@@ -44,6 +44,7 @@
     "root": "src",
     "resources": "src/resources",
     "elements": "src/resources/elements",
+    "form": "src/resources/form",
     "attributes": "src/resources/attributes",
     "valueConverters": "src/resources/value-converters",
     "bindingBehaviors": "src/resources/binding-behaviors"

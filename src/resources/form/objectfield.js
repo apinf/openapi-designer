@@ -194,8 +194,8 @@ export class Objectfield extends Parentfield {
    */
   getViewStrategy() {
     if (this.format === 'tabs') {
-      return 'resources/elements/objectfield-tabbed.html';
+      return 'resources/form/objectfield-tabbed.html';
     }
-    return 'resources/elements/objectfield.html';
+    return 'resources/form/objectfield.html';
   }
 }
