@@ -121,6 +121,11 @@
           "text",
           "jquery",
           {
+            "name": "pnotify",
+            "path": "../node_modules/pnotify/src",
+            "main": "pnotify"
+          },
+          {
             "name": "valid-url",
             "path": "../node_modules/valid-url",
             "main": "index"

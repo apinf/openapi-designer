@@ -7,6 +7,7 @@ import {schema, fieldsToShow} from './schemas/index';
 import {sky} from './sky';
 import {Validation} from './validation';
 import YAML from 'yamljs';
+import PNotify from 'pnotify';
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
 import $ from 'jquery';
@@ -153,6 +154,31 @@ export class App {
     }
     window.localStorage.split = type;
   }
+
+  notify(title, text = '', type = 'info') {
+    /*eslint no-new: 0*/
+    const notif = new PNotify({
+      title,
+      text,
+      type,
+      stack: {
+        dir1: 'up',
+        dir2: 'left',
+        push: 'up'
+      },
+      addclass: 'stack-bottomright',
+      animate: {
+        animate: true,
+        in_class: 'slideInUp',
+        out_class: 'slideOutDown'
+      },
+      nonblock: {
+        nonblock: true
+      }
+    });
+    notif.get().click(() => notif.remove());
+  }
+
 
   attached() {
     if (window.onhashchange) {
