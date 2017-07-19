@@ -20,6 +20,7 @@ export class App {
   sky = [];
 
   constructor(i18n, ea) {
+    this.i18n = i18n;
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);

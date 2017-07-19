@@ -29,6 +29,25 @@
   "output-editor": {
     "save": "Save changes"
   },
+  "sky": {
+    "space": {
+      "upload-complete": {
+        "title": "Upload complete",
+        "clickhere": "Click here to open the uploaded document.",
+        "uploaded-has-been": "{{title}} v{{version}} has been ",
+        "updated": "$t(sky.space.upload-complete.uploaded-has-been) updated in OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)",
+        "created": "$t(sky.space.upload-complete.uploaded-has-been) added to OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)",
+        "unknown": "$t(sky.space.upload-complete.uploaded-has-been) uploaded to OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)"
+      },
+      "upload-failed": {
+        "title": "Upload failed",
+        "invalid-document": "Invalid Swagger document",
+        "access-denied": "Access denied",
+        "version-published": "Can't edit published API",
+        "unknown": "Unknown error: HTTP {{status}}"
+      }
+    }
+  },
   "modal": {
     "validation-error": {
       "title": "Validation errors detected!",
