@@ -99,3 +99,49 @@
     margin-left: auto;
   }
 }
+
+.space-login {
+  input {
+    display: block;
+
+    box-sizing: border-box;
+    width: 100%;
+    margin: 1rem 0 1.0625rem;
+    padding: .5rem;
+
+    border: none;
+    border-bottom: .0625rem solid $border-color;
+    border-radius: .25rem .25rem 0 0;
+    background-color: white;
+
+    &:hover {
+      border-bottom: .0625rem solid $main-color;
+    }
+
+    &:focus {
+      margin-bottom: 1rem;
+
+      border-bottom: .125rem solid $main-color;
+    }
+  }
+
+  .right-aligner {
+    width: 15.25rem;
+    margin-left: auto;
+  }
+
+  button {
+    width: 7.5rem;
+    margin-left: auto;
+    padding: .375rem 1rem;
+
+    text-transform: uppercase;
+
+    border: none;
+    background-color: $main-color;
+
+    &:hover {
+      background-color: $dark-color;
+    }
+  }
+}

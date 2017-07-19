@@ -1,0 +1,21 @@
+<template>
+  <modal view-model.ref="spaceLoginModal" class="space-login">
+    <div slot="header" t="modal.space-login.title">
+      Log in to OpenAPI space
+    </div>
+    <div slot="content" class="space-login-modal">
+      <input type="text" t="[placeholder]modal.space-login.username" ref="spaceUsername"/>
+      <input type="password" t="[placeholder]modal.space-login.password" ref="spacePassword"/>
+    </div>
+    <div slot="footer" class="footer">
+      <div class="right-aligner">
+        <button class="cancel" t="modal.space-login.cancel" click.delegate="spaceLoginModal.close()">
+          Cancel
+        </button>
+        <button class="login" t="modal.space-login.login" click.delegate="spaceLogin()">
+          Log in
+        </button>
+      </div>
+    </div>
+  </modal>
+</template>

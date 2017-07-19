@@ -4,8 +4,10 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
 import {Field} from './resources/elements/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
+import {sky} from './sky';
 import {Validation} from './validation';
 import YAML from 'yamljs';
+import PNotify from 'pnotify';
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
 import $ from 'jquery';
@@ -15,11 +17,14 @@ export class App {
   @bindable
   language = window.localStorage.language || 'en';
   enableBranding = true;
+  sky = [];
 
   constructor(i18n, ea) {
+    this.i18n = i18n;
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
+    this.sky = sky;
     // Allow access from browser console
     window.$oai = this;
 
@@ -65,6 +70,30 @@ export class App {
   languageChanged() {
     window.localStorage.language = this.language;
     location.reload();
+  }
+
+  spaceLogin() {
+    const SPACE_BASE = 'https://openapi.space/api/v1';
+    $.ajax({
+      type: 'POST',
+      url: `${SPACE_BASE}/auth/login`,
+      contentType: 'application/json',
+      data: JSON.stringify({
+        username: this.spaceUsername.value,
+        password: this.spacePassword.value
+      })
+    }).then(data => {
+      window.localStorage.spaceToken = data.token;
+      window.localStorage.spaceUser = data.username;
+      this.spaceLoginModal.close();
+      if (this.pendingSkyUpload) {
+        this.pendingSkyUpload();
+        this.pendingSkyUpload = undefined;
+      }
+    }).fail(err => {
+      // TODO show error to user
+      console.error(err);
+    });
   }
 
   showRichPreview() {
@@ -126,6 +155,36 @@ export class App {
     }
     window.localStorage.split = type;
   }
+
+  notify(title, text = '', type = 'info', url = '') {
+    /*eslint no-new: 0*/
+    const notif = new PNotify({
+      title,
+      text,
+      type,
+      stack: {
+        dir1: 'up',
+        dir2: 'left',
+        push: 'up'
+      },
+      addclass: 'stack-bottomright',
+      animate: {
+        animate: true,
+        in_class: 'slideInUp',
+        out_class: 'slideOutDown'
+      },
+      nonblock: {
+        nonblock: true
+      }
+    });
+    notif.get().click(() => {
+      notif.remove();
+      if (url) {
+        window.open(url, '_blank');
+      }
+    });
+  }
+
 
   attached() {
     if (window.onhashchange) {
@@ -238,6 +297,10 @@ export class App {
       downloadLink.click();
       document.body.removeChild(downloadLink);
     }
+  }
+
+  upload(theCloud) {
+    theCloud.upload.call(theCloud, this.getFormData(), this);
   }
 
   delete(force) {
