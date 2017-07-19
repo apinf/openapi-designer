@@ -64,6 +64,12 @@
     "delete": {
       "title": "Document deleted",
       "body": "The data in the editor has been deleted.\n\nClick here to recover."
+    },
+    "space-login-failed": {
+      "title": "Login failed",
+      "incorrect-username": "Incorrect username.",
+      "incorrect-password": "Incorrect password.",
+      "unknown": "Unknown error: HTTP {{status}}"
     }
   },
   "confirm": {

@@ -118,9 +118,20 @@ export class App {
         this.pendingSkyUpload();
         this.pendingSkyUpload = undefined;
       }
-    }).fail(err => {
-      // TODO show error to user
-      console.error(err);
+    }).fail(({status}) => {
+      const title = this.i18n.tr('notify.space-login-failed.title');
+      let body;
+      switch (status) {
+      case 404:
+        body = this.i18n.tr('notify.space-login-failed.incorrect-username');
+        break;
+      case 401:
+        body = this.i18n.tr('notify.space-login-failed.incorrect-password');
+        break;
+      default:
+        body = this.i18n.tr('notify.space-login-failed.unknown-error', {status});
+      }
+      this.notify(title, body, 'error');
     });
   }
 
