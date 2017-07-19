@@ -15,7 +15,7 @@ export const sky = [
       if (!apiSpec || !apiSpec.info || !apiSpec.info.title) {
         const title = designer.i18n.tr('sky.space.upload-failed.title');
         const body = designer.i18n.tr('sky.space.upload-failed.missing-title');
-        designer.notify(body, title, 'error');
+        designer.notify(title, body, 'error');
         return;
       }
       const apiTitle = apiSpec.info.title;
