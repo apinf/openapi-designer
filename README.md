@@ -13,7 +13,7 @@ Design interface for creating OpenAPI (Swagger) specification files.
 0. Follow setup instructions up to step #2
 1. Run `docker build -t openapi-designer .`
 2. Run `docker run  -p <port>:80 openapi-designer` replacing `<port>` with the port you want the app to be accessible at.
-3. The designer should now be accessible at `http://localhost:<port>/app`
+3. The designer should now be accessible at `http://localhost:<port>`
 
 
 ## Development Status
