@@ -9,8 +9,10 @@ RUN npm install -g aurelia-cli
 WORKDIR /app
 ADD . .
 
+# TODO add arg support for building other environments than
+# the one in use at the git repo (e.g. production)
 RUN npm install && au build 
 
-#TODO make openapi-designer appear at hostname/ not at hostname/app/
-#RUN rm -rf /usr/share/nginx/html
-RUN mv /app /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html
+RUN ln -s /app /usr/share/nginx/html
+
