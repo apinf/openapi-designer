@@ -155,7 +155,7 @@ export class App {
     window.localStorage.split = type;
   }
 
-  notify(title, text = '', type = 'info') {
+  notify(title, text = '', type = 'info', url = '') {
     /*eslint no-new: 0*/
     const notif = new PNotify({
       title,
@@ -176,7 +176,12 @@ export class App {
         nonblock: true
       }
     });
-    notif.get().click(() => notif.remove());
+    notif.get().click(() => {
+      notif.remove();
+      if (url) {
+        window.open(url, '_blank');
+      }
+    });
   }
 
 
