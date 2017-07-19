@@ -7,10 +7,35 @@ import {schema, fieldsToShow} from './schemas/index';
 import {sky} from './sky';
 import {Validation} from './validation';
 import YAML from 'yamljs';
-import PNotify from 'pnotify';
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
-import $ from 'jquery';
+
+// I have no idea why this works.
+// PNotify has a very interesting module system that I couldn't get to work work
+// when importing in any other way than by using the monstrosity below.
+// Aurelia is probably not completely guilt-free either.
+//
+// To add a new pnotify module, you must add it to both of the arrays below in
+// the same format as the existing three extra modules.
+require(
+  [
+    'pnotify',
+    'pnotify/pnotify.nonblock',
+    'pnotify/pnotify.animate',
+    'pnotify/pnotify.confirm'
+  ],
+  () => require(
+    [
+      'pnotify',
+      'pnotify.nonblock',
+      'pnotify.animate',
+      'pnotify.confirm'
+    ],
+    pnfTemp => window.PNotify = pnfTemp));
+
 
 @inject(I18N, EventAggregator)
 export class App {
@@ -188,6 +213,32 @@ export class App {
     });
   }
 
+  confirm(title, text, type = 'info') {
+    return new Promise((resolve, reject) => {
+      const notif = new PNotify({
+        title,
+        text,
+        type,
+        stack: {
+          dir1: 'up',
+          dir2: 'left',
+          push: 'up'
+        },
+        addclass: 'stack-bottomright',
+        animate: {
+          animate: true,
+          in_class: 'slideInUp',
+          out_class: 'slideOutDown'
+        },
+        confirm: {
+          confirm: true
+        }
+      });
+      notif.get().on('pnotify.confirm', resolve);
+      notif.get().on('pnotify.cancel', reject);
+    });
+  }
+
 
   attached() {
     if (window.onhashchange) {
@@ -329,10 +380,12 @@ export class App {
 
   delete(force = false, notify = false) {
     if (!force) {
-      const userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
-      if (!userInput) {
-        return;
-      }
+      this.confirm(
+        this.i18n.tr('confirm.delete.title'),
+        this.i18n.tr('confirm.delete.body')
+      ).then(() => this.delete(true, notify))
+      .catch(() => void (0));
+      return;
     }
     let oldData;
     if (notify) {

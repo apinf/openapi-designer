@@ -122,7 +122,7 @@
           "jquery",
           {
             "name": "pnotify",
-            "path": "../node_modules/pnotify/src",
+            "path": "../node_modules/pnotify/dist",
             "main": "pnotify"
           },
           {

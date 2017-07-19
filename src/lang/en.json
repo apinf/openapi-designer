@@ -66,6 +66,12 @@
       "body": "The data in the editor has been deleted.\n\nClick here to recover."
     }
   },
+  "confirm": {
+    "delete": {
+      "title": "Confirm deletion",
+      "body": "Are you sure you want to delete ALL data?"
+    }
+  },
   "modal": {
     "validation-error": {
       "title": "Validation errors detected!",
