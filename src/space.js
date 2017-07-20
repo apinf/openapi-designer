@@ -25,6 +25,11 @@ export function login(designer, username, password, mode = 'space') {
       pendingUpload();
       pendingUpload = undefined;
     }
+    const title = designer.i18n.tr('notify.space-login-success.title');
+    const body = designer.i18n.tr('notify.space-login-success.body', {
+      username: data.username
+    });
+    designer.notify(title, body, 'success');
   }).fail(({status}) => {
     pendingUpload = undefined;
     const title = designer.i18n.tr('notify.space-login-failed.title');

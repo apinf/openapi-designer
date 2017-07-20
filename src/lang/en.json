@@ -71,6 +71,10 @@
       "incorrect-username": "Incorrect username.",
       "incorrect-password": "Incorrect password.",
       "unknown": "Unknown error: HTTP {{status}}"
+    },
+    "space-login-success": {
+      "title": "Login successful",
+      "body": "Logged in as {{username}}."
     }
   },
   "confirm": {
