@@ -1,13 +1,20 @@
 <template>
   <modal view-model.ref="spaceLoginModal" class="space-login">
-    <div slot="header" t="modal.space-login.title">
-      Log in to OpenAPI space
+    <div slot="header">
+      <span t="modal.space-login.title">Log in to OpenAPI space</span>
+      <span if.bind="spaceLoginApinf" t="modal.space-login.title-suffix-apinf">with APInf</span>
     </div>
     <div slot="content" class="space-login-modal">
       <input type="text" t="[placeholder]modal.space-login.username" ref="spaceUsername"/>
       <input type="password" t="[placeholder]modal.space-login.password" ref="spacePassword"/>
     </div>
     <div slot="footer" class="footer">
+      <button class="apinf" if.bind="!spaceLoginApinf" t="modal.space-login.apinf" click.delegate="toggleSpaceLoginType()">
+        Use APInf account
+      </button>
+      <button class="space" if.bind="spaceLoginApinf" t="modal.space-login.space" click.delegate="toggleSpaceLoginType()">
+        Use Space account
+      </button>
       <div class="right-aligner">
         <button class="cancel" t="modal.space-login.cancel" click.delegate="spaceLoginModal.close()">
           Cancel

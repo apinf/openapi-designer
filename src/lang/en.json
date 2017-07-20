@@ -71,6 +71,10 @@
       "incorrect-username": "Incorrect username.",
       "incorrect-password": "Incorrect password.",
       "unknown": "Unknown error: HTTP {{status}}"
+    },
+    "space-login-success": {
+      "title": "Login successful",
+      "body": "Logged in as {{username}}."
     }
   },
   "confirm": {
@@ -91,7 +95,10 @@
       "username": "Enter username...",
       "password": "Enter password...",
       "cancel": "Cancel",
-      "login": "Log in"
+      "login": "Log in",
+      "apinf": "Use APInf account",
+      "space": "Use Space account",
+      "title-suffix-apinf": "with APInf"
     }
   },
   "error": {

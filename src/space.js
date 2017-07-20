@@ -3,10 +3,10 @@ import $ from 'jquery';
 export const BASE_URL = 'https://openapi.space/api/v1';
 let pendingUpload = undefined;
 
-export function login(username, password, mode = 'normal') {
+export function login(designer, username, password, mode = 'space') {
   let url = `${BASE_URL}/auth/login`;
   let payload = JSON.stringify({ username, password });
-  if (mode !== 'normal') {
+  if (mode !== 'space') {
     url = `${url}/${mode}`;
   }
   if (mode === 'apinf_token') {
@@ -25,6 +25,11 @@ export function login(username, password, mode = 'normal') {
       pendingUpload();
       pendingUpload = undefined;
     }
+    const title = designer.i18n.tr('notify.space-login-success.title');
+    const body = designer.i18n.tr('notify.space-login-success.body', {
+      username: data.username
+    });
+    designer.notify(title, body, 'success');
   }).fail(({status}) => {
     pendingUpload = undefined;
     const title = designer.i18n.tr('notify.space-login-failed.title');
@@ -52,7 +57,7 @@ window.addEventListener('message', ({data}) => {
 
 function tryApinfTokenLogin(designer, callback) {
   if (window.localStorage.apinfToken && window.localStorage.apinfUserID) {
-    login(window.localStorage.apinfUserID, window.localStorage.apinfToken, 'apinf_token');
+    login(designer, window.localStorage.apinfUserID, window.localStorage.apinfToken, 'apinf_token');
     pendingUpload = callback;
     return true;
   }
