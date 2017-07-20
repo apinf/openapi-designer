@@ -91,14 +91,14 @@
       "show-rich-preview-anyway": "Avaa esikatselu kuitenkin"
     },
     "space-login": {
-      "title": "Log in to OpenAPI space",
-      "username": "Enter username...",
-      "password": "Enter password...",
-      "cancel": "Cancel",
-      "login": "Log in",
-      "apinf": "Use APInf account",
-      "space": "Use Space account",
-      "title-suffix-apinf": "with APInf"
+      "title": "Kirjaudu OpenAPI spaceen",
+      "username": "Anna käyttäjänimi...",
+      "password": "Anna salasana...",
+      "cancel": "Peruuta",
+      "login": "Kirjaudu",
+      "apinf": "Käytä APInf-tiliä",
+      "space": "Käytä Space-tiliä",
+      "title-suffix-apinf": "APInf-tilillä"
     }
   },
   "error": {
