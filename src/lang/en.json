@@ -70,7 +70,7 @@
       "title": "Login failed",
       "incorrect-username": "Incorrect username.",
       "incorrect-password": "Incorrect password.",
-      "unknown": "Unknown error: HTTP {{status}}"
+      "unknown-error": "Unknown error: HTTP {{status}}"
     },
     "space-login-success": {
       "title": "Login successful",
