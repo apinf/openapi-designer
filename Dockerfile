@@ -1,4 +1,4 @@
-FROM nginx:mainline
+FROM debian:stretch as builder 
 
 # aurelia needs git, current node solution needs curl and gpg
 RUN apt-get update && apt-get -y install curl gpg git 
@@ -6,15 +6,15 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get update && apt-get -y install nodejs
 RUN npm install -g aurelia-cli
 
-WORKDIR /app
+WORKDIR /build
 # Npm dependency lists get imported separately to let docker cache the 
 # npm install
-COPY package-lock.json package.json /app/
-RUN npm install && npm cache clean
+COPY package-lock.json package.json /build/
+RUN npm install 
 
 COPY . .
 ARG env=dev
 RUN au build --env $env
 
-RUN rm -rf /usr/share/nginx/html
-RUN ln -s /app /usr/share/nginx/html
+from nginx:mainline
+COPY --from=builder /build /usr/share/nginx/html
