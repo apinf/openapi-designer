@@ -3,7 +3,7 @@ import $ from 'jquery';
 export const BASE_URL = 'https://openapi.space/api/v1';
 let pendingUpload = undefined;
 
-export function login(username, password, mode = 'space') {
+export function login(designer, username, password, mode = 'space') {
   let url = `${BASE_URL}/auth/login`;
   let payload = JSON.stringify({ username, password });
   if (mode !== 'space') {
@@ -52,7 +52,7 @@ window.addEventListener('message', ({data}) => {
 
 function tryApinfTokenLogin(designer, callback) {
   if (window.localStorage.apinfToken && window.localStorage.apinfUserID) {
-    login(window.localStorage.apinfUserID, window.localStorage.apinfToken, 'apinf_token');
+    login(designer, window.localStorage.apinfUserID, window.localStorage.apinfToken, 'apinf_token');
     pendingUpload = callback;
     return true;
   }

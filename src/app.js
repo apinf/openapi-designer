@@ -115,7 +115,7 @@ export class App {
   }
 
   spaceLogin() {
-    space.login(this.spaceUsername.value, this.spacePassword.value, this.spaceLoginApinf ? 'apinf' : 'space');
+    space.login(this, this.spaceUsername.value, this.spacePassword.value, this.spaceLoginApinf ? 'apinf' : 'space');
   }
 
   showRichPreview() {
