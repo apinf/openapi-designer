@@ -127,9 +127,8 @@ export class App {
     }
 
     setTimeout(() => {
-      const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.json);
       this.richPreview = new SwaggerUIBundle({
-        url,
+        spec: this.getFormData(),
         dom_id: '#rich-preview',
         // Disable Swagger.io online validation (AKA spyware)
         validatorUrl: null,
