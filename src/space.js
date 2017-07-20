@@ -20,26 +20,26 @@ export function login(username, password, mode = 'normal') {
   }).then(data => {
     window.localStorage.spaceToken = data.token;
     window.localStorage.spaceUser = data.username;
-    this.spaceLoginModal.close();
+    designer.spaceLoginModal.close();
     if (pendingUpload) {
       pendingUpload();
       pendingUpload = undefined;
     }
   }).fail(({status}) => {
     pendingUpload = undefined;
-    const title = this.i18n.tr('notify.space-login-failed.title');
+    const title = designer.i18n.tr('notify.space-login-failed.title');
     let body;
     switch (status) {
     case 404:
-      body = this.i18n.tr('notify.space-login-failed.incorrect-username');
+      body = designer.i18n.tr('notify.space-login-failed.incorrect-username');
       break;
     case 401:
-      body = this.i18n.tr('notify.space-login-failed.incorrect-password');
+      body = designer.i18n.tr('notify.space-login-failed.incorrect-password');
       break;
     default:
-      body = this.i18n.tr('notify.space-login-failed.unknown-error', {status});
+      body = designer.i18n.tr('notify.space-login-failed.unknown-error', {status});
     }
-    this.notify(title, body, 'error');
+    designer.notify(title, body, 'error');
   });
 }
 
@@ -91,7 +91,7 @@ export function upload(apiSpec, designer) {
   }
   const apiTitle = apiSpec.info.title;
   const version = apiSpec.info.version;
-  const url = `${this.baseURL}/apis/${window.localStorage.spaceUser}/${apiTitle}`;
+  const url = `${BASE_URL}/apis/${window.localStorage.spaceUser}/${apiTitle}`;
   $.ajax({
     type: 'POST',
     url,
