@@ -106,7 +106,7 @@ export class App {
   }
 
   bind() {
-    this.split(window.localStorage.split || 'split');
+    this.split(window.localStorage.split || 'split', true);
   }
 
   languageChanged() {
@@ -160,7 +160,7 @@ export class App {
           this.richPreviewErrorModal.open();
           return;
         }
-      } else {
+      } else if (this.richPreviewErrorModal) {
         this.richPreviewErrorModal.close();
       }
     }
