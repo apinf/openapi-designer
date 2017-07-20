@@ -10,5 +10,5 @@ COPY . .
 ARG env=dev
 RUN au build --env $env
 
-from nginx:mainline
+from nginx:mainline-alpine
 COPY --from=builder /build /usr/share/nginx/html
