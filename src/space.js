@@ -3,10 +3,10 @@ import $ from 'jquery';
 export const BASE_URL = 'https://openapi.space/api/v1';
 let pendingUpload = undefined;
 
-export function login(username, password, mode = 'normal') {
+export function login(username, password, mode = 'space') {
   let url = `${BASE_URL}/auth/login`;
   let payload = JSON.stringify({ username, password });
-  if (mode !== 'normal') {
+  if (mode !== 'space') {
     url = `${url}/${mode}`;
   }
   if (mode === 'apinf_token') {

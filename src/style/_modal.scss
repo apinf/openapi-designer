@@ -126,12 +126,13 @@
   }
 
   .right-aligner {
-    width: 15.25rem;
-    margin-left: auto;
+    display: inline-block;
+    float: right;
   }
 
   button {
-    width: 7.5rem;
+    display: inline-block;
+
     margin-left: auto;
     padding: .375rem 1rem;
 

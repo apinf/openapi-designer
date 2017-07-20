@@ -46,6 +46,11 @@ export class App {
   language = window.localStorage.language || 'en';
   enableBranding = true;
   sky = [];
+  spaceLoginApinf = false;
+
+  toggleSpaceLoginType() {
+    this.spaceLoginApinf = !this.spaceLoginApinf;
+  }
 
   constructor(i18n, ea) {
     this.i18n = i18n;
@@ -110,7 +115,7 @@ export class App {
   }
 
   spaceLogin() {
-    space.login(this.spaceUsername.value, this.spacePassword.value);
+    space.login(this.spaceUsername.value, this.spacePassword.value, this.spaceLoginApinf ? 'apinf' : 'space');
   }
 
   showRichPreview() {
