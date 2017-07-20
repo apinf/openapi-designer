@@ -6,13 +6,13 @@ import {Field} from './resources/form/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
 import {sky} from './sky';
 import {Validation} from './validation';
+import * as space from './space';
 import YAML from 'yamljs';
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
-
 // I have no idea why this works.
 // PNotify has a very interesting module system that I couldn't get to work work
 // when importing in any other way than by using the monstrosity below.
@@ -89,6 +89,15 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+
+    window.addEventListener('message', ({data}) => {
+      if (data.swagger) {
+        if (!data.noDelete) {
+          delete(true);
+        }
+        this.forms.setValue(data);
+      }
+    }, false);
   }
 
   bind() {
@@ -101,38 +110,7 @@ export class App {
   }
 
   spaceLogin() {
-    const SPACE_BASE = 'https://openapi.space/api/v1';
-    $.ajax({
-      type: 'POST',
-      url: `${SPACE_BASE}/auth/login`,
-      contentType: 'application/json',
-      data: JSON.stringify({
-        username: this.spaceUsername.value,
-        password: this.spacePassword.value
-      })
-    }).then(data => {
-      window.localStorage.spaceToken = data.token;
-      window.localStorage.spaceUser = data.username;
-      this.spaceLoginModal.close();
-      if (this.pendingSkyUpload) {
-        this.pendingSkyUpload();
-        this.pendingSkyUpload = undefined;
-      }
-    }).fail(({status}) => {
-      const title = this.i18n.tr('notify.space-login-failed.title');
-      let body;
-      switch (status) {
-      case 404:
-        body = this.i18n.tr('notify.space-login-failed.incorrect-username');
-        break;
-      case 401:
-        body = this.i18n.tr('notify.space-login-failed.incorrect-password');
-        break;
-      default:
-        body = this.i18n.tr('notify.space-login-failed.unknown-error', {status});
-      }
-      this.notify(title, body, 'error');
-    });
+    space.login(this.spaceUsername.value, this.spacePassword.value);
   }
 
   showRichPreview() {
