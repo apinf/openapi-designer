@@ -1,4 +1,4 @@
-<template mouseover.delegate="mouseover()" mouseout.delegate="mouseout()">
+<template mouseover.delegate="mouseover()" mousemove.delegate="mousemove($event)" mouseout.delegate="mouseout()">
   <slot></slot>
   <div ref="textbox" class="text hidden">${text}</div>
 </template>
