@@ -22,6 +22,9 @@ To send raw Swagger data, the `postMessage` object needs to contain the field `s
 
 Example usage:
 ```js
+const iframe = document.getElementById("designer-iframe")
+const designer = iframe.contentWindow
+...
 const swagger = {
   swagger: "2.0",
   info: {
