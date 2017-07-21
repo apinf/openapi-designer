@@ -1,22 +1,38 @@
-# Integrating OpenAPI designer into an iframe
+# Integrating OpenAPI designer
+All communication to and from the designer when integrating happens through [`postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
+The examples here assume you have OpenAPI designer in an `iframe`, but `postMessage` is can also be used when you open the designer into a new tab/window.
 
-Create an iframe and put an instance of OpenAPI designer into it.
-Example code `<iframe id="iframe" width="1200" height="800" src="https://dev.openapi.design/master"></iframe>`
+## APInf login
+To make the designer automatically log into OpenAPI space with APInf platform credentials, simply send an object with `apinfUserID` and `apinfToken`.
 
-For integrating authentication, send an username and authtoken from a service supported by OpenAPI space authentication into the OpenAPI designer inside the iframe (currently only the Apinf platform is supported).
-They can be sent into an iframe using `window.postMessage()` [docs.](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)
-Example function that passes the apinf username and apinf authtoken from the document object into the iframe when called, if they are available in the document with the id's used in the function:
-
-```javascript
-function sendtoken() {
-   const iframe = document.getElementById("iframe").contentWindow
-   iframe.postMessage({
-     apinfUserID: document.getElementById("userid").value,
-     apinfToken: document.getElementById("authtoken").value
-   }, "*")
-}
+[Demo site](https://dev.openapi.design/iframe.html), example usage:
+```js
+const iframe = document.getElementById("designer-iframe")
+const designer = iframe.contentWindow
+...
+designer.postMessage({
+  apinfUserID: "xxxxxxxxxxxxxxxxx",
+  apinfToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
 ```
 
+## Sending Swagger documents
+Currently, you can only send raw Swagger data. Sending links will be supported in the future.
+To send raw Swagger data, the `postMessage` object needs to contain the field `swagger` with the Swagger data. Optionally, it can also have the field `noDelete` to tell the designer not to delete all existing data when importing the new data.
 
-## Example
-https://dev.openapi.design/iframe.html
+Example usage:
+```js
+const swagger = {
+  swagger: "2.0",
+  info: {
+    title: "Petstore API",
+    version: "1.0.0"
+  },
+  basePath: "/api/v1"
+}
+
+designer.postMessage({
+  swagger,
+  noDelete: true
+})
+```
