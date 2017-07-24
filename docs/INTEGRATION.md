@@ -39,3 +39,7 @@ designer.postMessage({
   noDelete: true
 })
 ```
+
+Display the editor using `iframe`
+
+`<iframe id="iframe" width="1200" height="800" src="https://dev.openapi.design/master"></iframe>`
