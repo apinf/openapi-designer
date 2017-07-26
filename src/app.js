@@ -2,24 +2,62 @@ import {inject, bindable} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {parseJSON} from './resources/jsonparser';
-import {Field} from './resources/elements/abstract/field';
+import {Field} from './resources/form/abstract/field';
 import {schema, fieldsToShow} from './schemas/index';
+import {sky} from './sky';
 import {Validation} from './validation';
+import * as space from './space';
 import YAML from 'yamljs';
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 import SwaggerUIBundle from 'swagger-ui';
 import SwaggerUIStandalonePreset from 'swagger-ui/swagger-ui-standalone-preset';
-import $ from 'jquery';
+// I have no idea why this works.
+// PNotify has a very interesting module system that I couldn't get to work work
+// when importing in any other way than by using the monstrosity below.
+// Aurelia is probably not completely guilt-free either.
+//
+// To add a new pnotify module, you must add it to both of the arrays below in
+// the same format as the existing extra modules.
+require(
+  [
+    'pnotify',
+    'pnotify/pnotify.animate',
+    'pnotify/pnotify.confirm'
+  ],
+  () => require(
+    [
+      'pnotify',
+      'pnotify.animate',
+      'pnotify.confirm'
+    ],
+    pnfTemp => window.PNotify = pnfTemp));
+
+window.stack_bottomright = {
+  dir1: 'up',
+  dir2: 'left',
+  push: 'up'
+};
 
 @inject(I18N, EventAggregator)
 export class App {
   @bindable
   language = window.localStorage.language || 'en';
   enableBranding = true;
+  sky = [];
+  spaceLoginApinf = false;
+
+  toggleSpaceLoginType() {
+    this.spaceLoginApinf = !this.spaceLoginApinf;
+  }
 
   constructor(i18n, ea) {
+    this.i18n = i18n;
     Field.internationalizer = i18n;
     Field.eventAggregator = ea;
     Field.validationFunctions = new Validation(i18n);
+    this.sky = sky;
     // Allow access from browser console
     window.$oai = this;
 
@@ -31,7 +69,7 @@ export class App {
         this.forms.setValue(savedData);
       }
     } catch (exception) {
-      console.log(exception);
+      console.error(exception);
       this.exception = exception;
       return;
     }
@@ -56,10 +94,19 @@ export class App {
     };
 
     this.forms.addChangeListener(() => this.saveFormLocal());
+
+    window.addEventListener('message', ({data}) => {
+      if (data.swagger) {
+        if (!data.noDelete) {
+          delete(true);
+        }
+        this.forms.setValue(data);
+      }
+    }, false);
   }
 
   bind() {
-    this.split(window.localStorage.split || 'split');
+    this.split(window.localStorage.split || 'split', true);
   }
 
   languageChanged() {
@@ -67,19 +114,24 @@ export class App {
     location.reload();
   }
 
+  spaceLogin() {
+    space.login(this, this.spaceUsername.value, this.spacePassword.value, this.spaceLoginApinf ? 'apinf' : 'space');
+  }
+
   showRichPreview() {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
       // Let's try again a bit later.
-      console.log('DOM not ready. Retrying rich preview in 0.5s...');
       setTimeout(() => this.showRichPreview(), 500);
       return;
     }
+
     setTimeout(() => {
-      const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.json);
       this.richPreview = new SwaggerUIBundle({
-        url,
+        spec: this.getFormData(),
         dom_id: '#rich-preview',
+        // Disable Swagger.io online validation (AKA spyware)
+        validatorUrl: null,
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset
@@ -97,7 +149,21 @@ export class App {
     $(this.richPreviewObj).empty();
   }
 
-  split(type) {
+  split(type, force = false) {
+    if (type === 'preview') {
+      if (!force) {
+        let errors = {};
+        this.forms.revalidate(errors);
+        this.richPreviewErrors = Object.entries(errors);
+        if (this.richPreviewErrors.length > 0) {
+          this.richPreviewErrorModal.open();
+          return;
+        }
+      } else if (this.richPreviewErrorModal) {
+        this.richPreviewErrorModal.close();
+      }
+    }
+    this.previousSplit = window.localStorage.split || 'split';
     this.showEditor = type === 'editor' || type === 'split';
     this.showOutput = type === 'output';
     this.splitView = type === 'split';
@@ -109,6 +175,56 @@ export class App {
     }
     window.localStorage.split = type;
   }
+
+  notify(title, text = '', type = 'info', url = '', onclick = undefined) {
+    /*eslint no-new: 0*/
+    const notif = new PNotify({
+      title,
+      text,
+      type,
+      stack: stack_bottomright,
+      addclass: 'stack-bottomright',
+      animate: {
+        animate: true,
+        in_class: 'slideInUp',
+        out_class: 'slideOutDown'
+      }
+    });
+    notif.get().click(() => {
+      notif.remove();
+      if (onclick) {
+        onclick();
+      }
+      if (url) {
+        window.open(url, '_blank');
+      }
+    });
+  }
+
+  confirm(title, text, type = 'info') {
+    return new Promise((resolve, reject) => {
+      const notif = new PNotify({
+        title,
+        text,
+        type,
+        stack: stack_bottomright,
+        addclass: 'stack-bottomright',
+        animate: {
+          animate: true,
+          in_class: 'bounceInUp',
+          out_class: 'bounceOutDown'
+        },
+        confirm: {
+          confirm: true
+        }
+      });
+      notif.get()
+        .on('pnotify.confirm', resolve)
+        .on('pnotify.cancel', reject)
+        .click(() => notif.remove());
+    });
+  }
+
 
   attached() {
     if (window.onhashchange) {
@@ -130,13 +246,23 @@ export class App {
       try {
         data = JSON.parse(rawData);
       } catch (ex) {
-        console.error(ex);
+        this.notify(
+          this.i18n.tr('notify.import-failed.title'),
+          this.i18n.tr('notify.import-failed.body', {error: ex}),
+          'error');
         return;
-        // Oh noes!
       }
     }
     delete(true);
     this.forms.setValue(data);
+    this.notify(
+      this.i18n.tr('notify.editor-import-complete.title'),
+      this.i18n.tr('notify.editor-import-complete.body', {
+        title: this.forms.resolveRef('#/header/info/title').getValue(),
+        version: this.forms.resolveRef('#/header/info/version').getValue()
+      }),
+      'success'
+    );
   }
 
   importFile() {
@@ -145,6 +271,20 @@ export class App {
     fileInput.css({display: 'none'});
     fileInput.appendTo('body');
     fileInput.trigger('click');
+
+    // IE/Edge don't want to trigger change events, so I have to do it for them...
+    //
+    // Check that the browser is IE/Edge
+    if (!!window.StyleMedia) {
+      // Check if there is a file every 0.5 seconds
+      const interval = setInterval(() => {
+        if (fileInput[0].files[0]) {
+          // The file was found, so trigger a change event and stop the interval.
+          fileInput.trigger('change');
+          clearInterval(interval);
+        }
+      }, 500);
+    }
 
     fileInput.change(() => {
       const file = fileInput[0].files[0];
@@ -158,11 +298,21 @@ export class App {
             data = JSON.parse(reader.result);
           }
         } catch (ex) {
-          console.error(ex);
+          this.notify(
+            this.i18n.tr('notify.import-failed.title'),
+            this.i18n.tr('notify.import-failed.body', {error: ex}),
+            'error');
           return;
-          // Oh noes!
         }
         this.forms.setValue(data);
+        this.notify(
+          this.i18n.tr('notify.import-complete.title'),
+          this.i18n.tr('notify.import-complete.body', {
+            title: this.forms.resolveRef('#/header/info/title').getValue(),
+            version: this.forms.resolveRef('#/header/info/version').getValue()
+          }),
+          'success'
+        );
       }, false);
       reader.readAsText(file);
     });
@@ -209,17 +359,38 @@ export class App {
     }
   }
 
-  delete(force) {
+  upload(theCloud) {
+    theCloud.upload.call(theCloud, this.getFormData(), this);
+  }
+
+  delete(force = false, notify = false) {
     if (!force) {
-      const userInput = confirm('Do you want to delete locally cached form data? \nThis action can not be undone.');
-      if (!userInput) {
-        return;
-      }
+      this.confirm(
+        this.i18n.tr('confirm.delete.title'),
+        this.i18n.tr('confirm.delete.body')
+      ).then(() => this.delete(true, notify))
+      .catch(() => void (0));
+      return;
+    }
+    let oldData;
+    if (notify) {
+      oldData = this.forms.getValue();
     }
     const pointerlessSchema = $.extend(true, {}, schema);
     this.forms = parseJSON('form', pointerlessSchema);
     delete localStorage['openapi-v2-design'];
     window.onhashchange();
+    if (notify) {
+      this.notify(
+        this.i18n.tr('notify.delete.title'),
+        this.i18n.tr('notify.delete.body'),
+        'info',
+        '',
+        () => {
+          this.delete(true, false);
+          this.forms.setValue(oldData);
+        });
+    }
   }
 
   getFormData() {

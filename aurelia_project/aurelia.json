@@ -44,6 +44,7 @@
     "root": "src",
     "resources": "src/resources",
     "elements": "src/resources/elements",
+    "form": "src/resources/form",
     "attributes": "src/resources/attributes",
     "valueConverters": "src/resources/value-converters",
     "bindingBehaviors": "src/resources/binding-behaviors"
@@ -120,6 +121,11 @@
           "aurelia-templating-binding",
           "text",
           "jquery",
+          {
+            "name": "pnotify",
+            "path": "../node_modules/pnotify/dist",
+            "main": "pnotify"
+          },
           {
             "name": "valid-url",
             "path": "../node_modules/valid-url",

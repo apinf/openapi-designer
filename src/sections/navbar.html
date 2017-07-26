@@ -38,7 +38,7 @@
       <div class="actions">
         <div class="split dropdown">
           <button class="button">
-            <img src="res/split.svg" alt="Delete"/>
+            <img src="res/split.svg" alt="Split"/>
           </button>
           <div class="content">
             <a href="javascript:void(0)" click.delegate="split('editor')" t="nav.actions.split.editor">
@@ -60,7 +60,7 @@
             <img src="res/trash.svg" alt="Delete"/>
           </button>
           <div class="content">
-            <a href="javascript:void(0)" click.delegate="delete()" t="nav.actions.delete">
+            <a href="javascript:void(0)" click.delegate="delete(false, true)" t="nav.actions.delete">
               Delete data
             </a>
           </div>
@@ -80,6 +80,16 @@
             </a>
             <a href="javascript:void(0)" click.delegate="download('yaml')" t="nav.actions.download.yaml">
               YAML
+            </a>
+          </div>
+        </div>
+        <div class="upload dropdown">
+          <button class="button">
+            <img src="res/upload.svg" alt="Upload"/>
+          </button>
+          <div class="content">
+            <a repeat.for="cloud of sky" href="javascript:void(0)" click.delegate="upload(cloud)">
+              ${cloud.name}
             </a>
           </div>
         </div>

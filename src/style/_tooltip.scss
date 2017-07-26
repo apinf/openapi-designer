@@ -12,12 +12,13 @@ tooltip {
   }
 
   > .text {
-    position: absolute;
+    position: fixed;
 
     display: none;
 
     box-sizing: border-box;
-    width: 20rem;
+    width: auto;
+    max-width: 20rem;
     padding: .5rem;
 
     border-radius: .25rem;

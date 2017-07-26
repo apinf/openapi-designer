@@ -7,6 +7,10 @@ $background-color: #f7f7f7;
   background: $background-color !important;
 }
 
+@import "../node_modules/pnotify/dist/pnotify.css";
+@import "../node_modules/pnotify/dist/pnotify.brighttheme.css";
+@import "../node_modules/pnotify/dist/pnotify.nonblock.css";
+@import "animate";
 @import "dropdown";
 @import "tooltip";
 @import "html";

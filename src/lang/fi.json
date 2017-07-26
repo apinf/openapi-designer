@@ -8,14 +8,97 @@
       "security": "Turvallisuus",
       "tags": "Tunnisteet",
       "paths": "Polut",
-      "definitions": "Määritelmät"
+      "definitions": "Määritelmät",
+      "output-editor": "Muokattava ulostulo",
+      "rich-preview": "Rikas esikatselu"
     },
     "actions": {
+      "split": {
+        "editor": "Vain muokkaus",
+        "split": "Muokkaus ja esikatselu",
+        "output": "Muokattava ulostulo",
+        "preview": "Rikas esikatselu"
+      },
       "delete": "Poista tiedot",
       "download": {
         "json": "JSON",
         "yaml": "YAML"
       }
+    }
+  },
+  "output-editor": {
+    "save": "Tallenna muutokset"
+  },
+  "sky": {
+    "space": {
+      "upload-complete": {
+        "title": "Tiedosto lähetetty",
+        "clickhere": "Paina tästä avaaksesi lähetetyn tiedoston.",
+        "uploaded-has-been": "{{title}} v{{version}} on ",
+        "updated": "$t(sky.space.upload-complete.uploaded-has-been) päivitetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
+        "created": "$t(sky.space.upload-complete.uploaded-has-been) lisätty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
+        "unknown": "$t(sky.space.upload-complete.uploaded-has-been) lähetetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)"
+      },
+      "upload-failed": {
+        "title": "Lähetys epäonnistui",
+        "invalid-document": "Epäkelpo Swagger-dokumentti",
+        "access-denied": "Pääsy estetty",
+        "version-published": "Julkaistua rajapintaa ei voi muokata",
+        "unknown": "Tuntematon virhe: HTTP {{status}}",
+        "missing-title": "Rajapinnalla on oltava otsikko, jotta sen voi lähettää OpenAPI spaceen."
+      }
+    }
+  },
+  "notify": {
+    "import-complete": {
+      "title": "Tuonti valmis",
+      "body": "{{title}} v{{version}} on tuotu suunnittelijaan."
+    },
+    "import-failed": {
+      "title": "Tuonti epäonnistui",
+      "body": "{{error}}"
+    },
+    "editor-import-complete": {
+      "title": "Muokattu ulostulo tallennettu",
+      "body": "Muutoksesi ulostulon muokkaimessa on tallennettu."
+    },
+    "delete": {
+      "title": "Dokumentti poistettu",
+      "body": "Suunnittelijassa olevat tiedot on poistettu.\n\nPaina tästä palauttaaksesi tiedot."
+    },
+    "space-login-failed": {
+      "title": "Kirjautuminen epäonnistui",
+      "incorrect-username": "Väärä käyttäjänimi.",
+      "incorrect-password": "Väärä salasana.",
+      "unknown-error": "Tuntematon virhe: HTTP {{status}}"
+    },
+    "space-login-success": {
+      "title": "Kirjautuminen onnistui",
+      "body": "Olet nyt kirjautunut käyttäjällä {{username}}."
+    }
+  },
+  "confirm": {
+    "delete": {
+      "title": "Varmista poisto",
+      "body": "Oletko varma, että haluat poistaa kaikki tiedot?"
+    }
+  },
+  "modal": {
+    "validation-error": {
+      "title": "Validointivirheitä havaittu!",
+      "cancel": "Peruuta",
+      "download-anyway": "Lataa kuitenkin",
+      "show-rich-preview-anyway": "Avaa esikatselu kuitenkin"
+    },
+    "space-login": {
+      "title": "Kirjaudu OpenAPI spaceen",
+      "username": "Anna käyttäjänimi...",
+      "password": "Anna salasana...",
+      "cancel": "Peruuta",
+      "login": "Kirjaudu",
+      "apinf": "Käytä APInf-tiliä",
+      "space": "Käytä Space-tiliä",
+      "title-suffix-apinf": "APInf-tilillä"
     }
   },
   "error": {
@@ -24,6 +107,15 @@
     "data-title": "Virheen tiedot"
   },
   "footer-product-of": "Product of",
+  "validation": {
+    "required-is-empty": "Tämä kenttä on vaadittu!",
+    "key-is-required": "Tämä kenttä vaatii avainarvon!",
+    "invalid-hostname": "Epäkelpo isäntänimi! Kelvollisia esimerkkejä: esimerkki.fi, api.esimerkki.fi:8080",
+    "invalid-email": "Epäkelpo sähköpostiosoite! Kelvollinen esimrekki: matti.meikalainen@esimerkki.fi",
+    "invalid-http-status": "Epäkelpo HTTP-tilakoodi! Kelvollisia esimerkkejä: default, 200",
+    "param-not-implemented": "Polkuparametria {{parameter}} ei ole implementoitu HTTP {{method}} -tilakäsittelijässä",
+    "invalid-url": "Epäkelpo Internet-osoite! Kelvollinen esimerkki: http://esimerkki.fi"
+  },
   "form": {
     "global": {
       "placeholder": "Anna arvo...",
@@ -32,12 +124,18 @@
     "externalDocs": {
       "label": "Ulkoinen dokumentaatio",
       "description": {
-        "label": "Kuvaus"
+        "label": "Kuvaus",
+        "placeholder": "esim. Katso lisätietoja tästä rajapinnasta"
       },
       "url": {
-        "label": "Linkki"
+        "label": "Linkki",
+        "placeholder": "esim. http://esimerkki.fi/dokumentaatio"
       }
     },
+    "defaultValue": {
+      "label": "Vakioarvo"
+    },
+    "supports-markdown": "Tämä kenttä tukee formatointia Markdown-syntaksilla.",
     "enum": {
       "label": "Sallitut arvot",
       "item": {
@@ -65,6 +163,7 @@
       "item": {
         "label": "Polku #{{index}}: {{-path}}",
         "operation": {
+          "label": "Polku",
           "methods": {
             "get": "GET",
             "put": "PUT",
@@ -75,13 +174,16 @@
             "patch": "PATCH"
           },
           "operationId": {
-            "label": "Toiminnan ID"
+            "label": "Toiminnan ID",
+            "placeholder": "Anna uniikki tunniste tälle operaatiolle."
           },
           "summary": {
-            "label": "Tiivistelmä"
+            "label": "Tiivistelmä",
+            "placeholder": "Anna lyhyt yhteenveto tämän operaation toiminnallisuudesta."
           },
           "description": {
-            "label": "Kuvaus"
+            "label": "Kuvaus",
+            "placeholder": "Anna perusteellinen selitys siitä, mitä tämä operaatio tekee."
           },
           "deprecated": {
             "label": "Vanhentunut?"
@@ -110,6 +212,7 @@
         },
         "reference": {
           "label": "Kohde",
+          "optionLabel": "Referenssi",
           "choices": {
             "choose": "Valitse kohde..."
           }
@@ -124,16 +227,21 @@
         "item": {
           "label": "Turvallisuusmääritelmä #{{index}}",
           "basic": {
+            "label": "Yksinkertainen",
             "description": {
-              "label": "Kuvaus"
+              "label": "Kuvaus",
+              "placeholder": "Kuvaa turvajärjestelmää tässä."
             }
           },
           "apiKey": {
+            "label": "API-avain",
             "description": {
-              "label": "Kuvaus"
+              "label": "Kuvaus",
+              "placeholder": "Kuvaa turvajärjestelmää tässä."
             },
             "name": {
-              "label": "Nimi"
+              "label": "Nimi",
+              "placeholder": "esim. api_key"
             },
             "in": {
               "label": "API-avaimen sijainti",
@@ -144,8 +252,10 @@
             }
           },
           "oauth2": {
+            "label": "OAuth2",
             "description": {
-              "label": "Kuvaus"
+              "label": "Kuvaus",
+              "placeholder": "Kuvaa turvajärjestelmää tässä."
             },
             "flow": {
               "label": "Flow",
@@ -157,10 +267,12 @@
               }
             },
             "authorizationUrl": {
-              "label": "Valtuutuslinkki"
+              "label": "Valtuutuslinkki",
+              "placeholder": "esim. https://esimerkki.fi/oauth/dialog"
             },
             "tokenUrl": {
-              "label": "Token URL (untranslated)"
+              "label": "Token URL (untranslated)",
+              "placeholder": "esim. https://esimerkki.fi/oauth/token"
             },
             "scopes": {
               "label": "Soveltamisalat",
@@ -168,10 +280,12 @@
               "item": {
                 "label": "Soveltamisala #{{index}}",
                 "key": {
-                  "label": "Avain"
+                  "label": "Avain",
+                  "placeholder": "esim. lemmikit:lue"
                 },
                 "description": {
-                  "label": "Kuvaus"
+                  "label": "Kuvaus",
+                  "placeholder": "Kuvaa esimerkiksi sitä, mihin tämä OAuth2-soveltamisala antaa pääsyn."
                 }
               }
             }
@@ -194,9 +308,11 @@
             },
             "scopes": {
               "label": "Soveltamisalat",
+              "helpText": "Soveltamisalat määrittävät, mitkä alat ovat vaadittuja ajamiseen. Tämä on jätettävä tyhjäksi, jos turvallisuusmääritelmä ei ole OAuth2-tyyppinen.",
               "newItemText": "Uusi OAuth2-soveltamisala",
               "item": {
-                "label": "OAuth2-soveltamisala #{{index}}"
+                "label": "OAuth2-soveltamisala #{{index}}",
+                "placeholder": "esim. lemmikit:lue"
               }
             }
           }
@@ -205,28 +321,33 @@
     },
     "tags": {
       "label": "Tunnisteet",
+      "newItemText": "Uusi tunniste",
       "item": {
-        "label": "Tunniste",
+        "label": "Tunniste #{{index}}: {{-name}}",
         "name": {
-          "label": "Nimi"
+          "label": "Nimi",
+          "placeholder": "esim. kayttajaoperaatiot"
         },
         "description": {
-          "label": "Kuvaus"
+          "label": "Kuvaus",
+          "placeholder": "Selitä, millaisia operaatioita tällä tunnisteella merkitään."
         }
       }
     },
     "mime": {
       "label": "MIME-tyypit",
       "consumes": {
-        "label": "Consumes (untranslated)",
+        "label": "Kuluttaa",
         "item": {
-          "label": "MIME-tyyppi"
+          "label": "MIME-tyyppi",
+          "placeholder": "esim. application/json"
         }
       },
       "produces": {
-        "label": "Produces (untranslated)",
+        "label": "Tuottaa",
         "item": {
-          "label": "MIME-tyyppi"
+          "label": "MIME-tyyppi",
+          "placeholder": "esim. application/json"
         }
       }
     },
@@ -235,43 +356,53 @@
       "info": {
         "label": "Perustiedot",
         "title": {
-          "label": "Otsikko"
+          "label": "Otsikko",
+          "placeholder": "esim. Esimerkkirajapinta"
         },
         "version": {
-          "label": "Versio"
+          "label": "Versio",
+          "placeholder": "esim. 1.0.0"
         },
         "description": {
-          "label": "Kuvaus"
+          "label": "Kuvaus",
+          "placeholder": "Kuvaa rajapintaa tässä."
         },
         "termsOfService": {
-          "label": "Käyttöehdot"
+          "label": "Käyttöehdot",
+          "placeholder": "esim. http://esimerkki.fi/kayttoehdot"
         },
         "contact": {
           "label": "Yhteystiedot",
           "name": {
-            "label": "Nimi"
+            "label": "Nimi",
+            "placeholder": "esim. Matti Meikäläinen"
           },
           "email": {
-            "label": "Sähköposti"
+            "label": "Sähköposti",
+            "placeholder": "esim. matti.meikalainen@esimerkki.fi"
           },
           "url": {
-            "label": "Linkki"
+            "label": "Linkki",
+            "placeholder": "esim. http://esimerkki.fi/ota-yhteytta"
           }
         },
         "license": {
           "label": "Lisenssi",
           "name": {
-            "label": "Nimi"
+            "label": "Nimi",
+            "placeholder": "esim. MIT"
           },
           "url": {
-            "label": "Linkki"
+            "label": "Linkki",
+            "placeholder": "esim. https://mit-license.org/"
           }
         }
       },
       "host": {
         "label": "Isäntäasetukset",
         "host": {
-          "label": "Isännän nimi"
+          "label": "Isännän nimi",
+          "placeholder": "esim. esimerkki.fi"
         },
         "basePath": {
           "label": "Peruspolku",
@@ -307,9 +438,16 @@
       }
     },
     "response": {
+      "response": {
+        "label": "Vastaus"
+      },
+      "reference": {
+        "label": "Referenssi"
+      },
       "label": "Vastaus #{{index}} HTTP {{-httpStatus}} -menetelmälle",
       "description": {
-        "label": "Kuvaus"
+        "label": "Kuvaus",
+        "placeholder": "Kuvaa vastausta tässä."
       },
       "schema": {
         "label": "Vastauselin"
@@ -322,6 +460,12 @@
       }
     },
     "parameter": {
+      "parameter": {
+        "label": "Parametri"
+      },
+      "reference": {
+        "label": "Referenssi"
+      },
       "label": "Parametri #{{index}}: {{-name}}",
       "$ref": {
         "label": "Kohde",
@@ -330,7 +474,8 @@
         }
       },
       "name": {
-        "label": "Nimi"
+        "label": "Nimi",
+        "placeholder": "Anna nimi..."
       },
       "in": {
         "label": "Sijainti",
@@ -343,11 +488,15 @@
         }
       },
       "description": {
-        "label": "Kuvaus"
+        "label": "Kuvaus",
+        "placeholder": "Kuvaa parametria tässä."
       },
       "required": {
         "label": "Vaadittu",
-        "helpText": "Onko tämä parametri pakollinen?"
+        "helpText": "Onko tämä parametri pakollinen?",
+        "choices": {
+          "required": ""
+        }
       },
       "allowEmptyValue": {
         "label": "Hyväksytäänkö tyhjät arvot?"
@@ -379,6 +528,13 @@
     "types": {
       "label": "Tyypit",
       "newItemText": "Uusi Tyyppi",
+      "allOf": {
+        "label": "Yhdistetyt tyypit",
+        "newItemText": "Yhdistä uusi tyyppi",
+        "item": {
+          "label": "Yhdistetty tyyppi #{{-index}}"
+        }
+      },
       "item": {
         "label": "Tyyppi #{{index}}: {{-name}}",
         "x-oad-type": {
@@ -391,6 +547,7 @@
             "array": "Lista",
             "object": "Objekti",
             "reference": "Referenssi",
+            "allOf": "Yhdistetyt tyypit",
             "null": "Tyhjä",
             "file": "Tiedosto"
           }
@@ -405,13 +562,26 @@
           }
         },
         "title": {
-          "label": "Otsikko"
+          "label": "Otsikko",
+          "placeholder": "Anna otsikko..."
         },
         "description": {
-          "label": "Kuvaus"
+          "label": "Kuvaus",
+          "placeholder": "Kuvaa tyyppiä tässä."
+        },
+        "readOnly": {
+          "label": "Vain luku?",
+          "helpText": "Jos valittu, tämä kenttä jätetään huomiotta asiakasohjelman lähettämissä pyynnöissä. Tälläisiä kenttiä ei saa merkata vaadituksi."
         },
         "items": {
           "label": "Listan sisältö"
+        },
+        "uniqueItems": {
+          "label": "Uniikit elementit?",
+          "helpText": "Jos valittu, listan kaikkien elementtien on oltava uniikkeja."
+        },
+        "additionalProperties": {
+          "label": "Kaavio muille kentille"
         },
         "properties": {
           "label": "Objektin sisältö",

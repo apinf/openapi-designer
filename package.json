@@ -17,6 +17,7 @@
     "i18next": "^8.4.2",
     "i18next-xhr-backend": "^1.4.2",
     "jquery": "^3.2.1",
+    "pnotify": "^3.2.0",
     "requirejs": "^2.3.2",
     "simplemde": "^1.11.2",
     "swagger-ui-dist": "^3.0.18",

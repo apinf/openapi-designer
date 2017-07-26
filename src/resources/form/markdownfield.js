@@ -1,5 +1,6 @@
 import {containerless} from 'aurelia-framework';
 import {Textareafield} from './textareafield';
+import {Field} from './abstract/field';
 import SimpleMDE from 'simplemde';
 
 /**
@@ -34,7 +35,7 @@ export class Markdownfield extends Textareafield {
       element: this.editorElem,
       indentWithTabs: true,
       lineWrapping: true,
-      placeholder: this.placeholder,
+      placeholder: `${this.placeholder}\n\n${Field.localizeGlobal('form.supports-markdown')}`,
       initialValue: this.value,
       status: false,
       tabSize: 2,

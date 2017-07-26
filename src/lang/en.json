@@ -29,11 +29,76 @@
   "output-editor": {
     "save": "Save changes"
   },
+  "sky": {
+    "space": {
+      "upload-complete": {
+        "title": "Upload complete",
+        "clickhere": "Click here to open the uploaded document.",
+        "uploaded-has-been": "{{title}} v{{version}} has been ",
+        "updated": "$t(sky.space.upload-complete.uploaded-has-been) updated in OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)",
+        "created": "$t(sky.space.upload-complete.uploaded-has-been) added to OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)",
+        "unknown": "$t(sky.space.upload-complete.uploaded-has-been) uploaded to OpenAPI space.\n\n$t(sky.space.upload-complete.clickhere)"
+      },
+      "upload-failed": {
+        "title": "Upload failed",
+        "invalid-document": "Invalid Swagger document",
+        "access-denied": "Access denied",
+        "version-published": "Can't edit published API",
+        "unknown": "Unknown error: HTTP {{status}}",
+        "missing-title": "The API must have a title in order to upload to OpenAPI space."
+      }
+    }
+  },
+  "notify": {
+    "import-complete": {
+      "title": "Import complete",
+      "body": "{{title}} v{{version}} has been imported into the designer."
+    },
+    "import-failed": {
+      "title": "Import failed",
+      "body": "Failed to import document: {{error}}"
+    },
+    "editor-import-complete": {
+      "title": "Edited output saved",
+      "body": "You changes to the output editor have been saved."
+    },
+    "delete": {
+      "title": "Document deleted",
+      "body": "The data in the editor has been deleted.\n\nClick here to recover."
+    },
+    "space-login-failed": {
+      "title": "Login failed",
+      "incorrect-username": "Incorrect username.",
+      "incorrect-password": "Incorrect password.",
+      "unknown-error": "Unknown error: HTTP {{status}}"
+    },
+    "space-login-success": {
+      "title": "Login successful",
+      "body": "Logged in as {{username}}."
+    }
+  },
+  "confirm": {
+    "delete": {
+      "title": "Confirm deletion",
+      "body": "Are you sure you want to delete ALL data?"
+    }
+  },
   "modal": {
-    "download-error": {
+    "validation-error": {
       "title": "Validation errors detected!",
       "cancel": "Cancel",
-      "download-anyway": "Download anyway"
+      "download-anyway": "Download anyway",
+      "show-rich-preview-anyway": "Open preview anyway"
+    },
+    "space-login": {
+      "title": "Log in to OpenAPI space",
+      "username": "Enter username...",
+      "password": "Enter password...",
+      "cancel": "Cancel",
+      "login": "Log in",
+      "apinf": "Use APInf account",
+      "space": "Use Space account",
+      "title-suffix-apinf": "with APInf"
     }
   },
   "error": {
@@ -70,6 +135,7 @@
     "defaultValue": {
       "label": "Default value"
     },
+    "supports-markdown": "This field supports formatting with Markdown.",
     "enum": {
       "label": "Allowed values",
       "item": {
@@ -109,7 +175,7 @@
           },
           "operationId": {
             "label": "Operation ID",
-            "placeholder": "Enter an unique operationId for this operation."
+            "placeholder": "Enter an unique identifier for this operation."
           },
           "summary": {
             "label": "Summary",
@@ -255,15 +321,16 @@
     },
     "tags": {
       "label": "Tag definitions",
+      "newItemText": "New Tag",
       "item": {
-        "label": "Tag",
+        "label": "Tag #{{index}}: {{-name}}",
         "name": {
           "label": "Name",
           "placeholder": "e.g. user_operations"
         },
         "description": {
           "label": "Description",
-          "placeholder": "Describe what is tagged with this."
+          "placeholder": "Describe what kind of operations are tagged with this tag."
         }
       }
     },
@@ -422,7 +489,7 @@
       },
       "description": {
         "label": "Description",
-        "placeholder": "Enter description..."
+        "placeholder": "Describe the parameter here."
       },
       "required": {
         "label": "Required",
@@ -463,7 +530,7 @@
       "newItemText": "New Type",
       "allOf": {
         "label": "Joined types",
-        "newItemText": "New joined type",
+        "newItemText": "Join a new type",
         "item": {
           "label": "Joined type #{{-index}}"
         }
@@ -500,7 +567,7 @@
         },
         "description": {
           "label": "Description",
-          "placeholder": "Enter description..."
+          "placeholder": "Describe the type here."
         },
         "readOnly": {
           "label": "Read-only?",
