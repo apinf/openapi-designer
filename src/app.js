@@ -106,7 +106,7 @@ export class App {
   }
 
   bind() {
-    this.split(window.localStorage.split || 'split', true);
+    this.split(window.localStorage.split || 'editor', true);
   }
 
   languageChanged() {
