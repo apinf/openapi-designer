@@ -1,7 +1,10 @@
 <template>
   <div class="about">
     <div class="about-inner">
-      <div class="ie11-only">
+      <div class="ie11-only ${ieWarningDismissed ? 'dismissed' : ''}">
+        <button class="dismiss" click.delegate="dismissIEWarning()">
+          <img src="res/delete.svg" alt="Delete"/>
+        </button>
         <h1>Warning!</h1>
         <p>
           Some features may not work properly on Internet Explorer.
