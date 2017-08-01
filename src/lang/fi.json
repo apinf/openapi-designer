@@ -29,24 +29,26 @@
   "output-editor": {
     "save": "Tallenna muutokset"
   },
-  "sky": {
-    "space": {
-      "upload-complete": {
-        "title": "Tiedosto lähetetty",
-        "clickhere": "Paina tästä avaaksesi lähetetyn tiedoston.",
-        "uploaded-has-been": "{{title}} v{{version}} on ",
-        "updated": "$t(sky.space.upload-complete.uploaded-has-been) päivitetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
-        "created": "$t(sky.space.upload-complete.uploaded-has-been) lisätty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
-        "unknown": "$t(sky.space.upload-complete.uploaded-has-been) lähetetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)"
-      },
-      "upload-failed": {
-        "title": "Lähetys epäonnistui",
-        "invalid-document": "Epäkelpo Swagger-dokumentti",
-        "access-denied": "Pääsy estetty",
-        "version-published": "Julkaistua rajapintaa ei voi muokata",
-        "unknown": "Tuntematon virhe: HTTP {{status}}",
-        "missing-title": "Rajapinnalla on oltava otsikko, jotta sen voi lähettää OpenAPI spaceen."
-      }
+  "space": {
+    "title": {
+      "upload": "Lähetä",
+      "publish": "Julkaise (Ei valmis)"
+    },
+    "upload-complete": {
+      "title": "Tiedosto lähetetty",
+      "clickhere": "Paina tästä avaaksesi lähetetyn tiedoston.",
+      "uploaded-has-been": "{{title}} v{{version}} on ",
+      "updated": "$t(space.upload-complete.uploaded-has-been) päivitetty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)",
+      "created": "$t(space.upload-complete.uploaded-has-been) lisätty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)",
+      "unknown": "$t(space.upload-complete.uploaded-has-been) lähetetty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)"
+    },
+    "upload-failed": {
+      "title": "Lähetys epäonnistui",
+      "invalid-document": "Epäkelpo Swagger-dokumentti",
+      "access-denied": "Pääsy estetty",
+      "version-published": "Julkaistua rajapintaa ei voi muokata",
+      "unknown": "Tuntematon virhe: HTTP {{status}}",
+      "missing-title": "Rajapinnalla on oltava otsikko, jotta sen voi lähettää OpenAPI spaceen."
     }
   },
   "notify": {
