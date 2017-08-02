@@ -49,9 +49,15 @@ export class App {
   enableBranding = true;
   sky = [];
   spaceLoginApinf = false;
+  ieWarningDismissed = window.localStorage.ieWarningDismissed === 'true';
 
   toggleSpaceLoginType() {
     this.spaceLoginApinf = !this.spaceLoginApinf;
+  }
+
+  dismissIEWarning() {
+    this.ieWarningDismissed = true;
+    window.localStorage.ieWarningDismissed = true;
   }
 
   constructor(i18n, ea) {
