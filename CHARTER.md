@@ -9,13 +9,13 @@ The goal is to have an OpenAPI design tool that can be integrated with APInf pla
 * Miscommunication of project intent or scope
 
 ## Value proposition
-User can create and edit OpenAPI documents without knowing the specification or being familiar with JSON or YAML. User is guided by user interface elements such as hints in form fields and mandatory fields and by the sequence of the form.
+User can create and edit OpenAPI documents without knowing the specification or being familiar with JSON or YAML. User is guided by user interface elements such as hints in form fields and mandatory fields as well as the user flow.
 
 ## Scope
 * Experimental support for OpenAPI specification version 3.0
 * Info texts where needed, needs should be determined via testing
 * Support editing existing documents on a server
-* Support better UI integration with platforms where the editor is in an iframe
+* Support better UI integration with other platforms, as a package (npm, bower) or custom element.
 * Publish the package in NPM or other such platform
 * Try implementing testing with aurelia testing solutions.
 
