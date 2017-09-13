@@ -21,6 +21,7 @@ User can create and edit OpenAPI documents without knowing the specification or 
 
 ## Out of scope
 * Dynamic validation of the output with 3rd party solutions
+* Uploading to any other servers except Open API space
 
 ## Stakeholders
 * APInf API management platform and company
