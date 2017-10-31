@@ -1,29 +1,27 @@
 # Open API designer project charter
 
 ## Objective
-The goal is to have an OpenAPI design tool and a storage backend that can be integrated with APInf platform. We will host the on our  servers and we are open if anyone want to use or build their own interface above it. Whoever uses our Open API Designer service to design their APIs, we offer them free cataloging at https://apinf.io 
+The goal is to have an OpenAPI design tool that can be integrated with APInf platform and storage backends.
 
 ## Risks
-* Duplication of effort
 * Misalignment with business or community goals
 * Failure to execute or prioritize properly
 * Miscommunication of project intent or scope
-* Going into competition with other companies and solutions
 
 ## Value proposition
-User can create an OpenAPI document without knowing the specification or being familiar with JSON or YAML. User is guided by user interface elements such as hints in form fields and mandatory fields.
+User can create and edit OpenAPI documents without knowing the specification or being familiar with JSON or YAML. User is guided by user interface elements such as hints in form fields and mandatory fields as well as the user flow.
 
 ## Scope
-* User can create a valid OpenAPI document according to OpenAPI specification version 2.0, maybe 3.0.
-* Input validation for the form fields
-* User can download the created document.
-* User can import an existing document to be edited.
-* The user can upload the document to backend service.
-* Communication to storage backend with REST API(s)
+* Experimental support for OpenAPI specification version 3.0
+* Info texts where needed, needs should be determined via testing
+* Support editing/loading existing documents from any web-accessible location
+* Support better UI integration with other platforms, as a package (npm, bower) or custom element.
+* Publish the package in NPM or other such platform
+* Try implementing testing with aurelia testing solutions.
 
 ## Out of scope
-* Integrations to 3rd party systems beyond iframes or custom elements
 * Dynamic validation of the output with 3rd party solutions
+* Uploading to any other servers except Open API space
 
 ## Stakeholders
 * APInf API management platform and company

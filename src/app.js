@@ -39,15 +39,23 @@ window.stack_bottomright = {
   push: 'up'
 };
 
+const DEFAULT_SPLIT = 'editor';
+
 @inject(I18N, EventAggregator)
 export class App {
   @bindable
   language = window.localStorage.language || 'en';
   enableBranding = true;
   spaceLoginApinf = false;
+  ieWarningDismissed = window.localStorage.ieWarningDismissed === 'true';
 
   toggleSpaceLoginType() {
     this.spaceLoginApinf = !this.spaceLoginApinf;
+  }
+
+  dismissIEWarning() {
+    this.ieWarningDismissed = true;
+    window.localStorage.ieWarningDismissed = true;
   }
 
   constructor(i18n, ea) {
@@ -103,7 +111,7 @@ export class App {
   }
 
   bind() {
-    this.split(window.localStorage.split || 'split', true);
+    this.split(window.localStorage.split || DEFAULT_SPLIT, true);
   }
 
   languageChanged() {
@@ -160,7 +168,7 @@ export class App {
         this.richPreviewErrorModal.close();
       }
     }
-    this.previousSplit = window.localStorage.split || 'split';
+    this.previousSplit = window.localStorage.split || DEFAULT_SPLIT;
     this.showEditor = type === 'editor' || type === 'split';
     this.showOutput = type === 'output';
     this.splitView = type === 'split';

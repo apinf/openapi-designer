@@ -119,3 +119,57 @@ a {
     color: #0288d1;
   }
 }
+
+.ie11-only {
+  display: none;
+}
+
+@media all and (-ms-high-contrast:none) {
+  .about .ie11-only:not(.dismissed) {
+    position: absolute;
+    right: 1rem;
+
+    display: block !important;
+
+    width: 20rem;
+    padding: 1.5rem;
+
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+
+    h1 {
+      margin: 0;
+      margin-bottom: .5rem;
+
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 0;
+
+      font-size: .875rem;
+    }
+
+    .dismiss {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      box-sizing: border-box;
+      width: 2rem;
+      height: 2rem;
+      margin: .5rem;
+      padding: .5rem;
+
+      cursor: pointer;
+
+      border: none;
+      background: none;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
