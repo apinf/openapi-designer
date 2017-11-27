@@ -88,8 +88,11 @@
             <img src="res/upload.svg" alt="Upload"/>
           </button>
           <div class="content">
-            <a repeat.for="cloud of sky" href="javascript:void(0)" click.delegate="upload(cloud)">
-              ${cloud.name}
+            <a href="javascript:void(0)" click.delegate="spaceUpload()" t="space.action.upload">
+              Upload
+            </a>
+            <a href="javascript:void(0)" click.delegate="alert('Not yet implemented')" t="space.action.publish">
+              Publish (NYI)
             </a>
           </div>
         </div>

@@ -80,8 +80,8 @@ function checkAuth(designer, callback) {
 
 function titleExists(apiSpec, designer) {
   if (!apiSpec || !apiSpec.info || !apiSpec.info.title) {
-    const title = designer.i18n.tr('sky.space.upload-failed.title');
-    const body = designer.i18n.tr('sky.space.upload-failed.missing-title');
+    const title = designer.i18n.tr('space.upload-failed.title');
+    const body = designer.i18n.tr('space.upload-failed.missing-title');
     designer.notify(title, body, 'error');
     return false;
   }
@@ -106,35 +106,35 @@ export function upload(apiSpec, designer) {
     contentType: 'application/json',
     data: JSON.stringify(apiSpec)
   }).then((data, _, {status}) => {
-    const title = designer.i18n.tr('sky.space.upload-complete.title');
+    const title = designer.i18n.tr('space.upload-complete.title');
     let body;
     switch (status) {
     case 200:
-      body = designer.i18n.tr('sky.space.upload-complete.updated', {title: apiTitle, version});
+      body = designer.i18n.tr('space.upload-complete.updated', {title: apiTitle, version});
       break;
     case 201:
-      body = designer.i18n.tr('sky.space.upload-complete.created', {title: apiTitle, version});
+      body = designer.i18n.tr('space.upload-complete.created', {title: apiTitle, version});
       break;
     default:
-      body = designer.i18n.tr('sky.space.upload-complete.unknown', {title: apiTitle, version});
+      body = designer.i18n.tr('space.upload-complete.unknown', {title: apiTitle, version});
       break;
     }
     designer.notify(title, body, 'success', data.url);
   }).fail(({status}) => {
-    const title = designer.i18n.tr('sky.space.upload-failed.title');
+    const title = designer.i18n.tr('space.upload-failed.title');
     let body;
     switch (status) {
     case 400:
-      body = designer.i18n.tr('sky.space.upload-failed.invalid-document');
+      body = designer.i18n.tr('space.upload-failed.invalid-document');
       break;
     case 403:
-      body = designer.i18n.tr('sky.space.upload-failed.access-denied');
+      body = designer.i18n.tr('space.upload-failed.access-denied');
       break;
     case 409:
-      body = designer.i18n.tr('sky.space.upload-failed.version-published');
+      body = designer.i18n.tr('space.upload-failed.version-published');
       break;
     default:
-      body = designer.i18n.tr('sky.space.upload-failed.unknown', {status});
+      body = designer.i18n.tr('space.upload-failed.unknown', {status});
     }
     designer.notify(title, body, 'error');
   });
