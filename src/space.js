@@ -139,3 +139,37 @@ export function upload(apiSpec, designer) {
     designer.notify(title, body, 'error');
   });
 }
+
+export function register(designer,email, username, password, mode='space'){
+  let url = `${BASE_URL}/auth/register`;
+  let payload = JSON.stringify({email, username, password });
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    data: payload,
+    url
+  }).then(data => {
+    window.localStorage.spaceEmail = data.email;
+    window.localStorage.spaceUsermail = data.username;
+    window.localStorage.spaceToken = data.token;
+    designer.spaceRegisterModal.close();
+    designer.spaceLoginModal.close();    
+ 
+    const title = designer.i18n.tr('notify.space-register-success.title');
+    const body = designer.i18n.tr('notify.space-register-success.body', {
+      username: data.username
+    });
+    designer.notify(title, body, 'success');
+  }).fail(({status}) => {
+    const title = designer.i18n.tr('notify.space-register-failed.title');
+    let body;
+    switch (status) {
+    case 409:
+      body = designer.i18n.tr('notify.space-register-failed.username-or-email-taken');
+      break;
+    default:
+      body = designer.i18n.tr('notify.space-register-failed.unknown-error', {status});
+    }
+    designer.notify(title, body, 'error')
+   });
+}

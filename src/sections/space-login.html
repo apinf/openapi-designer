@@ -3,6 +3,10 @@
     <div slot="header">
       <span t="modal.space-login.title">Log in to OpenAPI space</span>
       <span if.bind="spaceLoginApinf" t="modal.space-login.title-suffix-apinf">with APInf</span>
+      <div class="right-aligner">
+        <button if.bind="!spaceLoginApinf" click.delegate="spaceRegisterModal.open()"> Register to space </button>
+        <button if.bind="spaceLoginApinf"onclick="window.open('https://apinf.io/sign-up','_blank')">Register to APInf </button>  
+      </div>
     </div>
     <div slot="content" class="space-login-modal">
       <input type="text" t="[placeholder]modal.space-login.username" ref="spaceUsername"/>
@@ -10,17 +14,17 @@
     </div>
     <div slot="footer" class="footer">
       <button class="apinf" if.bind="!spaceLoginApinf" t="modal.space-login.apinf" click.delegate="toggleSpaceLoginType()">
-        Use APInf account
+      Use APInf account
       </button>
       <button class="space" if.bind="spaceLoginApinf" t="modal.space-login.space" click.delegate="toggleSpaceLoginType()">
-        Use Space account
+      Use Space account
       </button>
       <div class="right-aligner">
         <button class="cancel" t="modal.space-login.cancel" click.delegate="spaceLoginModal.close()">
-          Cancel
+        Cancel
         </button>
         <button class="login" t="modal.space-login.login" click.delegate="spaceLogin()">
-          Log in
+        Log in
         </button>
       </div>
     </div>

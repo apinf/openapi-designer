@@ -1,0 +1,22 @@
+<template>
+  <modal view-model.ref="spaceRegisterModal" class="space-register">
+    <div slot="header">
+      <span t="modal.space-register.title">Register to OpenAPI space</span>
+    </div>
+    <div slot="content" class="space-register-modal">
+      <input type="email" t="[placeholder]modal.space-register.email" ref="spaceEmail"/>
+      <input type="text" t="[placeholder]modal.space-register.username" ref="spaceUsername"/>
+      <input type="password" t="[placeholder]modal.space-register.password" ref="spacePassword"/>
+    </div>
+    <div slot="footer" class="footer">
+      <button class="cancel" t="modal.space-register.cancel" click.delegate="spaceRegisterModal.close()">
+        Cancel
+      </button>
+      <div class="right-aligner">
+        <button class="register" t="modal.space-register.register" click.delegate="spaceRegister()">
+        Register
+        </button>
+      </div>
+    </div>
+  </modal>
+</template>
