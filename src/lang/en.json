@@ -77,6 +77,15 @@
     "space-login-success": {
       "title": "Login successful",
       "body": "Logged in as {{username}}."
+    },
+    "space-register-failed": {
+      "title": "Register failed",
+      "username-or-email-taken": "Username or Email taken.",
+      "unknown-error": "Unknown error: HTTP {{status}}"
+    },
+    "space-register-success": {
+      "title": "Register successful",
+      "body": "Logged in as {{username}}."
     }
   },
   "confirm": {
@@ -101,6 +110,14 @@
       "apinf": "Use APInf account",
       "space": "Use Space account",
       "title-suffix-apinf": "with APInf"
+    },
+    "space-register": {
+      "title": "Register to OpenAPI space",
+      "email": "Enter email...",
+      "username": "Enter username...",
+      "password": "Enter password...",
+      "cancel": "Cancel",
+      "register": "Register"
     }
   },
   "error": {

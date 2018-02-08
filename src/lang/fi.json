@@ -76,7 +76,16 @@
     },
     "space-login-success": {
       "title": "Kirjautuminen onnistui",
-      "body": "Olet nyt kirjautunut käyttäjänä {{username}}."
+      "body": "Olet nyt kirjautunut käyttäjällä {{username}}."
+    },
+    "space-register-failed": {
+      "title": "Rekisteröinti epäonnistui",
+      "username-or-email-taken": "Käyttäjänimi tai Sähköposti varattu.",
+      "unknown-error": "Tuntematon virhe: HTTP {{status}}"
+    },
+    "space-register-success": {
+      "title": "Rekisteröinti onnistui",
+      "body":"Ole nyt kirjautunut käyttäjällä {{username}}."
     }
   },
   "confirm": {
@@ -101,7 +110,16 @@
       "apinf": "Käytä APInf-tiliä",
       "space": "Käytä Space-tiliä",
       "title-suffix-apinf": "APInf-tilillä"
+    },
+     "space-register": {
+       "title": "Rekisteröidy OpenApi Spaceen",
+       "email": "Lisää salasana...",
+       "username": "Lisää salasana...",
+       "password": "Lisää salasana...",
+       "cancel": "Peruuta",
+       "register": "Rekisteröidy"
     }
+
   },
   "error": {
     "title": "Hups!",

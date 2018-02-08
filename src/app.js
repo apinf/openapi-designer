@@ -123,6 +123,10 @@ export class App {
     space.login(this, this.spaceUsername.value, this.spacePassword.value, this.spaceLoginApinf ? 'apinf' : 'space');
   }
 
+  spaceRegister() {
+    space.register(this, this.spaceEmail.value, this.spaceUsername.value, this.spacePassword.value);
+  }
+
   showRichPreview() {
     if (!this.richPreviewObj) {
       // The DOM isn't ready yet, but swagger-ui requires it to be ready.
