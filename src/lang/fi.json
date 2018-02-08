@@ -9,15 +9,15 @@
       "tags": "Tunnisteet",
       "paths": "Polut",
       "definitions": "Määritelmät",
-      "output-editor": "Muokattava ulostulo",
-      "rich-preview": "Rikas esikatselu"
+      "output-editor": "Suora muokkaus",
+      "rich-preview": "Toiminnallinen esikatselu"
     },
     "actions": {
       "split": {
-        "editor": "Vain muokkaus",
-        "split": "Muokkaus ja esikatselu",
-        "output": "Muokattava ulostulo",
-        "preview": "Rikas esikatselu"
+        "editor": "Ohjattu muokkaus",
+        "split": "Ohjattu muokkaus ja esikatselu",
+        "output": "Suora muokkaus",
+        "preview": "Toiminnallinen esikatselu"
       },
       "delete": "Poista tiedot",
       "download": {
@@ -29,24 +29,26 @@
   "output-editor": {
     "save": "Tallenna muutokset"
   },
-  "sky": {
-    "space": {
-      "upload-complete": {
-        "title": "Tiedosto lähetetty",
-        "clickhere": "Paina tästä avaaksesi lähetetyn tiedoston.",
-        "uploaded-has-been": "{{title}} v{{version}} on ",
-        "updated": "$t(sky.space.upload-complete.uploaded-has-been) päivitetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
-        "created": "$t(sky.space.upload-complete.uploaded-has-been) lisätty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)",
-        "unknown": "$t(sky.space.upload-complete.uploaded-has-been) lähetetty OpenAPI spaceen.\n\n$t(sky.space.upload-complete.clickhere)"
-      },
-      "upload-failed": {
-        "title": "Lähetys epäonnistui",
-        "invalid-document": "Epäkelpo Swagger-dokumentti",
-        "access-denied": "Pääsy estetty",
-        "version-published": "Julkaistua rajapintaa ei voi muokata",
-        "unknown": "Tuntematon virhe: HTTP {{status}}",
-        "missing-title": "Rajapinnalla on oltava otsikko, jotta sen voi lähettää OpenAPI spaceen."
-      }
+  "space": {
+    "title": {
+      "upload": "Lähetä",
+      "publish": "Julkaise (Ei valmis)"
+    },
+    "upload-complete": {
+      "title": "Tiedosto lähetetty",
+      "clickhere": "Paina tästä avataksesi lähetetyn tiedoston.",
+      "uploaded-has-been": "{{title}} v{{version}} on ",
+      "updated": "$t(space.upload-complete.uploaded-has-been) päivitetty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)",
+      "created": "$t(space.upload-complete.uploaded-has-been) lisätty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)",
+      "unknown": "$t(space.upload-complete.uploaded-has-been) lähetetty OpenAPI spaceen.\n\n$t(space.upload-complete.clickhere)"
+    },
+    "upload-failed": {
+      "title": "Lähetys epäonnistui",
+      "invalid-document": "Epäkelpo Swagger-dokumentti",
+      "access-denied": "Pääsy estetty",
+      "version-published": "Julkaistua rajapintaa ei voi muokata",
+      "unknown": "Tuntematon virhe: HTTP {{status}}",
+      "missing-title": "Rajapinnalla on oltava otsikko, jotta sen voi lähettää OpenAPI spaceen."
     }
   },
   "notify": {
@@ -59,8 +61,8 @@
       "body": "{{error}}"
     },
     "editor-import-complete": {
-      "title": "Muokattu ulostulo tallennettu",
-      "body": "Muutoksesi ulostulon muokkaimessa on tallennettu."
+      "title": "Tiedosto tallennettu",
+      "body": "Muutoksesi on tallennettu."
     },
     "delete": {
       "title": "Dokumentti poistettu",
@@ -126,7 +128,7 @@
   },
   "footer-product-of": "Product of",
   "validation": {
-    "required-is-empty": "Tämä kenttä on vaadittu!",
+    "required-is-empty": "Tämä kenttä on pakollinen.",
     "key-is-required": "Tämä kenttä vaatii avainarvon!",
     "invalid-hostname": "Epäkelpo isäntänimi! Kelvollisia esimerkkejä: esimerkki.fi, api.esimerkki.fi:8080",
     "invalid-email": "Epäkelpo sähköpostiosoite! Kelvollinen esimrekki: matti.meikalainen@esimerkki.fi",
@@ -177,7 +179,7 @@
     },
     "paths": {
       "label": "Polut",
-      "newItemText": "Uusi Polku",
+      "newItemText": "Uusi polku",
       "item": {
         "label": "Polku #{{index}}: {{-path}}",
         "operation": {
@@ -221,11 +223,11 @@
           },
           "responses": {
             "label": "Vastaukset",
-            "newItemText": "Uusi Vastaus"
+            "newItemText": "Uusi vastaus"
           },
           "parameters": {
             "label": "Parametrit",
-            "newItemText": "Uusi Parametri"
+            "newItemText": "Uusi parametri"
           }
         },
         "reference": {
@@ -241,7 +243,7 @@
       "label": "Turvallisuus",
       "definitions": {
         "label": "Määritelmät",
-        "newItemText": "Uusi Turvallisuusmääritelmä",
+        "newItemText": "Uusi turvallisuusmääritelmä",
         "item": {
           "label": "Turvallisuusmääritelmä #{{index}}",
           "basic": {
@@ -294,7 +296,7 @@
             },
             "scopes": {
               "label": "Soveltamisalat",
-              "newItemText": "Uusi Soveltamisala",
+              "newItemText": "Uusi soveltamisala",
               "item": {
                 "label": "Soveltamisala #{{index}}",
                 "key": {
@@ -312,7 +314,7 @@
       },
       "requirements": {
         "label": "Vaatimukset",
-        "newItemText": "Uusi Vaatimusobjekti",
+        "newItemText": "Uusi vaatimusobjekti",
         "item": {
           "label": "Vaatimusobjekti #{{index}}",
           "newItemText": "Uusi turvallisuusvaatimus",
@@ -326,7 +328,7 @@
             },
             "scopes": {
               "label": "Soveltamisalat",
-              "helpText": "Soveltamisalat määrittävät, mitkä alat ovat vaadittuja ajamiseen. Tämä on jätettävä tyhjäksi, jos turvallisuusmääritelmä ei ole OAuth2-tyyppinen.",
+              "helpText": "Soveltamisalat määrittävät, mitkä alat ovat pakollisia ajamiseen. Tämä on jätettävä tyhjäksi, jos turvallisuusmääritelmä ei ole OAuth2-tyyppinen.",
               "newItemText": "Uusi OAuth2-soveltamisala",
               "item": {
                 "label": "OAuth2-soveltamisala #{{index}}",
@@ -449,7 +451,7 @@
       },
       "responses": {
         "label": "Vastaukset",
-        "newItemText": "Uusi Vastaus",
+        "newItemText": "Uusi vastaus",
         "item": {
           "label": "Vastaus #{{index}}: {{-name}}"
         }
@@ -468,7 +470,7 @@
         "placeholder": "Kuvaa vastausta tässä."
       },
       "schema": {
-        "label": "Vastauselin"
+        "label": "Vastauksen tietosisältö"
       },
       "$ref": {
         "label": "Kohde",
@@ -502,7 +504,7 @@
           "query": "Query-merkkijono",
           "header": "HTTP-ylätunniste",
           "formData": "Lomakkeen tiedot",
-          "body": "Pyyntöelin"
+          "body": "Pyynnön tietosisältö"
         }
       },
       "description": {

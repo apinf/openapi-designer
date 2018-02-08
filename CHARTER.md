@@ -14,13 +14,14 @@ User can create and edit OpenAPI documents without knowing the specification or 
 ## Scope
 * Experimental support for OpenAPI specification version 3.0
 * Info texts where needed, needs should be determined via testing
-* Support editing existing documents on a server
+* Support editing/loading existing documents from any web-accessible location
 * Support better UI integration with other platforms, as a package (npm, bower) or custom element.
 * Publish the package in NPM or other such platform
 * Try implementing testing with aurelia testing solutions.
 
 ## Out of scope
 * Dynamic validation of the output with 3rd party solutions
+* Uploading to any other servers except Open API space
 
 ## Stakeholders
 * APInf API management platform and company
