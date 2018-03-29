@@ -44,12 +44,15 @@ export function login(designer, username, password, mode = 'space') {
     default:
       body = designer.i18n.tr('notify.space-login-failed.unknown-error', {status});
     }
-    designer.notify(title, body, 'error');
+   designer.notify(title, body, 'error');
   });
 }
 
+
+
 window.addEventListener('message', ({data}) => {
   if (data.apinfToken && data.apinfUserID) {
+
     window.localStorage.apinfToken = data.apinfToken;
     window.localStorage.apinfUserID = data.apinfUserID;
   }
@@ -77,6 +80,7 @@ function checkAuth(designer, callback) {
   }
   return true;
 }
+
 
 function titleExists(apiSpec, designer) {
   if (!apiSpec || !apiSpec.info || !apiSpec.info.title) {
@@ -140,6 +144,7 @@ export function upload(apiSpec, designer) {
   });
 }
 
+
 export function register(designer,email, username, password, mode='space'){
   let url = `${BASE_URL}/auth/register`;
   let payload = JSON.stringify({email, username, password });
@@ -150,7 +155,7 @@ export function register(designer,email, username, password, mode='space'){
     url
   }).then(data => {
     window.localStorage.spaceEmail = data.email;
-    window.localStorage.spaceUsermail = data.username;
+    window.localStorage.spaceRegisterUser = data.username;
     window.localStorage.spaceToken = data.token;
     designer.spaceRegisterModal.close();
     designer.spaceLoginModal.close();    
@@ -172,4 +177,34 @@ export function register(designer,email, username, password, mode='space'){
     }
     designer.notify(title, body, 'error')
    });
+}
+
+export function logout(designer) {
+  let url = `${BASE_URL}/auth/logout`;
+  $.ajax({
+    type: 'POST',
+    url,
+    headers: {
+      Authorization: window.localStorage.spaceToken
+    },
+    contentType: 'application/json'
+  }).done(() => {
+    window.localStorage.removeItem('spaceToken');
+    window.localStorage.removeItem('spaceUser');
+
+    const title = designer.i18n.tr('notify.space-logout-success.title');
+    const body = designer.i18n.tr('notify.space-logout-success.body');
+    designer.notify(title, body, 'success');
+  }).fail(({status}) => {
+    const title = designer.i18n.tr('notify.space-logout-failed.title');
+    let body;
+    switch (status) {
+    case 403:
+      body = designer.i18n.tr('notify.space-logout-failed.user-was-not-logged-in');
+      break;
+    default:
+      body = designer.i18n.tr('notify.space-logout-failed.unkown-error', {status});
+    }
+    designer.notify(title, body, 'error');
+  });
 }
