@@ -53,6 +53,7 @@ export class App {
     this.spaceLoginApinf = !this.spaceLoginApinf;
   }
 
+
   dismissIEWarning() {
     this.ieWarningDismissed = true;
     window.localStorage.ieWarningDismissed = true;
@@ -124,7 +125,11 @@ export class App {
   }
 
   spaceRegister() {
-    space.register(this, this.spaceEmail.value, this.spaceUsername.value, this.spacePassword.value);
+    space.register(this, this.spaceEmail.value, this.spaceRegisterUsername.value, this.spaceRegisterPassword.value);
+  }
+   
+  logout() {
+    space.logout(this);
   }
 
   showRichPreview() {
@@ -371,6 +376,7 @@ export class App {
   uploadSpace() {
     space.upload.call(space, this.getFormData(), this);
   }
+
 
   delete(force = false, notify = false) {
     if (!force) {

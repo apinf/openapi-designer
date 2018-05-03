@@ -32,7 +32,8 @@
   "space": {
     "title": {
       "upload": "Upload",
-      "publish": "Publish (NYI)"
+      "publish": "Publish (NYI)",
+      "logout": "Logout"
     },
     "upload-complete": {
       "title": "Upload complete",
@@ -86,6 +87,15 @@
     "space-register-success": {
       "title": "Register successful",
       "body": "Logged in as {{username}}."
+    },
+    "space-logout-success": {
+      "title": "Logged out",
+      "body": "You have logged out."
+    },
+    "space-logout-failed": {
+      "title": "logout failed",
+      "user-was-not-logged-in": "You have not logged in.",
+      "unknown-error": "Unknown error: HTTP {{status}}"
     }
   },
   "confirm": {
