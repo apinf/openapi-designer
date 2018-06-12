@@ -92,6 +92,13 @@
     }
   }
 
+.cookie-modal h2{
+  margin: 1rem 0;
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
   .footer {
     display: block;
 

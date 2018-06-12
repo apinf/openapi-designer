@@ -48,6 +48,7 @@ export class App {
   enableBranding = true;
   spaceLoginApinf = false;
   ieWarningDismissed = window.localStorage.ieWarningDismissed === 'true';
+  cookieWarningDismissed = window.localStorage.cookieWarningDismissed === 'true';  
 
   toggleSpaceLoginType() {
     this.spaceLoginApinf = !this.spaceLoginApinf;
@@ -57,6 +58,11 @@ export class App {
   dismissIEWarning() {
     this.ieWarningDismissed = true;
     window.localStorage.ieWarningDismissed = true;
+  }
+
+  dismissCookieWarning() {
+    this.cookieWarningDismissed = true;
+    window.localStorage.cookieWarningDismissed = true;
   }
 
   constructor(i18n, ea) {
