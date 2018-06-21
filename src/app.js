@@ -383,6 +383,10 @@ export class App {
     space.upload.call(space, this.getFormData(), this);
   }
 
+  publish() {
+    space.publish.call(space, this.getFormData(), this);
+}
+
 
   delete(force = false, notify = false) {
     if (!force) {
