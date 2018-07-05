@@ -208,3 +208,52 @@ export function logout(designer) {
     designer.notify(title, body, 'error');
   });
 }
+
+export function publish(apiSpec, designer) {
+  if (!checkAuth(designer, () => publish(apiSpec, designer))) {
+    return;
+  } else if (!titleExists(apiSpec, designer)) {
+    return;
+  }
+  const apiTitle = apiSpec.info.title;
+  const version = apiSpec.info.version;
+  const url = `${BASE_URL}/apis/${window.localStorage.spaceUser}/${apiTitle}/${version}`;
+  $.ajax({
+    type: 'POST',
+    url,
+    headers: {
+      Authorization: window.localStorage.spaceToken
+    },
+    contentType: 'application/json',
+    data: JSON.stringify(apiSpec)
+   }).then((data, _, {status}) => {
+    const title = designer.i18n.tr('space.publish-complete.title');
+    let body;
+    switch (status) {
+    case 200:
+      body = designer.i18n.tr('space.publish-complete.published', {title: apiTitle, version});
+      break;
+    default:
+      body = designer.i18n.tr('space.publish-complete.unknown', {title: apiTitle, version});
+      break;
+    }
+    designer.notify(title, body, 'success', data.url);
+    }).fail(({status}) => {
+      const title = designer.i18n.tr('space.publish-failed.title');
+      let body;
+      switch (status) {
+      case 403:
+        body = designer.i18n.tr('space.publish-failed.access-denied');
+        break;
+      case 404:
+        body = designer.i18n.tr('space.publish-failed.not-found');
+        break;
+      case 409:
+        body = designer.i18n.tr('space.publish-failed.allready-published');
+        break;
+      default:
+        body = designer.i18n.tr('space.publish-failed.unknown', {status});
+      }
+      designer.notify(title, body, 'error');
+    });
+}

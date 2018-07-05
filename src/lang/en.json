@@ -32,7 +32,7 @@
   "space": {
     "title": {
       "upload": "Upload",
-      "publish": "Publish (NYI)",
+      "publish": "Publish",
       "logout": "Logout"
     },
     "upload-complete": {
@@ -50,6 +50,18 @@
       "version-published": "Can't edit published API",
       "unknown": "Unknown error: HTTP {{status}}",
       "missing-title": "The API must have a title in order to upload to OpenAPI space."
+    },
+    "publish-complete": {
+      "title": "Published",
+      "published": "{{title}} v{{version}} has been published",
+      "unknown": "{{title}} v{{version}} has been propably published"
+    },
+    "publish-failed": {
+      "title": "Publishing failed",
+      "access-denied": "Access denied",
+      "not-found": "specified API not found",
+      "allready-published": "the API version is allready published",
+      "unknown": "Unknown error: HTTP {{status}}"
     }
   },
   "notify": {
