@@ -18,6 +18,18 @@
           are also fully supported.
         </p>
       </div>
+      <div class="cookies ${cookieWarningDismissed ? 'dismissed' : ''}">
+        <button class="dismiss" click.delegate="dismissCookieWarning()">
+          <img src="res/delete.svg" alt="Delete"/>
+          </button>
+          <h2>about cookies</h2>
+          <p>
+           We use cookies to provide the services and features offered on our website, and to improve our user experience. 
+          </p>
+           <a href="javascript:void(0)" click.delegate="cookieModal.open()">
+            Learn more
+           </a>
+        </div>   
       <img src="res/openapi-designer-logo-tall.svg" style="width: 100%;"/>
 
       <h3>What is OpenAPI designer?</h3>
