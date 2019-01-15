@@ -153,7 +153,14 @@ export class Validation {
       if (!paramName) {
         return undefined;
       }
-      return field.resolveRef(`/global-definitions/${paramName}`).getValue();
+
+      const globalParams = field.resolveRef('/global-definitions/parameters');
+
+      for (const arrayParam of globalParams.children) {
+        if (arrayParam.getValue().name === paramName) {
+          return arrayParam.getValue();
+        }
+      }
     };
     const isParamInArray = (paramsField, lookingForParam) => {
       for (const arrayParam of paramsField.children) {
