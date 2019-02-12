@@ -32,7 +32,7 @@
     "aurelia-tools": "^0.2.2",
     "browser-sync": "^2.13.0",
     "connect-history-api-fallback": "^1.2.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "4.0",
     "gulp-changed-in-place": "^2.0.3",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
