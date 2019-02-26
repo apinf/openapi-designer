@@ -544,7 +544,9 @@ export class Field {
    * Delete this field from the parent.
    */
   delete() {
-    if (this.parent) {
+    var doIt = confirm("Are you sure you want to delete this?");
+
+    if (doIt && this.parent) {
       this.parent.deleteChild(typeof this.index === 'number' ? this.index : this.id);
     }
   }
